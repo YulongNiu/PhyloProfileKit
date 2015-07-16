@@ -17,7 +17,7 @@
 ##' @examples
 ##' data(atpPhyloExample)
 ##' load('../data/atpPhyloExample.RData')
-##' ATPphyloPlot <- PlotPhyloDendro(atpPhylo, geneBlockCol = 'white', speCol = specol, geneCol = genecol)
+##' ATPphyloPlot <- PlotPhyloDendro(atpPhyloExample$atpPhylo, geneBlockCol = 'white', speCol = atpPhyloExample$specol, geneCol = atpPhyloExample$genecol)
 ##' plot(ATPphyloPlot)
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom ggplot2 ggplot geom_text geom_tile geom_segment scale_fill_manual labs scale_x_continuous scale_y_continuous theme aes element_blank coord_flip
@@ -204,3 +204,20 @@ PlotPhyloDendro <- function(phyloData, geneNameSize = 3, geneNameCol = 'grey55',
 
   return(plotRes)
 } 
+
+
+
+
+##' Phylogenetic profiles of human F1Fo ATP synthase subunits.
+##'
+##' A list containing three objects:
+##' "atpPhylo" is a numeric matrix representing the phylogenetic profiles of F1Fo ATP synthase subuints.
+##' "specol" is the vector of colors corresponding to the species in "atpPhylo".
+##' "genecol" is the vector of colors corresponding to the genes in "atpPhylo".
+##' @docType data
+##' @name atpPhyloExample
+##' @format A list
+##' @references Unpublished data from Yulong Niu
+##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' 
+NULL

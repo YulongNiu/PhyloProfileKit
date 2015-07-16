@@ -11,7 +11,8 @@ Imports:
     reshape2,
     RColorBrewe,
     ggdendro,
-    grid
+    grid,
+    gridExtra
 ByteCompile: true
 License: GPL
 LazyData: true
