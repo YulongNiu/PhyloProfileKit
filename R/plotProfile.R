@@ -1,76 +1,91 @@
-PlotPhyloDendro <- function(phyloData, geneNameSize = 3, geneNameCol = 'grey55', geneBlockCol = NA, presentCol = 'steelblue', absentCol = 'grey91', speCol, geneCol) {
-  ## USE: plot the dendrogram of phylogenetic data
-  ## INPUT: 'phyloData' is the phylogenetic data, of which the row is gene and column is species.
-  ## 'geneNameSize' is the size of gene names label.
-  ## 'geneNameCol' is the colour of gene names.
-  ## 'geneBlockCol' is the space color between gene blocks, and the default value is NA meaning no space color. If the gene number is samll, less than 20, set it to 'white' is fine.
-  ## 'presentCol' is the color of present 1.
-  ## 'absentCol' is the color of absent 0.
-  ## 'speCol' is a vector of colors with names of species, which are the same as colnames of 'phyloData' (may not in the same order).
-  ## 'geneCol' is a vector of colors with names of species, which are the same as rownames of 'phyloData' (may not in the same order).
-  ## OUTPUT: A List of ggplot2 object.
-  ## 'phyloObj' is phylogenetic profile data.
-  ## 'geneDendroObj' is the dendrogram of genes.
-  ## 'speBlockObj' is a color block of species.
-  ## 'geneBlockObj' is the color block of species.
-  ## 'geneNamesObj' is the gene names.
+##' Plot phylogenetic profiles with gene and species clusters.
+##'
+##' A combination plot of phylogenetic profiles with gene and species clusters.
+##' 
+##' @title Plot phylogenetic profiles
+##' @param phyloData The phylogenetic profile data with 1 and 0 denoting the presence and absence of orthologous, respectively. The "phyloData" should be a numeric matrix, of which the row is gene and column is species.The "phyloData"has row names and column names which will be used for the dendrogram of row and column.
+##' @param geneNameSize The size of gene names label, and the default value is 3.
+##' @param geneNameCol The colour of gene names, and the default value is "grey55".
+##' @param geneBlockCol The space color between gene blocks, and the default value is "NA" meaning no space color. If the number of genes is samll, for example less than 20, setting it as 'white' is fine. 
+##' @param presentCol The color of present 1, the default value is "steelblue".
+##' @param absentCol The color of present 0, the default value is "grey91".
+##' @param speCol A vector of colors with names of species, which are the same as colnames of "phyloData" (may not in the same order). 
+##' @param geneCol A vector of colors with names of species, which are the same as rownames of "phyloData" (may not in the same order).
+##' @param widthShinkage The shinkage width vector, the default value is c(0.7, 0.7, 0.3, 7).
+##' @param heightsShinkage The shinkage width vector, the default value is c(0.3, 7). 
+##' @return A List of ggplot2 object. "phyloObj" is phylogenetic profile data."geneDendroObj" is the dendrogram of genes. "speBlockObj" is a color block of species. "geneBlockObj" is the color block of species. "geneNamesObj" is the gene names.
+##' @examples
+##' data(atpPhyloExample)
+##' load('../data/atpPhyloExample.RData')
+##' ATPphyloPlot <- PlotPhyloDendro(atpPhylo, geneBlockCol = 'white', speCol = specol, geneCol = genecol)
+##' plot(ATPphyloPlot)
+##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @importFrom ggplot2 ggplot geom_text geom_tile geom_segment scale_fill_manual labs scale_x_continuous scale_y_continuous theme aes element_blank coord_flip
+##' @importFrom grid unit
+##' @importFrom ggdendro dendro_data segment
+##' @importFrom gridExtra grid.arrange
+##' @importFrom reshape2 melt
+##' @export
+##' 
+PlotPhyloDendro <- function(phyloData, geneNameSize = 3, geneNameCol = 'grey55', geneBlockCol = NA, presentCol = 'steelblue', absentCol = 'grey91', speCol, geneCol, widthShinkage = c(0.7, 0.7, 0.3, 7), heightsShinkage = c(0.3, 7)) {
 
-  require('ggplot2')
-  require('reshape')
-  require('ggdendro')
   require('grid')
+  require('ggplot2')
+  require('reshape2')
+  require('ggdendro')
+  require('gridExtra')
 
-  # cluster genes and species
+  ## cluster genes and species
   hcGene <- hclust(dist(phyloData), method = 'average')
   rowInd <- hcGene$order
   hcSpe <- hclust(dist(t(phyloData)), method = 'average')
   colInd <- hcSpe$order
   
-  # order 'phyloData'
+  ## order 'phyloData'
   orderedPhyloData <- phyloData[rowInd,colInd]
   orderedColNames <- colnames(orderedPhyloData)
   orderedRowNames <- rownames(orderedPhyloData)
   breaksRow <- 1:length(orderedRowNames)
 
-  # order 'geneCol'
+  ## order 'geneCol'
   orderedGeneCol <- geneCol[match(rownames(orderedPhyloData), names(geneCol))]
   
-  # order 'speCol'
+  ## order 'speCol'
   orderedSpeCol <- speCol[match(colnames(orderedPhyloData), names(speCol))]
-    
-  # melt data for ggplot2
+  
+  ## melt data for ggplot2
   colnames(orderedPhyloData) <- 1:ncol(orderedPhyloData)
   rownames(orderedPhyloData) <- 1:nrow(orderedPhyloData)
   orderedPhyloData <- melt(orderedPhyloData)
   colnames(orderedPhyloData) <- c('geneNames', 'speNames', 'apData')
 
 
-  # plot gene names
+  ## plot gene names
   orderedRowNamesMat <- data.frame(x = rep(0, length(orderedRowNames)),
-                        y = seq(0.5, length(orderedRowNames)-0.5, 1),
-                        fillName = orderedRowNames)
+                                   y = seq(0.5, length(orderedRowNames)-0.5, 1),
+                                   fillName = orderedRowNames)
   
 
   geneNamesObj <- ggplot(orderedRowNamesMat, aes(x, y, label = fillName)) +
     geom_text(size = geneNameSize, colour = geneNameCol) +
-       labs(x = NULL, y = NULL) +
-      scale_x_continuous(expand = c(0, 0), breaks = NULL) +
-        scale_y_continuous(expand = c(0, 0), limits = c(0, length(orderedRowNames)), breaks = NULL) +
-           theme(legend.position='none',
-                    title = element_blank(),
-                    axis.text = element_blank(),
-                    axis.title = element_blank(),
-                    axis.ticks.length = unit(0, "mm"),
-                    axis.ticks.margin = unit(0, "mm"),
-                    axis.line = element_blank(),
-                    panel.margin = unit(0, 'mm'),
-                    panel.grid = element_blank(),
-                    panel.border = element_blank(),
-                    panel.background = element_blank(),
-                    plot.margin = unit(c(0, 0, 0, 0), 'line'),
-                    legend.margin = unit(0, 'mm'))
+      labs(x = NULL, y = NULL) +
+        scale_x_continuous(expand = c(0, 0), breaks = NULL) +
+          scale_y_continuous(expand = c(0, 0), limits = c(0, length(orderedRowNames)), breaks = NULL) +
+            theme(legend.position='none',
+                  title = element_blank(),
+                  axis.text = element_blank(),
+                  axis.title = element_blank(),
+                  axis.ticks.length = unit(0, "mm"),
+                  axis.ticks.margin = unit(0, "mm"),
+                  axis.line = element_blank(),
+                  panel.margin = unit(0, 'mm'),
+                  panel.grid = element_blank(),
+                  panel.border = element_blank(),
+                  panel.background = element_blank(),
+                  plot.margin = unit(c(0, 0, 0, 0), 'line'),
+                  legend.margin = unit(0, 'mm'))
 
-  # plot phylogenetic matrix
+  ## plot phylogenetic matrix
   phyloObj <- ggplot(orderedPhyloData, aes(speNames, geneNames)) +
     geom_tile(aes(fill = factor(apData))) +
       scale_fill_manual(name = 'status', labels = c('absent', 'present'), values = c(absentCol, presentCol)) +
@@ -91,17 +106,17 @@ PlotPhyloDendro <- function(phyloData, geneNameSize = 3, geneNameCol = 'grey55',
                     plot.margin = unit(c(0, 0, 0, 0), 'line'),
                     legend.margin = unit(0, 'mm'))
 
-  # dendrogram plot for genes
+  ## dendrogram plot for genes
   ddata <- dendro_data(hcGene, type = "rectangle")
   segData <- segment(ddata)
   segData[, c(1, 3)] <- segData[, c(1, 3)] - 0.5
   geneDendroObj <- ggplot(segData) +
     geom_segment(aes(x = x, y = y, xend = xend, yend = yend)) +
       labs(x = NULL, y = NULL) +
-      scale_y_reverse(expand = c(0, 0), breaks = NULL) +
-        scale_x_continuous(expand = c(0, 0), limits = c(0, nrow(phyloData)), breaks = NULL) +
-          coord_flip() +
-            theme(legend.position='none',
+        scale_y_reverse(expand = c(0, 0), breaks = NULL) +
+          scale_x_continuous(expand = c(0, 0), limits = c(0, nrow(phyloData)), breaks = NULL) +
+            coord_flip() +
+              theme(legend.position='none',
                     title = element_blank(),
                     axis.text = element_blank(),
                     axis.title = element_blank(),
@@ -115,10 +130,10 @@ PlotPhyloDendro <- function(phyloData, geneNameSize = 3, geneNameCol = 'grey55',
                     plot.margin = unit(c(0, 0, 0, 0), 'line'),
                     legend.margin = unit(0, 'mm'))
 
-  # gene color block
+  ## gene color block
   orderedGeneColMat <- data.frame(x = rep(0, length(orderedGeneCol)),
-                        y = 1:length(orderedGeneCol),
-                        fillCol = factor(orderedGeneCol))
+                                  y = 1:length(orderedGeneCol),
+                                  fillCol = factor(orderedGeneCol))
 
   geneBlockObj <- ggplot(orderedGeneColMat, aes(x, y)) +
     geom_tile(aes(fill = fillCol), color = geneBlockCol) +
@@ -140,7 +155,7 @@ PlotPhyloDendro <- function(phyloData, geneNameSize = 3, geneNameCol = 'grey55',
                     plot.margin = unit(c(0, 0, 0, 0), 'line'),
                     legend.margin = unit(0, 'mm'))
 
-  # species color block
+  ## species color block
   orderedSpeColMat <- data.frame(y = rep(0, length(orderedSpeCol)),
                                  x = 1:length(orderedSpeCol),
                                  fillCol = factor(orderedSpeCol))
@@ -164,13 +179,28 @@ PlotPhyloDendro <- function(phyloData, geneNameSize = 3, geneNameCol = 'grey55',
                     panel.background = element_blank(),
                     plot.margin = unit(c(0, 0, 0, 0), 'line'),
                     legend.margin = unit(0, 'mm'))
+  
+  ## plot empty block
+  empty <- ggplot()+geom_point(aes(1,1), colour="white") +
+    labs(x = NULL, y = NULL) +
+      scale_y_continuous(expand = c(0, 0), breaks = NULL) +
+        scale_x_continuous(expand = c(0, 0), breaks = NULL) +
+          theme(legend.position='none',
+                title = element_blank(),
+                axis.text = element_blank(),
+                axis.title = element_blank(),
+                axis.ticks.length = unit(0, "mm"),
+                axis.ticks.margin = unit(0, "mm"),
+                axis.line = element_blank(),
+                panel.margin = unit(0, 'mm'),
+                panel.grid = element_blank(),
+                panel.border = element_blank(),
+                panel.background = element_blank(),
+                plot.margin = unit(c(0, 0, 0, 0), 'line'),
+                legend.margin = unit(0, 'mm'))
+  
 
-  # return results
-  plotRes <- list(phyloObj = phyloObj,
-                  geneDendroObj = geneDendroObj,
-                  speBlockObj = speBlockObj,
-                  geneBlockObj = geneBlockObj,
-                  geneNamesObj = geneNamesObj)
+  plotRes <- grid.arrange(empty, empty, empty, speBlockObj, geneDendroObj, geneNamesObj, geneBlockObj, phyloObj, ncol = 4, nrow = 2, widths=c(0.7, 0.7, 0.3, 7), heights=c(0.3, 7))
 
   return(plotRes)
 } 

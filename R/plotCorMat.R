@@ -64,8 +64,8 @@ plotPhyloCor <- function(phyloData,
                 plot.margin = unit(c(0, 0, 0, 0), 'line'),
                 legend.margin = unit(0, 'mm'))
 
-  plot legent
-  Extract Legend
+  ## plot legent
+  ## Extract Legend
   corMatObjLegent <- ggplot(corMelt, aes(From, To, fill = Cor)) +
     geom_tile() +
       scale_fill_gradientn(colours = gradientCol)
