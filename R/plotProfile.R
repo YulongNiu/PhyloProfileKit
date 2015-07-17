@@ -1,6 +1,6 @@
 ##' Plot phylogenetic profiles with gene and species clusters.
 ##'
-##' A combination plot of phylogenetic profiles with gene and species clusters.
+##' A combination plot of phylogenetic profiles with genes and species clusters.
 ##' 
 ##' @title Plot phylogenetic profiles
 ##' @param phyloData The phylogenetic profile data with 1 and 0 denoting the presence and absence of orthologous, respectively. The "phyloData" should be a numeric matrix, of which the row is gene and column is species.The "phyloData"has row names and column names which will be used for the dendrogram of row and column.
@@ -11,9 +11,9 @@
 ##' @param absentCol The color of present 0, the default value is "grey91".
 ##' @param speCol A vector of colors with names of species, which are the same as colnames of "phyloData" (may not in the same order). 
 ##' @param geneCol A vector of colors with names of species, which are the same as rownames of "phyloData" (may not in the same order).
-##' @param widthShinkage The shinkage width vector, the default value is c(0.7, 0.7, 0.3, 7).
-##' @param heightsShinkage The shinkage width vector, the default value is c(0.3, 7). 
-##' @return A List of ggplot2 object. "phyloObj" is phylogenetic profile data."geneDendroObj" is the dendrogram of genes. "speBlockObj" is a color block of species. "geneBlockObj" is the color block of species. "geneNamesObj" is the gene names.
+##' @param widthsShinkage The shinkage width vector.
+##' @param heightsShinkage The shinkage width vector. 
+##' @return A plot object.
 ##' @examples
 ##' data(atpPhyloExample)
 ##' load('../data/atpPhyloExample.RData')
@@ -27,13 +27,22 @@
 ##' @importFrom reshape2 melt
 ##' @export
 ##' 
-PlotPhyloDendro <- function(phyloData, geneNameSize = 3, geneNameCol = 'grey55', geneBlockCol = NA, presentCol = 'steelblue', absentCol = 'grey91', speCol, geneCol, widthShinkage = c(0.7, 0.7, 0.3, 7), heightsShinkage = c(0.3, 7)) {
+PlotPhyloDendro <- function(phyloData,
+                            geneNameSize = 3,
+                            geneNameCol = 'grey55',
+                            geneBlockCol = NA,
+                            presentCol = 'steelblue',
+                            absentCol = 'grey91',
+                            speCol,
+                            geneCol,
+                            widthsShinkage = c(0.7, 0.7, 0.3, 7),
+                            heightsShinkage = c(0.3, 7)) {
 
-  require('grid')
-  require('ggplot2')
-  require('reshape2')
-  require('ggdendro')
-  require('gridExtra')
+  ## require('grid')
+  ## require('ggplot2')
+  ## require('reshape2')
+  ## require('ggdendro')
+  ## require('gridExtra')
 
   ## cluster genes and species
   hcGene <- hclust(dist(phyloData), method = 'average')
@@ -200,7 +209,7 @@ PlotPhyloDendro <- function(phyloData, geneNameSize = 3, geneNameCol = 'grey55',
                 legend.margin = unit(0, 'mm'))
   
 
-  plotRes <- grid.arrange(empty, empty, empty, speBlockObj, geneDendroObj, geneNamesObj, geneBlockObj, phyloObj, ncol = 4, nrow = 2, widths=c(0.7, 0.7, 0.3, 7), heights=c(0.3, 7))
+  plotRes <- grid.arrange(empty, empty, empty, speBlockObj, geneDendroObj, geneNamesObj, geneBlockObj, phyloObj, ncol = 4, nrow = 2, widths = widthsShinkage, heights = heightsShinkage)
 
   return(plotRes)
 } 
@@ -221,3 +230,4 @@ PlotPhyloDendro <- function(phyloData, geneNameSize = 3, geneNameCol = 'grey55',
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' 
 NULL
+  
