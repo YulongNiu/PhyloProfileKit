@@ -3,15 +3,15 @@
 ##' A combination plot of correlation matrix with genes and species clusters.
 ##' @title Plot correlation matrix
 ##' @param gradientCol The gradien colours for correlation matrix.
-##' @inheritParams PlotPhyloDendro
+##' @inheritParams PlotPhyloProfile
 ##' @return A plot object. 
 ##' @examples
 ##' data(fatp)
 ##' ATPCorPlot <- plotPhyloCor(fatp$atpPhylo, geneCol = fatp$genecol)
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @importFrom ggplot2 ggplot geom_text geom_tile geom_segment scale_fill_manual labs scale_x_continuous scale_y_continuous scale_fill_gradientn scale_x_discrete scale_y_discrete scale_x_reverse scale_y_reverse theme aes element_blank coord_flip
+##' @importFrom ggplot2 ggplot geom_text geom_tile geom_segment geom_point scale_fill_manual labs scale_x_continuous scale_y_continuous scale_fill_gradientn scale_x_discrete scale_y_discrete scale_x_reverse scale_y_reverse theme aes element_blank coord_flip
 ##' @importFrom grid unit
-##' @importFrom ggdendro dendro_data segment
+##' @importFrom ggdendro dendro_data.hclust segment
 ##' @importFrom gridExtra grid.arrange
 ##' @importFrom reshape2 melt
 ##' @importFrom RColorBrewer brewer.pal
@@ -140,7 +140,7 @@ plotPhyloCor <- function(phyloData,
                   legend.margin = unit(0, 'mm'))
   
   ## dendrogram plot for genes
-  ddata <- dendro_data(hcGene, type = 'rectangle')
+  ddata <- dendro_data.hclust(hcGene, type = 'rectangle')
   segData <- segment(ddata)
   segData[, c(1, 3)] <- segData[, c(1, 3)] - 0.5
   geneDendroObj <- ggplot(segData) +
@@ -189,23 +189,24 @@ plotPhyloCor <- function(phyloData,
                     legend.margin = unit(0, 'mm'))
   
    ## plot empty block
-  empty <- ggplot()+geom_point(aes(1,1), colour='white') +
-    labs(x = NULL, y = NULL) +
-      scale_y_continuous(expand = c(0, 0), breaks = NULL) +
-        scale_x_continuous(expand = c(0, 0), breaks = NULL) +
-          theme(legend.position='none',
-                title = element_blank(),
-                axis.text = element_blank(),
-                axis.title = element_blank(),
-                axis.ticks.length = unit(0, 'mm'),
-                axis.ticks.margin = unit(0, 'mm'),
-                axis.line = element_blank(),
-                panel.margin = unit(0, 'mm'),
-                panel.grid = element_blank(),
-                panel.border = element_blank(),
-                panel.background = element_blank(),
-                plot.margin = unit(c(0, 0, 0, 0), 'line'),
-                legend.margin = unit(0, 'mm'))
+  empty <- ggplot() +
+    geom_point(aes(1,1), colour='white') +
+      labs(x = NULL, y = NULL) +
+        scale_y_continuous(expand = c(0, 0), breaks = NULL) +
+          scale_x_continuous(expand = c(0, 0), breaks = NULL) +
+            theme(legend.position='none',
+                  title = element_blank(),
+                  axis.text = element_blank(),
+                  axis.title = element_blank(),
+                  axis.ticks.length = unit(0, 'mm'),
+                  axis.ticks.margin = unit(0, 'mm'),
+                  axis.line = element_blank(),
+                  panel.margin = unit(0, 'mm'),
+                  panel.grid = element_blank(),
+                  panel.border = element_blank(),
+                  panel.background = element_blank(),
+                  plot.margin = unit(c(0, 0, 0, 0), 'line'),
+                  legend.margin = unit(0, 'mm'))
   
   plotRes <- grid.arrange(geneDendroObj, geneRowNamesObj, geneBlockObj, corMatObj, empty, empty, empty, geneColNamesObj, ncol = 4, nrow = 2, widths = widthsShinkage, heights = heightsShinkage)
   

@@ -19,9 +19,9 @@
 ##' ATPphyloPlot <- PlotPhyloProfile(fatp$atpPhylo, speCol = fatp$specol, geneCol = fatp$genecol)
 ##' plot(ATPphyloPlot)
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @importFrom ggplot2 ggplot geom_text geom_tile geom_segment scale_fill_manual labs scale_x_continuous scale_y_continuous scale_y_reverse theme aes element_blank coord_flip
+##' @importFrom ggplot2 ggplot geom_text geom_tile geom_segment geom_point scale_fill_manual labs scale_x_continuous scale_y_continuous scale_y_reverse theme aes element_blank coord_flip
 ##' @importFrom grid unit
-##' @importFrom ggdendro dendro_data segment
+##' @importFrom ggdendro dendro_data.hclust segment
 ##' @importFrom gridExtra grid.arrange
 ##' @importFrom reshape2 melt
 ##' @export
@@ -115,7 +115,7 @@ PlotPhyloProfile <- function(phyloData,
                     legend.margin = unit(0, 'mm'))
 
   ## dendrogram plot for genes
-  ddata <- dendro_data(hcGene, type = 'rectangle')
+  ddata <- dendro_data.hclust(hcGene, type = 'rectangle')
   segData <- segment(ddata)
   segData[, c(1, 3)] <- segData[, c(1, 3)] - 0.5
   geneDendroObj <- ggplot(segData) +
