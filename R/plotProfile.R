@@ -6,7 +6,7 @@
 ##' @param phyloData The phylogenetic profile data with 1 and 0 denoting the presence and absence of orthologous, respectively. The "phyloData" should be a numeric matrix, of which the row is gene and column is species.The "phyloData"has row names and column names which will be used for the dendrogram of row and column.
 ##' @param geneNameSize The size of gene names label, and the default value is 3.
 ##' @param geneNameCol The colour of gene names, and the default value is "grey55".
-##' @param geneBlockCol The space color between gene blocks, and the default value is "NA" meaning no space color. If the number of genes is samll, for example less than 20, setting it as 'white' is fine. 
+##' @param geneBetweenBlockCol The space color between gene blocks, and the default value is "NA" meaning no space color. If the number of genes is samll, for example less than 20, setting it as 'white' is fine. 
 ##' @param presentCol The color of present 1, the default value is "steelblue".
 ##' @param absentCol The color of present 0, the default value is "grey91".
 ##' @param speCol A vector of colors with names of species, which are the same as colnames of "phyloData" (may not in the same order). 
@@ -15,27 +15,26 @@
 ##' @param heightsShinkage The shinkage width vector. 
 ##' @return A plot object.
 ##' @examples
-##' data(atpPhyloExample)
-##' load('../data/atpPhyloExample.RData')
-##' ATPphyloPlot <- PlotPhyloDendro(atpPhyloExample$atpPhylo, geneBlockCol = 'white', speCol = atpPhyloExample$specol, geneCol = atpPhyloExample$genecol)
+##' data(fatp)
+##' ATPphyloPlot <- PlotPhyloProfile(fatp$atpPhylo, speCol = fatp$specol, geneCol = fatp$genecol)
 ##' plot(ATPphyloPlot)
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @importFrom ggplot2 ggplot geom_text geom_tile geom_segment scale_fill_manual labs scale_x_continuous scale_y_continuous theme aes element_blank coord_flip
+##' @importFrom ggplot2 ggplot geom_text geom_tile geom_segment scale_fill_manual labs scale_x_continuous scale_y_continuous scale_y_reverse theme aes element_blank coord_flip
 ##' @importFrom grid unit
 ##' @importFrom ggdendro dendro_data segment
 ##' @importFrom gridExtra grid.arrange
 ##' @importFrom reshape2 melt
 ##' @export
 ##' 
-PlotPhyloDendro <- function(phyloData,
+PlotPhyloProfile <- function(phyloData,
                             geneNameSize = 3,
                             geneNameCol = 'grey55',
-                            geneBlockCol = NA,
+                            geneBetweenBlockCol = NA,
                             presentCol = 'steelblue',
                             absentCol = 'grey91',
                             speCol,
                             geneCol,
-                            widthsShinkage = c(0.7, 0.7, 0.3, 7),
+                            widthsShinkage = c(0.9, 0.7, 0.3, 7),
                             heightsShinkage = c(0.3, 7)) {
 
   ## require('grid')
@@ -84,8 +83,8 @@ PlotPhyloDendro <- function(phyloData,
                   title = element_blank(),
                   axis.text = element_blank(),
                   axis.title = element_blank(),
-                  axis.ticks.length = unit(0, "mm"),
-                  axis.ticks.margin = unit(0, "mm"),
+                  axis.ticks.length = unit(0, 'mm'),
+                  axis.ticks.margin = unit(0, 'mm'),
                   axis.line = element_blank(),
                   panel.margin = unit(0, 'mm'),
                   panel.grid = element_blank(),
@@ -105,8 +104,8 @@ PlotPhyloDendro <- function(phyloData,
                     title = element_blank(),
                     axis.text = element_blank(),
                     axis.title = element_blank(),
-                    axis.ticks.length = unit(0, "mm"),
-                    axis.ticks.margin = unit(0, "mm"),
+                    axis.ticks.length = unit(0, 'mm'),
+                    axis.ticks.margin = unit(0, 'mm'),
                     axis.line = element_blank(),
                     panel.margin = unit(0, 'mm'),
                     panel.grid = element_blank(),
@@ -116,7 +115,7 @@ PlotPhyloDendro <- function(phyloData,
                     legend.margin = unit(0, 'mm'))
 
   ## dendrogram plot for genes
-  ddata <- dendro_data(hcGene, type = "rectangle")
+  ddata <- dendro_data(hcGene, type = 'rectangle')
   segData <- segment(ddata)
   segData[, c(1, 3)] <- segData[, c(1, 3)] - 0.5
   geneDendroObj <- ggplot(segData) +
@@ -129,8 +128,8 @@ PlotPhyloDendro <- function(phyloData,
                     title = element_blank(),
                     axis.text = element_blank(),
                     axis.title = element_blank(),
-                    axis.ticks.length = unit(0, "mm"),
-                    axis.ticks.margin = unit(0, "mm"),
+                    axis.ticks.length = unit(0, 'mm'),
+                    axis.ticks.margin = unit(0, 'mm'),
                     axis.line = element_blank(),
                     panel.margin = unit(0, 'mm'),
                     panel.grid = element_blank(),
@@ -145,7 +144,7 @@ PlotPhyloDendro <- function(phyloData,
                                   fillCol = factor(orderedGeneCol))
 
   geneBlockObj <- ggplot(orderedGeneColMat, aes(x, y)) +
-    geom_tile(aes(fill = fillCol), color = geneBlockCol) +
+    geom_tile(aes(fill = fillCol), color = geneBetweenBlockCol) +
       labs(x = NULL, y = NULL) +
         scale_y_continuous(expand = c(0, 0), breaks = NULL) +
           scale_x_continuous(expand = c(0, 0), breaks = NULL) +
@@ -154,8 +153,8 @@ PlotPhyloDendro <- function(phyloData,
                     title = element_blank(),
                     axis.text = element_blank(),
                     axis.title = element_blank(),
-                    axis.ticks.length = unit(0, "mm"),
-                    axis.ticks.margin = unit(0, "mm"),
+                    axis.ticks.length = unit(0, 'mm'),
+                    axis.ticks.margin = unit(0, 'mm'),
                     axis.line = element_blank(),
                     panel.margin = unit(0, 'mm'),
                     panel.grid = element_blank(),
@@ -179,8 +178,8 @@ PlotPhyloDendro <- function(phyloData,
                     title = element_blank(),
                     axis.text = element_blank(),
                     axis.title = element_blank(),
-                    axis.ticks.length = unit(0, "mm"),
-                    axis.ticks.margin = unit(0, "mm"),
+                    axis.ticks.length = unit(0, 'mm'),
+                    axis.ticks.margin = unit(0, 'mm'),
                     axis.line = element_blank(),
                     panel.margin = unit(0, 'mm'),
                     panel.grid = element_blank(),
@@ -190,7 +189,7 @@ PlotPhyloDendro <- function(phyloData,
                     legend.margin = unit(0, 'mm'))
   
   ## plot empty block
-  empty <- ggplot()+geom_point(aes(1,1), colour="white") +
+  empty <- ggplot()+geom_point(aes(1,1), colour='white') +
     labs(x = NULL, y = NULL) +
       scale_y_continuous(expand = c(0, 0), breaks = NULL) +
         scale_x_continuous(expand = c(0, 0), breaks = NULL) +
@@ -198,8 +197,8 @@ PlotPhyloDendro <- function(phyloData,
                 title = element_blank(),
                 axis.text = element_blank(),
                 axis.title = element_blank(),
-                axis.ticks.length = unit(0, "mm"),
-                axis.ticks.margin = unit(0, "mm"),
+                axis.ticks.length = unit(0, 'mm'),
+                axis.ticks.margin = unit(0, 'mm'),
                 axis.line = element_blank(),
                 panel.margin = unit(0, 'mm'),
                 panel.grid = element_blank(),
@@ -224,7 +223,7 @@ PlotPhyloDendro <- function(phyloData,
 ##' "specol" is the vector of colors corresponding to the species in "atpPhylo".
 ##' "genecol" is the vector of colors corresponding to the genes in "atpPhylo".
 ##' @docType data
-##' @name atpPhyloExample
+##' @name fatp
 ##' @format A list
 ##' @references Unpublished data from Yulong Niu
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}

@@ -1,5 +1,5 @@
 Package: PhyloProfile
-Title: A package for phylogenetic profiling analysis.
+Title: A package for phylogenetic profiling analysis
 Description: This is a package providing mutiple distance and similarity methods and visualization for phylogenetic profiling anlaysis.
 Version: 0.1
 Author: Yulong Niu <niuylscu@gmail.com>
@@ -9,7 +9,7 @@ Depends:
 Imports:
     ggplot2,
     reshape2,
-    RColorBrewe,
+    RColorBrewer,
     ggdendro,
     grid,
     gridExtra

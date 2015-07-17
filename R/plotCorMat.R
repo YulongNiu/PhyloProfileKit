@@ -3,14 +3,13 @@
 ##' A combination plot of correlation matrix with genes and species clusters.
 ##' @title Plot correlation matrix
 ##' @param gradientCol The gradien colours for correlation matrix.
-##' @inheritParams
+##' @inheritParams PlotPhyloDendro
 ##' @return A plot object. 
 ##' @examples
-##' data(atpPhyloExample)
-##' load('../data/atpPhyloExample.RData')
-##' ATPCorPlot <- plotPhyloCor(atpPhyloExample$atpPhylo, geneCol = atpPhyloExample$genecol)
+##' data(fatp)
+##' ATPCorPlot <- plotPhyloCor(fatp$atpPhylo, geneCol = fatp$genecol)
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @importFrom ggplot2 ggplot geom_text geom_tile geom_segment scale_fill_manual labs scale_x_continuous scale_y_continuous scale_fill_gradientn scale_x_discrete scale_y_discrete theme aes element_blank coord_flip
+##' @importFrom ggplot2 ggplot geom_text geom_tile geom_segment scale_fill_manual labs scale_x_continuous scale_y_continuous scale_fill_gradientn scale_x_discrete scale_y_discrete scale_x_reverse scale_y_reverse theme aes element_blank coord_flip
 ##' @importFrom grid unit
 ##' @importFrom ggdendro dendro_data segment
 ##' @importFrom gridExtra grid.arrange
@@ -19,12 +18,12 @@
 ##' @export
 ##' 
 plotPhyloCor <- function(phyloData,
-                         gradientCol = colorRampPalette(rev(brewer.pal(n = 7, name = "RdYlBu")))(100),
+                         gradientCol = colorRampPalette(rev(brewer.pal(n = 7, name = 'RdYlBu')))(100),
                          geneNameSize = 3,
                          geneNameCol = 'grey55',
-                         geneBlockCol = NA,
+                         geneBetweenBlockCol = NA,
                          geneCol,
-                         widthShinkage = c(0.7, 0.7, 0.3, 7),
+                         widthsShinkage = c(0.9, 0.7, 0.3, 7),
                          heightsShinkage = c(7, 0.7)) {
   ## require('grid')
   ## require('reshape2')
@@ -67,8 +66,8 @@ plotPhyloCor <- function(phyloData,
                 title = element_blank(),
                 axis.text = element_blank(),
                 axis.title = element_blank(),
-                axis.ticks.length = unit(0, "mm"),
-                axis.ticks.margin = unit(0, "mm"),
+                axis.ticks.length = unit(0, 'mm'),
+                axis.ticks.margin = unit(0, 'mm'),
                 axis.line = element_blank(),
                 panel.margin = unit(0, 'mm'),
                 panel.grid = element_blank(),
@@ -84,7 +83,7 @@ plotPhyloCor <- function(phyloData,
   ##     scale_fill_gradientn(colours = gradientCol)
     ## g_legend <- function(a.gplot){ 
   ##   tmp <- ggplot_gtable(ggplot_build(a.gplot)) 
-  ##   leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box") 
+  ##   leg <- which(sapply(tmp$grobs, function(x) x$name) == 'guide-box') 
   ##   legend <- tmp$grobs[[leg]] 
   ##   return(legend)}
   ## corMatLegent <- g_legend(corMatObjLegent)
@@ -104,8 +103,8 @@ plotPhyloCor <- function(phyloData,
                   title = element_blank(),
                   axis.text = element_blank(),
                   axis.title = element_blank(),
-                  axis.ticks.length = unit(0, "mm"),
-                  axis.ticks.margin = unit(0, "mm"),
+                  axis.ticks.length = unit(0, 'mm'),
+                  axis.ticks.margin = unit(0, 'mm'),
                   axis.line = element_blank(),
                   panel.margin = unit(0, 'mm'),
                   panel.grid = element_blank(),
@@ -130,8 +129,8 @@ plotPhyloCor <- function(phyloData,
                   title = element_blank(),
                   axis.text = element_blank(),
                   axis.title = element_blank(),
-                  axis.ticks.length = unit(0, "mm"),
-                  axis.ticks.margin = unit(0, "mm"),
+                  axis.ticks.length = unit(0, 'mm'),
+                  axis.ticks.margin = unit(0, 'mm'),
                   axis.line = element_blank(),
                   panel.margin = unit(0, 'mm'),
                   panel.grid = element_blank(),
@@ -141,7 +140,7 @@ plotPhyloCor <- function(phyloData,
                   legend.margin = unit(0, 'mm'))
   
   ## dendrogram plot for genes
-  ddata <- dendro_data(hcGene, type = "rectangle")
+  ddata <- dendro_data(hcGene, type = 'rectangle')
   segData <- segment(ddata)
   segData[, c(1, 3)] <- segData[, c(1, 3)] - 0.5
   geneDendroObj <- ggplot(segData) +
@@ -154,8 +153,8 @@ plotPhyloCor <- function(phyloData,
                     title = element_blank(),
                     axis.text = element_blank(),
                     axis.title = element_blank(),
-                    axis.ticks.length = unit(0, "mm"),
-                    axis.ticks.margin = unit(0, "mm"),
+                    axis.ticks.length = unit(0, 'mm'),
+                    axis.ticks.margin = unit(0, 'mm'),
                     axis.line = element_blank(),
                     panel.margin = unit(0, 'mm'),
                     panel.grid = element_blank(),
@@ -170,7 +169,7 @@ plotPhyloCor <- function(phyloData,
                                   fillCol = rev(factor(orderedGeneCol)))
 
   geneBlockObj <- ggplot(orderedGeneColMat, aes(x, y)) +
-    geom_tile(aes(fill = fillCol), color = geneBlockCol) +
+    geom_tile(aes(fill = fillCol), color = geneBetweenBlockCol) +
       labs(x = NULL, y = NULL) +
         scale_y_continuous(expand = c(0, 0), breaks = NULL) +
           scale_x_continuous(expand = c(0, 0), breaks = NULL) +
@@ -179,8 +178,8 @@ plotPhyloCor <- function(phyloData,
                     title = element_blank(),
                     axis.text = element_blank(),
                     axis.title = element_blank(),
-                    axis.ticks.length = unit(0, "mm"),
-                    axis.ticks.margin = unit(0, "mm"),
+                    axis.ticks.length = unit(0, 'mm'),
+                    axis.ticks.margin = unit(0, 'mm'),
                     axis.line = element_blank(),
                     panel.margin = unit(0, 'mm'),
                     panel.grid = element_blank(),
@@ -190,7 +189,7 @@ plotPhyloCor <- function(phyloData,
                     legend.margin = unit(0, 'mm'))
   
    ## plot empty block
-  empty <- ggplot()+geom_point(aes(1,1), colour="white") +
+  empty <- ggplot()+geom_point(aes(1,1), colour='white') +
     labs(x = NULL, y = NULL) +
       scale_y_continuous(expand = c(0, 0), breaks = NULL) +
         scale_x_continuous(expand = c(0, 0), breaks = NULL) +
@@ -198,8 +197,8 @@ plotPhyloCor <- function(phyloData,
                 title = element_blank(),
                 axis.text = element_blank(),
                 axis.title = element_blank(),
-                axis.ticks.length = unit(0, "mm"),
-                axis.ticks.margin = unit(0, "mm"),
+                axis.ticks.length = unit(0, 'mm'),
+                axis.ticks.margin = unit(0, 'mm'),
                 axis.line = element_blank(),
                 panel.margin = unit(0, 'mm'),
                 panel.grid = element_blank(),
@@ -208,7 +207,7 @@ plotPhyloCor <- function(phyloData,
                 plot.margin = unit(c(0, 0, 0, 0), 'line'),
                 legend.margin = unit(0, 'mm'))
   
-  plotRes <- grid.arrange(geneDendroObj, geneRowNamesObj, geneBlockObj, corMatObj, empty, empty, empty, geneColNamesObj, ncol = 4, nrow = 2, widths = widthShinkage, heights = heightsShinkage)
+  plotRes <- grid.arrange(geneDendroObj, geneRowNamesObj, geneBlockObj, corMatObj, empty, empty, empty, geneColNamesObj, ncol = 4, nrow = 2, widths = widthsShinkage, heights = heightsShinkage)
   
   return(plotRes)
   
