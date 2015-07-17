@@ -19,7 +19,7 @@
 ##' ATPphyloPlot <- PlotPhyloProfile(fatp$atpPhylo, speCol = fatp$specol, geneCol = fatp$genecol)
 ##' plot(ATPphyloPlot)
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @importFrom ggplot2 ggplot geom_text geom_tile geom_segment geom_point scale_fill_manual labs scale_x_continuous scale_y_continuous scale_y_reverse theme aes element_blank coord_flip
+##' @importFrom ggplot2 ggplot geom_text geom_tile geom_segment geom_point scale_fill_manual labs scale_x_continuous scale_y_continuous scale_y_reverse theme aes_string element_blank coord_flip
 ##' @importFrom grid unit
 ##' @importFrom ggdendro dendro_data.hclust segment
 ##' @importFrom gridExtra grid.arrange
@@ -65,8 +65,7 @@ PlotPhyloProfile <- function(phyloData,
   colnames(orderedPhyloData) <- 1:ncol(orderedPhyloData)
   rownames(orderedPhyloData) <- 1:nrow(orderedPhyloData)
   orderedPhyloData <- melt(orderedPhyloData)
-  colnames(orderedPhyloData) <- c('geneNames', 'speNames', 'apData')
-
+  orderedPhyloData <- data.frame(geneNames = orderedPhyloData[, 1], speNames = orderedPhyloData[, 2], apData = factor(orderedPhyloData[, 3]))
 
   ## plot gene names
   orderedRowNamesMat <- data.frame(x = rep(0, length(orderedRowNames)),
@@ -74,7 +73,7 @@ PlotPhyloProfile <- function(phyloData,
                                    fillName = orderedRowNames)
   
 
-  geneNamesObj <- ggplot(orderedRowNamesMat, aes(x, y, label = fillName)) +
+  geneNamesObj <- ggplot(orderedRowNamesMat, aes_string('x', 'y', label = 'fillName')) +
     geom_text(size = geneNameSize, colour = geneNameCol) +
       labs(x = NULL, y = NULL) +
         scale_x_continuous(expand = c(0, 0), breaks = NULL) +
@@ -94,8 +93,8 @@ PlotPhyloProfile <- function(phyloData,
                   legend.margin = unit(0, 'mm'))
 
   ## plot phylogenetic matrix
-  phyloObj <- ggplot(orderedPhyloData, aes(speNames, geneNames)) +
-    geom_tile(aes(fill = factor(apData))) +
+  phyloObj <- ggplot(orderedPhyloData, aes_string('speNames', 'geneNames')) +
+    geom_tile(aes_string(fill = 'apData')) +
       scale_fill_manual(name = 'status', labels = c('absent', 'present'), values = c(absentCol, presentCol)) +
         labs(x = NULL, y = NULL) +
           scale_y_continuous(expand = c(0, 0), breaks = NULL) +
@@ -119,7 +118,7 @@ PlotPhyloProfile <- function(phyloData,
   segData <- segment(ddata)
   segData[, c(1, 3)] <- segData[, c(1, 3)] - 0.5
   geneDendroObj <- ggplot(segData) +
-    geom_segment(aes(x = x, y = y, xend = xend, yend = yend)) +
+    geom_segment(aes_string(x = 'x', y = 'y', xend = 'xend', yend = 'yend')) +
       labs(x = NULL, y = NULL) +
         scale_y_reverse(expand = c(0, 0), breaks = NULL) +
           scale_x_continuous(expand = c(0, 0), limits = c(0, nrow(phyloData)), breaks = NULL) +
@@ -143,8 +142,8 @@ PlotPhyloProfile <- function(phyloData,
                                   y = 1:length(orderedGeneCol),
                                   fillCol = factor(orderedGeneCol))
 
-  geneBlockObj <- ggplot(orderedGeneColMat, aes(x, y)) +
-    geom_tile(aes(fill = fillCol), color = geneBetweenBlockCol) +
+  geneBlockObj <- ggplot(orderedGeneColMat, aes_string('x', 'y')) +
+    geom_tile(aes_string(fill = 'fillCol'), color = geneBetweenBlockCol) +
       labs(x = NULL, y = NULL) +
         scale_y_continuous(expand = c(0, 0), breaks = NULL) +
           scale_x_continuous(expand = c(0, 0), breaks = NULL) +
@@ -168,8 +167,8 @@ PlotPhyloProfile <- function(phyloData,
                                  x = 1:length(orderedSpeCol),
                                  fillCol = factor(orderedSpeCol))
 
-  speBlockObj <- ggplot(orderedSpeColMat, aes(x, y)) +
-    geom_tile(aes(fill = fillCol)) +
+  speBlockObj <- ggplot(orderedSpeColMat, aes_string('x', 'y')) +
+    geom_tile(aes_string(fill = 'fillCol')) +
       labs(x = NULL, y = NULL) +
         scale_y_continuous(expand = c(0, 0), breaks = NULL) +
           scale_x_continuous(expand = c(0, 0), breaks = NULL) +
@@ -189,23 +188,25 @@ PlotPhyloProfile <- function(phyloData,
                     legend.margin = unit(0, 'mm'))
   
   ## plot empty block
-  empty <- ggplot()+geom_point(aes(1,1), colour='white') +
-    labs(x = NULL, y = NULL) +
-      scale_y_continuous(expand = c(0, 0), breaks = NULL) +
-        scale_x_continuous(expand = c(0, 0), breaks = NULL) +
-          theme(legend.position='none',
-                title = element_blank(),
-                axis.text = element_blank(),
-                axis.title = element_blank(),
-                axis.ticks.length = unit(0, 'mm'),
-                axis.ticks.margin = unit(0, 'mm'),
-                axis.line = element_blank(),
-                panel.margin = unit(0, 'mm'),
-                panel.grid = element_blank(),
-                panel.border = element_blank(),
-                panel.background = element_blank(),
-                plot.margin = unit(c(0, 0, 0, 0), 'line'),
-                legend.margin = unit(0, 'mm'))
+  emptyData <- data.frame(x = 1, y = 1)
+  empty <- ggplot(emptyData) +
+    geom_point(aes_string('x', 'y'), colour='white') +
+      labs(x = NULL, y = NULL) +
+        scale_y_continuous(expand = c(0, 0), breaks = NULL) +
+          scale_x_continuous(expand = c(0, 0), breaks = NULL) +
+            theme(legend.position='none',
+                  title = element_blank(),
+                  axis.text = element_blank(),
+                  axis.title = element_blank(),
+                  axis.ticks.length = unit(0, 'mm'),
+                  axis.ticks.margin = unit(0, 'mm'),
+                  axis.line = element_blank(),
+                  panel.margin = unit(0, 'mm'),
+                  panel.grid = element_blank(),
+                  panel.border = element_blank(),
+                  panel.background = element_blank(),
+                  plot.margin = unit(c(0, 0, 0, 0), 'line'),
+                  legend.margin = unit(0, 'mm'))
   
 
   plotRes <- grid.arrange(empty, empty, empty, speBlockObj, geneDendroObj, geneNamesObj, geneBlockObj, phyloObj, ncol = 4, nrow = 2, widths = widthsShinkage, heights = heightsShinkage)

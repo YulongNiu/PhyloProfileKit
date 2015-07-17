@@ -9,7 +9,7 @@
 ##' data(fatp)
 ##' ATPCorPlot <- plotPhyloCor(fatp$atpPhylo, geneCol = fatp$genecol)
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @importFrom ggplot2 ggplot geom_text geom_tile geom_segment geom_point scale_fill_manual labs scale_x_continuous scale_y_continuous scale_fill_gradientn scale_x_discrete scale_y_discrete scale_x_reverse scale_y_reverse theme aes element_blank coord_flip
+##' @importFrom ggplot2 ggplot geom_text geom_tile geom_segment geom_point scale_fill_manual labs scale_x_continuous scale_y_continuous scale_fill_gradientn scale_x_discrete scale_y_discrete scale_x_reverse scale_y_reverse theme aes_string element_blank coord_flip
 ##' @importFrom grid unit
 ##' @importFrom ggdendro dendro_data.hclust segment
 ##' @importFrom gridExtra grid.arrange
@@ -54,9 +54,9 @@ plotPhyloCor <- function(phyloData,
   orderedGeneCol <- geneCol[match(rownames(orderedPhyloData), names(geneCol))]
 
   ## plot cor matrix
-  corMatObj <- ggplot(corMelt, aes(From, To, fill = Cor)) +
+  corMatObj <- ggplot(corMelt, aes_string('From', 'To', fill = 'Cor')) +
     geom_tile() +
-      geom_text(aes(From, To, label = Cor), color = '#073642', size = 4) +
+      geom_text(aes_string('From', 'To', label = 'Cor'), color = '#073642', size = 4) +
   scale_fill_gradientn(colours = gradientCol) +
     scale_x_discrete(expand = c(0, 0), breaks = NULL) +
       scale_y_discrete(expand = c(0, 0), breaks = NULL) +
@@ -78,7 +78,7 @@ plotPhyloCor <- function(phyloData,
 
   ## ## plot legent
   ## ## Extract Legend
-  ## corMatObjLegent <- ggplot(corMelt, aes(From, To, fill = Cor)) +
+  ## corMatObjLegent <- ggplot(corMelt, aes_string('From', 'To', fill = 'Cor')) +
   ##   geom_tile() +
   ##     scale_fill_gradientn(colours = gradientCol)
     ## g_legend <- function(a.gplot){ 
@@ -94,7 +94,7 @@ plotPhyloCor <- function(phyloData,
                                    fillName = rev(orderedRowNames))
   
 
-  geneRowNamesObj <- ggplot(orderedRowNamesMat, aes(x, y, label = fillName)) +
+  geneRowNamesObj <- ggplot(orderedRowNamesMat, aes_string('x', 'y', label = 'fillName')) +
     geom_text(size = geneNameSize, colour = geneNameCol) +
       labs(x = NULL, y = NULL) +
         scale_x_continuous(expand = c(0, 0), breaks = NULL) +
@@ -120,7 +120,7 @@ plotPhyloCor <- function(phyloData,
                                    fillName = orderedRowNames)
   
 
-  geneColNamesObj <- ggplot(orderedColNamesMat, aes(x, y, label = fillName)) +
+  geneColNamesObj <- ggplot(orderedColNamesMat, aes_string('x', 'y', label = 'fillName')) +
     geom_text(size = geneNameSize, colour = geneNameCol, angle = 90) +
       labs(x = NULL, y = NULL) +
         scale_x_continuous(expand = c(0, 0), limits = c(0, length(orderedRowNames)), breaks = NULL) +
@@ -144,7 +144,7 @@ plotPhyloCor <- function(phyloData,
   segData <- segment(ddata)
   segData[, c(1, 3)] <- segData[, c(1, 3)] - 0.5
   geneDendroObj <- ggplot(segData) +
-    geom_segment(aes(x = x, y = y, xend = xend, yend = yend)) +
+    geom_segment(aes_string(x = 'x', y = 'y', xend = 'xend', yend = 'yend')) +
       labs(x = NULL, y = NULL) +
         scale_y_reverse(expand = c(0, 0), breaks = NULL) +
           scale_x_reverse(expand = c(0, 0), limits = c(nrow(phyloData), 0), breaks = NULL) +
@@ -168,8 +168,8 @@ plotPhyloCor <- function(phyloData,
                                   y = 1:length(orderedGeneCol),
                                   fillCol = rev(factor(orderedGeneCol)))
 
-  geneBlockObj <- ggplot(orderedGeneColMat, aes(x, y)) +
-    geom_tile(aes(fill = fillCol), color = geneBetweenBlockCol) +
+  geneBlockObj <- ggplot(orderedGeneColMat, aes_string('x', 'y')) +
+    geom_tile(aes_string(fill = 'fillCol'), color = geneBetweenBlockCol) +
       labs(x = NULL, y = NULL) +
         scale_y_continuous(expand = c(0, 0), breaks = NULL) +
           scale_x_continuous(expand = c(0, 0), breaks = NULL) +
@@ -188,9 +188,10 @@ plotPhyloCor <- function(phyloData,
                     plot.margin = unit(c(0, 0, 0, 0), 'line'),
                     legend.margin = unit(0, 'mm'))
   
-   ## plot empty block
-  empty <- ggplot() +
-    geom_point(aes(1,1), colour='white') +
+  ## plot empty block
+  emptyData <- data.frame(x = 1, y = 1)
+  empty <- ggplot(emptyData) +
+    geom_point(aes_string('x', 'y'), colour='white') +
       labs(x = NULL, y = NULL) +
         scale_y_continuous(expand = c(0, 0), breaks = NULL) +
           scale_x_continuous(expand = c(0, 0), breaks = NULL) +
