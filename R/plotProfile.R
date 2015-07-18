@@ -17,12 +17,16 @@
 ##' @examples
 ##' data(fatp)
 ##' ATPphyloPlot <- PlotPhyloProfile(fatp$atpPhylo, speCol = fatp$specol, geneCol = fatp$genecol)
-##' plot(ATPphyloPlot)
+##' \dontrun{
+##' pdf('FATPprofilePlot.pdf')
+##' ATPphyloPlot
+##' dev.off()
+##' }
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom ggplot2 ggplot geom_text geom_tile geom_segment geom_point scale_fill_manual labs scale_x_continuous scale_y_continuous scale_y_reverse theme aes_string element_blank coord_flip
 ##' @importFrom grid unit
 ##' @importFrom ggdendro dendro_data.hclust segment
-##' @importFrom gridExtra grid.arrange
+##' @importFrom gridExtra marrangeGrob
 ##' @importFrom reshape2 melt
 ##' @export
 ##' 
@@ -209,7 +213,13 @@ PlotPhyloProfile <- function(phyloData,
                   legend.margin = unit(0, 'mm'))
   
 
-  plotRes <- grid.arrange(empty, empty, empty, speBlockObj, geneDendroObj, geneNamesObj, geneBlockObj, phyloObj, ncol = 4, nrow = 2, widths = widthsShinkage, heights = heightsShinkage)
+  plotRes <- marrangeGrob(
+    list(empty, empty, empty, speBlockObj, geneDendroObj, geneNamesObj, geneBlockObj, phyloObj),
+    ncol = 4,
+    nrow = 2,
+    widths = widthsShinkage,
+    heights = heightsShinkage,
+    top = NULL)
 
   return(plotRes)
 } 

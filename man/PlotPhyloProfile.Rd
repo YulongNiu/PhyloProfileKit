@@ -42,7 +42,11 @@ A combination plot of phylogenetic profiles with genes and species clusters.
 \examples{
 data(fatp)
 ATPphyloPlot <- PlotPhyloProfile(fatp$atpPhylo, speCol = fatp$specol, geneCol = fatp$genecol)
-plot(ATPphyloPlot)
+\dontrun{
+pdf('FATPprofilePlot.pdf')
+ATPphyloPlot
+dev.off()
+}
 }
 \author{
 Yulong Niu \email{niuylscu@gmail.com}

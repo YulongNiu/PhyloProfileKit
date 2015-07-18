@@ -8,11 +8,16 @@
 ##' @examples
 ##' data(fatp)
 ##' ATPCorPlot <- PlotPhyloCor(fatp$atpPhylo, geneCol = fatp$genecol)
+##' \dontrun{
+##' pdf('FATPCorplot.pdf')
+##' ATPCorPlot
+##' dev.off()
+##' }
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom ggplot2 ggplot geom_text geom_tile geom_segment geom_point scale_fill_manual labs scale_x_continuous scale_y_continuous scale_fill_gradientn scale_x_discrete scale_y_discrete scale_x_reverse scale_y_reverse theme aes_string element_blank coord_flip
 ##' @importFrom grid unit
 ##' @importFrom ggdendro dendro_data.hclust segment
-##' @importFrom gridExtra grid.arrange
+##' @importFrom gridExtra marrangeGrob
 ##' @importFrom reshape2 melt
 ##' @importFrom RColorBrewer brewer.pal
 ##' @export
@@ -209,7 +214,11 @@ PlotPhyloCor <- function(phyloData,
                   plot.margin = unit(c(0, 0, 0, 0), 'line'),
                   legend.margin = unit(0, 'mm'))
   
-  plotRes <- grid.arrange(geneDendroObj, geneRowNamesObj, geneBlockObj, corMatObj, empty, empty, empty, geneColNamesObj, ncol = 4, nrow = 2, widths = widthsShinkage, heights = heightsShinkage)
+  plotRes <- marrangeGrob(list(geneDendroObj, geneRowNamesObj, geneBlockObj, corMatObj, empty, empty, empty, geneColNamesObj),
+                          ncol = 4,
+                          nrow = 2,
+                          widths = widthsShinkage,
+                          heights = heightsShinkage)
   
   return(plotRes)
   
