@@ -7,7 +7,7 @@
 ##' @return A plot object. 
 ##' @examples
 ##' data(fatp)
-##' ATPCorPlot <- plotPhyloCor(fatp$atpPhylo, geneCol = fatp$genecol)
+##' ATPCorPlot <- PlotPhyloCor(fatp$atpPhylo, geneCol = fatp$genecol)
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom ggplot2 ggplot geom_text geom_tile geom_segment geom_point scale_fill_manual labs scale_x_continuous scale_y_continuous scale_fill_gradientn scale_x_discrete scale_y_discrete scale_x_reverse scale_y_reverse theme aes_string element_blank coord_flip
 ##' @importFrom grid unit
@@ -17,7 +17,7 @@
 ##' @importFrom RColorBrewer brewer.pal
 ##' @export
 ##' 
-plotPhyloCor <- function(phyloData,
+PlotPhyloCor <- function(phyloData,
                          gradientCol = colorRampPalette(rev(brewer.pal(n = 7, name = 'RdYlBu')))(100),
                          geneNameSize = 3,
                          geneNameCol = 'grey55',
