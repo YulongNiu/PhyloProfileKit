@@ -40,7 +40,7 @@ data(fatp)
 ATPCorPlot <- PlotPhyloCor(fatp$atpPhylo, geneCol = fatp$genecol)
 \dontrun{
 pdf('FATPCorplot.pdf')
-ATPCorPlot
+ATPCorPlot <- PlotPhyloCor(fatp$atpPhylo, geneCol = fatp$genecol)
 dev.off()
 }
 }

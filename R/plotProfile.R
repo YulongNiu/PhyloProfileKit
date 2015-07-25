@@ -19,14 +19,14 @@
 ##' ATPphyloPlot <- PlotPhyloProfile(fatp$atpPhylo, speCol = fatp$specol, geneCol = fatp$genecol)
 ##' \dontrun{
 ##' pdf('FATPprofilePlot.pdf')
-##' ATPphyloPlot
+##' ATPphyloPlot <- PlotPhyloProfile(fatp$atpPhylo, speCol = fatp$specol, geneCol = fatp$genecol)
 ##' dev.off()
 ##' }
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom ggplot2 ggplot geom_text geom_tile geom_segment geom_point scale_fill_manual labs scale_x_continuous scale_y_continuous scale_y_reverse theme aes_string element_blank coord_flip
 ##' @importFrom grid unit
 ##' @importFrom ggdendro dendro_data.hclust segment
-##' @importFrom gridExtra marrangeGrob
+##' @importFrom gridExtra grid.arrange
 ##' @importFrom reshape2 melt
 ##' @export
 ##' 
@@ -213,13 +213,27 @@ PlotPhyloProfile <- function(phyloData,
                   legend.margin = unit(0, 'mm'))
   
 
-  plotRes <- marrangeGrob(
-    list(empty, empty, empty, speBlockObj, geneDendroObj, geneNamesObj, geneBlockObj, phyloObj),
+  ## plotRes <- marrangeGrob(
+  ##   list(empty, empty, empty, speBlockObj, geneDendroObj, geneNamesObj, geneBlockObj, phyloObj),
+  ##   ncol = 4,
+  ##   nrow = 2,
+  ##   widths = widthsShinkage,
+  ##   heights = heightsShinkage,
+  ##   top = NULL)
+
+  plotRes <- grid.arrange(
+    empty,
+    empty,
+    empty,
+    speBlockObj,
+    geneDendroObj,
+    geneNamesObj,
+    geneBlockObj,
+    phyloObj,
     ncol = 4,
     nrow = 2,
     widths = widthsShinkage,
-    heights = heightsShinkage,
-    top = NULL)
+    heights = heightsShinkage)
 
   return(plotRes)
 } 

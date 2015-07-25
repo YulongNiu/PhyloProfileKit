@@ -10,14 +10,14 @@
 ##' ATPCorPlot <- PlotPhyloCor(fatp$atpPhylo, geneCol = fatp$genecol)
 ##' \dontrun{
 ##' pdf('FATPCorplot.pdf')
-##' ATPCorPlot
+##' ATPCorPlot <- PlotPhyloCor(fatp$atpPhylo, geneCol = fatp$genecol)
 ##' dev.off()
 ##' }
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom ggplot2 ggplot geom_text geom_tile geom_segment geom_point scale_fill_manual labs scale_x_continuous scale_y_continuous scale_fill_gradientn scale_x_discrete scale_y_discrete scale_x_reverse scale_y_reverse theme aes_string element_blank coord_flip
 ##' @importFrom grid unit
 ##' @importFrom ggdendro dendro_data.hclust segment
-##' @importFrom gridExtra marrangeGrob
+##' @importFrom gridExtra grid.arrange
 ##' @importFrom reshape2 melt
 ##' @importFrom RColorBrewer brewer.pal
 ##' @export
@@ -61,32 +61,32 @@ PlotPhyloCor <- function(phyloData,
   ## plot cor matrix
   corMatObj <- ggplot(corMelt, aes_string('From', 'To', fill = 'Cor')) +
     geom_tile() +
-      geom_text(aes_string('From', 'To', label = 'Cor'), color = '#073642', size = 4) +
-  scale_fill_gradientn(colours = gradientCol) +
-    scale_x_discrete(expand = c(0, 0), breaks = NULL) +
-      scale_y_discrete(expand = c(0, 0), breaks = NULL) +
-        labs(x = NULL, y = NULL) +
-          theme(legend.justification = c(1, 1),
-                legend.position = c(1, 1),
-                title = element_blank(),
-                axis.text = element_blank(),
-                axis.title = element_blank(),
-                axis.ticks.length = unit(0, 'mm'),
-                axis.ticks.margin = unit(0, 'mm'),
-                axis.line = element_blank(),
-                panel.margin = unit(0, 'mm'),
-                panel.grid = element_blank(),
-                panel.border = element_blank(),
-                panel.background = element_blank(),
-                plot.margin = unit(c(0, 0, 0, 0), 'line'),
-                legend.margin = unit(0, 'mm'))
+      geom_text(aes_string('From', 'To', label = 'Cor'), colour = '#073642', size = 4) +
+        scale_fill_gradientn(colours = gradientCol) +
+          scale_x_discrete(expand = c(0, 0), breaks = NULL) +
+            scale_y_discrete(expand = c(0, 0), breaks = NULL) +
+              labs(x = NULL, y = NULL) +
+                theme(legend.justification = c(1, 1),
+                      legend.position = c(1, 1),
+                      title = element_blank(),
+                      axis.text = element_blank(),
+                      axis.title = element_blank(),
+                      axis.ticks.length = unit(0, 'mm'),
+                      axis.ticks.margin = unit(0, 'mm'),
+                      axis.line = element_blank(),
+                      panel.margin = unit(0, 'mm'),
+                      panel.grid = element_blank(),
+                      panel.border = element_blank(),
+                      panel.background = element_blank(),
+                      plot.margin = unit(c(0, 0, 0, 0), 'line'),
+                      legend.margin = unit(0, 'mm'))
 
   ## ## plot legent
   ## ## Extract Legend
   ## corMatObjLegent <- ggplot(corMelt, aes_string('From', 'To', fill = 'Cor')) +
   ##   geom_tile() +
   ##     scale_fill_gradientn(colours = gradientCol)
-    ## g_legend <- function(a.gplot){ 
+  ## g_legend <- function(a.gplot){ 
   ##   tmp <- ggplot_gtable(ggplot_build(a.gplot)) 
   ##   leg <- which(sapply(tmp$grobs, function(x) x$name) == 'guide-box') 
   ##   legend <- tmp$grobs[[leg]] 
@@ -213,13 +213,41 @@ PlotPhyloCor <- function(phyloData,
                   panel.background = element_blank(),
                   plot.margin = unit(c(0, 0, 0, 0), 'line'),
                   legend.margin = unit(0, 'mm'))
+
+  ## plotRes <- list(geneDendroObj = geneDendroObj,
+  ##                 geneRowNamesObj = geneRowNamesObj,
+  ##                 geneBlockObj = geneBlockObj,
+  ##                 corMatObj = corMatObj,
+  ##                 empty = empty,
+  ##                 geneColNamesObj = geneColNamesObj,
+  ##                 corMelt = corMelt)
   
-  plotRes <- marrangeGrob(list(geneDendroObj, geneRowNamesObj, geneBlockObj, corMatObj, empty, empty, empty, geneColNamesObj),
-                          ncol = 4,
-                          nrow = 2,
-                          widths = widthsShinkage,
-                          heights = heightsShinkage)
-  
+  ## plotRes <- arrangeGrob(geneDendroOabj,
+  ##                        geneRowNamesObj,
+  ##                        geneBlockObj,
+  ##                        corMatObj,
+  ##                        empty,
+  ##                        empty,
+  ##                        empty,
+  ##                        geneColNamesObj,
+  ##                        ncol = 4,
+  ##                        nrow = 2,
+  ##                        widths = widthsShinkage,
+  ##                        heights = heightsShinkage)
+
+  plotRes <- grid.arrange(geneDendroObj,
+                         geneRowNamesObj,
+                         geneBlockObj,
+                         corMatObj,
+                         empty,
+                         empty,
+                         empty,
+                         geneColNamesObj,
+                         ncol = 4,
+                         nrow = 2,
+                         widths = widthsShinkage,
+                         heights = heightsShinkage)
   return(plotRes)
   
 }
+

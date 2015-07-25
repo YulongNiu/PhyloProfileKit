@@ -44,7 +44,7 @@ data(fatp)
 ATPphyloPlot <- PlotPhyloProfile(fatp$atpPhylo, speCol = fatp$specol, geneCol = fatp$genecol)
 \dontrun{
 pdf('FATPprofilePlot.pdf')
-ATPphyloPlot
+ATPphyloPlot <- PlotPhyloProfile(fatp$atpPhylo, speCol = fatp$specol, geneCol = fatp$genecol)
 dev.off()
 }
 }
