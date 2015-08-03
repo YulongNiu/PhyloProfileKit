@@ -6,8 +6,8 @@
 \usage{
 PlotPhyloCor(phyloData, gradientCol = colorRampPalette(rev(brewer.pal(n = 7,
   name = "RdYlBu")))(100), geneNameSize = 3, geneNameCol = "grey55",
-  geneBetweenBlockCol = NA, geneCol, widthsShinkage = c(0.9, 0.7, 0.3, 7),
-  heightsShinkage = c(7, 0.7))
+  geneBetweenBlockCol = NA, geneCol, showCorVal = TRUE,
+  widthsShinkage = c(0.9, 0.7, 0.3, 7), heightsShinkage = c(7, 0.7))
 }
 \arguments{
 \item{phyloData}{The phylogenetic profile data with 1 and 0 denoting the presence and absence of orthologous, respectively. The "phyloData" should be a numeric matrix, of which the row is gene and column is species.The "phyloData"has row names and column names which will be used for the dendrogram of row and column.}
@@ -21,6 +21,8 @@ PlotPhyloCor(phyloData, gradientCol = colorRampPalette(rev(brewer.pal(n = 7,
 \item{geneBetweenBlockCol}{The space color between gene blocks, and the default value is "NA" meaning no space color. If the number of genes is samll, for example less than 20, setting it as 'white' is fine.}
 
 \item{geneCol}{A vector of colors with names of species, which are the same as rownames of "phyloData" (may not in the same order).}
+
+\item{showCorVal}{Whether or not show the correlation values, and the default is set as TRUE.}
 
 \item{widthsShinkage}{The shinkage width vector.}
 

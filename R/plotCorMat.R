@@ -3,6 +3,7 @@
 ##' A combination plot of correlation matrix with genes and species clusters.
 ##' @title Plot correlation matrix
 ##' @param gradientCol The gradien colours for correlation matrix.
+##' @param showCorVal Whether or not show the correlation values, and the default is set as TRUE.
 ##' @inheritParams PlotPhyloProfile
 ##' @return A plot object. 
 ##' @examples
@@ -28,6 +29,7 @@ PlotPhyloCor <- function(phyloData,
                          geneNameCol = 'grey55',
                          geneBetweenBlockCol = NA,
                          geneCol,
+                         showCorVal = TRUE,
                          widthsShinkage = c(0.9, 0.7, 0.3, 7),
                          heightsShinkage = c(7, 0.7)) {
   ## require('grid')
@@ -61,25 +63,27 @@ PlotPhyloCor <- function(phyloData,
   ## plot cor matrix
   corMatObj <- ggplot(corMelt, aes_string('From', 'To', fill = 'Cor')) +
     geom_tile() +
-      geom_text(aes_string('From', 'To', label = 'Cor'), colour = '#073642', size = 4) +
-        scale_fill_gradientn(colours = gradientCol) +
-          scale_x_discrete(expand = c(0, 0), breaks = NULL) +
-            scale_y_discrete(expand = c(0, 0), breaks = NULL) +
-              labs(x = NULL, y = NULL) +
-                theme(legend.justification = c(1, 1),
-                      legend.position = c(1, 1),
-                      title = element_blank(),
-                      axis.text = element_blank(),
-                      axis.title = element_blank(),
-                      axis.ticks.length = unit(0, 'mm'),
-                      axis.ticks.margin = unit(0, 'mm'),
-                      axis.line = element_blank(),
-                      panel.margin = unit(0, 'mm'),
-                      panel.grid = element_blank(),
-                      panel.border = element_blank(),
-                      panel.background = element_blank(),
-                      plot.margin = unit(c(0, 0, 0, 0), 'line'),
-                      legend.margin = unit(0, 'mm'))
+      scale_fill_gradientn(colours = gradientCol) +
+        scale_x_discrete(expand = c(0, 0), breaks = NULL) +
+          scale_y_discrete(expand = c(0, 0), breaks = NULL) +
+            labs(x = NULL, y = NULL) +
+              theme(legend.justification = c(1, 1),
+                    legend.position = c(1, 1),
+                    title = element_blank(),
+                    axis.text = element_blank(),
+                    axis.title = element_blank(),
+                    axis.ticks.length = unit(0, 'mm'),
+                    axis.ticks.margin = unit(0, 'mm'),
+                    axis.line = element_blank(),
+                    panel.margin = unit(0, 'mm'),
+                    panel.grid = element_blank(),
+                    panel.border = element_blank(),
+                    panel.background = element_blank(),
+                    plot.margin = unit(c(0, 0, 0, 0), 'line'),
+                    legend.margin = unit(0, 'mm'))
+  if (showCorVal) {
+    corMatObj <- corMatObj +
+      geom_text(aes_string('From', 'To', label = 'Cor'), colour = '#073642', size = 4)} else {}
 
   ## ## plot legent
   ## ## Extract Legend
