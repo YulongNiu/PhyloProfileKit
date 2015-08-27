@@ -15,8 +15,7 @@
 ##' dev.off()
 ##' }
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @importFrom ggplot2 ggplot geom_text geom_tile geom_segment geom_point scale_fill_manual labs scale_x_continuous scale_y_continuous scale_fill_gradientn scale_x_discrete scale_y_discrete scale_x_reverse scale_y_reverse theme aes_string element_blank coord_flip
-##' @importFrom grid unit
+##' @importFrom ggplot2 ggplot geom_text geom_tile geom_segment geom_point scale_fill_manual labs scale_x_continuous scale_y_continuous scale_fill_gradientn scale_x_discrete scale_y_discrete scale_x_reverse scale_y_reverse aes_string coord_flip
 ##' @importFrom ggdendro dendro_data.hclust segment
 ##' @importFrom gridExtra grid.arrange
 ##' @importFrom reshape2 melt
@@ -68,20 +67,8 @@ PlotPhyloCor <- function(phyloData,
         scale_x_discrete(expand = c(0, 0), breaks = NULL) +
           scale_y_discrete(expand = c(0, 0), breaks = NULL) +
             labs(x = NULL, y = NULL) +
-              theme(legend.justification = c(1, 1),
-                    legend.position = c(1, 1),
-                    title = element_blank(),
-                    axis.text = element_blank(),
-                    axis.title = element_blank(),
-                    axis.ticks.length = unit(0, 'mm'),
-                    axis.ticks.margin = unit(0, 'mm'),
-                    axis.line = element_blank(),
-                    panel.margin = unit(0, 'mm'),
-                    panel.grid = element_blank(),
-                    panel.border = element_blank(),
-                    panel.background = element_blank(),
-                    plot.margin = unit(c(0, 0, 0, 0), 'line'),
-                    legend.margin = unit(0, 'mm'))
+              theme_phylo()
+
   if (showCorVal) {
     corMatObj <- corMatObj +
       geom_text(aes_string('From', 'To', label = 'Cor'), colour = '#073642', size = 4)} else {}
@@ -109,19 +96,7 @@ PlotPhyloCor <- function(phyloData,
       labs(x = NULL, y = NULL) +
         scale_x_continuous(expand = c(0, 0), breaks = NULL) +
           scale_y_continuous(expand = c(0, 0), limits = c(0, length(orderedRowNames)), breaks = NULL) +
-            theme(legend.position='none',
-                  title = element_blank(),
-                  axis.text = element_blank(),
-                  axis.title = element_blank(),
-                  axis.ticks.length = unit(0, 'mm'),
-                  axis.ticks.margin = unit(0, 'mm'),
-                  axis.line = element_blank(),
-                  panel.margin = unit(0, 'mm'),
-                  panel.grid = element_blank(),
-                  panel.border = element_blank(),
-                  panel.background = element_blank(),
-                  plot.margin = unit(c(0, 0, 0, 0), 'line'),
-                  legend.margin = unit(0, 'mm'))
+            theme_phylo()
 
 
   ## plot col gene names
@@ -135,19 +110,8 @@ PlotPhyloCor <- function(phyloData,
       labs(x = NULL, y = NULL) +
         scale_x_continuous(expand = c(0, 0), limits = c(0, length(orderedRowNames)), breaks = NULL) +
           scale_y_continuous(expand = c(0, 0), breaks = NULL) +
-            theme(legend.position='none',
-                  title = element_blank(),
-                  axis.text = element_blank(),
-                  axis.title = element_blank(),
-                  axis.ticks.length = unit(0, 'mm'),
-                  axis.ticks.margin = unit(0, 'mm'),
-                  axis.line = element_blank(),
-                  panel.margin = unit(0, 'mm'),
-                  panel.grid = element_blank(),
-                  panel.border = element_blank(),
-                  panel.background = element_blank(),
-                  plot.margin = unit(c(0, 0, 0, 0), 'line'),
-                  legend.margin = unit(0, 'mm'))
+            theme_phylo()
+
   
   ## dendrogram plot for genes
   ddata <- dendro_data.hclust(hcGene, type = 'rectangle')
@@ -159,19 +123,8 @@ PlotPhyloCor <- function(phyloData,
         scale_y_reverse(expand = c(0, 0), breaks = NULL) +
           scale_x_reverse(expand = c(0, 0), limits = c(nrow(phyloData), 0), breaks = NULL) +
             coord_flip() +
-              theme(legend.position='none',
-                    title = element_blank(),
-                    axis.text = element_blank(),
-                    axis.title = element_blank(),
-                    axis.ticks.length = unit(0, 'mm'),
-                    axis.ticks.margin = unit(0, 'mm'),
-                    axis.line = element_blank(),
-                    panel.margin = unit(0, 'mm'),
-                    panel.grid = element_blank(),
-                    panel.border = element_blank(),
-                    panel.background = element_blank(),
-                    plot.margin = unit(c(0, 0, 0, 0), 'line'),
-                    legend.margin = unit(0, 'mm'))
+              theme_phylo()
+
 
   ## gene color block
   orderedGeneColMat <- data.frame(x = rep(0, length(orderedGeneCol)),
@@ -184,19 +137,8 @@ PlotPhyloCor <- function(phyloData,
         scale_y_continuous(expand = c(0, 0), breaks = NULL) +
           scale_x_continuous(expand = c(0, 0), breaks = NULL) +
             scale_fill_manual(values = levels(orderedGeneColMat$fillCol)) +
-              theme(legend.position='none',
-                    title = element_blank(),
-                    axis.text = element_blank(),
-                    axis.title = element_blank(),
-                    axis.ticks.length = unit(0, 'mm'),
-                    axis.ticks.margin = unit(0, 'mm'),
-                    axis.line = element_blank(),
-                    panel.margin = unit(0, 'mm'),
-                    panel.grid = element_blank(),
-                    panel.border = element_blank(),
-                    panel.background = element_blank(),
-                    plot.margin = unit(c(0, 0, 0, 0), 'line'),
-                    legend.margin = unit(0, 'mm'))
+              theme_phylo()
+
   
   ## plot empty block
   emptyData <- data.frame(x = 1, y = 1)
@@ -205,19 +147,7 @@ PlotPhyloCor <- function(phyloData,
       labs(x = NULL, y = NULL) +
         scale_y_continuous(expand = c(0, 0), breaks = NULL) +
           scale_x_continuous(expand = c(0, 0), breaks = NULL) +
-            theme(legend.position='none',
-                  title = element_blank(),
-                  axis.text = element_blank(),
-                  axis.title = element_blank(),
-                  axis.ticks.length = unit(0, 'mm'),
-                  axis.ticks.margin = unit(0, 'mm'),
-                  axis.line = element_blank(),
-                  panel.margin = unit(0, 'mm'),
-                  panel.grid = element_blank(),
-                  panel.border = element_blank(),
-                  panel.background = element_blank(),
-                  plot.margin = unit(c(0, 0, 0, 0), 'line'),
-                  legend.margin = unit(0, 'mm'))
+            theme_phylo()
 
   ## plotRes <- list(geneDendroObj = geneDendroObj,
   ##                 geneRowNamesObj = geneRowNamesObj,

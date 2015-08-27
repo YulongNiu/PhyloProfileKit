@@ -23,8 +23,7 @@
 ##' dev.off()
 ##' }
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @importFrom ggplot2 ggplot geom_text geom_tile geom_segment geom_point scale_fill_manual labs scale_x_continuous scale_y_continuous scale_y_reverse theme aes_string element_blank coord_flip
-##' @importFrom grid unit
+##' @importFrom ggplot2 ggplot geom_text geom_tile geom_segment geom_point scale_fill_manual labs scale_x_continuous scale_y_continuous scale_y_reverse aes_string coord_flip
 ##' @importFrom ggdendro dendro_data.hclust segment
 ##' @importFrom gridExtra grid.arrange
 ##' @importFrom reshape2 melt
@@ -82,19 +81,8 @@ PlotPhyloProfile <- function(phyloData,
       labs(x = NULL, y = NULL) +
         scale_x_continuous(expand = c(0, 0), breaks = NULL) +
           scale_y_continuous(expand = c(0, 0), limits = c(0, length(orderedRowNames)), breaks = NULL) +
-            theme(legend.position='none',
-                  title = element_blank(),
-                  axis.text = element_blank(),
-                  axis.title = element_blank(),
-                  axis.ticks.length = unit(0, 'mm'),
-                  axis.ticks.margin = unit(0, 'mm'),
-                  axis.line = element_blank(),
-                  panel.margin = unit(0, 'mm'),
-                  panel.grid = element_blank(),
-                  panel.border = element_blank(),
-                  panel.background = element_blank(),
-                  plot.margin = unit(c(0, 0, 0, 0), 'line'),
-                  legend.margin = unit(0, 'mm'))
+            theme_phylo()
+
 
   ## plot phylogenetic matrix
   phyloObj <- ggplot(orderedPhyloData, aes_string('speNames', 'geneNames')) +
@@ -103,19 +91,7 @@ PlotPhyloProfile <- function(phyloData,
         labs(x = NULL, y = NULL) +
           scale_y_continuous(expand = c(0, 0), breaks = NULL) +
             scale_x_continuous(expand = c(0, 0), breaks = NULL) +
-              theme(legend.position='none',
-                    title = element_blank(),
-                    axis.text = element_blank(),
-                    axis.title = element_blank(),
-                    axis.ticks.length = unit(0, 'mm'),
-                    axis.ticks.margin = unit(0, 'mm'),
-                    axis.line = element_blank(),
-                    panel.margin = unit(0, 'mm'),
-                    panel.grid = element_blank(),
-                    panel.border = element_blank(),
-                    panel.background = element_blank(),
-                    plot.margin = unit(c(0, 0, 0, 0), 'line'),
-                    legend.margin = unit(0, 'mm'))
+              theme_phylo()
 
   ## dendrogram plot for genes
   ddata <- dendro_data.hclust(hcGene, type = 'rectangle')
@@ -127,19 +103,7 @@ PlotPhyloProfile <- function(phyloData,
         scale_y_reverse(expand = c(0, 0), breaks = NULL) +
           scale_x_continuous(expand = c(0, 0), limits = c(0, nrow(phyloData)), breaks = NULL) +
             coord_flip() +
-              theme(legend.position='none',
-                    title = element_blank(),
-                    axis.text = element_blank(),
-                    axis.title = element_blank(),
-                    axis.ticks.length = unit(0, 'mm'),
-                    axis.ticks.margin = unit(0, 'mm'),
-                    axis.line = element_blank(),
-                    panel.margin = unit(0, 'mm'),
-                    panel.grid = element_blank(),
-                    panel.border = element_blank(),
-                    panel.background = element_blank(),
-                    plot.margin = unit(c(0, 0, 0, 0), 'line'),
-                    legend.margin = unit(0, 'mm'))
+              theme_phylo()
 
   ## gene color block
   orderedGeneColMat <- data.frame(x = rep(0, length(orderedGeneCol)),
@@ -152,19 +116,7 @@ PlotPhyloProfile <- function(phyloData,
         scale_y_continuous(expand = c(0, 0), breaks = NULL) +
           scale_x_continuous(expand = c(0, 0), breaks = NULL) +
             scale_fill_manual(values = levels(orderedGeneColMat$fillCol)) +
-              theme(legend.position='none',
-                    title = element_blank(),
-                    axis.text = element_blank(),
-                    axis.title = element_blank(),
-                    axis.ticks.length = unit(0, 'mm'),
-                    axis.ticks.margin = unit(0, 'mm'),
-                    axis.line = element_blank(),
-                    panel.margin = unit(0, 'mm'),
-                    panel.grid = element_blank(),
-                    panel.border = element_blank(),
-                    panel.background = element_blank(),
-                    plot.margin = unit(c(0, 0, 0, 0), 'line'),
-                    legend.margin = unit(0, 'mm'))
+              theme_phylo()
 
   ## species color block
   orderedSpeColMat <- data.frame(y = rep(0, length(orderedSpeCol)),
@@ -177,19 +129,8 @@ PlotPhyloProfile <- function(phyloData,
         scale_y_continuous(expand = c(0, 0), breaks = NULL) +
           scale_x_continuous(expand = c(0, 0), breaks = NULL) +
             scale_fill_manual(values = levels(orderedSpeColMat$fillCol)) +
-              theme(legend.position='none',
-                    title = element_blank(),
-                    axis.text = element_blank(),
-                    axis.title = element_blank(),
-                    axis.ticks.length = unit(0, 'mm'),
-                    axis.ticks.margin = unit(0, 'mm'),
-                    axis.line = element_blank(),
-                    panel.margin = unit(0, 'mm'),
-                    panel.grid = element_blank(),
-                    panel.border = element_blank(),
-                    panel.background = element_blank(),
-                    plot.margin = unit(c(0, 0, 0, 0), 'line'),
-                    legend.margin = unit(0, 'mm'))
+              theme_phylo()
+ 
   
   ## plot empty block
   emptyData <- data.frame(x = 1, y = 1)
@@ -198,19 +139,7 @@ PlotPhyloProfile <- function(phyloData,
       labs(x = NULL, y = NULL) +
         scale_y_continuous(expand = c(0, 0), breaks = NULL) +
           scale_x_continuous(expand = c(0, 0), breaks = NULL) +
-            theme(legend.position='none',
-                  title = element_blank(),
-                  axis.text = element_blank(),
-                  axis.title = element_blank(),
-                  axis.ticks.length = unit(0, 'mm'),
-                  axis.ticks.margin = unit(0, 'mm'),
-                  axis.line = element_blank(),
-                  panel.margin = unit(0, 'mm'),
-                  panel.grid = element_blank(),
-                  panel.border = element_blank(),
-                  panel.background = element_blank(),
-                  plot.margin = unit(c(0, 0, 0, 0), 'line'),
-                  legend.margin = unit(0, 'mm'))
+            theme_phylo()
   
 
   ## plotRes <- marrangeGrob(
@@ -239,6 +168,34 @@ PlotPhyloProfile <- function(phyloData,
 } 
 
 
+
+##' Phylo theme
+##'
+##' A totally blank gpplot2 theme
+##' @title Blank theme for plots
+##' @param ... ggplot2 theme() additional parameters
+##' @return ggplot2 object
+##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @importFrom ggplot2 element_blank theme_bw %+replace% theme
+##' @importFrom grid unit
+##' 
+theme_phylo <- function(...) {
+  theme_bw() %+replace%
+  theme(legend.position='none',
+        title = element_blank(),
+        axis.text = element_blank(),
+        axis.title = element_blank(),
+        axis.ticks.length = unit(0, 'mm'),
+        axis.ticks.margin = unit(0, 'mm'),
+        axis.line = element_blank(),
+        panel.margin = unit(0, 'mm'),
+        panel.grid = element_blank(),
+        panel.border = element_blank(),
+        panel.background = element_blank(),
+        plot.margin = unit(c(0, 0, 0, 0), 'line'),
+        legend.margin = unit(0, 'mm'),
+        ...)
+}
 
 
 ##' Phylogenetic profiles of human F1Fo ATP synthase subunits.
