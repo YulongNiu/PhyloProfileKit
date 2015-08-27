@@ -1,0 +1,17 @@
+TODO List
+--------------------------
+
+* seperate function mode
+
+* add species in the phylogenetic plot
+
+* set gene names in phylo and correlation plot
+
+* gene annotation in correlation plot when gene number is large
+
+* multiple similarity (including correlation) method
+
+* PCA plot of input genes
+
+
+
