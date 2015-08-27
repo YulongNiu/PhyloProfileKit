@@ -52,7 +52,7 @@ PlotPhyloCor <- function(phyloData,
   corMat[lower.tri(corMat)] <- NA
   corMat <- corMat[, ncol(corMat):1]
   corMelt <- melt(corMat)
-  corMelt <- corMelt[-which(is.na(corMelt[, 3])),]
+  corMelt <- corMelt[!(is.na(corMelt[, 3])),]
   corMelt <- data.frame(corMelt)
   colnames(corMelt) <- c('From', 'To', 'Cor')
   
@@ -61,9 +61,10 @@ PlotPhyloCor <- function(phyloData,
   orderedGeneCol <- geneCol[match(rownames(orderedPhyloData), names(geneCol))]
 
   ## plot cor matrix
+  simBreaks = seq(0, 1, 0.25)
   corMatObj <- ggplot(corMelt, aes_string('From', 'To', fill = 'Cor')) +
     geom_tile() +
-      scale_fill_gradientn(colours = gradientCol) +
+      scale_fill_gradientn(colours = gradientCol, breaks = simBreaks, labels = format(simBreaks), limits = c(0, 1)) +
         scale_x_discrete(expand = c(0, 0), breaks = NULL) +
           scale_y_discrete(expand = c(0, 0), breaks = NULL) +
             labs(x = NULL, y = NULL) +
@@ -254,4 +255,3 @@ PlotPhyloCor <- function(phyloData,
   return(plotRes)
   
 }
-
