@@ -21,4 +21,5 @@ A totally blank gpplot2 theme
 \author{
 Yulong Niu \email{niuylscu@gmail.com}
 }
+\keyword{internal}
 

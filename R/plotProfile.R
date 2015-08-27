@@ -178,6 +178,7 @@ PlotPhyloProfile <- function(phyloData,
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom ggplot2 element_blank theme_bw %+replace% theme
 ##' @importFrom grid unit
+##' @keywords internal
 ##' 
 theme_phylo <- function(...) {
   theme_bw() %+replace%
