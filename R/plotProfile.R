@@ -81,7 +81,7 @@ PlotPhyloProfile <- function(phyloData,
       labs(x = NULL, y = NULL) +
         scale_x_continuous(expand = c(0, 0), breaks = NULL) +
           scale_y_continuous(expand = c(0, 0), limits = c(0, length(orderedRowNames)), breaks = NULL) +
-            theme_phylo()
+            theme_phylo(legend.position='none')
 
 
   ## plot phylogenetic matrix
@@ -91,7 +91,7 @@ PlotPhyloProfile <- function(phyloData,
         labs(x = NULL, y = NULL) +
           scale_y_continuous(expand = c(0, 0), breaks = NULL) +
             scale_x_continuous(expand = c(0, 0), breaks = NULL) +
-              theme_phylo()
+              theme_phylo(legend.position='none')
 
   ## dendrogram plot for genes
   ddata <- dendro_data.hclust(hcGene, type = 'rectangle')
@@ -103,7 +103,7 @@ PlotPhyloProfile <- function(phyloData,
         scale_y_reverse(expand = c(0, 0), breaks = NULL) +
           scale_x_continuous(expand = c(0, 0), limits = c(0, nrow(phyloData)), breaks = NULL) +
             coord_flip() +
-              theme_phylo()
+              theme_phylo(legend.position='none')
 
   ## gene color block
   orderedGeneColMat <- data.frame(x = rep(0, length(orderedGeneCol)),
@@ -116,7 +116,7 @@ PlotPhyloProfile <- function(phyloData,
         scale_y_continuous(expand = c(0, 0), breaks = NULL) +
           scale_x_continuous(expand = c(0, 0), breaks = NULL) +
             scale_fill_manual(values = levels(orderedGeneColMat$fillCol)) +
-              theme_phylo()
+              theme_phylo(legend.position='none')
 
   ## species color block
   orderedSpeColMat <- data.frame(y = rep(0, length(orderedSpeCol)),
@@ -129,18 +129,11 @@ PlotPhyloProfile <- function(phyloData,
         scale_y_continuous(expand = c(0, 0), breaks = NULL) +
           scale_x_continuous(expand = c(0, 0), breaks = NULL) +
             scale_fill_manual(values = levels(orderedSpeColMat$fillCol)) +
-              theme_phylo()
+              theme_phylo(legend.position='none')
  
   
   ## plot empty block
-  emptyData <- data.frame(x = 1, y = 1)
-  empty <- ggplot(emptyData) +
-    geom_point(aes_string('x', 'y'), colour='white') +
-      labs(x = NULL, y = NULL) +
-        scale_y_continuous(expand = c(0, 0), breaks = NULL) +
-          scale_x_continuous(expand = c(0, 0), breaks = NULL) +
-            theme_phylo()
-  
+  emptyBlock <- EmptyEle()
 
   ## plotRes <- marrangeGrob(
   ##   list(empty, empty, empty, speBlockObj, geneDendroObj, geneNamesObj, geneBlockObj, phyloObj),
@@ -151,9 +144,9 @@ PlotPhyloProfile <- function(phyloData,
   ##   top = NULL)
 
   plotRes <- grid.arrange(
-    empty,
-    empty,
-    empty,
+    emptyBlock,
+    emptyBlock,
+    emptyBlock,
     speBlockObj,
     geneDendroObj,
     geneNamesObj,
@@ -169,47 +162,6 @@ PlotPhyloProfile <- function(phyloData,
 
 
 
-##' Phylo theme
-##'
-##' A totally blank gpplot2 theme
-##' @title Blank theme for plots
-##' @param ... ggplot2 theme() additional parameters
-##' @return ggplot2 object
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @importFrom ggplot2 element_blank theme_bw %+replace% theme
-##' @importFrom grid unit
-##' @keywords internal
-##' 
-theme_phylo <- function(...) {
-  theme_bw() %+replace%
-  theme(legend.position='none',
-        title = element_blank(),
-        axis.text = element_blank(),
-        axis.title = element_blank(),
-        axis.ticks.length = unit(0, 'mm'),
-        axis.ticks.margin = unit(0, 'mm'),
-        axis.line = element_blank(),
-        panel.margin = unit(0, 'mm'),
-        panel.grid = element_blank(),
-        panel.border = element_blank(),
-        panel.background = element_blank(),
-        plot.margin = unit(c(0, 0, 0, 0), 'line'),
-        legend.margin = unit(0, 'mm'),
-        ...)
-}
 
 
-##' Phylogenetic profiles of human F1Fo ATP synthase subunits.
-##'
-##' A list containing three objects:
-##' "atpPhylo" is a numeric matrix representing the phylogenetic profiles of F1Fo ATP synthase subuints.
-##' "specol" is the vector of colors corresponding to the species in "atpPhylo".
-##' "genecol" is the vector of colors corresponding to the genes in "atpPhylo".
-##' @docType data
-##' @name fatp
-##' @format A list
-##' @references Unpublished data from Yulong Niu
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' 
-NULL
-  
+

@@ -67,7 +67,8 @@ PlotPhyloCor <- function(phyloData,
         scale_x_discrete(expand = c(0, 0), breaks = NULL) +
           scale_y_discrete(expand = c(0, 0), breaks = NULL) +
             labs(x = NULL, y = NULL) +
-              theme_phylo()
+              theme_phylo(legend.justification = c(1, 1),
+                          legend.position = c(1, 1))
 
   if (showCorVal) {
     corMatObj <- corMatObj +
@@ -96,7 +97,7 @@ PlotPhyloCor <- function(phyloData,
       labs(x = NULL, y = NULL) +
         scale_x_continuous(expand = c(0, 0), breaks = NULL) +
           scale_y_continuous(expand = c(0, 0), limits = c(0, length(orderedRowNames)), breaks = NULL) +
-            theme_phylo()
+            theme_phylo(legend.position='none')
 
 
   ## plot col gene names
@@ -123,7 +124,7 @@ PlotPhyloCor <- function(phyloData,
         scale_y_reverse(expand = c(0, 0), breaks = NULL) +
           scale_x_reverse(expand = c(0, 0), limits = c(nrow(phyloData), 0), breaks = NULL) +
             coord_flip() +
-              theme_phylo()
+              theme_phylo(legend.position='none')
 
 
   ## gene color block
@@ -137,17 +138,11 @@ PlotPhyloCor <- function(phyloData,
         scale_y_continuous(expand = c(0, 0), breaks = NULL) +
           scale_x_continuous(expand = c(0, 0), breaks = NULL) +
             scale_fill_manual(values = levels(orderedGeneColMat$fillCol)) +
-              theme_phylo()
+              theme_phylo(legend.position='none')
 
   
   ## plot empty block
-  emptyData <- data.frame(x = 1, y = 1)
-  empty <- ggplot(emptyData) +
-    geom_point(aes_string('x', 'y'), colour='white') +
-      labs(x = NULL, y = NULL) +
-        scale_y_continuous(expand = c(0, 0), breaks = NULL) +
-          scale_x_continuous(expand = c(0, 0), breaks = NULL) +
-            theme_phylo()
+  emptyBlock <- EmptyEle()
 
   ## plotRes <- list(geneDendroObj = geneDendroObj,
   ##                 geneRowNamesObj = geneRowNamesObj,
@@ -174,9 +169,9 @@ PlotPhyloCor <- function(phyloData,
                          geneRowNamesObj,
                          geneBlockObj,
                          corMatObj,
-                         empty,
-                         empty,
-                         empty,
+                         emptyBlock,
+                         emptyBlock,
+                         emptyBlock,
                          geneColNamesObj,
                          ncol = 4,
                          nrow = 2,
