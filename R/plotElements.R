@@ -1,4 +1,4 @@
-##' Phylo theme
+##' PhyloProfile theme
 ##'
 ##' A totally blank gpplot2 theme expect for legend
 ##' @title Blank theme
@@ -9,7 +9,7 @@
 ##' @importFrom grid unit
 ##' @keywords internal
 ##' 
-theme_phylo <- function(...) {
+theme_pp <- function(...) {
   theme_bw() %+replace%
   theme(title = element_blank(),
         axis.text = element_blank(),
@@ -36,14 +36,63 @@ theme_phylo <- function(...) {
 ##' @importFrom ggplot2 ggplot geom_point labs aes_string scale_y_continuous scale_x_continuous
 ##' @keywords internal
 ##' 
-EmptyEle <- function(...) {
+geom_emptyblock<- function(...) {
   emptyData <- data.frame(x = 1, y = 1)
   empty <- ggplot(emptyData) +
     geom_point(aes_string('x', 'y'), colour='white', ...) +
       labs(x = NULL, y = NULL) +
         scale_y_continuous(expand = c(0, 0), breaks = NULL) +
           scale_x_continuous(expand = c(0, 0), breaks = NULL) +
-            theme_phylo(legend.position='none')
+            theme_pp(legend.position='none')
 
   return(empty)
 }
+
+
+##' ggplot legend
+##'
+##' Retrieve the ggplot legend from a given ggplot2 object. This function may cause a blank display device, a dirty method is used to walkaround.
+##' @title Retrieve ggplot2 legend
+##' @param g ggplot2 object
+##' @param ... ggplot2 theme() additional parameters mainly about control the legend position
+##' @return Legend object
+##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @importFrom ggplot2 ggplotGrob theme
+##' @keywords internal
+##' @references \url{https://github.com/hadley/ggplot2/wiki/Share-a-legend-between-two-ggplot2-graphs}
+##' @references \url{https://stackoverflow.com/questions/17012518/why-does-this-r-ggplot2-code-bring-up-a-blank-display-device}
+##' @references \url{https://github.com/hadley/ggplot2/issues/809}
+##' 
+geom_legend <- function(g, ...) {
+  ## !!!Be aware of this dirty walkaround!!!
+  pdf(file = NULL)
+  g <- ggplotGrob(g + theme(...))$grobs
+  dev.off()
+  
+  legend <- g[[which(sapply(g, function(x) x$name) == "guide-box")]]
+
+  return(legend)
+}
+
+
+##' Legend of phylogenetic profilings 
+##'
+##' Legend annotating the species categories, like the class or phylum.
+##' @title Phylo legend
+##' @param classCol A vector of colors with the names defining the species categories.
+##' @param ... Parameters from geom_legend
+##' @return ggplot2 object
+##' @examples
+##' data(fatp)
+##' 
+##' phylo_legend(fatp$domain)
+##' phyloVec <- c('#00C19F', '#93AA00', '#D39200')
+##' names(phyloVec) <- c('Eukaryota', 'Archaea', 'Bacteria')
+##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @export
+##' 
+phylo_legend <- function(classCol, ...) {
+  
+}
+
+

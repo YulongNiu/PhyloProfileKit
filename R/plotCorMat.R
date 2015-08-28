@@ -67,7 +67,7 @@ PlotPhyloCor <- function(phyloData,
         scale_x_discrete(expand = c(0, 0), breaks = NULL) +
           scale_y_discrete(expand = c(0, 0), breaks = NULL) +
             labs(x = NULL, y = NULL) +
-              theme_phylo(legend.justification = c(1, 1),
+              theme_pp(legend.justification = c(1, 1),
                           legend.position = c(1, 1))
 
   if (showCorVal) {
@@ -97,7 +97,7 @@ PlotPhyloCor <- function(phyloData,
       labs(x = NULL, y = NULL) +
         scale_x_continuous(expand = c(0, 0), breaks = NULL) +
           scale_y_continuous(expand = c(0, 0), limits = c(0, length(orderedRowNames)), breaks = NULL) +
-            theme_phylo(legend.position='none')
+            theme_pp(legend.position='none')
 
 
   ## plot col gene names
@@ -111,7 +111,7 @@ PlotPhyloCor <- function(phyloData,
       labs(x = NULL, y = NULL) +
         scale_x_continuous(expand = c(0, 0), limits = c(0, length(orderedRowNames)), breaks = NULL) +
           scale_y_continuous(expand = c(0, 0), breaks = NULL) +
-            theme_phylo()
+            theme_pp()
 
   
   ## dendrogram plot for genes
@@ -124,7 +124,7 @@ PlotPhyloCor <- function(phyloData,
         scale_y_reverse(expand = c(0, 0), breaks = NULL) +
           scale_x_reverse(expand = c(0, 0), limits = c(nrow(phyloData), 0), breaks = NULL) +
             coord_flip() +
-              theme_phylo(legend.position='none')
+              theme_pp(legend.position='none')
 
 
   ## gene color block
@@ -138,11 +138,11 @@ PlotPhyloCor <- function(phyloData,
         scale_y_continuous(expand = c(0, 0), breaks = NULL) +
           scale_x_continuous(expand = c(0, 0), breaks = NULL) +
             scale_fill_manual(values = levels(orderedGeneColMat$fillCol)) +
-              theme_phylo(legend.position='none')
+              theme_pp(legend.position='none')
 
   
   ## plot empty block
-  emptyBlock <- EmptyEle()
+  emptyBlock <- geom_emptyblock()
 
   ## plotRes <- list(geneDendroObj = geneDendroObj,
   ##                 geneRowNamesObj = geneRowNamesObj,

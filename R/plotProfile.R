@@ -81,7 +81,7 @@ PlotPhyloProfile <- function(phyloData,
       labs(x = NULL, y = NULL) +
         scale_x_continuous(expand = c(0, 0), breaks = NULL) +
           scale_y_continuous(expand = c(0, 0), limits = c(0, length(orderedRowNames)), breaks = NULL) +
-            theme_phylo(legend.position='none')
+            theme_pp(legend.position='none')
 
 
   ## plot phylogenetic matrix
@@ -91,7 +91,7 @@ PlotPhyloProfile <- function(phyloData,
         labs(x = NULL, y = NULL) +
           scale_y_continuous(expand = c(0, 0), breaks = NULL) +
             scale_x_continuous(expand = c(0, 0), breaks = NULL) +
-              theme_phylo(legend.position='none')
+              theme_pp(legend.position='none')
 
   ## dendrogram plot for genes
   ddata <- dendro_data.hclust(hcGene, type = 'rectangle')
@@ -103,7 +103,7 @@ PlotPhyloProfile <- function(phyloData,
         scale_y_reverse(expand = c(0, 0), breaks = NULL) +
           scale_x_continuous(expand = c(0, 0), limits = c(0, nrow(phyloData)), breaks = NULL) +
             coord_flip() +
-              theme_phylo(legend.position='none')
+              theme_pp(legend.position='none')
 
   ## gene color block
   orderedGeneColMat <- data.frame(x = rep(0, length(orderedGeneCol)),
@@ -116,7 +116,7 @@ PlotPhyloProfile <- function(phyloData,
         scale_y_continuous(expand = c(0, 0), breaks = NULL) +
           scale_x_continuous(expand = c(0, 0), breaks = NULL) +
             scale_fill_manual(values = levels(orderedGeneColMat$fillCol)) +
-              theme_phylo(legend.position='none')
+              theme_pp(legend.position='none')
 
   ## species color block
   orderedSpeColMat <- data.frame(y = rep(0, length(orderedSpeCol)),
@@ -129,11 +129,11 @@ PlotPhyloProfile <- function(phyloData,
         scale_y_continuous(expand = c(0, 0), breaks = NULL) +
           scale_x_continuous(expand = c(0, 0), breaks = NULL) +
             scale_fill_manual(values = levels(orderedSpeColMat$fillCol)) +
-              theme_phylo(legend.position='none')
+              theme_pp(legend.position='none')
  
   
   ## plot empty block
-  emptyBlock <- EmptyEle()
+  emptyBlock <- geom_emptyblock()
 
   ## plotRes <- marrangeGrob(
   ##   list(empty, empty, empty, speBlockObj, geneDendroObj, geneNamesObj, geneBlockObj, phyloObj),
