@@ -20,6 +20,7 @@
 ##' @importFrom gridExtra grid.arrange
 ##' @importFrom reshape2 melt
 ##' @importFrom RColorBrewer brewer.pal
+##' @rdname simiplot
 ##' @export
 ##' 
 PlotPhyloCor <- function(phyloData,
@@ -179,4 +180,27 @@ PlotPhyloCor <- function(phyloData,
                          heights = heightsShinkage)
   return(plotRes)
   
+}
+
+##' @inheritParams PlotPhyloCor
+##' @return correlation matrix
+##' @examples
+##' data(fatp)
+##' corMat <- GetPhyloCorMat(fatp$atpPhylo)
+##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @rdname simiplot
+##' @export
+GetPhyloCorMat <- function(phyloData) {
+  ## cluster genes and species
+  hcGene <- hclust(dist(phyloData), method = 'average')
+  rowInd <- hcGene$order
+
+  ## order 'phyloData'
+  orderedPhyloData <- phyloData[rowInd, ]
+  orderedRowNames <- rownames(orderedPhyloData)
+
+  ## correlation matrix
+  corMat <- round(cor(t(orderedPhyloData)), digits = 2)
+
+  return(corMat)
 }
