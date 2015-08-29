@@ -75,24 +75,5 @@ geom_legend <- function(g, ...) {
 }
 
 
-##' Legend of phylogenetic profilings 
-##'
-##' Legend annotating the species categories, like the class or phylum.
-##' @title Phylo legend
-##' @param classCol A vector of colors with the names defining the species categories.
-##' @param ... Parameters from geom_legend
-##' @return ggplot2 object
-##' @examples
-##' data(fatp)
-##' 
-##' phylo_legend(fatp$domain)
-##' phyloVec <- c('#00C19F', '#93AA00', '#D39200')
-##' names(phyloVec) <- c('Eukaryota', 'Archaea', 'Bacteria')
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @export
-##' 
-phylo_legend <- function(classCol, ...) {
-  
-}
 
 

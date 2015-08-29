@@ -1,3 +1,44 @@
+##' Legend of species in phylogenetic profilings 
+##'
+##' Legend annotating the species categories, like the class or phylum.
+##' @title Phylo legend
+##' @inheritParams PlotPhyloProfile
+##' @param classCol A vector of colors with the names defining the species categories.
+##' @param ... Parameters from geom_legend
+##' @return ggplot2 object
+##' @examples
+##' data(fatp)
+##' speLeg <- legend_spe(fatp$specol, fatp$domain, legend.position = 'left')
+##' \dontrun{
+##' # plot legend
+##' require(gridExtra)
+##' grid.arrange(speLeg, ncol = 1)
+##' }
+##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @importFrom ggplot2 ggplot aes_string geom_tile scale_fill_manual
+##' @export
+##' 
+legend_spe <- function(speCol, classCol, ...) {
+
+  speCol <- factor(speCol)
+  classCol <- classCol[order(classCol)]
+  classCol <- classCol[rank(levels(speCol))]
+  
+  ## species object
+  speColMat <- data.frame(y = rep(0, length(speCol)),
+                          x = 1:length(speCol),
+                          fillCol = factor(speCol))
+
+  speBlockObj <- ggplot(speColMat, aes_string('x', 'y')) +
+    geom_tile(aes_string(fill = 'fillCol')) +
+      scale_fill_manual(values = levels(speCol), name = 'Phylogney Colour', labels = names(classCol))
+
+  speLegObj <- geom_legend(speBlockObj, ...)
+
+  return(speLegObj)
+}
+
+
 ##' Plot phylogenetic profiles with gene and species clusters.
 ##'
 ##' A combination plot of phylogenetic profiles with genes and species clusters.

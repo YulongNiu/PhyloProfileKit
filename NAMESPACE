@@ -2,7 +2,7 @@
 
 export(PlotPhyloCor)
 export(PlotPhyloProfile)
-export(phylo_legend)
+export(legend_spe)
 importFrom(RColorBrewer,brewer.pal)
 importFrom(ggdendro,dendro_data.hclust)
 importFrom(ggdendro,segment)
