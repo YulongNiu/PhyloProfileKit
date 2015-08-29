@@ -4,11 +4,9 @@
 \alias{legend_spe}
 \title{Phylo legend}
 \usage{
-legend_spe(speCol, classCol, ...)
+legend_spe(classCol, ...)
 }
 \arguments{
-\item{speCol}{A vector of colors with names of species, which are the same as colnames of "phyloData" (may not in the same order).}
-
 \item{classCol}{A vector of colors with the names defining the species categories.}
 
 \item{...}{Parameters from geom_legend}
@@ -24,7 +22,7 @@ Legend annotating the species categories, like the class or phylum.
 }
 \examples{
 data(fatp)
-speLeg <- legend_spe(fatp$specol, fatp$domain, legend.position = 'left')
+speLeg <- legend_spe(fatp$domain, legend.position = 'left')
 \dontrun{
 # plot legend
 require(gridExtra)

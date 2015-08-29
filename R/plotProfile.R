@@ -2,13 +2,12 @@
 ##'
 ##' Legend annotating the species categories, like the class or phylum.
 ##' @title Phylo legend
-##' @inheritParams PlotPhyloProfile
 ##' @param classCol A vector of colors with the names defining the species categories.
 ##' @param ... Parameters from geom_legend
 ##' @return ggplot2 object
 ##' @examples
 ##' data(fatp)
-##' speLeg <- legend_spe(fatp$specol, fatp$domain, legend.position = 'left')
+##' speLeg <- legend_spe(fatp$domain, legend.position = 'left')
 ##' \dontrun{
 ##' # plot legend
 ##' require(gridExtra)
@@ -18,20 +17,16 @@
 ##' @importFrom ggplot2 ggplot aes_string geom_tile scale_fill_manual
 ##' @export
 ##' 
-legend_spe <- function(speCol, classCol, ...) {
+legend_spe <- function(classCol, ...) {
 
-  speCol <- factor(speCol)
-  classCol <- classCol[order(classCol)]
-  classCol <- classCol[rank(levels(speCol))]
-  
   ## species object
-  speColMat <- data.frame(y = rep(0, length(speCol)),
-                          x = 1:length(speCol),
-                          fillCol = factor(speCol))
+  colMat <- data.frame(y = rep(0, length(classCol)),
+                            x = 1:length(classCol),
+                            fillCol = classCol)
 
-  speBlockObj <- ggplot(speColMat, aes_string('x', 'y')) +
+  speBlockObj <- ggplot(colMat, aes_string('x', 'y')) +
     geom_tile(aes_string(fill = 'fillCol')) +
-      scale_fill_manual(values = levels(speCol), name = 'Phylogney Colour', labels = names(classCol))
+      scale_fill_manual(values = unname(classCol), name = 'Phylogney Colour', labels = names(classCol))
 
   speLegObj <- geom_legend(speBlockObj, ...)
 
