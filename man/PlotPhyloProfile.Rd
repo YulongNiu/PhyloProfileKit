@@ -6,8 +6,8 @@
 \usage{
 PlotPhyloProfile(phyloData, geneNameSize = 3, geneNameCol = "grey55",
   geneBetweenBlockCol = NA, presentCol = "steelblue",
-  absentCol = "grey91", speCol, geneCol, widthsShinkage = c(0.9, 0.7, 0.3,
-  7), heightsShinkage = c(0.3, 7))
+  absentCol = "grey91", speCol, geneCol, classCol, widthsShinkage = c(0.9,
+  0.7, 0.3, 7, 2.2), heightsShinkage = c(0.3, 7), ...)
 }
 \arguments{
 \item{phyloData}{The phylogenetic profile data with 1 and 0 denoting the presence and absence of orthologous, respectively. The "phyloData" should be a numeric matrix, of which the row is gene and column is species.The "phyloData"has row names and column names which will be used for the dendrogram of row and column.}
@@ -26,9 +26,13 @@ PlotPhyloProfile(phyloData, geneNameSize = 3, geneNameCol = "grey55",
 
 \item{geneCol}{A vector of colors with names of species, which are the same as rownames of "phyloData" (may not in the same order).}
 
+\item{classCol}{A vector of colors with the names defining the species categories.}
+
 \item{widthsShinkage}{The shinkage width vector.}
 
 \item{heightsShinkage}{The shinkage width vector.}
+
+\item{...}{Parameters from geom_legend}
 }
 \value{
 A plot object.
@@ -41,10 +45,13 @@ A combination plot of phylogenetic profiles with genes and species clusters.
 }
 \examples{
 data(fatp)
-ATPphyloPlot <- PlotPhyloProfile(fatp$atpPhylo, speCol = fatp$specol, geneCol = fatp$genecol)
+ATPphyloPlot <- PlotPhyloProfile(fatp$atpPhylo, speCol = fatp$specol, geneCol = fatp$genecol,
+classCol = fatp$domain, legend.position = 'left')
 \dontrun{
+# an example of saving output figures
 pdf('FATPprofilePlot.pdf')
-ATPphyloPlot <- PlotPhyloProfile(fatp$atpPhylo, speCol = fatp$specol, geneCol = fatp$genecol)
+ATPphyloPlot <- PlotPhyloProfile(fatp$atpPhylo, speCol = fatp$specol, geneCol = fatp$genecol,
+classCol = fatp$domain, legend.position = 'left')
 dev.off()
 }
 }
