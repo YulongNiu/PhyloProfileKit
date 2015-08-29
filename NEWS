@@ -3,8 +3,6 @@ TODO List
 
 * seperate function mode
 
-* add species in the phylogenetic plot
-
 * set gene names in phylo and correlation plot
 
 * gene annotation in correlation plot when gene number is large
@@ -17,4 +15,10 @@ TODO List
 
 * support d @>@ (d + ggplot2Fun() + ggplot2Fun()) @<@ 
 
+PhyloProfile v0.3.0
+----------------------------
+
+* add phylogeny (e.g., class, phylum, or domain) legend
+
+* 
 
