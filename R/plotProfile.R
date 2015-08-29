@@ -26,7 +26,7 @@ legend_spe <- function(classCol, ...) {
 
   speBlockObj <- ggplot(colMat, aes_string('x', 'y')) +
     geom_tile(aes_string(fill = 'fillCol')) +
-      scale_fill_manual(values = unname(classCol), name = 'Phylogney Colour', labels = names(classCol))
+      scale_fill_manual(values = unname(classCol), name = 'Phylogeny', labels = names(classCol))
 
   speLegObj <- geom_legend(speBlockObj, ...)
 
@@ -48,14 +48,18 @@ legend_spe <- function(classCol, ...) {
 ##' @param speCol A vector of colors with names of species, which are the same as colnames of "phyloData" (may not in the same order). 
 ##' @param geneCol A vector of colors with names of species, which are the same as rownames of "phyloData" (may not in the same order).
 ##' @param widthsShinkage The shinkage width vector.
-##' @param heightsShinkage The shinkage width vector. 
+##' @param heightsShinkage The shinkage width vector.
+##' @inheritParams legend_spe
 ##' @return A plot object.
 ##' @examples
 ##' data(fatp)
-##' ATPphyloPlot <- PlotPhyloProfile(fatp$atpPhylo, speCol = fatp$specol, geneCol = fatp$genecol)
+##' ATPphyloPlot <- PlotPhyloProfile(fatp$atpPhylo, speCol = fatp$specol, geneCol = fatp$genecol,
+##' classCol = fatp$domain, legend.position = 'left')
 ##' \dontrun{
+##' # an example of saving output figures
 ##' pdf('FATPprofilePlot.pdf')
-##' ATPphyloPlot <- PlotPhyloProfile(fatp$atpPhylo, speCol = fatp$specol, geneCol = fatp$genecol)
+##' ATPphyloPlot <- PlotPhyloProfile(fatp$atpPhylo, speCol = fatp$specol, geneCol = fatp$genecol,
+##' classCol = fatp$domain, legend.position = 'left')
 ##' dev.off()
 ##' }
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
@@ -66,15 +70,17 @@ legend_spe <- function(classCol, ...) {
 ##' @export
 ##' 
 PlotPhyloProfile <- function(phyloData,
-                            geneNameSize = 3,
-                            geneNameCol = 'grey55',
-                            geneBetweenBlockCol = NA,
-                            presentCol = 'steelblue',
-                            absentCol = 'grey91',
-                            speCol,
-                            geneCol,
-                            widthsShinkage = c(0.9, 0.7, 0.3, 7),
-                            heightsShinkage = c(0.3, 7)) {
+                             geneNameSize = 3,
+                             geneNameCol = 'grey55',
+                             geneBetweenBlockCol = NA,
+                             presentCol = 'steelblue',
+                             absentCol = 'grey91',
+                             speCol,
+                             geneCol,
+                             classCol,
+                             widthsShinkage = c(0.9, 0.7, 0.3, 7, 2.2),
+                             heightsShinkage = c(0.3, 7),
+                             ...) {
 
   ## require('grid')
   ## require('ggplot2')
@@ -166,6 +172,9 @@ PlotPhyloProfile <- function(phyloData,
           scale_x_continuous(expand = c(0, 0), breaks = NULL) +
             scale_fill_manual(values = levels(orderedSpeColMat$fillCol)) +
               theme_pp(legend.position='none')
+
+  ## species legend
+  speLegObj <- legend_spe(classCol, ...)
  
   
   ## plot empty block
@@ -184,11 +193,13 @@ PlotPhyloProfile <- function(phyloData,
     emptyBlock,
     emptyBlock,
     speBlockObj,
+    emptyBlock,
     geneDendroObj,
     geneNamesObj,
     geneBlockObj,
     phyloObj,
-    ncol = 4,
+    speLegObj,
+    ncol = 5,
     nrow = 2,
     widths = widthsShinkage,
     heights = heightsShinkage)

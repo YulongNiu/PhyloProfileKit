@@ -58,6 +58,7 @@ geom_emptyblock<- function(...) {
 ##' @return Legend object
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom ggplot2 ggplotGrob theme
+##' @importFrom grid unit
 ##' @keywords internal
 ##' @references \url{https://github.com/hadley/ggplot2/wiki/Share-a-legend-between-two-ggplot2-graphs}
 ##' @references \url{https://stackoverflow.com/questions/17012518/why-does-this-r-ggplot2-code-bring-up-a-blank-display-device}
@@ -66,7 +67,7 @@ geom_emptyblock<- function(...) {
 geom_legend <- function(g, ...) {
   ## !!!Be aware of this dirty walkaround!!!
   pdf(file = NULL)
-  g <- ggplotGrob(g + theme(...))$grobs
+  g <- ggplotGrob(g + theme(legend.margin = unit(0, 'mm'), ...))$grobs
   dev.off()
   
   legend <- g[[which(sapply(g, function(x) x$name) == "guide-box")]]
