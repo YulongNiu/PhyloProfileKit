@@ -16,7 +16,7 @@
 ##' }
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom ggplot2 ggplot geom_text geom_tile geom_segment geom_point scale_fill_manual labs scale_x_continuous scale_y_continuous scale_fill_gradientn scale_x_discrete scale_y_discrete scale_x_reverse scale_y_reverse aes_string coord_flip
-##' @importFrom ggdendro dendro_data.hclust segment
+##' @importFrom ggdendro dendro_data segment
 ##' @importFrom gridExtra grid.arrange
 ##' @importFrom reshape2 melt
 ##' @importFrom RColorBrewer brewer.pal
@@ -116,7 +116,7 @@ PlotPhyloCor <- function(phyloData,
 
   
   ## dendrogram plot for genes
-  ddata <- dendro_data.hclust(hcGene, type = 'rectangle')
+  ddata <- dendro_data(hcGene, type = 'rectangle')
   segData <- segment(ddata)
   segData[, c(1, 3)] <- segData[, c(1, 3)] - 0.5
   geneDendroObj <- ggplot(segData) +

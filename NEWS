@@ -3,22 +3,30 @@ TODO List
 
 * seperate function mode
 
-* set gene names in phylo and correlation plot
-
-* gene annotation in correlation plot when gene number is large
-
 * multiple similarity (including correlation) method
 
 * PCA plot of input genes
 
 * @>@ @<@ @/\@ @\/@ '@' is for 'at'. Remeber to add the scale paramers.
 
-* support d @>@ (d + ggplot2Fun() + ggplot2Fun()) @<@ 
+* support d @>@ (d + ggplot2Fun() + ggplot2Fun()) @<@
+
+PhyloProfile v0.3.2
+----------------------------
+
+* use "dendro_data" instead of "dendro_data.hclust" in "ggdendro" package (version 0.1.17).
+
+PhyloProfile v0.3.1
+----------------------------
+
+* set gene names in phylo and correlation plot
+
+* gene annotation in correlation plot when gene number is large
 
 PhyloProfile v0.3.0
 ----------------------------
 
 * add phylogeny (e.g., class, phylum, or domain) legend
 
-* 
+* separate the "emptyblock" object and the "theme_pp" object
 
