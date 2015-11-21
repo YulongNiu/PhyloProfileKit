@@ -46,7 +46,7 @@ legend_spe <- function(classCol, ...) {
 ##' @param presentCol The color of present 1, the default value is "steelblue".
 ##' @param absentCol The color of present 0, the default value is "grey91".
 ##' @param speCol A vector of colors with names of species, which are the same as colnames of "phyloData" (may not in the same order). 
-##' @param geneCol A vector of colors with names of species, which are the same as rownames of "phyloData" (may not in the same order).
+##' @param geneCol A vector of colors with names of genes, which are the same as rownames of "phyloData" (may not in the same order).
 ##' @param widthsShinkage The shinkage width vector.
 ##' @param heightsShinkage The shinkage width vector.
 ##' @inheritParams legend_spe
@@ -57,7 +57,7 @@ legend_spe <- function(classCol, ...) {
 ##' classCol = fatp$domain, legend.position = 'left')
 ##' \dontrun{
 ##' # an example of saving output figures
-##' pdf('FATPprofilePlot.pdf')
+##' cairo_pdf('FATPprofilePlot.pdf')
 ##' ATPphyloPlot <- PlotPhyloProfile(fatp$atpPhylo, speCol = fatp$specol, geneCol = fatp$genecol,
 ##' classCol = fatp$domain, legend.position = 'left')
 ##' dev.off()
