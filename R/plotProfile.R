@@ -26,7 +26,7 @@ legend_spe <- function(classCol, ...) {
 
   speBlockObj <- ggplot(colMat, aes_string('x', 'y')) +
     geom_tile(aes_string(fill = 'fillCol')) +
-      scale_fill_manual(values = unname(classCol), name = 'Phylogeny', labels = names(classCol))
+      scale_fill_manual(values = unname(classCol), name = 'Taxa', labels = names(classCol))
 
   speLegObj <- geom_legend(speBlockObj, ...)
 
