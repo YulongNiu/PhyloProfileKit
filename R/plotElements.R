@@ -15,7 +15,6 @@ theme_pp <- function(...) {
         axis.text = element_blank(),
         axis.title = element_blank(),
         axis.ticks.length = unit(0, 'mm'),
-        axis.ticks.margin = unit(0, 'mm'),
         axis.line = element_blank(),
         panel.margin = unit(0, 'mm'),
         panel.grid = element_blank(),

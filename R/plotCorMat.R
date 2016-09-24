@@ -20,6 +20,7 @@
 ##' @importFrom gridExtra grid.arrange
 ##' @importFrom reshape2 melt
 ##' @importFrom RColorBrewer brewer.pal
+##' @importFrom grDevices colorRampPalette dev.off pdf
 ##' @rdname simiplot
 ##' @export
 ##' 
@@ -188,6 +189,7 @@ PlotPhyloCor <- function(phyloData,
 ##' data(fatp)
 ##' corMat <- GetPhyloCorMat(fatp$atpPhylo)
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @importFrom stats cor dist hclust
 ##' @rdname simiplot
 ##' @export
 GetPhyloCorMat <- function(phyloData) {
