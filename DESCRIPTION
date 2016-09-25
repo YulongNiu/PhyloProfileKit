@@ -13,7 +13,10 @@ Imports:
     RColorBrewer,
     ggdendro,
     grid,
-    gridExtra
+    gridExtra,
+    stats,
+    grDevices,
+    vegan
 ByteCompile: true
 License: GPL
 LazyData: true
