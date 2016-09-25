@@ -9,7 +9,7 @@ SimDistBatch(ftMat, profileMat, FUN, n = 1)
 \arguments{
 \item{ftMat}{A two column matrix which should at least have rownames.}
 
-\item{profileMat}{The phylogenetic profile data with 1 and 0 denoting the presence and absence of orthologous, respectively. It is a named numeric matrix, columns are species and rows are genes.}
+\item{profileMat}{The phylogenetic profile data with 1 and 0 denoting the presence and absence of orthologous, respectively. It is a named numeric matrix, columns are species anniuyulongd rows are genes.}
 
 \item{FUN}{Functions to calculate single similarity or distance.}
 

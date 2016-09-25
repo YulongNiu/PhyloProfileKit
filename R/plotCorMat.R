@@ -5,11 +5,13 @@
 ##' @param gradientCol The gradien colours for correlation matrix.
 ##' @param showCorVal Whether or not show the correlation values, and the default is set as TRUE.
 ##' @inheritParams PlotPhyloProfile
+##' @importFrom grDevices colorRampPalette
 ##' @return A plot object. 
 ##' @examples
 ##' data(fatp)
 ##' ATPCorPlot <- PlotPhyloCor(fatp$atpPhylo, geneCol = fatp$genecol)
 ##' \dontrun{
+##' require(grDevices)
 ##' cairo_pdf('FATPCorplot.pdf')
 ##' ATPCorPlot <- PlotPhyloCor(fatp$atpPhylo, geneCol = fatp$genecol)
 ##' dev.off()
@@ -20,7 +22,6 @@
 ##' @importFrom gridExtra grid.arrange
 ##' @importFrom reshape2 melt
 ##' @importFrom RColorBrewer brewer.pal
-##' @importFrom grDevices colorRampPalette dev.off pdf
 ##' @rdname simiplot
 ##' @export
 ##' 

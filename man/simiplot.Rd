@@ -46,6 +46,7 @@ A combination plot of correlation matrix with genes and species clusters.
 data(fatp)
 ATPCorPlot <- PlotPhyloCor(fatp$atpPhylo, geneCol = fatp$genecol)
 \dontrun{
+require(grDevices)
 cairo_pdf('FATPCorplot.pdf')
 ATPCorPlot <- PlotPhyloCor(fatp$atpPhylo, geneCol = fatp$genecol)
 dev.off()

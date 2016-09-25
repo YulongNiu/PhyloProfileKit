@@ -4,7 +4,7 @@
 ##' 
 ##' @title Batch process of similarity and distance.
 ##' @param ftMat A two column matrix which should at least have rownames.
-##' @param profileMat The phylogenetic profile data with 1 and 0 denoting the presence and absence of orthologous, respectively. It is a named numeric matrix, columns are species and rows are genes.
+##' @param profileMat The phylogenetic profile data with 1 and 0 denoting the presence and absence of orthologous, respectively. It is a named numeric matrix, columns are species anniuyulongd rows are genes.
 ##' @param FUN Functions to calculate single similarity or distance.
 ##' @param n The number of CPUs or processors, and the default value is 1.
 ##' @return A numeric vector
@@ -47,8 +47,9 @@ SimDistBatch <- function(ftMat, profileMat, FUN, n = 1) {
 ##' Similarity or distance of paired phylogenetic profile
 ##'
 ##' SimCor(): Person's correlation coefficient.
-##' SimJaccard(): Jaccard similarity
-##' SimMI(): Mutual information
+##' SimJaccard(): Jaccard similarity.
+##' SimMI(): Mutual information.
+##' DistHamming(): Hamming distance.
 ##' 
 ##' @title similarity and distance
 ##' @param pairProfile A paired phylogenetic profile. Names of rows are genes and names of columns are species
@@ -64,6 +65,8 @@ SimDistBatch <- function(ftMat, profileMat, FUN, n = 1) {
 ##' jacAB <- SimJaccard(ab)
 ##' ## Mutual information
 ##' MIAB <- SimMI(ab)
+##' ## Hamming distance
+##' hamAB <- DistHamming(ab)
 ##' 
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom stats cor
@@ -80,15 +83,33 @@ SimCor <- function(pairProfile) {
 
 ##' @inheritParams SimCor
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @importFrom vegan vegdist
 ##' @rdname simdist
 ##' @export
 ##'
 ##' 
 SimJaccard <- function(pairProfile) {
-  return(1 - vegdist(pairProfile, method = 'jaccard'))
+  
+  f <- pairProfile[1, ]
+  t <- pairProfile[2, ]
+
+  A <- sum((f + 2*t) == 3)
+
+  jac <- A / (sum(f) + sum(t) - A)
+  
+  return(jac)
 }
 
+
+
+##' @inheritParams SimCor
+##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @rdname simdist
+##' @export
+##'
+##' 
+DistHamming <- function(pairProfile) {
+  return(sum(pairProfile[1, ] != pairProfile[2, ]))
+}
 
 
 ##' @inheritParams SimCor
