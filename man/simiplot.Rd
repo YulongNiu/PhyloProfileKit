@@ -13,7 +13,7 @@ PlotPhyloCor(phyloData, gradientCol = colorRampPalette(rev(brewer.pal(n = 7,
 GetPhyloCorMat(phyloData)
 }
 \arguments{
-\item{phyloData}{The phylogenetic profile data with 1 and 0 denoting the presence and absence of orthologous, respectively. The "phyloData" should be a numeric matrix, of which the row is gene and column is species.The "phyloData"has row names and column names which will be used for the dendrogram of row and column.}
+\item{phyloData}{The phylogenetic profile data with 1 and 0 denoting the presence and absence of orthologous, respectively. The "phyloData" should be a numeric matrix, of which the row is gene and column is species. The "phyloData"has row names and column names which will be used for the dendrogram of row and column.}
 
 \item{gradientCol}{The gradien colours for correlation matrix.}
 

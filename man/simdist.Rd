@@ -4,7 +4,7 @@
 \alias{SimCor}
 \alias{SimJaccard}
 \alias{SimMI}
-\title{Correlation and distance}
+\title{similarity and distance}
 \usage{
 SimCor(pairProfile)
 
@@ -19,7 +19,7 @@ SimMI(pairProfile)
 A numeric value.
 }
 \description{
-Correlation or distance between a pair of phylogenetic profile
+Similarity or distance of paired phylogenetic profile
 }
 \details{
 SimCor(): Person's correlation coefficient.
@@ -45,5 +45,8 @@ Yulong Niu \email{niuylscu@gmail.com}
 Yulong Niu \email{niuylscu@gmail.com}
 
 Yulong Niu \email{niuylscu@gmail.com}
+}
+\seealso{
+SimDistBatch
 }
 
