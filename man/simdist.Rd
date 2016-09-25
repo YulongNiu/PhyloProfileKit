@@ -3,11 +3,14 @@
 \name{SimCor}
 \alias{SimCor}
 \alias{SimJaccard}
+\alias{SimMI}
 \title{Correlation and distance}
 \usage{
 SimCor(pairProfile)
 
 SimJaccard(pairProfile)
+
+SimMI(pairProfile)
 }
 \arguments{
 \item{pairProfile}{A paired phylogenetic profile. Names of rows are genes and names of columns are species}
@@ -21,6 +24,7 @@ Correlation or distance between a pair of phylogenetic profile
 \details{
 SimCor(): Person's correlation coefficient.
 SimJaccard(): Jaccard similarity
+SimMI(): Mutual information
 }
 \examples{
 ## alpha and beta subunits from the F-type ATP synthase.
@@ -31,8 +35,13 @@ ab <- fatp$atpPhylo[c('ATP5A1', 'ATP5B'), ]
 corAB <- SimCor(ab)
 ## Jaccard similarity
 jacAB <- SimJaccard(ab)
+## Mutual information
+MIAB <- SimMI(ab)
+
 }
 \author{
+Yulong Niu \email{niuylscu@gmail.com}
+
 Yulong Niu \email{niuylscu@gmail.com}
 
 Yulong Niu \email{niuylscu@gmail.com}

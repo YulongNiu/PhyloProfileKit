@@ -16,7 +16,9 @@ Imports:
     gridExtra,
     stats,
     grDevices,
-    vegan
+    vegan,
+    doParallel,
+    foreach
 ByteCompile: true
 License: GPL
 LazyData: true
