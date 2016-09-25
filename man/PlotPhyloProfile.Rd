@@ -10,7 +10,7 @@ PlotPhyloProfile(phyloData, geneNameSize = 3, geneNameCol = "grey55",
   0.7, 0.3, 7, 2.2), heightsShinkage = c(0.3, 7), ...)
 }
 \arguments{
-\item{phyloData}{The phylogenetic profile data with 1 and 0 denoting the presence and absence of orthologous, respectively. The "phyloData" should be a numeric matrix, of which the row is gene and column is species.The "phyloData"has row names and column names which will be used for the dendrogram of row and column.}
+\item{phyloData}{The phylogenetic profile data with 1 and 0 denoting the presence and absence of orthologous, respectively. The "phyloData" should be a numeric matrix, of which the row is gene and column is species. The "phyloData"has row names and column names which will be used for the dendrogram of row and column.}
 
 \item{geneNameSize}{The size of gene names label, and the default value is 3.}
 
