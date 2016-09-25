@@ -4,7 +4,7 @@
 ##' 
 ##' @title Batch process of similarity and distance.
 ##' @param ftMat A two column matrix which should at least have rownames.
-##' @param profileMat The phylogenetic profile data with 1 and 0 denoting the presence and absence of orthologous, respectively. It is a named numeric matrix, columns are species anniuyulongd rows are genes.
+##' @param profileMat The phylogenetic profile data with 1 and 0 denoting the presence and absence of orthologous, respectively. It is a named numeric matrix, columns are species and rows are genes.
 ##' @param FUN Functions to calculate single similarity or distance.
 ##' @param n The number of CPUs or processors, and the default value is 1.
 ##' @return A numeric vector
