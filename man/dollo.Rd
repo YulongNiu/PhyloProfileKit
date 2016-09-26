@@ -64,7 +64,7 @@ DolloDist(): Infer the Dollo's parsimony distance.
 }
 \examples{
 ## example tree
-library("ape")
+library('ape')
 testTreeText <- '((((t1, t2),(t3, t4)),t5), (t6, (t7, t8)));'
 testTree <- read.tree(text = testTreeText)
 plot(testTree)

@@ -74,53 +74,6 @@ arma::uvec InferGainNodes(Rcpp::List gainList) {
 }
 
 
-//' @export
-// [[Rcpp::export]]
-arma::uvec InferGainNodes2(Rcpp::List gainList) {
-
-  uvec gainVec;
-
-  uword gainNum = gainList.size();
-  uvec path1st = gainList[0];
-  uvec gainA = MergeList(gainList);
-  uword gainANum = gainA.size();
-
-  uword root = gainA[0];
-  uword ancestor = 0;
-
-  if (gainNum > 1) {
-
-    uvec gainAUni = unique(gainA);
-    uword nodeNum = gainAUni.size();
-    uvec (nodeNum, fill::zeros);
-
-    for (uowrd i = 0; i < nodeNum; ++i) {
-      
-    }
-  } else {
-    gainVec = gainA.elem(find(gainA < root));
-  }
-
-  if (gainNum > 1) {
-    for (uword i = 0; i < gainANum; ++i) {
-      uword eachRepeatNum = CountRepeatIdx(i, gainA);
-      if (eachRepeatNum < gainNum) {
-        ancestor = gainA[i - 1];
-        break;
-      } else {}
-    }
-
-    gainA = unique(gainA);
-    gainVec = gainA.elem(find(gainA < root || gainA >= ancestor));
-
-  } else {
-    gainVec = gainA.elem(find(gainA < root));
-  }
-
-  return gainVec;
-}
-
-
 //' @param edgeMat A edge mat could be generated from the "ape" package.The first row should be (root --> nodes).
 //' @param tipPath  A list of ancestors of each gain tips. In each elements, the first one is the root.
 //' @param pr A numeric vector indicates the "presence-absence" pattern."pr" should be in the same order with the tips of tree
@@ -130,15 +83,15 @@ arma::uvec InferGainNodes2(Rcpp::List gainList) {
 // [[Rcpp::export]]
 arma::imat InferEdge(arma::umat edgeMat,
                      Rcpp::List tipPath,
-                     arma::uvec pr) {
+                     Rcpp::NumericVector pr) {
 
   // gain and loss matrix
   imat glMat(edgeMat.n_rows, 2, fill::zeros);
-  uword gainTipNum = accu(pr);
+  uword gainTipNum = sum(pr);
 
   if (gainTipNum > 0 && gainTipNum < pr.size()) {
     // gain tips
-    List gainTips = tipPath[as<IntegerVector>(wrap(find(pr == 1)))];
+    List gainTips = tipPath[pr == 1];
 
     // infer gain nodes and tips
     uvec gains = InferGainNodes(gainTips);
@@ -168,8 +121,8 @@ arma::imat InferEdge(arma::umat edgeMat,
 // [[Rcpp::export]]
 arma::uword DolloDist(arma::umat edgeMat,
                       Rcpp::List tipPath,
-                      arma::uvec pr1,
-                      arma::uvec pr2) {
+                      Rcpp::NumericVector pr1,
+                      Rcpp::NumericVector pr2) {
 
   imat glMat1 = InferEdge(edgeMat, tipPath, pr1);
   imat glMat2 = InferEdge(edgeMat, tipPath, pr2);
@@ -221,3 +174,5 @@ arma::uword CountRepeatIdx(arma::uword idx,
 
   return repeatNum;
 }
+
+

@@ -21,7 +21,7 @@
 #'
 #' @examples
 #' ## example tree
-#' library("ape")
+#' library('ape')
 #' testTreeText <- '((((t1, t2),(t3, t4)),t5), (t6, (t7, t8)));'
 #' testTree <- read.tree(text = testTreeText)
 #' plot(testTree)
@@ -101,6 +101,7 @@ DistHamming <- function(pairProfile) {
     .Call('PhyloProfile_DistHamming', PACKAGE = 'PhyloProfile', pairProfile)
 }
 
+#' @keywords internal
 eachMI <- function(p1, p2, p3, n) {
     .Call('PhyloProfile_eachMI', PACKAGE = 'PhyloProfile', p1, p2, p3, n)
 }
