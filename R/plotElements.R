@@ -58,6 +58,7 @@ geom_emptyblock<- function(...) {
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom ggplot2 ggplotGrob theme
 ##' @importFrom grid unit
+##' @importFrom grDevices pdf dev.off
 ##' @keywords internal
 ##' @references \url{https://github.com/hadley/ggplot2/wiki/Share-a-legend-between-two-ggplot2-graphs}
 ##' @references \url{https://stackoverflow.com/questions/17012518/why-does-this-r-ggplot2-code-bring-up-a-blank-display-device}
