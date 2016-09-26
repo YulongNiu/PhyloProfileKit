@@ -25,7 +25,7 @@ using namespace arma;
 //'
 //' @examples
 //' ## example tree
-//' library("ape")
+//' library('ape')
 //' testTreeText <- '((((t1, t2),(t3, t4)),t5), (t6, (t7, t8)));'
 //' testTree <- read.tree(text = testTreeText)
 //' plot(testTree)
@@ -53,6 +53,53 @@ arma::uvec InferGainNodes(Rcpp::List gainList) {
 
   uword root = gainA[0];
   uword ancestor = 0;
+
+  if (gainNum > 1) {
+    for (uword i = 0; i < gainANum; ++i) {
+      uword eachRepeatNum = CountRepeatIdx(i, gainA);
+      if (eachRepeatNum < gainNum) {
+        ancestor = gainA[i - 1];
+        break;
+      } else {}
+    }
+
+    gainA = unique(gainA);
+    gainVec = gainA.elem(find(gainA < root || gainA >= ancestor));
+
+  } else {
+    gainVec = gainA.elem(find(gainA < root));
+  }
+
+  return gainVec;
+}
+
+
+//' @export
+// [[Rcpp::export]]
+arma::uvec InferGainNodes2(Rcpp::List gainList) {
+
+  uvec gainVec;
+
+  uword gainNum = gainList.size();
+  uvec path1st = gainList[0];
+  uvec gainA = MergeList(gainList);
+  uword gainANum = gainA.size();
+
+  uword root = gainA[0];
+  uword ancestor = 0;
+
+  if (gainNum > 1) {
+
+    uvec gainAUni = unique(gainA);
+    uword nodeNum = gainAUni.size();
+    uvec (nodeNum, fill::zeros);
+
+    for (uowrd i = 0; i < nodeNum; ++i) {
+      
+    }
+  } else {
+    gainVec = gainA.elem(find(gainA < root));
+  }
 
   if (gainNum > 1) {
     for (uword i = 0; i < gainANum; ++i) {
@@ -104,6 +151,7 @@ arma::imat InferEdge(arma::umat edgeMat,
     // all gain tips
     glMat.ones();
   }
+  // if no gain tips, then all zero
   else{}
 
   return glMat;
