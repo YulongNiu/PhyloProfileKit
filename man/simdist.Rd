@@ -9,11 +9,11 @@
 \usage{
 SimJaccard(pairProfile)
 
-SimCor(pairProfile)
+SimMI(pairProfile)
 
 DistHamming(pairProfile)
 
-SimMI(pairProfile)
+SimCor(pairProfile)
 }
 \arguments{
 \item{pairProfile}{A paired phylogenetic profile, columns are genes and rows are species.}
@@ -46,12 +46,6 @@ hamAB <- DistHamming(ab)
 
 }
 \author{
-Yulong Niu \email{niuylscu@gmail.com}
-
-Yulong Niu \email{niuylscu@gmail.com}
-
-Yulong Niu \email{niuylscu@gmail.com}
-
 Yulong Niu \email{niuylscu@gmail.com}
 }
 \seealso{

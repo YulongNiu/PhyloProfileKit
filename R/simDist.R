@@ -79,85 +79,22 @@ SimCor <- function(pairProfile) {
   return(cor(pairProfile[, 1], pairProfile[, 2]))
 }
 
-
-
-## ##' @inheritParams SimCor
-## ##' @author Yulong Niu \email{niuylscu@@gmail.com}
-## ##' @rdname simdist
-## ##' @export
-## ##'
-## ##' 
-## SimJaccard <- function(pairProfile) {
-  
-##   f <- pairProfile[, 1]
-##   t <- pairProfile[, 2]
-
-##   A <- sum((f + 2*t) == 3)
-
-##   jac <- A / (sum(f) + sum(t) - A)
-  
-##   return(jac)
-## }
-
-
 ## library('Rcpp')
 ## library('RcppArmadillo')
 ## library('microbenchmark')
-## library('PhyloProfile')
+## library('bioDist')
+## load('../data/fatp.RData')
 ## sourceCpp('../src/simDistCpp.cpp')
 
-## data(fatp)
-## ab <- t(fatp$atpPhylo[sample(1:17, 2, replace = TRUE), ])
-
 ## microbenchmark(
-##   'R' = for (i in 1:1000) {SimJaccard(t(fatp$atpPhylo[sample(1:17, 2, replace = TRUE), ]))},
-##   'arma' = for (i in 1:1000) {SimJaccardArma(t(fatp$atpPhylo[sample(1:17, 2, replace = TRUE), ]))}
+##   'R' = for (i in 1:1000) {SimMIR(t(fatp$atpPhylo[sample(1:17, 2, replace = TRUE), ]))},
+##   'arma' = for (i in 1:1000) {SimMI(t(fatp$atpPhylo[sample(1:17, 2, replace = TRUE), ]))},
+##   'bioDist' = for (i in 1:1000) {mutualInfo(fatp$atpPhylo[sample(1:17, 2, replace = TRUE), ])}
 ## )
-
-## SimJaccard(ab)
-## SimJaccardArma(ab)
-
-##' @inheritParams SimCor
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @rdname simdist
-##' @export
-##'
-##' 
-DistHamming <- function(pairProfile) {
-  return(sum(pairProfile[, 1] != pairProfile[, 2]))
-}
-
-
-##' @inheritParams SimCor
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @rdname simdist
-##' @export
-##'
-##' 
-SimMI <- function(pairProfile) {
-  
-  combVec <- pairProfile[, 1] + 2 * pairProfile[, 2]
-  
-  N <- ncol(pairProfile)
-  A <- sum(combVec == 3)
-  B <- sum(combVec == 1)
-  C <- sum(combVec == 2)
-  D <- N - A - B - C
-
-  eachMI <- function(p1, p2, p3, n) {
-    eachI <- p1 * log(n * p1 / ((p1 + p2) * (p1 + p3))) / n
-    return(eachI)
-  }
-
-  NaN2Zero <- function(x) {
-    if (is.na(x)) {
-      x <- 0
-    } else {}
-
-    return(x)
-  }
-
-  I <- NaN2Zero(eachMI(A, B, C, N)) + NaN2Zero(eachMI(B, A, D, N)) + NaN2Zero(eachMI(C, A, D, N)) + NaN2Zero(eachMI(D, C, B, N))
-
-  return(I)
-}
+## for(i in 1:10) {
+##   ab <- t(fatp$atpPhylo[sample(1:17, 2, replace = TRUE), ])
+##   stopifnot(
+##     all.equal(SimMIR(ab), as.numeric(mutualInfo(t(ab)))),
+##     all.equal(SimMIR(ab), SimMI(ab))
+##   )
+## }

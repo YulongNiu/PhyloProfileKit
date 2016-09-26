@@ -78,3 +78,39 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// SimMI
+double SimMI(arma::umat pairProfile);
+RcppExport SEXP PhyloProfile_SimMI(SEXP pairProfileSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::umat >::type pairProfile(pairProfileSEXP);
+    rcpp_result_gen = Rcpp::wrap(SimMI(pairProfile));
+    return rcpp_result_gen;
+END_RCPP
+}
+// DistHamming
+arma::uword DistHamming(arma::umat pairProfile);
+RcppExport SEXP PhyloProfile_DistHamming(SEXP pairProfileSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::umat >::type pairProfile(pairProfileSEXP);
+    rcpp_result_gen = Rcpp::wrap(DistHamming(pairProfile));
+    return rcpp_result_gen;
+END_RCPP
+}
+// eachMI
+double eachMI(double p1, double p2, double p3, double n);
+RcppExport SEXP PhyloProfile_eachMI(SEXP p1SEXP, SEXP p2SEXP, SEXP p3SEXP, SEXP nSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type p1(p1SEXP);
+    Rcpp::traits::input_parameter< double >::type p2(p2SEXP);
+    Rcpp::traits::input_parameter< double >::type p3(p3SEXP);
+    Rcpp::traits::input_parameter< double >::type n(nSEXP);
+    rcpp_result_gen = Rcpp::wrap(eachMI(p1, p2, p3, n));
+    return rcpp_result_gen;
+END_RCPP
+}

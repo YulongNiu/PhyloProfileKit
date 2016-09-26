@@ -81,10 +81,27 @@ CountRepeatIdx <- function(idx, y) {
 }
 
 #' @inheritParams SimCor
-#' @author Yulong Niu \email{niuylscu@@gmail.com}
 #' @rdname simdist
 #' @export
 SimJaccard <- function(pairProfile) {
     .Call('PhyloProfile_SimJaccard', PACKAGE = 'PhyloProfile', pairProfile)
+}
+
+#' @inheritParams SimCor
+#' @rdname simdist
+#' @export
+SimMI <- function(pairProfile) {
+    .Call('PhyloProfile_SimMI', PACKAGE = 'PhyloProfile', pairProfile)
+}
+
+#' @inheritParams SimCor
+#' @rdname simdist
+#' @export
+DistHamming <- function(pairProfile) {
+    .Call('PhyloProfile_DistHamming', PACKAGE = 'PhyloProfile', pairProfile)
+}
+
+eachMI <- function(p1, p2, p3, n) {
+    .Call('PhyloProfile_eachMI', PACKAGE = 'PhyloProfile', p1, p2, p3, n)
 }
 
