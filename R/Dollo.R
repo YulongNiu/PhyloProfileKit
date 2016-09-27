@@ -63,16 +63,14 @@
 ## set.seed(123456)
 ## testTree <- rtree(1000)
 ## pathList <- nodepath(testTree)
-## testNum <- 100
+## testNum <- 1000
 
-## set.seed(123)
+## set.seed(123123)
 ## gainMat1 <- matrix(sample(0:1, testNum * 1000, replace = TRUE), ncol = testNum)
-## set.seed(456)
+## set.seed(456456)
 ## gainMat2 <- matrix(sample(0:1, testNum * 1000, replace = TRUE), ncol = testNum)
 
 ## microbenchmark(
 ##   'gain' = for(i in 1:testNum){DolloDist(testTree$edge, pathList, gainMat1[, i], gainMat2[, i])}
 ## )
-
-
  
