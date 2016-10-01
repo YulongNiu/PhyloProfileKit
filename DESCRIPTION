@@ -1,7 +1,7 @@
 Package: PhyloProfile
 Title: A package for phylogenetic profiling analysis
 Description: This is a package providing mutiple distance and similarity methods and visualization for phylogenetic profiling analysis.
-Version: 0.3.6
+Version: 0.3.7
 Author: Yulong Niu <niuylscu@gmail.com>
 Maintainer: Yulong Niu <niuylscu@gmail.com>
 Depends:
@@ -14,11 +14,14 @@ Imports:
     grid,
     gridExtra,
     stats,
+    utils,
     grDevices,
     doParallel,
     foreach,
     Rcpp,
     ape
+Suggests:
+    testthat
 ByteCompile: true
 License: GPL
 LazyData: true

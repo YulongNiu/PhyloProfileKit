@@ -18,28 +18,28 @@ BEGIN_RCPP
 END_RCPP
 }
 // InferEdge
-arma::imat InferEdge(arma::umat edgeMat, Rcpp::List tipPath, arma::uvec pr);
+arma::imat InferEdge(arma::umat edgeMat, Rcpp::List tipPath, Rcpp::NumericVector pr);
 RcppExport SEXP PhyloProfile_InferEdge(SEXP edgeMatSEXP, SEXP tipPathSEXP, SEXP prSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< arma::umat >::type edgeMat(edgeMatSEXP);
     Rcpp::traits::input_parameter< Rcpp::List >::type tipPath(tipPathSEXP);
-    Rcpp::traits::input_parameter< arma::uvec >::type pr(prSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type pr(prSEXP);
     rcpp_result_gen = Rcpp::wrap(InferEdge(edgeMat, tipPath, pr));
     return rcpp_result_gen;
 END_RCPP
 }
 // DolloDist
-arma::uword DolloDist(arma::umat edgeMat, Rcpp::List tipPath, arma::uvec pr1, arma::uvec pr2);
+arma::uword DolloDist(arma::umat edgeMat, Rcpp::List tipPath, Rcpp::NumericVector pr1, Rcpp::NumericVector pr2);
 RcppExport SEXP PhyloProfile_DolloDist(SEXP edgeMatSEXP, SEXP tipPathSEXP, SEXP pr1SEXP, SEXP pr2SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< arma::umat >::type edgeMat(edgeMatSEXP);
     Rcpp::traits::input_parameter< Rcpp::List >::type tipPath(tipPathSEXP);
-    Rcpp::traits::input_parameter< arma::uvec >::type pr1(pr1SEXP);
-    Rcpp::traits::input_parameter< arma::uvec >::type pr2(pr2SEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type pr1(pr1SEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type pr2(pr2SEXP);
     rcpp_result_gen = Rcpp::wrap(DolloDist(edgeMat, tipPath, pr1, pr2));
     return rcpp_result_gen;
 END_RCPP

@@ -1,10 +1,3 @@
-##' Used for development 
-##'
-##' Code blocks used for development
-##' 
-##' @name develcode
-##' @examples 
-##' \donttest{
 ##' ######################test plot#######################
 ##'   require('grid')
 ##'   require('ggplot2')
@@ -48,11 +41,3 @@
 ##'   rownames(orderedPhyloData) <- 1:nrow(orderedPhyloData)
 ##'   orderedPhyloData <- melt(orderedPhyloData)
 ##'   orderedPhyloData <- data.frame(geneNames = orderedPhyloData[, 1], speNames = orderedPhyloData[, 2], apData = factor(orderedPhyloData[, 3]))
-##' ########################################################
-##'
-##' ######################## test fontsize ######################
-##' 
-##' #############################################################
-##' }
-
-NULL

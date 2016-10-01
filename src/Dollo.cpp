@@ -25,7 +25,7 @@ using namespace arma;
 //'
 //' @examples
 //' ## example tree
-//' library("ape")
+//' library('ape')
 //' testTreeText <- '((((t1, t2),(t3, t4)),t5), (t6, (t7, t8)));'
 //' testTree <- read.tree(text = testTreeText)
 //' plot(testTree)
@@ -83,15 +83,15 @@ arma::uvec InferGainNodes(Rcpp::List gainList) {
 // [[Rcpp::export]]
 arma::imat InferEdge(arma::umat edgeMat,
                      Rcpp::List tipPath,
-                     arma::uvec pr) {
+                     Rcpp::NumericVector pr) {
 
   // gain and loss matrix
   imat glMat(edgeMat.n_rows, 2, fill::zeros);
-  uword gainTipNum = accu(pr);
+  uword gainTipNum = sum(pr);
 
   if (gainTipNum > 0 && gainTipNum < pr.size()) {
     // gain tips
-    List gainTips = tipPath[as<IntegerVector>(wrap(find(pr == 1)))];
+    List gainTips = tipPath[pr == 1];
 
     // infer gain nodes and tips
     uvec gains = InferGainNodes(gainTips);
@@ -104,6 +104,7 @@ arma::imat InferEdge(arma::umat edgeMat,
     // all gain tips
     glMat.ones();
   }
+  // if no gain tips, then all zero
   else{}
 
   return glMat;
@@ -120,8 +121,8 @@ arma::imat InferEdge(arma::umat edgeMat,
 // [[Rcpp::export]]
 arma::uword DolloDist(arma::umat edgeMat,
                       Rcpp::List tipPath,
-                      arma::uvec pr1,
-                      arma::uvec pr2) {
+                      Rcpp::NumericVector pr1,
+                      Rcpp::NumericVector pr2) {
 
   imat glMat1 = InferEdge(edgeMat, tipPath, pr1);
   imat glMat2 = InferEdge(edgeMat, tipPath, pr2);
@@ -173,3 +174,5 @@ arma::uword CountRepeatIdx(arma::uword idx,
 
   return repeatNum;
 }
+
+

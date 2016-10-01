@@ -13,11 +13,11 @@ arma::uvec InferGainNodes(Rcpp::List gainList);
 
 arma::imat InferEdge(arma::umat edgeMat,
                      Rcpp::List tipPath,
-                     arma::uvec pr);
+                     Rcpp::NumericVector pr);
 
 arma::uword DolloDist(arma::umat edgeMat,
                       Rcpp::List tipPath,
-                      arma::uvec pr1,
-                      arma::uvec pr2);
+                      Rcpp::NumericVector pr1,
+                      Rcpp::NumericVector pr2);
 
 #endif

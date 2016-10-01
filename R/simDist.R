@@ -78,23 +78,3 @@ SimDistBatch <- function(ftMat, profileMat, FUN, n = 1) {
 SimCor <- function(pairProfile) {
   return(cor(pairProfile[, 1], pairProfile[, 2]))
 }
-
-## library('Rcpp')
-## library('RcppArmadillo')
-## library('microbenchmark')
-## library('bioDist')
-## load('../data/fatp.RData')
-## sourceCpp('../src/simDistCpp.cpp')
-
-## microbenchmark(
-##   'R' = for (i in 1:1000) {SimMIR(t(fatp$atpPhylo[sample(1:17, 2, replace = TRUE), ]))},
-##   'arma' = for (i in 1:1000) {SimMI(t(fatp$atpPhylo[sample(1:17, 2, replace = TRUE), ]))},
-##   'bioDist' = for (i in 1:1000) {mutualInfo(fatp$atpPhylo[sample(1:17, 2, replace = TRUE), ])}
-## )
-## for(i in 1:10) {
-##   ab <- t(fatp$atpPhylo[sample(1:17, 2, replace = TRUE), ])
-##   stopifnot(
-##     all.equal(SimMIR(ab), as.numeric(mutualInfo(t(ab)))),
-##     all.equal(SimMIR(ab), SimMI(ab))
-##   )
-## }

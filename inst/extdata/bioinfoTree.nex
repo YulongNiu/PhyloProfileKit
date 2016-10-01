@@ -1,0 +1,58 @@
+#NEXUS
+
+[File saved Tue Jun 28 14:04:56 2005]
+
+BEGIN TAXA;
+	DIMENSIONS NTAX = 21;
+	TAXLABELS
+		c_elegans
+		d_melanogaster
+		h_sapiens
+		e_cuniculi
+		c_neoformans
+		u_maydis
+		s_pombe
+		y_lipolytica
+		c_glabrata
+		s_bayanus
+		s_mikatae
+		s_cerevisiae
+		s_paradoxus
+		e_gossypii
+		k_lactis
+		c_albicans
+		d_hansenii
+		n_crassa
+		g_zeae
+		m_grisea
+		a_nidulans
+		;
+ENDBLOCK;
+
+
+BEGIN TREES;
+	TRANSLATE
+		1	c_elegans,
+		2	d_melanogaster,
+		3	h_sapiens,
+		4	e_cuniculi,
+		5	c_neoformans,
+		6	u_maydis,
+		7	s_pombe,
+		8	y_lipolytica,
+		9	c_glabrata,
+		10	s_bayanus,
+		11	s_mikatae,
+		12	s_cerevisiae,
+		13	s_paradoxus,
+		14	e_gossypii,
+		15	k_lactis,
+		16	c_albicans,
+		17	d_hansenii,
+		18	n_crassa,
+		19	g_zeae,
+		20	m_grisea,
+		21	a_nidulans
+		;
+	TREE * PHYLIP_1= ((1:0.334690,(2:0.243270,3:0.163240):0.042040):0.107550,(4:0.764620,((5:0.197780,6:0.148870):0.067340,(7:0.187040,((8:0.168940,(((9:0.053770,(10:0.012320,(11:0.010070,(12:0.003050,13:0.003910):0.001940):0.005820):0.037950):0.024720,(14:0.068460,15:0.061300):0.012710):0.068470,(16:0.063830,17:0.056180):0.052290):0.064540):0.070710,(21:0.138580,(18:0.081910,(19:0.081300,20:0.081250):0.026300):0.083890):0.101670):0.036900):0.049120):0.079980):0.047670);
+ENDBLOCK;
