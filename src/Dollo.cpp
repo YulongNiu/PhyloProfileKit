@@ -15,6 +15,8 @@ using namespace arma;
 //'
 //' DolloDist(): Infer the Dollo's parsimony distance.
 //'
+//' InferEdge(): Infer the present and absent of each edges.
+//'
 //' @title Dollo's parsimony distance
 //' @param gainList A list of ancestors of each gain tips. In each elements, the first one is the root.
 //' @return
@@ -22,6 +24,8 @@ using namespace arma;
 //' InferGainNodes(): A vector (with tips) of 1 and 0.
 //'
 //' DolloDist(): An integer.
+//'
+//' InferEdge(): A numeric edge present and absent matrix.
 //'
 //' @examples
 //' ## example tree
@@ -77,7 +81,6 @@ arma::uvec InferGainNodes(Rcpp::List gainList) {
 //' @param edgeMat A edge mat could be generated from the "ape" package.The first row should be (root --> nodes).
 //' @param tipPath  A list of ancestors of each gain tips. In each elements, the first one is the root.
 //' @param pr A numeric vector indicates the "presence-absence" pattern."pr" should be in the same order with the tips of tree
-//' @return A numeric edge present and absent matrix.
 //' @rdname dollo
 //' @export
 // [[Rcpp::export]]

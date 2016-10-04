@@ -42,7 +42,7 @@ InferGainNodes(): A vector (with tips) of 1 and 0.
 
 DolloDist(): An integer.
 
-A numeric edge present and absent matrix.
+InferEdge(): A numeric edge present and absent matrix.
 
 A number indicating the Dollo's parsimony distance.
 
@@ -61,6 +61,8 @@ Algorithm:
 InferGainNodes(): Infer the present nodes and tips.
 
 DolloDist(): Infer the Dollo's parsimony distance.
+
+InferEdge(): Infer the present and absent of each edges.
 }
 \examples{
 ## example tree
