@@ -1,5 +1,7 @@
 context('simdist')
 
+library('stats')
+
 SimJaccardR <- function(pairProfile) {
   
   f <- pairProfile[, 1]
@@ -47,7 +49,7 @@ SimMIR <- function(pairProfile) {
 }
 
 DistEuclideanR <- function(pairProfile) {
-  return(sqrt(sum(pairProfile[, 1] != pairProfile[, 2])))
+  return(sqrt(sum((pairProfile[, 1] - pairProfile[, 2])^2)))
 }
 
 #######################test R version and Arma version############
@@ -55,6 +57,7 @@ testNum <- 10000
 
 sd1 <- numeric(testNum)
 sd2 <- numeric(testNum)
+sd3 <- numeric(testNum)
 
 for(i in 1:testNum) {
   speNum <- 20
@@ -98,10 +101,12 @@ for(i in 1:testNum) {
 
   sd1[i] <- DistEuclideanR(pptmp)
   sd2[i] <- DistEuclidean(pptmp)
+  sd3[i] <- as.numeric(dist(t(pptmp), method = 'euclidean'))
 }
 
 test_that('Euclidean distances are equal in two versions.', {
   expect_equal(sum(sd1 == sd2), testNum)
+  expect_equal(sum(sd1 == sd3), testNum)
 })
 ########################################################################
 

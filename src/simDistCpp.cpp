@@ -77,9 +77,9 @@ double DistEuclidean(arma::umat pairProfile) {
   uvec f = pairProfile.col(0);
   uvec t = pairProfile.col(1);
 
-  uvec neq = find(f != t);
+  uvec neq = f - t;
 
-  double eu = sqrt(neq.n_elem);
+  double eu = sqrt(sum(square(neq)));
 
   return eu;
 
