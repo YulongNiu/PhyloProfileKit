@@ -83,6 +83,14 @@ CountRepeatIdx <- function(idx, y) {
     .Call('PhyloProfile_CountRepeatIdx', PACKAGE = 'PhyloProfile', idx, y)
 }
 
+TestLen <- function(y) {
+    invisible(.Call('PhyloProfile_TestLen', PACKAGE = 'PhyloProfile', y))
+}
+
+getEigenValues <- function(M) {
+    .Call('PhyloProfile_getEigenValues', PACKAGE = 'PhyloProfile', M)
+}
+
 #' @inheritParams SimCor
 #' @rdname simdist
 #' @export
