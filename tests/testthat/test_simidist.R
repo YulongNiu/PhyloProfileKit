@@ -46,6 +46,10 @@ SimMIR <- function(pairProfile) {
   return(I)
 }
 
+DistEuclideanR <- function(pairProfile) {
+  return(sqrt(sum(pairProfile[, 1] != pairProfile[, 2])))
+}
+
 #######################test R version and Arma version############
 testNum <- 10000
 
@@ -60,7 +64,7 @@ for(i in 1:testNum) {
   sd2[i] <- SimMI(pptmp)
 }
 
-test_that('MI distances are equal in two versions.', {
+test_that('MI similarity are equal in two versions.', {
   expect_equal(sum(sd1 == sd2), testNum)
 })
 
@@ -72,7 +76,7 @@ for(i in 1:testNum) {
   sd2[i] <- SimJaccard(pptmp)
 }
 
-test_that('MI distances are equal in two versions.', {
+test_that('Jaccard similarity are equal in two versions.', {
   expect_equal(sum(sd1 == sd2), testNum)
 })
 
@@ -84,7 +88,19 @@ for(i in 1:testNum) {
   sd2[i] <- DistHamming(pptmp)
 }
 
-test_that('MI distances are equal in two versions.', {
+test_that('Hamming distances are equal in two versions.', {
+  expect_equal(sum(sd1 == sd2), testNum)
+})
+
+for(i in 1:testNum) {
+  speNum <- 20
+  pptmp <- matrix(sample(0:1, 2 * speNum, replace = TRUE), ncol = 2, nrow = speNum)
+
+  sd1[i] <- DistEuclideanR(pptmp)
+  sd2[i] <- DistEuclidean(pptmp)
+}
+
+test_that('Euclidean distances are equal in two versions.', {
   expect_equal(sum(sd1 == sd2), testNum)
 })
 ########################################################################

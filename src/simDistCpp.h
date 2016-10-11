@@ -10,6 +10,8 @@ double SimMI(arma::umat pairProfile);
 
 arma::uword DistHamming(arma::umat pairProfile);
 
+double DistEuclidean(arma::umat pairProfile);
+
 double eachMI(double p1,
               double p2,
               double p3,

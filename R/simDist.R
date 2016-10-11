@@ -1,7 +1,7 @@
 ##' Similarity or distance of input phylogenetic profiles
 ##'
 ##' SimDistBatch(): Similarity and distance in batch mode.
-##' 
+##'
 ##' @title Batch process of similarity and distance.
 ##' @param ftMat A two column matrix which should at least have rownames.
 ##' @param profileMat The phylogenetic profile data with 1 and 0 denoting the presence and absence of orthologous, respectively. It is a named numeric matrix, columns are genes and rows are species.
@@ -17,9 +17,9 @@
 ##' @importFrom foreach foreach %dopar%
 ##' @seealso simdist
 ##' @export
-##' 
+##'
 SimDistBatch <- function(ftMat, profileMat, FUN, n = 1) {
-  
+
   ## register multiple core
   registerDoParallel(cores = n)
 
@@ -50,6 +50,7 @@ SimDistBatch <- function(ftMat, profileMat, FUN, n = 1) {
 ##' SimJaccard(): Jaccard similarity.
 ##' SimMI(): Mutual information.
 ##' DistHamming(): Hamming distance.
+##' DistEuclidean(): Euclidean distance.
 ##' 
 ##' @title similarity and distance
 ##' @param pairProfile A paired phylogenetic profile, columns are genes and rows are species.
@@ -67,7 +68,8 @@ SimDistBatch <- function(ftMat, profileMat, FUN, n = 1) {
 ##' MIAB <- SimMI(ab)
 ##' ## Hamming distance
 ##' hamAB <- DistHamming(ab)
-##' 
+##' ## Eulidean distance
+##' euAB <- DistEuclidean(ab)
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom stats cor
 ##' @rdname simdist
@@ -78,3 +80,22 @@ SimDistBatch <- function(ftMat, profileMat, FUN, n = 1) {
 SimCor <- function(pairProfile) {
   return(cor(pairProfile[, 1], pairProfile[, 2]))
 }
+
+
+
+## library('Rcpp')
+## library('RcppArmadillo')
+## library('microbenchmark')
+## library('PhyloProfile')
+## sourceCpp('../src/simDistCpp.cpp')
+
+## data(fatp)
+## ab <- t(fatp$atpPhylo[sample(1:17, 2, replace = TRUE), ])
+
+
+## microbenchmark(
+##   'dist' = for (i in 1:1000) {dist(fatp$atpPhylo[sample(1:17, 2, replace = TRUE), ])},
+##   'R' = for (i in 1:1000) {DistEuclideanR(t(fatp$atpPhylo[sample(1:17, 2, replace = TRUE), ]))},
+##   'arma' = for (i in 1:1000) {DistEuclidean(t(fatp$atpPhylo[sample(1:17, 2, replace = TRUE), ]))}
+## )
+

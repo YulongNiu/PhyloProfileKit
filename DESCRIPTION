@@ -1,7 +1,7 @@
 Package: PhyloProfile
 Title: A package for phylogenetic profiling analysis
 Description: This is a package providing mutiple distance and similarity methods and visualization for phylogenetic profiling analysis.
-Version: 0.3.8
+Version: 0.3.9
 Author: Yulong Niu <niuylscu@gmail.com>
 Maintainer: Yulong Niu <niuylscu@gmail.com>
 Depends:
@@ -28,5 +28,4 @@ LazyData: true
 RoxygenNote: 5.0.1
 LinkingTo: 
     Rcpp,
-    RcppArmadillo,
-    RcppEigen
+    RcppArmadillo

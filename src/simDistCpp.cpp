@@ -68,6 +68,23 @@ arma::uword DistHamming(arma::umat pairProfile) {
 
 }
 
+//' @inheritParams SimCor
+//' @rdname simdist
+//' @export
+// [[Rcpp::export]]
+double DistEuclidean(arma::umat pairProfile) {
+
+  uvec f = pairProfile.col(0);
+  uvec t = pairProfile.col(1);
+
+  uvec neq = find(f != t);
+
+  double eu = sqrt(neq.n_elem);
+
+  return eu;
+
+}
+
 
 //' @keywords internal
 // [[Rcpp::export]]

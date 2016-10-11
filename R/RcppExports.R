@@ -83,14 +83,6 @@ CountRepeatIdx <- function(idx, y) {
     .Call('PhyloProfile_CountRepeatIdx', PACKAGE = 'PhyloProfile', idx, y)
 }
 
-TestLen <- function(y) {
-    invisible(.Call('PhyloProfile_TestLen', PACKAGE = 'PhyloProfile', y))
-}
-
-getEigenValues <- function(M) {
-    .Call('PhyloProfile_getEigenValues', PACKAGE = 'PhyloProfile', M)
-}
-
 #' @inheritParams SimCor
 #' @rdname simdist
 #' @export
@@ -110,6 +102,13 @@ SimMI <- function(pairProfile) {
 #' @export
 DistHamming <- function(pairProfile) {
     .Call('PhyloProfile_DistHamming', PACKAGE = 'PhyloProfile', pairProfile)
+}
+
+#' @inheritParams SimCor
+#' @rdname simdist
+#' @export
+DistEuclidean <- function(pairProfile) {
+    .Call('PhyloProfile_DistEuclidean', PACKAGE = 'PhyloProfile', pairProfile)
 }
 
 #' @keywords internal

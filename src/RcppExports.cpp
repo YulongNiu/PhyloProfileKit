@@ -2,7 +2,6 @@
 // Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 #include <RcppArmadillo.h>
-#include <RcppEigen.h>
 #include <Rcpp.h>
 
 using namespace Rcpp;
@@ -68,27 +67,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// TestLen
-void TestLen(VectorXd y);
-RcppExport SEXP PhyloProfile_TestLen(SEXP ySEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< VectorXd >::type y(ySEXP);
-    TestLen(y);
-    return R_NilValue;
-END_RCPP
-}
-// getEigenValues
-VectorXd getEigenValues(Map<MatrixXd> M);
-RcppExport SEXP PhyloProfile_getEigenValues(SEXP MSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Map<MatrixXd> >::type M(MSEXP);
-    rcpp_result_gen = Rcpp::wrap(getEigenValues(M));
-    return rcpp_result_gen;
-END_RCPP
-}
 // SimJaccard
 double SimJaccard(arma::umat pairProfile);
 RcppExport SEXP PhyloProfile_SimJaccard(SEXP pairProfileSEXP) {
@@ -119,6 +97,17 @@ BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< arma::umat >::type pairProfile(pairProfileSEXP);
     rcpp_result_gen = Rcpp::wrap(DistHamming(pairProfile));
+    return rcpp_result_gen;
+END_RCPP
+}
+// DistEuclidean
+double DistEuclidean(arma::umat pairProfile);
+RcppExport SEXP PhyloProfile_DistEuclidean(SEXP pairProfileSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::umat >::type pairProfile(pairProfileSEXP);
+    rcpp_result_gen = Rcpp::wrap(DistEuclidean(pairProfile));
     return rcpp_result_gen;
 END_RCPP
 }
