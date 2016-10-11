@@ -58,8 +58,10 @@
 ## library('ape')
 ## library('Rcpp')
 ## library('RcppArmadillo')
+## library('RcppEigen')
 
 ## sourceCpp('../src/Dollo.cpp')
+## sourceCpp('../src/DolloEigen.cpp')
 ## set.seed(123456)
 ## testTree <- rtree(1000)
 ## pathList <- nodepath(testTree)
@@ -73,4 +75,4 @@
 ## microbenchmark(
 ##   'gain' = for(i in 1:testNum){DolloDist(testTree$edge, pathList, gainMat1[, i], gainMat2[, i])}
 ## )
- 
+

@@ -104,6 +104,13 @@ DistHamming <- function(pairProfile) {
     .Call('PhyloProfile_DistHamming', PACKAGE = 'PhyloProfile', pairProfile)
 }
 
+#' @inheritParams SimCor
+#' @rdname simdist
+#' @export
+DistEuclidean <- function(pairProfile) {
+    .Call('PhyloProfile_DistEuclidean', PACKAGE = 'PhyloProfile', pairProfile)
+}
+
 #' @keywords internal
 eachMI <- function(p1, p2, p3, n) {
     .Call('PhyloProfile_eachMI', PACKAGE = 'PhyloProfile', p1, p2, p3, n)

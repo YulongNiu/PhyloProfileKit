@@ -3,6 +3,7 @@
 export(BayesTraits)
 export(BayesTraitsBatch)
 export(BayesTraitsMode)
+export(DistEuclidean)
 export(DistHamming)
 export(DolloDist)
 export(DolloDistBatch)
