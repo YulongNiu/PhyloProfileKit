@@ -68,45 +68,45 @@ BEGIN_RCPP
 END_RCPP
 }
 // SimJaccard
-double SimJaccard(arma::umat pairProfile);
+double SimJaccard(arma::mat pairProfile);
 RcppExport SEXP PhyloProfile_SimJaccard(SEXP pairProfileSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::umat >::type pairProfile(pairProfileSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type pairProfile(pairProfileSEXP);
     rcpp_result_gen = Rcpp::wrap(SimJaccard(pairProfile));
     return rcpp_result_gen;
 END_RCPP
 }
 // SimMI
-double SimMI(arma::umat pairProfile);
+double SimMI(arma::mat pairProfile);
 RcppExport SEXP PhyloProfile_SimMI(SEXP pairProfileSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::umat >::type pairProfile(pairProfileSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type pairProfile(pairProfileSEXP);
     rcpp_result_gen = Rcpp::wrap(SimMI(pairProfile));
     return rcpp_result_gen;
 END_RCPP
 }
 // DistHamming
-arma::uword DistHamming(arma::umat pairProfile);
+arma::uword DistHamming(arma::mat pairProfile);
 RcppExport SEXP PhyloProfile_DistHamming(SEXP pairProfileSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::umat >::type pairProfile(pairProfileSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type pairProfile(pairProfileSEXP);
     rcpp_result_gen = Rcpp::wrap(DistHamming(pairProfile));
     return rcpp_result_gen;
 END_RCPP
 }
 // DistEuclidean
-double DistEuclidean(arma::umat pairProfile);
+double DistEuclidean(arma::mat pairProfile);
 RcppExport SEXP PhyloProfile_DistEuclidean(SEXP pairProfileSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::umat >::type pairProfile(pairProfileSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type pairProfile(pairProfileSEXP);
     rcpp_result_gen = Rcpp::wrap(DistEuclidean(pairProfile));
     return rcpp_result_gen;
 END_RCPP

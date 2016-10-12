@@ -61,43 +61,43 @@ sd3 <- numeric(testNum)
 
 for(i in 1:testNum) {
   speNum <- 20
-  pptmp <- matrix(sample(0:1, 2 * speNum, replace = TRUE), ncol = 2, nrow = speNum)
+  pptmp <- matrix(rnorm(2 * speNum), ncol = 2, nrow = speNum)
 
   sd1[i] <- SimMIR(pptmp)
   sd2[i] <- SimMI(pptmp)
 }
 
 test_that('MI similarity are equal in two versions.', {
-  expect_equal(sum(sd1 == sd2), testNum)
+  expect_equal(all.equal(sd1, sd2), TRUE)
 })
 
 for(i in 1:testNum) {
   speNum <- 20
-  pptmp <- matrix(sample(0:1, 2 * speNum, replace = TRUE), ncol = 2, nrow = speNum)
+  pptmp <- matrix(rnorm(2 * speNum), ncol = 2, nrow = speNum)
 
   sd1[i] <- SimJaccardR(pptmp)
   sd2[i] <- SimJaccard(pptmp)
 }
 
 test_that('Jaccard similarity are equal in two versions.', {
-  expect_equal(sum(sd1 == sd2), testNum)
+  expect_equal(all.equal(sd1, sd2), TRUE)
 })
 
 for(i in 1:testNum) {
   speNum <- 20
-  pptmp <- matrix(sample(0:1, 2 * speNum, replace = TRUE), ncol = 2, nrow = speNum)
+  pptmp <- matrix(rnorm(2 * speNum), ncol = 2, nrow = speNum)
 
   sd1[i] <- DistHammingR(pptmp)
   sd2[i] <- DistHamming(pptmp)
 }
 
 test_that('Hamming distances are equal in two versions.', {
-  expect_equal(sum(sd1 == sd2), testNum)
+  expect_equal(all.equal(sd1, sd2), TRUE)
 })
 
 for(i in 1:testNum) {
   speNum <- 20
-  pptmp <- matrix(sample(0:1, 2 * speNum, replace = TRUE), ncol = 2, nrow = speNum)
+  pptmp <- matrix(rnorm(2 * speNum), ncol = 2, nrow = speNum)
 
   sd1[i] <- DistEuclideanR(pptmp)
   sd2[i] <- DistEuclidean(pptmp)
@@ -105,8 +105,8 @@ for(i in 1:testNum) {
 }
 
 test_that('Euclidean distances are equal in two versions.', {
-  expect_equal(sum(sd1 == sd2), testNum)
-  expect_equal(sum(sd1 == sd3), testNum)
+  expect_equal(all.equal(sd1, sd2), TRUE)
+  expect_equal(all.equal(sd1, sd3), TRUE)
 })
 ########################################################################
 

@@ -9,11 +9,11 @@ using namespace arma;
 //' @rdname simdist
 //' @export
 // [[Rcpp::export]]
-double SimJaccard(arma::umat pairProfile) {
+double SimJaccard(arma::mat pairProfile) {
 
-  uvec f = pairProfile.col(0);
-  uvec t = pairProfile.col(1);
-  uvec combVec = f + 2*t;
+  vec f = pairProfile.col(0);
+  vec t = pairProfile.col(1);
+  vec combVec = f + 2*t;
 
   uvec inter = find(combVec == 3);
 
@@ -29,11 +29,11 @@ double SimJaccard(arma::umat pairProfile) {
 //' @rdname simdist
 //' @export
 // [[Rcpp::export]]
-double SimMI(arma::umat pairProfile) {
+double SimMI(arma::mat pairProfile) {
 
-  uvec f = pairProfile.col(0);
-  uvec t = pairProfile.col(1);
-  uvec combVec = f + 2*t;
+  vec f = pairProfile.col(0);
+  vec t = pairProfile.col(1);
+  vec combVec = f + 2*t;
 
   double N = pairProfile.n_rows;
   uvec Avec = find(combVec == 3);
@@ -55,10 +55,10 @@ double SimMI(arma::umat pairProfile) {
 //' @rdname simdist
 //' @export
 // [[Rcpp::export]]
-arma::uword DistHamming(arma::umat pairProfile) {
+arma::uword DistHamming(arma::mat pairProfile) {
 
-  uvec f = pairProfile.col(0);
-  uvec t = pairProfile.col(1);
+  vec f = pairProfile.col(0);
+  vec t = pairProfile.col(1);
 
   uvec neq = find(f != t);
 
@@ -72,17 +72,16 @@ arma::uword DistHamming(arma::umat pairProfile) {
 //' @rdname simdist
 //' @export
 // [[Rcpp::export]]
-double DistEuclidean(arma::umat pairProfile) {
+double DistEuclidean(arma::mat pairProfile) {
 
-  uvec f = pairProfile.col(0);
-  uvec t = pairProfile.col(1);
+  vec f = pairProfile.col(0);
+  vec t = pairProfile.col(1);
 
-  uvec neq = f - t;
+  vec neq = f - t;
 
   double eu = sqrt(sum(square(neq)));
 
   return eu;
-
 }
 
 
