@@ -58,10 +58,10 @@
 ## library('ape')
 ## library('Rcpp')
 ## library('RcppArmadillo')
-## library('RcppEigen')
 
 ## sourceCpp('../src/Dollo.cpp')
-## sourceCpp('../src/DolloEigen.cpp')
+## sourceCpp('../src/simDistCpp.cpp')
+
 ## set.seed(123456)
 ## testTree <- rtree(1000)
 ## pathList <- nodepath(testTree)

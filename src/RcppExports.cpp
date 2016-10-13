@@ -125,3 +125,14 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// testTable
+Rcpp::IntegerVector testTable(Rcpp::IntegerVector x);
+RcppExport SEXP PhyloProfile_testTable(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(testTable(x));
+    return rcpp_result_gen;
+END_RCPP
+}

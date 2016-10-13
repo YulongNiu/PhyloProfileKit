@@ -116,3 +116,7 @@ eachMI <- function(p1, p2, p3, n) {
     .Call('PhyloProfile_eachMI', PACKAGE = 'PhyloProfile', p1, p2, p3, n)
 }
 
+testTable <- function(x) {
+    .Call('PhyloProfile_testTable', PACKAGE = 'PhyloProfile', x)
+}
+
