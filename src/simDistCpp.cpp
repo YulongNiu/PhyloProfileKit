@@ -98,7 +98,3 @@ double eachMI(double p1,
   }
 }
 
-// [[Rcpp::export]]
-Rcpp::IntegerVector testTable(Rcpp::IntegerVector x) {
-  return(table(x));
-}
