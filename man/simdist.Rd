@@ -6,6 +6,7 @@
 \alias{SimCor}
 \alias{SimJaccard}
 \alias{SimMI}
+\alias{SimMIConti}
 \title{similarity and distance}
 \usage{
 SimJaccard(pairProfile)
@@ -17,6 +18,8 @@ DistHamming(pairProfile)
 DistEuclidean(pairProfile)
 
 SimCor(pairProfile)
+
+SimMIConti(pairProfile)
 }
 \arguments{
 \item{pairProfile}{A paired phylogenetic profile, columns are genes and rows are species.}
@@ -31,6 +34,7 @@ Similarity or distance of paired phylogenetic profile
 SimCor(): Person's correlation coefficient.
 SimJaccard(): Jaccard similarity.
 SimMI(): Mutual information.
+SimMIConti(): Mutual information for continuous variables
 DistHamming(): Hamming distance.
 DistEuclidean(): Euclidean distance.
 }
@@ -45,6 +49,7 @@ corAB <- SimCor(ab)
 jacAB <- SimJaccard(ab)
 ## Mutual information
 MIAB <- SimMI(ab)
+MIABConti <- SimMIConti(ab)
 ## Hamming distance
 hamAB <- DistHamming(ab)
 ## Eulidean distance

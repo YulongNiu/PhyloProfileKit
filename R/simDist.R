@@ -49,6 +49,7 @@ SimDistBatch <- function(ftMat, profileMat, FUN, n = 1) {
 ##' SimCor(): Person's correlation coefficient.
 ##' SimJaccard(): Jaccard similarity.
 ##' SimMI(): Mutual information.
+##' SimMIConti(): Mutual information for continuous variables
 ##' DistHamming(): Hamming distance.
 ##' DistEuclidean(): Euclidean distance.
 ##' 
@@ -66,6 +67,7 @@ SimDistBatch <- function(ftMat, profileMat, FUN, n = 1) {
 ##' jacAB <- SimJaccard(ab)
 ##' ## Mutual information
 ##' MIAB <- SimMI(ab)
+##' MIABConti <- SimMIConti(ab)
 ##' ## Hamming distance
 ##' hamAB <- DistHamming(ab)
 ##' ## Eulidean distance
@@ -75,12 +77,18 @@ SimDistBatch <- function(ftMat, profileMat, FUN, n = 1) {
 ##' @rdname simdist
 ##' @seealso SimDistBatch
 ##' @export
-##'
-##' 
 SimCor <- function(pairProfile) {
   return(cor(pairProfile[, 1], pairProfile[, 2]))
 }
 
+
+##' @inheritParams SimCor
+##' @rdname simdist
+##' @importFrom bioDist mutualInfo
+##' @export
+SimMIConti <- function(pairProfile) {
+  return(as.numeric(mutualInfo(t(pairProfile))))
+}
 
 
 ## library('Rcpp')
