@@ -2,36 +2,38 @@
 ##'
 ##' Algorithm:
 ##'
-##' Step1: rawBitM < hitCutoff to hitReset;
+##' Step1: rawBitM < bitCutoff to bitReset;
 ##'
 ##' Step2: In each row (species), x/max(x);
 ##'
 ##' Step3: L^2 SVD normalization.
 ##'
 ##' The core SVD normalization is retrieved from the SVD-Phy package with performance modification.
-##' @title Singular value decomposition normalization of bit score matrix.
+##' @title Singular value decomposition normalization of bit score matrix
 ##' @param rawBitM Raw bit score matrix
-##' @param hitCutoff Minimum value of the bit score.
-##' @param hitReset Reset the bit score for ones lower than the `hitCutoff`.
+##' @param bitCutoff Minimum value of the bit score.
+##' @param bitReset Reset the bit score for ones lower than the `bitCutoff`.
 ##' @return
 ##'
-##' SVDNor(): Normalized bit score matrix.
+##' SVDNor(): SVD normalized bit score matrix.
 ##'
 ##' SVDPhy(): A L^2 normalized unitary matrix.
 ##'
 ##' @examples
 ##' data(fatp)
-##' svd <- SVDNor(fatp$atpPhyloBit)
+##' svdM <- SVDNor(fatp$atpPhyloBit)
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @importFrom SVDPhy
+##' @inheritParams SVDPhy
 ##' @references \url{http://bioinformatics.oxfordjournals.org/content/suppl/2015/11/25/btv696.DC1/SVD-Phy-supplementary-material.docx}
 ##' @references \url{https://bitbucket.org/andrea/svd-phy}
+##' @seealso NPPNor
+##' @rdname SVD
 ##' @export
-SVDNor <- function(rawBitM, hitCutoff = 60, hitReset = 1, trimming = 0.3, minConserve = -0.1) {
+SVDNor <- function(rawBitM, bitCutoff = 60, bitReset = 1, trimming = 0.3, minConserve = -0.1) {
 
-  ## step1: rawBitM < hitCutoff to hitReset
+  ## step1: rawBitM < bitCutoff to bitReset
   norProfile <- apply(rawBitM, 1:2, function(x){
-    x <- ifelse(x < hitCutoff, hitReset, x)
+    x <- ifelse(x < bitCutoff, bitReset, x)
     return(x)
   })
 
@@ -43,9 +45,9 @@ SVDNor <- function(rawBitM, hitCutoff = 60, hitReset = 1, trimming = 0.3, minCon
   norProfile <- t(norProfile)
 
   ## step3: L^2 SVD normalization.
-  norM <- SVDPhy(norProfile, trimming = trimming, minConserve = minConserve)
+  norProfile <- SVDPhy(norProfile, trimming = trimming, minConserve = minConserve)
 
-  return(norM)
+  return(norProfile)
 
 }
 
@@ -54,7 +56,8 @@ SVDNor <- function(rawBitM, hitCutoff = 60, hitReset = 1, trimming = 0.3, minCon
 
 ##' @param bitM Bit score matrix, for example the BLASTP or STRING bit scores. It is a named numeric matrix, columns are species and rows are genes.
 ##' @param trimming A percentages top unitary matrix.
-##' @param minConserve Minimum number of homologous in each species. The species with homologous less than this value are discarded.
+##' @param minConserve Minimum number of homologous in each species. The species with homologous less than thsi value are discarded.
+##' @rdname SVD
 ##' @export
 SVDPhy <- function(bitM, trimming, minConserve){
 
