@@ -1,7 +1,7 @@
 Package: PhyloProfile
 Title: A package for phylogenetic profiling analysis
 Description: This is a package providing mutiple distance and similarity methods and visualization for phylogenetic profiling analysis.
-Version: 0.3.12
+Version: 0.3.13
 Author: Yulong Niu <niuylscu@gmail.com>
 Maintainer: Yulong Niu <niuylscu@gmail.com>
 Depends:
