@@ -1,7 +1,13 @@
 Package: PhyloProfile
 Title: A package for phylogenetic profiling analysis
-Description: This is a package providing mutiple distance and similarity methods and visualization for phylogenetic profiling analysis.
-Version: 0.3.13
+Description: It contains various analysis methods and visualization of phylogenetic profiles.
+    Methods include co-occurrency (Jaccard similarity, Pearson correlation coefficient, mutual information,
+    Hamming distance, and Euclidean distance), model-based methods(maximum likelihood from "BayesTrait" and
+    Dollo parsimony distance), and normalization (NPP and SVD). Visualization techniques consist of phylogenetic
+    profile, correlation matrix, configures of Circos plot, and D3 network. Retrieving phylogenetic profile
+    from the STRING database. Downstream analysis includes expanding known gene-sets, significant gene-set
+    analysis.
+Version: 0.4.0
 Author: Yulong Niu <niuylscu@gmail.com>
 Maintainer: Yulong Niu <niuylscu@gmail.com>
 Depends:
@@ -29,4 +35,4 @@ LazyData: true
 RoxygenNote: 5.0.1
 LinkingTo: 
     Rcpp,
-    RcppArmadillo,
+    RcppArmadillo
