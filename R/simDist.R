@@ -43,45 +43,6 @@ SimDistBatch <- function(ftMat, profileMat, FUN, n = 1) {
 }
 
 
-
-##' Similarity or distance of paired phylogenetic profile
-##'
-##' SimCor(): Person's correlation coefficient.
-##' SimJaccard(): Jaccard similarity.
-##' SimMI(): Mutual information.
-##' SimMIConti(): Mutual information for continuous variables
-##' DistHamming(): Hamming distance.
-##' DistEuclidean(): Euclidean distance.
-##' 
-##' @title similarity and distance
-##' @param pairProfile A paired phylogenetic profile, columns are genes and rows are species.
-##' @return A numeric value.
-##' @examples
-##' ## alpha and beta subunits from the F-type ATP synthase.
-##' data(fatp)
-##' ab <- t(fatp$atpPhylo[c('ATP5A1', 'ATP5B'), ])
-##'
-##' ## Person's correlation coefficient
-##' corAB <- SimCor(ab)
-##' ## Jaccard similarity
-##' jacAB <- SimJaccard(ab)
-##' ## Mutual information
-##' MIAB <- SimMI(ab)
-##' MIABConti <- SimMIConti(ab)
-##' ## Hamming distance
-##' hamAB <- DistHamming(ab)
-##' ## Eulidean distance
-##' euAB <- DistEuclidean(ab)
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @importFrom stats cor
-##' @rdname simdist
-##' @seealso SimDistBatch
-##' @export
-SimCor <- function(pairProfile) {
-  return(cor(pairProfile[, 1], pairProfile[, 2]))
-}
-
-
 ##' @inheritParams SimCor
 ##' @rdname simdist
 ##' @importFrom bioDist mutualInfo
@@ -94,16 +55,12 @@ SimMIConti <- function(pairProfile) {
 ## library('Rcpp')
 ## library('RcppArmadillo')
 ## library('microbenchmark')
-## library('PhyloProfile')
+## ## library('PhyloProfile')
 ## sourceCpp('../src/simDistCpp.cpp')
 
-## data(fatp)
-## ab <- t(fatp$atpPhylo[sample(1:17, 2, replace = TRUE), ])
-
-
 ## microbenchmark(
-##   'dist' = for (i in 1:1000) {dist(fatp$atpPhylo[sample(1:17, 2, replace = TRUE), ])},
-##   'R' = for (i in 1:1000) {DistEuclideanR(t(fatp$atpPhylo[sample(1:17, 2, replace = TRUE), ]))},
-##   'arma' = for (i in 1:1000) {DistEuclidean(t(fatp$atpPhylo[sample(1:17, 2, replace = TRUE), ]))}
+##   'R' = for(i in 1:1000){SimCorR(matrix(rnorm(10000), ncol = 2))},
+##   'arma2' = for(i in 1:1000){SimCor(matrix(rnorm(10000), ncol = 2))},
+##   'arma' = for(i in 1:1000){SimCor2(matrix(rnorm(10000), ncol = 2))}
 ## )
 

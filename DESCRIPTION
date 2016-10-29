@@ -8,8 +8,7 @@ Description: It contains various analysis methods and visualization of phylogene
     from the STRING database. Downstream analysis includes expanding known gene-sets, significant gene-set
     analysis.
 Version: 0.4.0
-Author: Yulong Niu <niuylscu@gmail.com>
-Maintainer: Yulong Niu <niuylscu@gmail.com>
+Authors@R: person("Yulong", "Niu", email = "niuylscu@gmail.com", role = c("aut", "cre"))
 Depends:
     R (>= 3.2.1)
 Imports:

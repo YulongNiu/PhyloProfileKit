@@ -83,6 +83,43 @@ CountRepeatIdx <- function(idx, y) {
     .Call('PhyloProfile_CountRepeatIdx', PACKAGE = 'PhyloProfile', idx, y)
 }
 
+#' Similarity or distance of paired phylogenetic profile
+#'
+#' SimCor(): Person's correlation coefficient.
+#' SimJaccard(): Jaccard similarity.
+#' SimMI(): Mutual information.
+#' SimMIConti(): Mutual information for continuous variables
+#' DistHamming(): Hamming distance.
+#' DistEuclidean(): Euclidean distance.
+#'
+#' @title similarity and distance
+#' @param pairProfile A paired phylogenetic profile, columns are genes and rows are species.
+#' @return A numeric value.
+#' @examples
+#' ## alpha and beta subunits from the F-type ATP synthase.
+#' data(fatp)
+#' ab <- t(fatp$atpPhylo[c('ATP5A1', 'ATP5B'), ])
+#'
+#' ## Person's correlation coefficient
+#' corAB <- SimCor(ab)
+#' ## Jaccard similarity
+#' jacAB <- SimJaccard(ab)
+#' ## Mutual information
+#' MIAB <- SimMI(ab)
+#' MIABConti <- SimMIConti(ab)
+#' ## Hamming distance
+#' hamAB <- DistHamming(ab)
+#' ## Eulidean distance
+#' euAB <- DistEuclidean(ab)
+#' @author Yulong Niu \email{niuylscu@@gmail.com}
+#' @importFrom stats cor
+#' @rdname simdist
+#' @seealso SimDistBatch
+#' @export
+SimCor <- function(pairProfile) {
+    .Call('PhyloProfile_SimCor', PACKAGE = 'PhyloProfile', pairProfile)
+}
+
 #' @inheritParams SimCor
 #' @rdname simdist
 #' @export
