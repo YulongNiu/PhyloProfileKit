@@ -144,3 +144,8 @@ double eachMI(double p1,
   }
 }
 
+
+// // [[Rcpp::export]]
+// arma::umat testHist(arma::mat tmp1) {
+//   return hist(tmp1, linspace<vec>(tmp1.min(), tmp1.max(), 10));
+// }

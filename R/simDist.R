@@ -35,7 +35,7 @@ SimDistBatch <- function(ftMat, profileMat, FUN, n = 1) {
 
     return(eachSD)
   }
-  
+
   ## stop multiple core
   stopImplicitCluster()
 
