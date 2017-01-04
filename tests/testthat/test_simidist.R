@@ -2,6 +2,10 @@ context('simdist')
 
 library('stats')
 
+SimCorR <- function(pairProfile) {
+  return(cor(pairProfile[, 1], pairProfile[, 2]))
+}
+
 SimJaccardR <- function(pairProfile) {
   
   f <- pairProfile[, 1]
@@ -58,6 +62,18 @@ testNum <- 10000
 sd1 <- numeric(testNum)
 sd2 <- numeric(testNum)
 sd3 <- numeric(testNum)
+
+for(i in 1:testNum) {
+  speNum <- 20
+  pptmp <- matrix(rnorm(2 * speNum), ncol = 2, nrow = speNum)
+
+  sd1[i] <- SimCorR(pptmp)
+  sd2[i] <- SimCor(pptmp)
+}
+
+test_that('Pearson correlation coefficient are equal in two versions.', {
+  expect_equal(all.equal(sd1, sd2), TRUE)
+})
 
 for(i in 1:testNum) {
   speNum <- 20

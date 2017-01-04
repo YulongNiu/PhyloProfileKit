@@ -67,6 +67,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// SimCor
+double SimCor(arma::mat pairProfile);
+RcppExport SEXP PhyloProfile_SimCor(SEXP pairProfileSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type pairProfile(pairProfileSEXP);
+    rcpp_result_gen = Rcpp::wrap(SimCor(pairProfile));
+    return rcpp_result_gen;
+END_RCPP
+}
 // SimJaccard
 double SimJaccard(arma::mat pairProfile);
 RcppExport SEXP PhyloProfile_SimJaccard(SEXP pairProfileSEXP) {
