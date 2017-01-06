@@ -2,20 +2,20 @@
 ##'
 ##' @slot .Data An integer matrix or a numeric matrix, of which the rows are genes/proteins and columns are species. It validates the rownames and colnames of the matrix.
 ##' @examples
-##' ppBinning <- new('pp',
+##' ppBinning <- new('PP',
 ##'                  matrix(sample(0:1, 10 * 20, replace = TRUE),
 ##'                         ncol = 20,
 ##'                         dimnames = list(paste0('gene', 1:10),
 ##'                                         paste0('spe', 1:20))))
-##' ppContinuous <- new('pp',
+##' ppContinuous <- new('PP',
 ##'                     matrix(rnorm(10 * 20),
 ##'                            ncol = 20,
 ##'                            dimnames = list(paste0('gene', 1:10),
 ##'                                            paste0('spe', 1:20))))
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom methods setClass
-##' @exportClass pp
-setClass(Class = 'pp',
+##' @exportClass PP
+setClass(Class = 'PP',
          contains = 'matrix',
          validity = function(object) {
            d <- object@.Data
@@ -24,11 +24,12 @@ setClass(Class = 'pp',
            } else {
              if (is.null(rownames(d)) ||
                  is.null(rownames(d))) {
-               warn <- 'The pp matrix (.Data slot) needs rownames or colnames.'
+               warn <- 'The PP matrix (.Data slot) needs rownames or colnames.'
                return(warn)
              } else {return(TRUE)}
            }
          })
+
 
 ## ## validate nrow and ncol
 ## ## validate rownames

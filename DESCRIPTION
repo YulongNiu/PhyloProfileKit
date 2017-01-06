@@ -1,12 +1,14 @@
 Package: PhyloProfile
 Title: A package for phylogenetic profiling analysis
-Description: It contains various analysis methods and visualization of phylogenetic profiles.
-    Methods include co-occurrency (Jaccard similarity, Pearson correlation coefficient, mutual information,
-    Hamming distance, and Euclidean distance), model-based methods(maximum likelihood from "BayesTrait" and
-    Dollo parsimony distance), and normalization (NPP and SVD). Visualization techniques consist of phylogenetic
-    profile, correlation matrix, configures of Circos plot, and D3 network. Retrieving phylogenetic profile
-    from the STRING database. Downstream analysis includes expanding known gene-sets, significant gene-set
-    analysis.
+Description: It contains various analysis methods and visualization of
+    phylogenetic profiles. Methods include co-occurrency (Jaccard similarity,
+    Pearson correlation coefficient, mutual information, Hamming distance, and
+    Euclidean distance), model-based methods(maximum likelihood from "BayesTrait"
+    and Dollo parsimony distance), and normalization (NPP and SVD). Visualization
+    techniques consist of phylogenetic profile, correlation matrix, configures of
+    Circos plot, and D3 network. Retrieving phylogenetic profile from the STRING
+    database. Downstream analysis includes expanding known gene-sets, significant
+    gene-set analysis.
 Version: 0.4.0
 Authors@R: person("Yulong", "Niu", email = "niuylscu@gmail.com", role = c("aut", "cre"))
 Maintainer: Yulong Niu <niuylscu@gmail.com>
@@ -34,6 +36,24 @@ ByteCompile: true
 License: GPL
 LazyData: true
 RoxygenNote: 5.0.1
-LinkingTo: 
-    Rcpp,
+LinkingTo: Rcpp,
     RcppArmadillo
+Collate:
+    'AllClasses.R'
+    'AllGenerics.R'
+    'BayesTraits.R'
+    'Dollo.R'
+    'DolloBatch.R'
+    'NPP.R'
+    'PlotState.R'
+    'RcppChk.R'
+    'RcppExports.R'
+    'SVD.R'
+    'dataDef.R'
+    'develFile.R'
+    'gloableChkVar.R'
+    'method-show.R'
+    'plotCorMat.R'
+    'plotElements.R'
+    'plotProfile.R'
+    'simDist.R'
