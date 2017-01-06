@@ -6,7 +6,7 @@
 ##' @param showCorVal Whether or not show the correlation values, and the default is set as TRUE.
 ##' @inheritParams PlotPhyloProfile
 ##' @importFrom grDevices colorRampPalette
-##' @return A plot object. 
+##' @return A plot object.
 ##' @examples
 ##' data(fatp)
 ##' ATPCorPlot <- PlotPhyloCor(fatp$atpPhylo, geneCol = fatp$genecol)
@@ -24,7 +24,7 @@
 ##' @importFrom RColorBrewer brewer.pal
 ##' @rdname simplot
 ##' @export
-##' 
+##'
 PlotPhyloCor <- function(phyloData,
                          gradientCol = colorRampPalette(rev(brewer.pal(n = 7, name = 'RdYlBu')))(100),
                          geneNameSize = 3,

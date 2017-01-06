@@ -55,6 +55,6 @@ Yulong Niu \email{niuylscu@gmail.com}
 \url{https://bitbucket.org/andrea/svd-phy}
 }
 \seealso{
-NPPNor
+\code{\link{NPPNor}}
 }
 

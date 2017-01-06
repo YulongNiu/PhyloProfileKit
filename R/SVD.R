@@ -26,7 +26,7 @@
 ##' @inheritParams SVDPhy
 ##' @references \url{http://bioinformatics.oxfordjournals.org/content/suppl/2015/11/25/btv696.DC1/SVD-Phy-supplementary-material.docx}
 ##' @references \url{https://bitbucket.org/andrea/svd-phy}
-##' @seealso NPPNor
+##' @seealso \code{\link{NPPNor}}
 ##' @rdname SVD
 ##' @export
 SVDNor <- function(rawBitM, bitCutoff = 60, bitReset = 1, trimming = 0.3, minConserve = -0.1) {

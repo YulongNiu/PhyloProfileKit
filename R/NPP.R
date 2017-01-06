@@ -19,7 +19,7 @@
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @inheritParams SVDNor
 ##' @references \url{http://www.nature.com/nature/journal/v493/n7434/extref/nature11779-s1.pdf}
-##' @seealso SVDNor
+##' @seealso \code{\link{SVDNor}}
 ##' @export
 NPPNor <- function(rawBitM, bitCutoff = 60, bitReset = 1) {
 
