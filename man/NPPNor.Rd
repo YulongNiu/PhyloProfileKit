@@ -7,7 +7,7 @@
 NPPNor(rawBitM, bitCutoff = 60, bitReset = 1)
 }
 \arguments{
-\item{rawBitM}{Raw bit score matrix}
+\item{rawBitM}{Raw bit score matrix.}
 
 \item{bitCutoff}{Minimum value of the bit score.}
 

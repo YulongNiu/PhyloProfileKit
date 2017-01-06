@@ -11,7 +11,7 @@
 \item{object}{A \code{PP} instance.}
 }
 \value{
-messages
+Show messages.
 }
 \description{
 Show method for \code{PP} instances

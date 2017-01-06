@@ -1,0 +1,52 @@
+---
+title: "PhyloProfile: an R package for phylogenetic profiling analysis"
+author: "\\
+
+	Yulong Niu \\
+
+        College of Life Sciences, Sichuan University, China"
+date: "`r Sys.Date()`"
+bibliography: PhyloProfileRef.bib
+csl: nature.csl
+output:
+  prettydoc::html_pretty:
+    toc: true
+    theme: cayman
+    highlight: github
+  pdf_document:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{PhyloProfile: an R package for phylogenetic profiling analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\usepackage[utf8]{inputenc}
+---
+
+```{r style, echo=FALSE, results="asis", message=FALSE}
+knitr::opts_chunk$set(tidy = FALSE,
+                      warning = FALSE,
+                      message = FALSE)
+```
+
+
+```{r echo=FALSE, results='hide', message=FALSE}
+library(PhyloProfile)
+```
+
+# Abstract
+
+[PhyloProfile](https://github.com/YulongNiu/PhyloProfile) contains various analysis methods and visualization of phylogenetic profiles. Methods include co-occurrency (Jaccard similarity, Pearson correlation coefficient, mutual information, Hamming distance, and Euclidean distance), model-based methods(maximum likelihood from "BayesTrait" and Dollo parsimony distance), and normalization (NPP and SVD). Visualization techniques consist of phylogenetic profile, correlation matrix, configures of Circos plot, and D3 network. Retrieving phylogenetic profile from the STRING database. Downstream analysis includes expanding known gene-sets and significant gene-set analysis.
+
+# Homepage
+
+Please visit [PhyloProfile homepage](https://github.com/YulongNiu/PhyloProfile) for more information.
+
+
+# Session Information
+
+Here is the output of `sessionInfo()` on the system on which this document was compiled:
+
+```{r echo=FALSE}
+sessionInfo()
+```
+
+# References

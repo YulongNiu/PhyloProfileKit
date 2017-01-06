@@ -11,7 +11,7 @@ SVDNor(rawBitM, bitCutoff = 60, bitReset = 1, trimming = 0.3,
 SVDPhy(bitM, trimming, minConserve)
 }
 \arguments{
-\item{rawBitM}{Raw bit score matrix}
+\item{rawBitM}{Raw bit score matrix.}
 
 \item{bitCutoff}{Minimum value of the bit score.}
 

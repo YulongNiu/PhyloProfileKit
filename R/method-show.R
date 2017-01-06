@@ -6,7 +6,7 @@ NULL
 ##'
 ##' @title show methods
 ##' @param object A \code{PP} instance.
-##' @return messages
+##' @return Show messages.
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom utils str
 ##' @importFrom methods show

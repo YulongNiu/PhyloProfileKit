@@ -1,5 +1,5 @@
 Package: PhyloProfile
-Title: A package for phylogenetic profiling analysis
+Title: PhyloProfile: an R package for phylogenetic profiling analysis
 Description: It contains various analysis methods and visualization of
     phylogenetic profiles. Methods include co-occurrency (Jaccard similarity,
     Pearson correlation coefficient, mutual information, Hamming distance, and
@@ -31,11 +31,16 @@ Imports:
     methods,
     bioDist
 Suggests:
-    testthat
+    testthat,
+    BiocStyle,
+    knitr,
+    rmarkdown,
+    prettydoc
 ByteCompile: true
 License: GPL
 LazyData: true
 RoxygenNote: 5.0.1
+VignetteBuilder: knitr
 LinkingTo: Rcpp,
     RcppArmadillo
 Collate:

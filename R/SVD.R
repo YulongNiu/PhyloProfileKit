@@ -10,7 +10,7 @@
 ##'
 ##' The core SVD normalization is retrieved from the SVD-Phy package with performance modification.
 ##' @title Singular value decomposition normalization of bit score matrix
-##' @param rawBitM Raw bit score matrix
+##' @param rawBitM Raw bit score matrix.
 ##' @param bitCutoff Minimum value of the bit score.
 ##' @param bitReset Reset the bit score for ones lower than the `bitCutoff`.
 ##' @return
