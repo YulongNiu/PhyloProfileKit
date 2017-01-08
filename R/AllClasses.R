@@ -2,8 +2,9 @@
 ##'
 ##' @slot .Data An integer matrix or a numeric matrix, of which the rows are genes/proteins and columns are species. It validates the rownames and colnames of the matrix.
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @importFrom methods setClass
+##' @importFrom magrittr %>%
 ##' @exportClass PP
+##' 
 setClass(Class = 'PP',
          contains = 'matrix',
          validity = function(object) {
@@ -14,8 +15,7 @@ setClass(Class = 'PP',
            } else {
              if (is.null(rownames(d)) ||
                  is.null(rownames(d))) {
-               warn <- 'The PP matrix (.Data slot) needs rownames or colnames.'
-               return(warn)
+               warn <- 'The PP matrix (.Data slot) needs rownames or colnames.' %>% return
              } else {return(TRUE)}
            }
          })

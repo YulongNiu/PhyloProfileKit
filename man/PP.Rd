@@ -2,60 +2,33 @@
 % Please edit documentation in R/PP.R
 \name{PP}
 \alias{PP}
-\alias{PPData}
-\alias{PPData<-}
-\title{Constructor and acccessors}
+\title{Constructor}
 \usage{
 PP(value)
-
-PPData(ppObj)
-
-PPData(ppObj) <- value
 }
 \arguments{
 \item{value}{A numeric matrix.}
-
-\item{ppObj}{A PP object.}
 }
 \value{
-PP(): A PP object.
-
-PPData(): A numeric matrix.
+A PP object.
 }
 \description{
-The constructor and accessors of the PP class
+The constructor the PP class
 }
 \details{
-PP(): Construct a PP object from a matrix.
-
-PPData(): Extract the data matrix from a PP object. See the following examples for replacing the data matrix.
+Construct a PP object from a matrix.
 }
 \examples{
+require("magrittr")
 
 ## construct a PP object without dimnames
-ppBinning <- PP(matrix(sample(0:1, 10 * 20, replace = TRUE), ncol = 20))
+ppBinning <- sample(0:1, 10 * 20, replace = TRUE) \%>\% matrix(ncol = 20) \%>\% PP
 
 ## with dimnames
-ppContinuous <- new('PP',
-                    matrix(rnorm(10 * 20),
-                           ncol = 20,
-                           dimnames = list(paste0('protein', 1:10),
-                                           paste0('spe', 1:20))))
-
-
-## extract data matrix
-PPData(ppContinuous)
-
-## replace whole data matrix
-rmat <- matrix(sample(0:1, 20 * 30, replace = TRUE),
-               ncol = 30,
-               dimnames = list(paste0('pro', 1:20),
-                               paste0('spe', 1:30)))
-PPData(ppContinuous)  <- rmat
-## type is changed to "binning"
-ppContinuous
-
-
+ppContinuous <- matrix(rnorm(10 * 20),
+                       ncol = 20,
+                       dimnames = list(paste0('protein', 1:10),
+                                       paste0('spe', 1:20))) \%>\% PP
 }
 \author{
 Yulong Niu \email{niuylscu@gmail.com}

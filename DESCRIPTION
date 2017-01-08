@@ -29,6 +29,7 @@ Imports:
     Rcpp,
     ape,
     methods,
+    magrittr,
     bioDist
 Suggests:
     testthat,
@@ -49,7 +50,6 @@ Collate:
     'Dollo.R'
     'DolloBatch.R'
     'NPP.R'
-    'show-methods.R'
     'PP.R'
     'PlotState.R'
     'RcppChk.R'
