@@ -34,8 +34,7 @@ Suggests:
     testthat,
     BiocStyle,
     knitr,
-    rmarkdown,
-    prettydoc
+    rmarkdown
 ByteCompile: true
 License: GPL
 LazyData: true

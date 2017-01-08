@@ -9,11 +9,9 @@ date: "`r Sys.Date()`"
 bibliography: PhyloProfileRef.bib
 csl: nature.csl
 output:
-  prettydoc::html_pretty:
+  BiocStyle::html_document:
     toc: true
-    theme: cayman
-    highlight: github
-  pdf_document:
+  BiocStyle::pdf_document:
     toc: true
 vignette: >
   %\VignetteIndexEntry{PhyloProfile: an R package for phylogenetic profiling analysis}
@@ -22,6 +20,7 @@ vignette: >
 ---
 
 ```{r style, echo=FALSE, results="asis", message=FALSE}
+BiocStyle::markdown()
 knitr::opts_chunk$set(tidy = FALSE,
                       warning = FALSE,
                       message = FALSE)
@@ -35,6 +34,7 @@ library(PhyloProfile)
 # Abstract
 
 [PhyloProfile](https://github.com/YulongNiu/PhyloProfile) contains various analysis methods and visualization of phylogenetic profiles. Methods include co-occurrency (Jaccard similarity, Pearson correlation coefficient, mutual information, Hamming distance, and Euclidean distance), model-based methods(maximum likelihood from "BayesTrait" and Dollo parsimony distance), and normalization (NPP and SVD). Visualization techniques consist of phylogenetic profile, correlation matrix, configures of Circos plot, and D3 network. Retrieving phylogenetic profile from the STRING database. Downstream analysis includes expanding known gene-sets and significant gene-set analysis.
+
 
 # Homepage
 

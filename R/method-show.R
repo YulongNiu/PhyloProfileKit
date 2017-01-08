@@ -19,14 +19,17 @@ setMethod(f = 'show',
             d <- object@.Data
 
             ##~~~~~~~~~~~~~cat message~~~~~~~~~~~~
-            cat('#\n# phylogenetic profile\n#\n')
-            cat('#...species number', '\t', ncol(d), '\n')
-            cat('#...gene/protein number', '\t', nrow(d), '\n')
+            cat('---\n')
+            cat('description: "phylogenetic profile"\n')
+            cat('class: ', class(object), '\n')
             if (is.integer(object)) {
-              cat('#...type', '\t', 'binning', '\n')
+              cat('type: "binning"', '\n')
             } else {
-              cat('#...type', '\t', 'continuous', '\n')
+              cat('type: "continuous"', '\n')
             }
+            cat('#species: ', ncol(d), '\n')
+            cat('#gene/protein: ', nrow(d), '\n')
+            cat('---\n')
             str(d)
             ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           })

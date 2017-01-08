@@ -19,7 +19,8 @@ setClass(Class = 'PP',
          contains = 'matrix',
          validity = function(object) {
            d <- object@.Data
-           if (sum(dim(d)) == 0) {
+           if (ncol(d) == 0 ||
+               nrow(d) == 0){
              return(TRUE)
            } else {
              if (is.null(rownames(d)) ||
