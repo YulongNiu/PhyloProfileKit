@@ -1,17 +1,6 @@
 ##' This class represents the data structure of phylogenetic profile.
 ##'
 ##' @slot .Data An integer matrix or a numeric matrix, of which the rows are genes/proteins and columns are species. It validates the rownames and colnames of the matrix.
-##' @examples
-##' ppBinning <- new('PP',
-##'                  matrix(sample(0:1, 10 * 20, replace = TRUE),
-##'                         ncol = 20,
-##'                         dimnames = list(paste0('gene', 1:10),
-##'                                         paste0('spe', 1:20))))
-##' ppContinuous <- new('PP',
-##'                     matrix(rnorm(10 * 20),
-##'                            ncol = 20,
-##'                            dimnames = list(paste0('gene', 1:10),
-##'                                            paste0('spe', 1:20))))
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom methods setClass
 ##' @exportClass PP
