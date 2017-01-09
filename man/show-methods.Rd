@@ -3,7 +3,7 @@
 \docType{methods}
 \name{show,PP-method}
 \alias{show,PP-method}
-\title{show methods}
+\title{Show methods}
 \usage{
 \S4method{show}{PP}(object)
 }

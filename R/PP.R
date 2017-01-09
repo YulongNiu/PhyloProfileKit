@@ -4,7 +4,7 @@ NULL
 
 ##' Show method for \code{PP} objects
 ##'
-##' @title show methods
+##' @title Show methods
 ##' @param object A \code{PP} object.
 ##' @return Show messages.
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
@@ -37,13 +37,13 @@ setMethod(f = 'show',
           })
 
 
-##' The constructor the PP class
+##' The constructor the \code{PP} class
 ##'
-##' Construct a PP object from a matrix.
+##' Construct a \code{PP} object from a matrix.
 ##'
 ##' @title Constructor
 ##' @param value A numeric matrix.
-##' @return A PP object.
+##' @return A \code{PP} object.
 ##' @examples
 ##' require("magrittr")
 ##'
@@ -91,13 +91,13 @@ PP <- function(value) {
 
 
 
-##' Select and replace the data matrix of a PP object
+##' Select and replace the data matrix of a \code{PP} object
 ##'
-##' \code{PPData(x)}: Extract the data matrix from a PP object.
+##' \code{PPData(x)}: Extract the data matrix from a \code{PP} object.
 ##'
-##' \code{PPData(x) <- value}: Replace the data matrix of a PP object.
+##' \code{PPData(x) <- value}: Replace the data matrix of a \code{PP} object.
 ##'
-##' @title Select and replace PP data
+##' @title Select and replace \code{PP} data
 ##' @inheritParams PPData
 ##' @return A numeric matrix.
 ##'
@@ -111,7 +111,7 @@ PP <- function(value) {
 ##'                        ncol = 20,
 ##'                        dimnames = list(paste0('protein', 1:10),
 ##'                                        paste0('spe', 1:20))) %>% PP
-##' 
+##'
 ##' ## extract data matrix
 ##' PPData(ppContinuous)
 ##'
@@ -132,7 +132,7 @@ PP <- function(value) {
 setMethod(f = 'PPData',
           signature = c(x = 'PP'),
           definition = function(x, ...) {
-            x@.Data %>% return
+            return(x@.Data)
           })
 
 
@@ -143,24 +143,51 @@ setMethod(f = 'PPData',
 ##' @exportMethod PPData<-
 ##'
 setMethod(f = 'PPData<-',
-          signature = c(x = 'PP', value = 'matrix'),
+          signature = c(x = 'PP'),
           definition = function(x, ..., value) {
             x@.Data <- value
             x %T>% validObject %>% return
           })
 
 
+
+##' Select or replace parts of a \code{PP} object
+##'
+##' \code{x[i, j, ..., drop]}: Select parts of a \code{PP} object.
+##'
+##' \code{x[i, j, ..., drop] <- value}: Replace parts of a \code{PP} object.
+##'
+##' @title Select or replace PP objects
+##' @param x A \code{PP} object.
+##' @param i,j,... Indices.
+##' @param drop Whether the result is coerced to the lowest possible dimension. Please always set it as \code{FALSE}.
+##' @return A \code{PP} object.
+##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @importFrom methods callNextMethod
+##' @rdname select-methods
+##' @exportMethod [
+##'
 setMethod(f = '[',
           signature = c(x = 'PP'),
           definition = function(x, i, j, ..., drop) {
-            x@.Data <- callNextMethod()
-            x %T>% validObject %>% return
+            PPData(x) <- callNextMethod()
+            return(x)
           })
 
 
-## select and replace
+##' @param value A number, numeric vector or numeric matrix.
+##' @importFrom methods callNextMethod
+##' @rdname select-methods
+##' @exportMethod [<-
+##'
+setMethod(f = '[<-',
+          signature = c(x = 'PP'),
+          definition = function(x, i, j, ..., value) {
+            PPData(x) <- callNextMethod()
+            return(x)
+          })
 
+## TODO:
 ## cbind
-
 ## rbind
 

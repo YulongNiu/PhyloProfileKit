@@ -10,13 +10,13 @@ PP(value)
 \item{value}{A numeric matrix.}
 }
 \value{
-A PP object.
+A \code{PP} object.
 }
 \description{
-The constructor the PP class
+The constructor the \code{PP} class
 }
 \details{
-Construct a PP object from a matrix.
+Construct a \code{PP} object from a matrix.
 }
 \examples{
 require("magrittr")
