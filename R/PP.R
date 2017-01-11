@@ -1,4 +1,4 @@
-##' @include AllClasses.R utilities.R
+##' @include AllClasses.R AllGenerics.R utilities.R
 NULL
 
 
@@ -28,7 +28,7 @@ setMethod(f = 'show',
               cat('type: "continuous"', '\n')
             }
             cat('#species: ', ncol(d), '\n')
-            cat('#gene/protein: ', nrow(d), '\n')
+            cat('#proteins: ', nrow(d), '\n')
             cat('---\n')
             ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -79,7 +79,7 @@ PP <- function(value) {
 
     ## check rownames
     if (is.null(rownames(value))) {
-      rownames(value) <- paste0('gene', seq_len(rowSize))
+      rownames(value) <- paste0('protein', seq_len(rowSize))
     } else{}
 
     ## transfer
@@ -186,6 +186,8 @@ setMethod(f = '[<-',
             PPData(x) <- callNextMethod()
             return(x)
           })
+
+
 
 ## TODO:
 ## cbind

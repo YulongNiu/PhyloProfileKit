@@ -33,8 +33,61 @@ library(PhyloProfile)
 
 # Abstract
 
-[PhyloProfile](https://github.com/YulongNiu/PhyloProfile) contains various analysis methods and visualization of phylogenetic profiles. Methods include co-occurrency (Jaccard similarity, Pearson correlation coefficient, mutual information, Hamming distance, and Euclidean distance), model-based methods(maximum likelihood from "BayesTrait" and Dollo parsimony distance), and normalization (NPP and SVD). Visualization techniques consist of phylogenetic profile, correlation matrix, configures of Circos plot, and D3 network. Retrieving phylogenetic profile from the STRING database. Downstream analysis includes expanding known gene-sets and significant gene-set analysis.
+[PhyloProfile](https://github.com/YulongNiu/PhyloProfile) contains various analysis methods and visualization of phylogenetic profiles. 
 
+## Preprocess
+
++ Retrieving phylogenetic profile from the [STRING](http://string-db.org/) database
++ Normalization 
+    * Normalized Phylogenetic Profile (NPP)
+    * Singular Value Decomposition (SVD)
+   
+## Supported analysis
+
++ Co-occurrency methods
+    * Jaccard similarity
+    * Pearson correlation coefficient
+    * mutual information
+    * Hamming distance
+    * Euclidean distance
++ Model-based methods
+    * Maximum likelihood
+    * Dollo parsimony distance
++ Downstream analysis
+    * Expanding known gene-sets
+    * Significant gene-set analysis
+    
+## Visualization
+
++ Phylogenetic profile plot
++ correlation matrix plot
++ [Circos](http://circos.ca/) plot
++ [D3](https://d3js.org/) network
+
+# Introduction
+
+Phylogenetic profiling is a bioinformatic technique used to show protein presence and absence across a large number of species. This genomic-context method is based on the assumption that functionally related proteins are likely to evolve in a correlated manner [@pellegrini1999assigning]. It has been successfully applied to detect novel physical protein-protein interactions, new components of biological complexes, and potential linkages in signaling pathways or metabolic processes [@kensche2008practical].
+
+As increasing numbers of sequenced genomes have become available, various online tools and databases has been developed [@cheng2015protphylo; @sadreyev2015phylogene; @ott2012napp; @szklarczyk2014string; @cromar2016phylopro2]. However, systematically analysis of user-defined phylogenetic profile on local computers is still a slow and tedious process. Here, we provided a R package named *[PhyloProfile](https://github.com/YulongNiu/PhyloProfile)* for analyzing and visualizing phylogenetic profiles.
+
+# Construction of phylogenetic profiles
+
+In *[PhyloProfile](https://github.com/YulongNiu/PhyloProfile)*
+, a profile with $n$ proteins across $m$ organisms is denoted as a $n \times m$ matrix containing either binning or continuous data. A binning matrix uses 0 and 1 to represent the homologies absence and presence, respectively. A continuous matrix usually consists of specific sequence similarities, for example BLAST bit scores, which need to be normalized before further analysis.
+
+## Read profiles from local files
+
+`PP()` is designed to coerce a matrix to a `PP` class object, for example we read a published profile [@barker2007constrained] stored in a csv-formed file. 
+
+```{r}
+library('PhyloProfile')
+library('magrittr')
+
+descPath <- system.file('extdata', package = 'PhyloProfile')
+bioinfoPMat <- read.csv(file.path(descPath, 'bioinfoProfile.csv'), row.names = 1) %>% as.matrix
+bioinfoP <- PP(bioinfoPMat)
+bioinfoP
+```
 
 # Homepage
 
