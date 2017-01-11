@@ -19,7 +19,7 @@ SVDPhy(bitM, trimming, minConserve)
 
 \item{trimming}{A percentages top unitary matrix.}
 
-\item{minConserve}{Minimum number of homologous in each species. The species with homologous less than thsi value are discarded.}
+\item{minConserve}{Minimum number of homologous in each species. The species with homologous less than this value are discarded.}
 
 \item{bitM}{Bit score matrix, for example the BLASTP or STRING bit scores. It is a named numeric matrix, columns are species and rows are genes.}
 }

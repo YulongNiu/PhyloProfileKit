@@ -9,17 +9,24 @@ setClass(Class = 'PP',
          contains = 'matrix',
          validity = function(object) {
            d <- object@.Data
+
+           ## 1. validate numeric matrix
+           if (!is.numeric(d) ||
+               !is.matrix(d)) {
+             warn <- 'The PP (.Data slot) should be an integer matrix of a numeric matrix.' %>% return
+           } else {}
+
+           ## 2. validate rownames and colnames
            if (ncol(d) == 0 ||
                nrow(d) == 0){
              return(TRUE)
            } else {
              if (is.null(rownames(d)) ||
                  is.null(rownames(d))) {
-               warn <- 'The PP matrix (.Data slot) needs rownames or colnames.' %>% return
+               warn <- 'The PP (.Data slot) needs rownames or colnames.' %>% return
              } else {return(TRUE)}
            }
          })
-
 
 ## ## validate nrow and ncol
 ## ## validate rownames

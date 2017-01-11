@@ -1,4 +1,4 @@
-##' @include AllClasses.R
+##' @include AllClasses.R utilities.R
 NULL
 
 
@@ -22,7 +22,7 @@ setMethod(f = 'show',
             cat('---\n')
             cat('description: "phylogenetic profile"\n')
             cat('class: ', class(object), '\n')
-            if (is.integer(object)) {
+            if (isBinMat_internal(d)) {
               cat('type: "binning"', '\n')
             } else {
               cat('type: "continuous"', '\n')

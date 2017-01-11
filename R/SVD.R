@@ -56,7 +56,7 @@ SVDNor <- function(rawBitM, bitCutoff = 60, bitReset = 1, trimming = 0.3, minCon
 
 ##' @param bitM Bit score matrix, for example the BLASTP or STRING bit scores. It is a named numeric matrix, columns are species and rows are genes.
 ##' @param trimming A percentages top unitary matrix.
-##' @param minConserve Minimum number of homologous in each species. The species with homologous less than thsi value are discarded.
+##' @param minConserve Minimum number of homologous in each species. The species with homologous less than this value are discarded.
 ##' @rdname SVD
 ##' @export
 SVDPhy <- function(bitM, trimming, minConserve){

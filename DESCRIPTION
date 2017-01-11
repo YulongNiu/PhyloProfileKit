@@ -50,6 +50,7 @@ Collate:
     'Dollo.R'
     'DolloBatch.R'
     'NPP.R'
+    'utilities.R'
     'PP.R'
     'PlotState.R'
     'RcppChk.R'
