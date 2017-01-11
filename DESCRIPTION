@@ -30,6 +30,7 @@ Imports:
     ape,
     methods,
     magrittr,
+    STRINGdb,
     bioDist
 Suggests:
     testthat,

@@ -73,7 +73,7 @@ As increasing numbers of sequenced genomes have become available, various online
 # Construction of phylogenetic profiles
 
 In *[PhyloProfile](https://github.com/YulongNiu/PhyloProfile)*
-, a profile with $n$ proteins across $m$ organisms is denoted as a $n \times m$ matrix containing either binning or continuous data. A binning matrix uses 0 and 1 to represent the homologies absence and presence, respectively. A continuous matrix usually consists of specific sequence similarities, for example BLAST bit scores, which need to be normalized before further analysis.
+, a profile with $n$ proteins across $m$ organisms is denoted as a $n \times m$ matrix containing either binning or continuous data. A binning matrix uses 0 and 1 to represent the homologs absence and presence, respectively. A continuous matrix usually consists of specific sequence similarities, for example BLAST bit scores, which need to be normalized before further analysis.
 
 ## Read profiles from local files
 
