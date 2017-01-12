@@ -6,16 +6,22 @@ NULL
 ##' Retrieve the bit score matrix from a give organism.
 ##'
 ##' @title Constructor from the STRING database
-##' @param speID Number. NCBI taxonomy identifier must be present in the STRING database.
-##' @param STRINGnorm Whether use the normalized or raw bit scores.
+##' @param speID Number. NCBI taxonomy identifier must be present in the STRING database. Use \code{get_STRING_species()} from the STRINGdb package to determine supported organisms.
+##' @param top Number or "all". Top number of proteins or the whole genome (set as "all")
+##' @param STRINGnorm Whether you use the normalized or raw bit scores.
 ##' @param n The number of CPUs or processors, and the default value is 1.
-##' @inheritParams STRINGdb::get_homologs_besthits
+##' @param symbets Whether you keep only symmetrical best hits.
 ##' @return A \code{PP} object.
 ##' @examples
-##' ## human
-##' PPSTRING(9606, n = 2)
+##' ## human top 5 proteins
+##' PPSTRING(9606, top = 5, n = 2)
+##'
+##' \dontrun{
+##' ## all human proteins
+##' PPRCSTRING(9606, top = "all", n = 4)
+##' }
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @importFrom STRINGdb get_STRING_species get_proteins get_proteins
+##' @import STRINGdb
 ##' @importFrom doParallel registerDoParallel stopImplicitCluster
 ##' @importFrom foreach foreach %dopar%
 ##' @importFrom magrittr %>%
@@ -34,8 +40,21 @@ PPSTRING <- function(speID, top = 10, symbets = FALSE, STRINGnorm = FALSE, n = 1
   sdb <- STRINGdb$new(version = '10', species = speID, score_threshold = 0)
   pMat <- sdb$get_proteins()
   pIDs <- pMat[, 1]
+  pIDsLen <- length(pIDs)
 
-  proMat <- foreach(i = 1:10, .combine = rbind) %dopar% {
+  ## determine protein number
+  if (is.numeric(top)) {
+    if (top < pIDsLen) {
+      tN <- top
+    } else {
+      tN <- pIDsLen
+    }
+  } else {
+    ## all proteins
+    tN <- pIDsLen
+  }
+
+  proMat <- foreach(i = 1:tN, .combine = rbind) %dopar% {
 
     ## initvec
     eachInit <- rep(0, length(spIDs))
@@ -57,8 +76,8 @@ PPSTRING <- function(speID, top = 10, symbets = FALSE, STRINGnorm = FALSE, n = 1
 
   }
 
-  ## CAUTIONS!!!!
-  rownames(proMat) <- pIDs[1:10]
+  ## STRING IDs
+  rownames(proMat) <- pIDs[1:tN]
   colnames(proMat) <- spIDs
 
   ## stop multiple core

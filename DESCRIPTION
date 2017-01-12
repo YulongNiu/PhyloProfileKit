@@ -56,6 +56,7 @@ Collate:
     'PlotState.R'
     'RcppChk.R'
     'RcppExports.R'
+    'STRING.R'
     'SVD.R'
     'dataDef.R'
     'develFile.R'
