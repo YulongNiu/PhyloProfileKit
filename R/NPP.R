@@ -21,8 +21,9 @@
 ##' @references \url{http://www.nature.com/nature/journal/v493/n7434/extref/nature11779-s1.pdf}
 ##' @seealso \code{\link{SVDNor}}
 ##' @export
-NPPNor <- function(rawBitM, bitCutoff = 60, bitReset = 1) {
+NPPNor <- function(rawBitM, bitCutoff = 50, bitReset = 1) {
 
+  # Step1: rawBitM < hitCutoff to hitReset;
   norProfile <- apply(rawBitM, 1:2, function(x){
     x <- ifelse(x < bitCutoff, bitReset, x)
     return(x)

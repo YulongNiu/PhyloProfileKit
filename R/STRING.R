@@ -10,7 +10,8 @@ NULL
 ##' @param top Number or "all". Top number of proteins or the whole genome (set as "all")
 ##' @param STRINGnorm Whether you use the normalized or raw bit scores.
 ##' @param n The number of CPUs or processors, and the default value is 1.
-##' @param symbets Whether you keep only symmetrical best hits.
+##' @param symbets Whether to keep only symmetrical best hits.
+##' @param verbose Whether to print retrieve process.
 ##' @return A \code{PP} object.
 ##' @examples
 ##' ## human top 5 proteins
@@ -27,7 +28,7 @@ NULL
 ##' @importFrom magrittr %>%
 ##' @export
 ##' 
-PPSTRING <- function(speID, top = 10, symbets = FALSE, STRINGnorm = FALSE, n = 1) {
+PPSTRING <- function(speID, top = 10, symbets = FALSE, STRINGnorm = FALSE, n = 1, verbose = FALSE) {
 
   ## register multiple core
   registerDoParallel(cores = n)
@@ -55,6 +56,10 @@ PPSTRING <- function(speID, top = 10, symbets = FALSE, STRINGnorm = FALSE, n = 1
   }
 
   proMat <- foreach(i = 1:tN, .combine = rbind) %dopar% {
+
+    if (verbose) {
+      cat(paste0('It is running ', i, ' in a total of ', tN, '.\n'))
+    } else {}
 
     ## initvec
     eachInit <- rep(0, length(spIDs))

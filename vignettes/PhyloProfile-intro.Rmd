@@ -1,5 +1,5 @@
 ---
-title: "PhyloProfile: an R package for phylogenetic profiling analysis"
+title: "PhyloProfile: a R package for phylogenetic profiling"
 author: "\\
 
 	Yulong Niu \\
@@ -14,7 +14,7 @@ output:
   BiocStyle::pdf_document:
     toc: true
 vignette: >
-  %\VignetteIndexEntry{PhyloProfile: an R package for phylogenetic profiling analysis}
+  %\VignetteIndexEntry{PhyloProfile: a R package for phylogenetic profiling}
   %\VignetteEngine{knitr::rmarkdown}
   %\usepackage[utf8]{inputenc}
 ---
@@ -28,7 +28,9 @@ knitr::opts_chunk$set(tidy = FALSE,
 
 
 ```{r echo=FALSE, results='hide', message=FALSE}
-library(PhyloProfile)
+library('PhyloProfile')
+library('magrittr')
+library('STRINGdb')
 ```
 
 # Abstract
@@ -82,12 +84,36 @@ In *[PhyloProfile](https://github.com/YulongNiu/PhyloProfile)*
 ```{r}
 library('PhyloProfile')
 library('magrittr')
+library('STRINGdb')
 
 descPath <- system.file('extdata', package = 'PhyloProfile')
 bioinfoPMat <- read.csv(file.path(descPath, 'bioinfoProfile.csv'), row.names = 1) %>% as.matrix
 bioinfoP <- PP(bioinfoPMat)
+
+## binning matrix
 bioinfoP
 ```
+
+## Retrieve profiles from the STRING database
+
+The [STRING](http://string-db.org/) database (version 10) provides raw BLAST bit scores of the best hit for more than 2,000 organisms. The bit score matrix (continuous matrix) can be obtained by `PPSTRING()`. 
+
+The organisms supported by STRING:
+
+```{r}
+sp <- get_STRING_species(version = '10', species_name = NULL)
+head(sp)
+```
+
+Retrieve the profile of 5 human proteins:
+
+``` {r}
+## species id of Homo sapiens is 9606
+## continuous matrix
+PPSTRING(speID = 9606, top = 5, n = 2)
+```
+
+Set `top = 'all'` for complete human profile, and increase `n` to accelerate the download process if multiple cores are supported on your system.
 
 # Homepage
 

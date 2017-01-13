@@ -29,7 +29,7 @@
 ##' @seealso \code{\link{NPPNor}}
 ##' @rdname SVD
 ##' @export
-SVDNor <- function(rawBitM, bitCutoff = 60, bitReset = 1, trimming = 0.3, minConserve = -0.1) {
+SVDNor <- function(rawBitM, bitCutoff = 60, bitReset = 0, trimming = 0.3, minConserve = -0.1) {
 
   ## step1: rawBitM < bitCutoff to bitReset
   norProfile <- apply(rawBitM, 1:2, function(x){
@@ -56,7 +56,7 @@ SVDNor <- function(rawBitM, bitCutoff = 60, bitReset = 1, trimming = 0.3, minCon
 
 ##' @param bitM Bit score matrix, for example the BLASTP or STRING bit scores. It is a named numeric matrix, columns are species and rows are genes.
 ##' @param trimming A percentages top unitary matrix.
-##' @param minConserve Minimum number of homologous in each species. The species with homologous less than this value are discarded.
+##' @param minConserve Minimum number of homologous. The proteins with homologous less than this value are discarded.
 ##' @rdname SVD
 ##' @export
 SVDPhy <- function(bitM, trimming, minConserve){
@@ -80,7 +80,7 @@ SVDPhy <- function(bitM, trimming, minConserve){
     return(x/sqrt(sum(x^2)))
   }))
 
-  rownames(resultM) <- rownames(bitM)
+  rownames(resultM) <- rownames(bitM)[filteredIdx]
 
   return(resultM)
 }
