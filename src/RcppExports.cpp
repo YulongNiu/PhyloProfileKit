@@ -67,6 +67,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// SVDArma
+arma::mat SVDArma(arma::mat bitM, double trimming, double minConserve);
+RcppExport SEXP PhyloProfile_SVDArma(SEXP bitMSEXP, SEXP trimmingSEXP, SEXP minConserveSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type bitM(bitMSEXP);
+    Rcpp::traits::input_parameter< double >::type trimming(trimmingSEXP);
+    Rcpp::traits::input_parameter< double >::type minConserve(minConserveSEXP);
+    rcpp_result_gen = Rcpp::wrap(SVDArma(bitM, trimming, minConserve));
+    return rcpp_result_gen;
+END_RCPP
+}
 // SimCor
 double SimCor(arma::mat pairProfile);
 RcppExport SEXP PhyloProfile_SimCor(SEXP pairProfileSEXP) {

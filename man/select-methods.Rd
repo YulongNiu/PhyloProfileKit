@@ -6,7 +6,7 @@
 \alias{[<-,PP,ANY,ANY,ANY-method}
 \title{Select or replace PP objects}
 \usage{
-\S4method{[}{PP,ANY,ANY,ANY}(x, i, j, ..., drop = TRUE)
+\S4method{[}{PP,ANY,ANY,ANY}(x, i, j, ..., drop = FALSE)
 
 \S4method{[}{PP,ANY,ANY,ANY}(x, i, j, ...) <- value
 }
@@ -15,7 +15,7 @@
 
 \item{i, j, ...}{Indices.}
 
-\item{drop}{Whether the result is coerced to the lowest possible dimension. Please always set it as \code{FALSE}.}
+\item{drop}{Whether the result is coerced to the lowest possible dimension. Desalt set is \code{FALSE}.}
 
 \item{value}{A number, numeric vector or numeric matrix.}
 }

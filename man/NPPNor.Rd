@@ -4,7 +4,7 @@
 \alias{NPPNor}
 \title{z-score normalization of phylogenetic profile}
 \usage{
-NPPNor(rawBitM, bitCutoff = 60, bitReset = 1)
+NPPNor(rawBitM, bitCutoff = 50, bitReset = 1)
 }
 \arguments{
 \item{rawBitM}{Raw bit score matrix.}

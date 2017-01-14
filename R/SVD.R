@@ -84,3 +84,18 @@ SVDPhy <- function(bitM, trimming, minConserve){
 
   return(resultM)
 }
+
+
+## library(Rcpp)
+## library(RcppArmadillo)
+## sourceCpp('../src/normSVD.cpp')
+## load('/home/Yulong/Documents/ecoli_homology.rda')
+
+## tmpData <- ecoli_homology[1:2000, ]
+
+
+## tmpM <- SVDPhy(tmpData, trimming = 0.8, minConserve = 12)
+
+## tmpCppM <- SVDArma(tmpData, trimming = 0.8, minConserve = 12)
+
+## tmp1 <- tmpM - tmpCppM

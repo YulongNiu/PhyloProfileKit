@@ -5,7 +5,7 @@
 \alias{SVDPhy}
 \title{Singular value decomposition normalization of bit score matrix}
 \usage{
-SVDNor(rawBitM, bitCutoff = 60, bitReset = 1, trimming = 0.3,
+SVDNor(rawBitM, bitCutoff = 60, bitReset = 0, trimming = 0.3,
   minConserve = -0.1)
 
 SVDPhy(bitM, trimming, minConserve)
@@ -19,7 +19,7 @@ SVDPhy(bitM, trimming, minConserve)
 
 \item{trimming}{A percentages top unitary matrix.}
 
-\item{minConserve}{Minimum number of homologous in each species. The species with homologous less than this value are discarded.}
+\item{minConserve}{Minimum number of homologous. The proteins with homologous less than this value are discarded.}
 
 \item{bitM}{Bit score matrix, for example the BLASTP or STRING bit scores. It is a named numeric matrix, columns are species and rows are genes.}
 }

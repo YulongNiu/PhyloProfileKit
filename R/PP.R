@@ -160,7 +160,7 @@ setMethod(f = 'PPData<-',
 ##' @title Select or replace PP objects
 ##' @param x A \code{PP} object.
 ##' @param i,j,... Indices.
-##' @param drop Whether the result is coerced to the lowest possible dimension. Please always set it as \code{FALSE}.
+##' @param drop Whether the result is coerced to the lowest possible dimension. Desalt set is \code{FALSE}.
 ##' @return A \code{PP} object.
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom methods callNextMethod
@@ -169,7 +169,7 @@ setMethod(f = 'PPData<-',
 ##'
 setMethod(f = '[',
           signature = c(x = 'PP'),
-          definition = function(x, i, j, ..., drop) {
+          definition = function(x, i, j, ..., drop = FALSE) {
             PPData(x) <- callNextMethod()
             return(x)
           })

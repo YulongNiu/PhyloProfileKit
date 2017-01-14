@@ -83,6 +83,10 @@ CountRepeatIdx <- function(idx, y) {
     .Call('PhyloProfile_CountRepeatIdx', PACKAGE = 'PhyloProfile', idx, y)
 }
 
+SVDArma <- function(bitM, trimming, minConserve) {
+    .Call('PhyloProfile_SVDArma', PACKAGE = 'PhyloProfile', bitM, trimming, minConserve)
+}
+
 #' Similarity or distance of paired phylogenetic profile
 #'
 #' SimCor(): Person's correlation coefficient.
