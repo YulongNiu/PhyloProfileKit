@@ -21,15 +21,15 @@
 ##'
 ##' @examples
 ##' data(fatp)
-##' svdM <- SVDNor(fatp$atpPhyloBit)
+##' svdM <- SVDNorR(fatp$atpPhyloBit)
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @inheritParams SVDPhy
+##' @inheritParams SVDPhyR
 ##' @references \url{http://bioinformatics.oxfordjournals.org/content/suppl/2015/11/25/btv696.DC1/SVD-Phy-supplementary-material.docx}
 ##' @references \url{https://bitbucket.org/andrea/svd-phy}
 ##' @seealso \code{\link{NPPNor}}
 ##' @rdname SVD
 ##' @export
-SVDNor <- function(rawBitM, bitCutoff = 60, bitReset = 0, trimming = 0.3, minConserve = -0.1) {
+SVDNorR <- function(rawBitM, bitCutoff = 60, bitReset = 0, trimming = 0.3, minConserve = -0.1) {
 
   ## step1: rawBitM < bitCutoff to bitReset
   norProfile <- apply(rawBitM, 1:2, function(x){
@@ -45,7 +45,7 @@ SVDNor <- function(rawBitM, bitCutoff = 60, bitReset = 0, trimming = 0.3, minCon
   norProfile <- t(norProfile)
 
   ## step3: L^2 SVD normalization.
-  norProfile <- SVDPhy(norProfile, trimming = trimming, minConserve = minConserve)
+  norProfile <- SVDPhyR(norProfile, trimming = trimming, minConserve = minConserve)
 
   return(norProfile)
 
@@ -59,7 +59,7 @@ SVDNor <- function(rawBitM, bitCutoff = 60, bitReset = 0, trimming = 0.3, minCon
 ##' @param minConserve Minimum number of homologous. The proteins with homologous less than this value are discarded.
 ##' @rdname SVD
 ##' @export
-SVDPhy <- function(bitM, trimming, minConserve){
+SVDPhyR <- function(bitM, trimming, minConserve){
 
   ## Lapack SVD
   s <- La.svd(bitM)
@@ -92,10 +92,12 @@ SVDPhy <- function(bitM, trimming, minConserve){
 ## load('/home/Yulong/Documents/ecoli_homology.rda')
 
 ## tmpData <- ecoli_homology[1:2000, ]
+## tmpM <- SVDPhyR(tmpData, trimming = 0.8, minConserve = 12)
+## tmpCppM <- SVDPhy(tmpData, trimming = 0.8, minConserve = 12)
 
+## tmpData <- matrix(sample(0:200, 2000 * 1792, replace = TRUE), nrow = 2000)
+## rownames(tmpData) <- paste0('gene', 1:2000)
 
-## tmpM <- SVDPhy(tmpData, trimming = 0.8, minConserve = 12)
+## tmpM <- SVDNorR(tmpData,  bitCutoff = 60, bitReset = 0, trimming = 0.8, minConserve = 12)
 
-## tmpCppM <- SVDArma(tmpData, trimming = 0.8, minConserve = 12)
-
-## tmp1 <- tmpM - tmpCppM
+## tmpCppM <- SVDNorm(tmpData, bitCutoff = 60, bitReset = 0, trimming = 0.8, minConserve = 12)

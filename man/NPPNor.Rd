@@ -39,6 +39,6 @@ Yulong Niu \email{niuylscu@gmail.com}
 \url{http://www.nature.com/nature/journal/v493/n7434/extref/nature11779-s1.pdf}
 }
 \seealso{
-\code{\link{SVDNor}}
+\code{\link{SVDNorR}}
 }
 

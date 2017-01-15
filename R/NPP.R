@@ -17,9 +17,9 @@
 ##' data(fatp)
 ##' nppM <- NPPNor(fatp$atpPhyloBit)
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @inheritParams SVDNor
+##' @inheritParams SVDNorR
 ##' @references \url{http://www.nature.com/nature/journal/v493/n7434/extref/nature11779-s1.pdf}
-##' @seealso \code{\link{SVDNor}}
+##' @seealso \code{\link{SVDNorR}}
 ##' @export
 NPPNor <- function(rawBitM, bitCutoff = 50, bitReset = 1) {
 

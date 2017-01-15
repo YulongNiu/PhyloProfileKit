@@ -83,8 +83,12 @@ CountRepeatIdx <- function(idx, y) {
     .Call('PhyloProfile_CountRepeatIdx', PACKAGE = 'PhyloProfile', idx, y)
 }
 
-SVDArma <- function(bitM, trimming, minConserve) {
-    .Call('PhyloProfile_SVDArma', PACKAGE = 'PhyloProfile', bitM, trimming, minConserve)
+SVDPhy <- function(bitM, trimming, minConserve) {
+    .Call('PhyloProfile_SVDPhy', PACKAGE = 'PhyloProfile', bitM, trimming, minConserve)
+}
+
+SVDNorm <- function(rawBitM, bitCutoff, bitReset, trimming, minConserve) {
+    .Call('PhyloProfile_SVDNorm', PACKAGE = 'PhyloProfile', rawBitM, bitCutoff, bitReset, trimming, minConserve)
 }
 
 #' Similarity or distance of paired phylogenetic profile

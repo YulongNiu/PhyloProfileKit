@@ -4,8 +4,14 @@
 #include <RcppArmadillo.h>
 #include <Rcpp.h>
 
-arma::mat SVDArma(arma::mat bitM,
-                  double trimming,
-                  double minConserve);
+Rcpp::NumericMatrix SVDPhy(Rcpp::NumericMatrix bitM,
+                           double trimming,
+                           double minConserve);
+
+Rcpp::NumericMatrix SVDNor(Rcpp::NumericMatrix rawBitM,
+                           double bitCutoff,
+                           double bitReset,
+                           double trimming,
+                           double minConserve);
 
 #endif
