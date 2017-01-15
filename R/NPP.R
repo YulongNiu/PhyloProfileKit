@@ -4,9 +4,11 @@
 ##'
 ##' Step1: rawBitM < hitCutoff to hitReset;
 ##'
-##' Step2: In each row (species), log2(x/max(x));
+##' Step2: 
 ##'
-##' Step3: z-score for each column.
+##' Step3: in each row (species), log2(x/max(x));
+##'
+##' Step4: z-score for each column.
 ##' 
 ##' @title z-score normalization of phylogenetic profile
 ##' @return
@@ -15,13 +17,14 @@
 ##'
 ##' @examples
 ##' data(fatp)
-##' nppM <- NPPNor(fatp$atpPhyloBit)
+##' nppM <- NPPNorR(fatp$atpPhyloBit)
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @inheritParams SVDNorR
 ##' @references \url{http://www.nature.com/nature/journal/v493/n7434/extref/nature11779-s1.pdf}
 ##' @seealso \code{\link{SVDNorR}}
 ##' @export
-NPPNor <- function(rawBitM, bitCutoff = 50, bitReset = 1) {
+##' 
+NPPNorR <- function(rawBitM, bitCutoff = 50, bitReset = 1) {
 
   # Step1: rawBitM < hitCutoff to hitReset;
   norProfile <- apply(rawBitM, 1:2, function(x){
@@ -29,7 +32,7 @@ NPPNor <- function(rawBitM, bitCutoff = 50, bitReset = 1) {
     return(x)
   })
 
-  ## step2: In each row (species), log2(x/max(x))
+  ## step2: in each row (species), log2(x/max(x))
   norProfile <- apply(norProfile, 1, function(x) {
     x <- log2(x/max(x))
     return(x)

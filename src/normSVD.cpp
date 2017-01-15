@@ -5,58 +5,13 @@
 using namespace Rcpp;
 using namespace arma;
 
-// [[Rcpp::export]]
-Rcpp::NumericMatrix SVDPhy(Rcpp::NumericMatrix bitM,
-                           double trimming,
-                           double minConserve) {
-
-  //keep rownames
-  CharacterVector rn = rownames(bitM);
-  mat bitMArma(bitM.begin(), bitM.nrow(), bitM.ncol(), false);
-
-  uvec dimV(2);
-  dimV(0) = bitMArma.n_rows;
-  dimV(1) = bitMArma.n_cols;
-
-  // SVD
-  mat U;
-  vec s;
-  mat V;
-  svd(U, s, V, bitMArma);
-  U = U.cols(0, dimV.min() - 1);
-
-  // filter genes
-  uvec hasV(bitMArma.n_rows);
-  for (uword i = 0; i < bitMArma.n_rows; ++i) {
-    uvec counterIdx  = find(bitMArma.row(i) > 0);
-    hasV(i) = counterIdx.n_elem;
-  }
-  uvec filteredIdx = find(hasV > minConserve);
-  U = U.rows(filteredIdx);
-
-  // trim species
-  mat UTrimmed = U.cols(regspace<uvec>(0, round(trimming * U.n_cols) - 1));
-
-  // L^2 normalization
-  UTrimmed.each_row([](rowvec& r){
-      r /= sqrt(sum(square(r)));
-    });
-
-  // rownames
-  NumericVector filteredIdxCpp(filteredIdx.begin(), filteredIdx.end());
-  NumericMatrix resultM(UTrimmed.n_rows, UTrimmed.n_cols, UTrimmed.begin());
-  rownames(resultM) = rn[filteredIdxCpp];
-
-  return resultM;
-}
-
 
 // [[Rcpp::export]]
 Rcpp::NumericMatrix SVDNorm(Rcpp::NumericMatrix rawBitM,
-                           double bitCutoff,
-                           double bitReset,
-                           double trimming,
-                           double minConserve) {
+                            double bitCutoff,
+                            double bitReset,
+                            double minConserve,
+                            double trimming) {
 
   // keep rownames
   CharacterVector rn = rownames(rawBitM);
@@ -77,8 +32,50 @@ Rcpp::NumericMatrix SVDNorm(Rcpp::NumericMatrix rawBitM,
   rownames(norP) = rn;
 
   NumericMatrix resultM = SVDPhy(norP,
-                                 trimming = trimming,
-                                 minConserve = minConserve);
+                                 bitReset = bitReset,
+                                 minConserve = minConserve,
+                                 trimming = trimming);
+
+  return resultM;
+}
+
+
+// [[Rcpp::export]]
+Rcpp::NumericMatrix SVDPhy(Rcpp::NumericMatrix bitM,
+                           double bitReset,
+                           double minConserve,
+                           double trimming) {
+
+  //keep rownames
+  CharacterVector rn = rownames(bitM);
+  mat bitMArma(bitM.begin(), bitM.nrow(), bitM.ncol(), false);
+
+  uvec dimV(2);
+  dimV(0) = bitMArma.n_rows;
+  dimV(1) = bitMArma.n_cols;
+
+  // SVD
+  mat U;
+  vec s;
+  mat V;
+  svd(U, s, V, bitMArma);
+  U = U.cols(0, dimV.min() - 1);
+
+  // filter genes (rows)
+  uvec hasV = sum(bitMArma > bitReset, 1);
+  uvec filteredIdx = find(hasV >= minConserve);
+  U = U.rows(filteredIdx);
+
+  // trim species
+  mat UTrimmed = U.cols(regspace<uvec>(0, round(trimming * U.n_cols) - 1));
+
+  // L^2 normalization
+  mat normU = normalise(UTrimmed, 2, 1);
+
+  // rownames
+  NumericVector filteredIdxCpp(filteredIdx.begin(), filteredIdx.end());
+  NumericMatrix resultM(normU.n_rows, normU.n_cols, normU.begin());
+  rownames(resultM) = rn[filteredIdxCpp];
 
   return resultM;
 }
