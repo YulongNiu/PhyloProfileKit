@@ -12,7 +12,6 @@
 ##' @title Singular value decomposition normalization of bit score matrix
 ##' @param rawBitM Raw bit score matrix.
 ##' @param bitCutoff Minimum value of the bit score.
-##' @param bitReset Reset the bit score for ones lower than the `bitCutoff`.
 ##' @return
 ##'
 ##' SVDNor(): SVD normalized bit score matrix.
@@ -26,7 +25,7 @@
 ##' @inheritParams SVDPhyR
 ##' @references \url{http://bioinformatics.oxfordjournals.org/content/suppl/2015/11/25/btv696.DC1/SVD-Phy-supplementary-material.docx}
 ##' @references \url{https://bitbucket.org/andrea/svd-phy}
-##' @seealso \code{\link{NPPNor}}
+##' @seealso \code{\link{NPPNorR}}
 ##' @rdname SVD
 ##' @export
 SVDNorR <- function(rawBitM, bitCutoff = 60, bitReset = 0, trimming = 0.3, minConserve = -0.1) {
@@ -45,7 +44,7 @@ SVDNorR <- function(rawBitM, bitCutoff = 60, bitReset = 0, trimming = 0.3, minCo
   norProfile <- t(norProfile)
 
   ## step3: L^2 SVD normalization.
-  norProfile <- SVDPhyR(norProfile, trimming = trimming, minConserve = minConserve)
+  norProfile <- SVDPhyR(norProfile, bitReset = bitReset, minConserve = minConserve, trimming = trimming)
 
   return(norProfile)
 
@@ -55,21 +54,19 @@ SVDNorR <- function(rawBitM, bitCutoff = 60, bitReset = 0, trimming = 0.3, minCo
 
 
 ##' @param bitM Bit score matrix, for example the BLASTP or STRING bit scores. It is a named numeric matrix, columns are species and rows are genes.
+##' @param bitReset Reset the bit score for ones lower than the `bitCutoff`.
 ##' @param trimming A percentages top unitary matrix.
 ##' @param minConserve Minimum number of homologous. The proteins with homologous less than this value are discarded.
 ##' @rdname SVD
 ##' @export
-SVDPhyR <- function(bitM, trimming, minConserve){
+SVDPhyR <- function(bitM, bitReset, minConserve, trimming){
 
   ## Lapack SVD
   s <- La.svd(bitM)
   svdm <- s$u
 
   ## filter genes
-  filteredIdx <- apply(bitM, 1, function(x){
-    counter <- sum(x > 0)
-    return(counter > minConserve)
-  })
+  filteredIdx <- rowSums(bitM > bitReset) > minConserve
   svdm <- svdm[filteredIdx, ]
 
   ## trim species
@@ -93,15 +90,15 @@ SVDPhyR <- function(bitM, trimming, minConserve){
 
 ## load('/home/Yulong/Documents/ecoli_homology.rda')
 ## tmpData <- ecoli_homology[1:2000, ]
-## tmpM <- SVDPhyR(tmpData, trimming = 0.8, minConserve = 12)
+## tmpM <- SVDPhyR(tmpData,  bitReset = 0, minConserve = 12, trimming = 0.8)
 ## tmpCppM <- SVDPhy(tmpData, bitReset = 0, minConserve = 12, trimming = 0.8)
 
 ## tmpData <- matrix(sample(0:200, 2000 * 1792, replace = TRUE), nrow = 2000)
 ## rownames(tmpData) <- paste0('gene', 1:2000)
 ## colnames(tmpData) <- paste0('spe', 1:1792)
 
-## tmpM <- NPPNorR(tmpData,  bitCutoff = 60, bitReset = 1)
+## tmpM <- NPPNorR(tmpData,  bitCutoff = 60, bitReset = 1, minConserve = 12)
 ## tmpCppM <- NPPNorm(tmpData, bitCutoff = 60, bitReset = 1, minConserve = 12)
 
-## tmpM <- SVDNorR(tmpData,  bitCutoff = 60, bitReset = 0, minConserve = 12, trimming = 0.8)
-## tmpCppM <- SVDNorm(tmpData, bitCutoff = 60, bitReset = 0, minConserve = 12, trimming = 0.8)
+## tmpM <- SVDNorR(tmpData,  bitCutoff = 100, bitReset = 0, minConserve = 12, trimming = 0.8)
+## tmpCppM <- SVDNorm(tmpData, bitCutoff = 100, bitReset = 0, minConserve = 12, trimming = 0.8)

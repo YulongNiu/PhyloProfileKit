@@ -4,7 +4,7 @@
 ##'
 ##' Step1: rawBitM < hitCutoff to hitReset;
 ##'
-##' Step2: 
+##' Step2: filter genes without enough homologys
 ##'
 ##' Step3: in each row (species), log2(x/max(x));
 ##'
@@ -24,28 +24,34 @@
 ##' @seealso \code{\link{SVDNorR}}
 ##' @export
 ##' 
-NPPNorR <- function(rawBitM, bitCutoff = 50, bitReset = 1) {
+NPPNorR <- function(rawBitM, bitCutoff = 50, bitReset = 1, minConserve = 0) {
 
-  # Step1: rawBitM < hitCutoff to hitReset;
+  # step1: rawBitM < hitCutoff to hitReset;
   norProfile <- apply(rawBitM, 1:2, function(x){
     x <- ifelse(x < bitCutoff, bitReset, x)
     return(x)
   })
 
-  ## step2: in each row (species), log2(x/max(x))
+  ## step2: filter genes without enough homologys
+  filteredIdx <- rowSums(rawBitM > bitReset) > minConserve
+  norProfile <- norProfile[filteredIdx, ]
+
+  ## step3: in each row (species), log2(x/max(x))
   norProfile <- apply(norProfile, 1, function(x) {
     x <- log2(x/max(x))
     return(x)
   })
   norProfile <- t(norProfile)
 
-  ## step3: z-score for each column
+  ## step4: z-score for each column
   norProfile <- apply(norProfile, 2, function(x) {
     x <- scale(x)
     return(x)
   })
 
-  rownames(norProfile) <- rownames(rawBitM)
+  rownames(norProfile) <- rownames(rawBitM)[filteredIdx]
+  colnames(norProfile) <- colnames(rawBitM)
 
   return(norProfile)
 }
+

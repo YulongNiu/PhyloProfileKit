@@ -8,7 +8,7 @@
 SVDNorR(rawBitM, bitCutoff = 60, bitReset = 0, trimming = 0.3,
   minConserve = -0.1)
 
-SVDPhyR(bitM, trimming, minConserve)
+SVDPhyR(bitM, bitReset, minConserve, trimming)
 }
 \arguments{
 \item{rawBitM}{Raw bit score matrix.}
@@ -55,6 +55,6 @@ Yulong Niu \email{niuylscu@gmail.com}
 \url{https://bitbucket.org/andrea/svd-phy}
 }
 \seealso{
-\code{\link{NPPNor}}
+\code{\link{NPPNorR}}
 }
 
