@@ -1,4 +1,4 @@
-##' @include AllClasses.R
+##' @include AllClasses.R AllGenerics.R utilities.R
 NULL
 
 
@@ -22,13 +22,13 @@ setMethod(f = 'show',
             cat('---\n')
             cat('description: "phylogenetic profile"\n')
             cat('class: ', class(object), '\n')
-            if (is.integer(object)) {
+            if (isBinMat_internal(d)) {
               cat('type: "binning"', '\n')
             } else {
               cat('type: "continuous"', '\n')
             }
             cat('#species: ', ncol(d), '\n')
-            cat('#gene/protein: ', nrow(d), '\n')
+            cat('#proteins: ', nrow(d), '\n')
             cat('---\n')
             ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -79,7 +79,7 @@ PP <- function(value) {
 
     ## check rownames
     if (is.null(rownames(value))) {
-      rownames(value) <- paste0('gene', seq_len(rowSize))
+      rownames(value) <- paste0('protein', seq_len(rowSize))
     } else{}
 
     ## transfer
@@ -160,7 +160,7 @@ setMethod(f = 'PPData<-',
 ##' @title Select or replace PP objects
 ##' @param x A \code{PP} object.
 ##' @param i,j,... Indices.
-##' @param drop Whether the result is coerced to the lowest possible dimension. Please always set it as \code{FALSE}.
+##' @param drop Whether the result is coerced to the lowest possible dimension. Desalt set is \code{FALSE}.
 ##' @return A \code{PP} object.
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom methods callNextMethod
@@ -169,7 +169,7 @@ setMethod(f = 'PPData<-',
 ##'
 setMethod(f = '[',
           signature = c(x = 'PP'),
-          definition = function(x, i, j, ..., drop) {
+          definition = function(x, i, j, ..., drop = FALSE) {
             PPData(x) <- callNextMethod()
             return(x)
           })
@@ -186,6 +186,8 @@ setMethod(f = '[<-',
             PPData(x) <- callNextMethod()
             return(x)
           })
+
+
 
 ## TODO:
 ## cbind

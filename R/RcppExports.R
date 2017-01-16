@@ -83,6 +83,71 @@ CountRepeatIdx <- function(idx, y) {
     .Call('PhyloProfile_CountRepeatIdx', PACKAGE = 'PhyloProfile', idx, y)
 }
 
+#' NPP normalization
+#'
+#' Algorithm:
+#'
+#' Step1: rawBitM < hitCutoff to hitReset;
+#'
+#' Step2: filter genes without enough homologys
+#'
+#' Step3: in each row (species), log2(x/max(x));
+#'
+#' Step4: z-score for each column.
+#' 
+#' @title z-score normalization of phylogenetic profile
+#' @return
+#'
+#' NPPNorm(): NPP normalized bit score matrix.
+#'
+#' @author Yulong Niu \email{niuylscu@@gmail.com}
+#' @inheritParams SVDNorm
+#' @references \href{http://www.nature.com/nature/journal/v493/n7434/extref/nature11779-s1.pdf}{NPP description}
+#' @keywords internal
+NPPNorm <- function(rawBitM, bitCutoff, bitReset, minConserve) {
+    .Call('PhyloProfile_NPPNorm', PACKAGE = 'PhyloProfile', rawBitM, bitCutoff, bitReset, minConserve)
+}
+
+#' SVD normalization
+#'
+#' Algorithm:
+#'
+#' Step1: rawBitM < bitCutoff to bitReset;
+#'
+#' Step2: In each row (species), x/max(x);
+#'
+#' Step3: L^2 SVD normalization.
+#'
+#' The core SVD normalization is retrieved from the SVD-Phy package with performance modification.
+#' @title Singular value decomposition normalization of bit score matrix
+#' @param rawBitM Raw bit score matrix.
+#' @param bitCutoff Minimum value of the bit score.
+#' @return
+#'
+#' SVDNorm(): SVD normalized bit score matrix.
+#'
+#' SVDPhy(): A L^2 normalized unitary matrix.
+#'
+#' @author Yulong Niu \email{niuylscu@@gmail.com}
+#' @inheritParams SVDPhy
+#' @references \href{https://bitbucket.org/andrea/svd-phy}{SVD-Phy package}
+#' @references \href{http://bioinformatics.oxfordjournals.org/content/suppl/2015/11/25/btv696.DC1/SVD-Phy-supplementary-material.docx}{SVD description}
+#' @rdname normSVD
+#' @keywords internal
+SVDNorm <- function(rawBitM, bitCutoff, bitReset, minConserve, trimming) {
+    .Call('PhyloProfile_SVDNorm', PACKAGE = 'PhyloProfile', rawBitM, bitCutoff, bitReset, minConserve, trimming)
+}
+
+#' @param bitM Bit score matrix, for example the BLASTP or STRING bit scores. It is a named numeric matrix, columns are species and rows are genes.
+#' @param bitReset Reset the bit score for ones lower than the `bitCutoff`.
+#' @param trimming A percentages top unitary matrix.
+#' @param minConserve Minimum number of homologous. The proteins with homologous less than this value are discarded.
+#' @rdname normSVD
+#' @keywords internal
+SVDPhy <- function(bitM, bitReset, minConserve, trimming) {
+    .Call('PhyloProfile_SVDPhy', PACKAGE = 'PhyloProfile', bitM, bitReset, minConserve, trimming)
+}
+
 #' Similarity or distance of paired phylogenetic profile
 #'
 #' SimCor(): Person's correlation coefficient.

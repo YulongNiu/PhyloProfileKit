@@ -67,6 +67,49 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// NPPNorm
+Rcpp::NumericMatrix NPPNorm(Rcpp::NumericMatrix rawBitM, double bitCutoff, double bitReset, double minConserve);
+RcppExport SEXP PhyloProfile_NPPNorm(SEXP rawBitMSEXP, SEXP bitCutoffSEXP, SEXP bitResetSEXP, SEXP minConserveSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type rawBitM(rawBitMSEXP);
+    Rcpp::traits::input_parameter< double >::type bitCutoff(bitCutoffSEXP);
+    Rcpp::traits::input_parameter< double >::type bitReset(bitResetSEXP);
+    Rcpp::traits::input_parameter< double >::type minConserve(minConserveSEXP);
+    rcpp_result_gen = Rcpp::wrap(NPPNorm(rawBitM, bitCutoff, bitReset, minConserve));
+    return rcpp_result_gen;
+END_RCPP
+}
+// SVDNorm
+Rcpp::NumericMatrix SVDNorm(Rcpp::NumericMatrix rawBitM, double bitCutoff, double bitReset, double minConserve, double trimming);
+RcppExport SEXP PhyloProfile_SVDNorm(SEXP rawBitMSEXP, SEXP bitCutoffSEXP, SEXP bitResetSEXP, SEXP minConserveSEXP, SEXP trimmingSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type rawBitM(rawBitMSEXP);
+    Rcpp::traits::input_parameter< double >::type bitCutoff(bitCutoffSEXP);
+    Rcpp::traits::input_parameter< double >::type bitReset(bitResetSEXP);
+    Rcpp::traits::input_parameter< double >::type minConserve(minConserveSEXP);
+    Rcpp::traits::input_parameter< double >::type trimming(trimmingSEXP);
+    rcpp_result_gen = Rcpp::wrap(SVDNorm(rawBitM, bitCutoff, bitReset, minConserve, trimming));
+    return rcpp_result_gen;
+END_RCPP
+}
+// SVDPhy
+Rcpp::NumericMatrix SVDPhy(Rcpp::NumericMatrix bitM, double bitReset, double minConserve, double trimming);
+RcppExport SEXP PhyloProfile_SVDPhy(SEXP bitMSEXP, SEXP bitResetSEXP, SEXP minConserveSEXP, SEXP trimmingSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type bitM(bitMSEXP);
+    Rcpp::traits::input_parameter< double >::type bitReset(bitResetSEXP);
+    Rcpp::traits::input_parameter< double >::type minConserve(minConserveSEXP);
+    Rcpp::traits::input_parameter< double >::type trimming(trimmingSEXP);
+    rcpp_result_gen = Rcpp::wrap(SVDPhy(bitM, bitReset, minConserve, trimming));
+    return rcpp_result_gen;
+END_RCPP
+}
 // SimCor
 double SimCor(arma::mat pairProfile);
 RcppExport SEXP PhyloProfile_SimCor(SEXP pairProfileSEXP) {

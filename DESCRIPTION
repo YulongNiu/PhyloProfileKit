@@ -30,6 +30,7 @@ Imports:
     ape,
     methods,
     magrittr,
+    STRINGdb,
     bioDist
 Suggests:
     testthat,
@@ -49,12 +50,13 @@ Collate:
     'BayesTraits.R'
     'Dollo.R'
     'DolloBatch.R'
-    'NPP.R'
+    'utilities.R'
     'PP.R'
+    'Norm.R'
     'PlotState.R'
     'RcppChk.R'
     'RcppExports.R'
-    'SVD.R'
+    'STRING.R'
     'dataDef.R'
     'develFile.R'
     'gloableChkVar.R'
