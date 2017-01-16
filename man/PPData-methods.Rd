@@ -17,9 +17,9 @@ PPData(x, ...) <- value
 \S4method{PPData}{PP}(x, ...) <- value
 }
 \arguments{
-\item{x}{A PP object.}
+\item{x}{A \code{PP} object.}
 
-\item{...}{Additional parameters}
+\item{...}{Additional parameters.}
 
 \item{value}{A numeric matrix.}
 }

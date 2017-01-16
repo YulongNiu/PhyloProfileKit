@@ -6,6 +6,32 @@ using namespace Rcpp;
 using namespace arma;
 
 
+//' SVD normalization
+//'
+//' Algorithm:
+//'
+//' Step1: rawBitM < bitCutoff to bitReset;
+//'
+//' Step2: In each row (species), x/max(x);
+//'
+//' Step3: L^2 SVD normalization.
+//'
+//' The core SVD normalization is retrieved from the SVD-Phy package with performance modification.
+//' @title Singular value decomposition normalization of bit score matrix
+//' @param rawBitM Raw bit score matrix.
+//' @param bitCutoff Minimum value of the bit score.
+//' @return
+//'
+//' SVDNorm(): SVD normalized bit score matrix.
+//'
+//' SVDPhy(): A L^2 normalized unitary matrix.
+//'
+//' @author Yulong Niu \email{niuylscu@@gmail.com}
+//' @inheritParams SVDPhy
+//' @references \href{https://bitbucket.org/andrea/svd-phy}{SVD-Phy package}
+//' @references \href{http://bioinformatics.oxfordjournals.org/content/suppl/2015/11/25/btv696.DC1/SVD-Phy-supplementary-material.docx}{SVD description}
+//' @rdname normSVD
+//' @keywords internal
 // [[Rcpp::export]]
 Rcpp::NumericMatrix SVDNorm(Rcpp::NumericMatrix rawBitM,
                             double bitCutoff,
@@ -40,6 +66,13 @@ Rcpp::NumericMatrix SVDNorm(Rcpp::NumericMatrix rawBitM,
 }
 
 
+
+//' @param bitM Bit score matrix, for example the BLASTP or STRING bit scores. It is a named numeric matrix, columns are species and rows are genes.
+//' @param bitReset Reset the bit score for ones lower than the `bitCutoff`.
+//' @param trimming A percentages top unitary matrix.
+//' @param minConserve Minimum number of homologous. The proteins with homologous less than this value are discarded.
+//' @rdname normSVD
+//' @keywords internal
 // [[Rcpp::export]]
 Rcpp::NumericMatrix SVDPhy(Rcpp::NumericMatrix bitM,
                            double bitReset,
