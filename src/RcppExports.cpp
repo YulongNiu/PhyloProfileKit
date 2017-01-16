@@ -55,18 +55,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// CountRepeatIdx
-arma::uword CountRepeatIdx(arma::uword idx, arma::uvec y);
-RcppExport SEXP PhyloProfile_CountRepeatIdx(SEXP idxSEXP, SEXP ySEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::uword >::type idx(idxSEXP);
-    Rcpp::traits::input_parameter< arma::uvec >::type y(ySEXP);
-    rcpp_result_gen = Rcpp::wrap(CountRepeatIdx(idx, y));
-    return rcpp_result_gen;
-END_RCPP
-}
 // NPPNorm
 Rcpp::NumericMatrix NPPNorm(Rcpp::NumericMatrix rawBitM, double bitCutoff, double bitReset, double minConserve);
 RcppExport SEXP PhyloProfile_NPPNorm(SEXP rawBitMSEXP, SEXP bitCutoffSEXP, SEXP bitResetSEXP, SEXP minConserveSEXP) {

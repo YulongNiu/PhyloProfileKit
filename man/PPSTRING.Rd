@@ -27,7 +27,7 @@ A \code{PP} object.
 The constructor of the \code{PP} class from the STRING database
 }
 \details{
-Retrieve the bit score matrix from a give organism.
+Retrieve the bit score matrix from a give organism. The default bit score threshold in STRING is 50, homologous with values smaller than 50 are not shown. For these homologous, the default value is set as 0.
 }
 \examples{
 ## human top 5 proteins

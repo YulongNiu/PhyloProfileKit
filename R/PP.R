@@ -45,7 +45,7 @@ setMethod(f = 'show',
 ##' @param value A numeric matrix.
 ##' @return A \code{PP} object.
 ##' @examples
-##' require("magrittr")
+##' require('magrittr')
 ##'
 ##' ## construct a PP object without dimnames
 ##' ppBinning <- sample(0:1, 10 * 20, replace = TRUE) %>% matrix(ncol = 20) %>% PP
@@ -56,7 +56,6 @@ setMethod(f = 'show',
 ##'                        dimnames = list(paste0('protein', 1:10),
 ##'                                        paste0('spe', 1:20))) %>% PP
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @importFrom magrittr %>%
 ##' @export
 ##'
 PP <- function(value) {
@@ -69,7 +68,7 @@ PP <- function(value) {
     ## check 0 row or 0 columns
     if (colSize == 0 ||
         rowSize == 0) {
-      value %>% as('PP') %>% return
+      return(as(value, 'PP'))
     } else {}
 
     ## check colnames
@@ -83,9 +82,9 @@ PP <- function(value) {
     } else{}
 
     ## transfer
-    value %>% as('PP') %>% return
+    return(as(value, 'PP'))
   } else {
-    value %>% return
+    return(value)
   }
 }
 
@@ -106,7 +105,7 @@ PP <- function(value) {
 ##' \code{PPData(x) <- value}: An update PP object.
 ##'
 ##' @examples
-##' require(magrittr)
+##' require('magrittr')
 ##' ppContinuous <- matrix(rnorm(10 * 20),
 ##'                        ncol = 20,
 ##'                        dimnames = list(paste0('protein', 1:10),
@@ -125,7 +124,6 @@ PP <- function(value) {
 ##' ppContinuous
 ##'
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @importFrom magrittr %>%
 ##' @rdname PPData-methods
 ##' @exportMethod PPData
 ##'

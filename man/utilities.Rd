@@ -2,21 +2,32 @@
 % Please edit documentation in R/utilities.R
 \name{isBinMat_internal}
 \alias{isBinMat_internal}
+\alias{valiMat_internal}
 \title{utilities}
 \usage{
 isBinMat_internal(x)
+
+valiMat_internal(x, className)
 }
 \arguments{
 \item{x}{A matrix.}
+
+\item{className}{A character string indicating the class names.}
+
+\item{x}{A numeric matrix.}
 }
 \value{
 \code{isBinMat_internal()}: Logic.
+
+\code{valiMat_internal()}: \code{TRUE} or a warning message.
 }
 \description{
 Additional utilities
 }
 \details{
 \code{isBinMat_internal()}: Whether a matrix is binning.
+
+\code{valiMat_internal()}: Validate a numeric matrix with row names and column names.
 }
 \keyword{internal}
 

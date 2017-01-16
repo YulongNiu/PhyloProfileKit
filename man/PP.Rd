@@ -19,7 +19,7 @@ The constructor the \code{PP} class
 Construct a \code{PP} object from a matrix.
 }
 \examples{
-require("magrittr")
+require('magrittr')
 
 ## construct a PP object without dimnames
 ppBinning <- sample(0:1, 10 * 20, replace = TRUE) \%>\% matrix(ncol = 20) \%>\% PP

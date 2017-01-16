@@ -74,15 +74,6 @@ MergeList <- function(x) {
     .Call('PhyloProfile_MergeList', PACKAGE = 'PhyloProfile', x)
 }
 
-#' @param idx Index
-#' @param y A unsigned integer vector
-#' @return Repeat number of y[idx] in y.
-#' @rdname dollo
-#' @keywords internal
-CountRepeatIdx <- function(idx, y) {
-    .Call('PhyloProfile_CountRepeatIdx', PACKAGE = 'PhyloProfile', idx, y)
-}
-
 #' NPP normalization
 #'
 #' Algorithm:

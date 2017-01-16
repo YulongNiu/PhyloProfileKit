@@ -39,7 +39,7 @@ Select and replace the data matrix of a \code{PP} object
 \code{PPData(x) <- value}: Replace the data matrix of a \code{PP} object.
 }
 \examples{
-require(magrittr)
+require('magrittr')
 ppContinuous <- matrix(rnorm(10 * 20),
                        ncol = 20,
                        dimnames = list(paste0('protein', 1:10),

@@ -1,37 +1,37 @@
+##' @include utilities.R
+NULL
+
 ##' This class represents the data structure of phylogenetic profile.
 ##'
 ##' @slot .Data An integer matrix or a numeric matrix, of which the rows are genes/proteins and columns are species. It validates the rownames and colnames of the matrix.
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @importFrom magrittr %>%
 ##' @exportClass PP
 ##' 
 setClass(Class = 'PP',
          contains = 'matrix',
          validity = function(object) {
            d <- object@.Data
-
-           ## 1. validate numeric matrix
-           if (!is.numeric(d) ||
-               !is.matrix(d)) {
-             warn <- 'The PP (.Data slot) should be an integer matrix of a numeric matrix.' %>% return
-           } else {}
-
-           ## 2. validate rownames and colnames
-           if (ncol(d) == 0 ||
-               nrow(d) == 0){
-             return(TRUE)
-           } else {
-             if (is.null(rownames(d)) ||
-                 is.null(rownames(d))) {
-               warn <- 'The PP (.Data slot) needs rownames or colnames.' %>% return
-             } else {return(TRUE)}
-           }
+           valiMat_internal(d, 'PP')
          })
 
 ## ## validate nrow and ncol
 ## ## validate rownames
-## setClass(Class = 'idx',
-##          contains = 'matrix')
+setClass(Class = 'Idx',
+         contains = 'matrix',
+         validity = function(object) {
+           d <- object@.Data
+           valiMat_internal(d, 'Idx')
+         })
+
+
+## Test <- function(x) {
+##   if (!(is.numeric(x) &&
+##         is.matrix(x))) {
+##     return('haha')
+##   } else {
+##     TRUE
+##   }
+## }
 
 ## tmp3 <- new('idx', matrix(sample(1:10, 3 * 2), ncol = 2))
 
