@@ -2,10 +2,10 @@
 NULL
 
 
-##' Show method for \code{PP} objects
+##' Show method for \code{PP} and \code{PPIdx} objects
 ##'
 ##' @title Show methods
-##' @param object A \code{PP} object.
+##' @param object A \code{PP}/\code{PPIdx} object.
 ##' @return Show messages.
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom utils str
@@ -16,23 +16,24 @@ NULL
 setMethod(f = 'show',
           signature = 'PP',
           definition = function(object){
-            d <- object@.Data
+
+            p <- object@.Data
 
             ##~~~~~~~~~~~~~head~~~~~~~~~~~~
             cat('---\n')
             cat('description: "phylogenetic profile"\n')
             cat('class: ', class(object), '\n')
-            if (isBinMat_internal(d)) {
-              cat('type: "binning"', '\n')
+            if (isBinMat_internal(p)) {
+              cat('profile: "binning"', '\n')
             } else {
-              cat('type: "continuous"', '\n')
+              cat('profile: "continuous"', '\n')
             }
-            cat('#species: ', ncol(d), '\n')
-            cat('#proteins: ', nrow(d), '\n')
+            cat('#species: ', ncol(p), '\n')
+            cat('#proteins: ', nrow(p), '\n')
             cat('---\n')
             ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-            str(d)
+            str(p)
 
           })
 

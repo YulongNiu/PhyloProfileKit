@@ -53,6 +53,7 @@ Collate:
     'DolloBatch.R'
     'PP.R'
     'Norm.R'
+    'PPIdx.R'
     'PlotState.R'
     'RcppChk.R'
     'RcppExports.R'

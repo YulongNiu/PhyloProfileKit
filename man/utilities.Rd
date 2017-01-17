@@ -7,12 +7,12 @@
 \usage{
 isBinMat_internal(x)
 
-valiMat_internal(x, className)
+valiMat_internal(x, warnName)
 }
 \arguments{
 \item{x}{A matrix.}
 
-\item{className}{A character string indicating the class names.}
+\item{warnName}{A character string indicating the class names.}
 
 \item{x}{A numeric matrix.}
 }

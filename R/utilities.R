@@ -33,19 +33,19 @@ isBinMat_internal <- function(x) {
 
 
 ##' @param x A numeric matrix.
-##' @param className A character string indicating the class names.
+##' @param warnName A character string indicating the class names.
 ##' @rdname utilities
 ##' @keywords internal
 ##' 
-valiMat_internal <- function(x, className) {
+valiMat_internal <- function(x, warnName) {
 
-  warnNumMat <- 'The %class% (.Data slot) should be an integer matrix of a numeric matrix.'
-  warnMatName <- 'The %class% (.Data slot) needs rownames or colnames.'
+  warnNumMat <- 'The %name% should be an integer matrix of a numeric matrix.'
+  warnMatName <- 'The %name% needs rownames or colnames.'
 
   ## 1. validate numeric matrix
   if (!(is.numeric(x) &&
         is.matrix(x))) {
-    warn <- sub('%class%', className, warnNumMat)
+    warn <- sub('%name%', warnName, warnNumMat)
     return(warn)
   } else {}
 
@@ -56,7 +56,7 @@ valiMat_internal <- function(x, className) {
   } else {
     if (is.null(rownames(x)) ||
         is.null(rownames(x))) {
-      warn <- sub('%class%', className, warnMatName)
+      warn <- sub('%name%', warnName, warnMatName)
       return(warn)
     } else {
       return(TRUE)

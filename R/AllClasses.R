@@ -3,7 +3,7 @@ NULL
 
 ##' This class represents the data structure of phylogenetic profile.
 ##'
-##' @slot .Data An integer matrix or a numeric matrix, of which the rows are genes/proteins and columns are species. It validates the rownames and colnames of the matrix.
+##' @slot .Data An integer matrix or a numeric matrix, of which the rows are genes/proteins and columns are species. It validates the rownames and colnames of the profile matrix.
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @exportClass PP
 ##' 
@@ -11,16 +11,22 @@ setClass(Class = 'PP',
          contains = 'matrix',
          validity = function(object) {
            d <- object@.Data
-           valiMat_internal(d, 'PP')
+           valiMat_internal(d, 'profile')
          })
 
-## ## validate nrow and ncol
-## ## validate rownames
-setClass(Class = 'Idx',
-         contains = 'matrix',
+
+##' This class represents the data structure of phylogenetic profile with linkage indices.
+##'
+##' @slot idx An integer matrix. It validates the rownames and colnames of the profile matrix.
+##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @exportClass PPIdx
+##' 
+setClass(Class = 'PPIdx',
+         slots = c(idx = 'matrix'),
+         contains = 'PP',
          validity = function(object) {
-           d <- object@.Data
-           valiMat_internal(d, 'Idx')
+           d <- object@idx
+           valiMat_internal(d, 'indices')
          })
 
 
