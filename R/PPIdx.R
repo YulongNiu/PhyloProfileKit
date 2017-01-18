@@ -51,7 +51,7 @@ setMethod(f = 'show',
 ##' linkM <- sample(1:30, 20 * 2, replace = TRUE) %>% paste0('protein', .) %>% matrix(ncol = 2)
 ##' ppBinIdx <- PPIdx(linkM, ppBinning)
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @importFrom magrittr %>% 
+##' @importFrom magrittr %>%
 ##' @export
 ##' 
 PPIdx <- function(value, p) {
@@ -59,7 +59,8 @@ PPIdx <- function(value, p) {
   ## whole proteins
   wp <- rownames(p@.Data)
 
-  if (class(value) == 'matrix') {
+  if (is.matrix(value) &&
+      is.character(value)) {
 
     colSize <- ncol(value)
     rowSize <- nrow(value)
@@ -80,8 +81,7 @@ PPIdx <- function(value, p) {
       rownames(value) <- paste0('link', seq_len(rowSize))
     } else{}
 
-    ## check linkage proteins in wp
-    ## NA if not in wp
+    ## check linkage proteins in wp, NA if not in wp
     vcheck <- c(value) %>% match(wp) %>% matrix(ncol = 2, dimnames = dimnames(value))
     hasLogic <- !(is.na(vcheck[, 1]) | is.na(vcheck[, 2]))
     vcheck <- vcheck[hasLogic, , drop = FALSE]

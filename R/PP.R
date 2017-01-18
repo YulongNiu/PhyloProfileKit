@@ -61,7 +61,8 @@ setMethod(f = 'show',
 ##'
 PP <- function(value) {
 
-  if (class(value) == 'matrix') {
+  if (is.matrix(value) &&
+      is.character(value)) {
 
     colSize <- ncol(value)
     rowSize <- nrow(value)
