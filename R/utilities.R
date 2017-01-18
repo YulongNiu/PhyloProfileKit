@@ -71,9 +71,7 @@ valiMat_internal <- function(x, warnName) {
 ##' \code{combSelf_internal()}: Self pairs.
 ##'
 ##' @title Combination
-##' @param x Vector with length > 0.
-##' @param self Whether include self pairs.
-##' @param bidirect Whether to include two directions.
+##' @param x Vector.
 ##' @return
 ##'
 ##' \code{comb2_internal()}/\code{combWhole_internal()}/\code{combSelf_internal()}: Matrix with 2 columns
@@ -82,38 +80,27 @@ valiMat_internal <- function(x, warnName) {
 ##' @rdname comb
 ##' @keywords internal
 ##' 
-comb2_internal <- function(x, self = FALSE, bidirect = FALSE) {
+comb2_internal <- function(x) {
 
   l <- length(x)
 
   if (l < 2) {
-    if (!self) {
-      return(matrix(0, 0, 0))
-    } else {
-      return(combSelf_internal(x))
-    }
-  } else {}
+    m <- matrix(0, nrow = 0, ncol = 2)
+  } else {
+    fV <- rep(x[1:(l - 1)], ((l - 1):1))
+    tVIdx <- unlist(mapply(seq, 2:l, l))
+    tV <- x[tVIdx]
 
-  fV <- rep(x[1:(l - 1)], ((l - 1):1))
-  tVIdx <- unlist(mapply(seq, 2:l, l))
-  tV <- x[tVIdx]
-
-  m <- cbind(fV, tV)
-
-  if (bidirect) {
-    m <- rbind(m, m[, 2:1])
-  } else {}
-
-  if (self) {
-    m <- rbind(m, combSelf_internal(x))
-  } else ()
+    m <- cbind(fV, tV)
+  }
 
   return(m)
 }
 
 
 ##' @param y The whole vector, and every element of \code{x} should be in \code{y}.
-##' @inheritParams comb2_internal()
+##' @param self Whether include self pairs.
+##' @param bidirect Whether to include two directions.
 ##' @rdname comb
 ##' @keywords internal
 ##' 
@@ -121,22 +108,14 @@ combWhole_internal <- function(x, y, self = FALSE, bidirect = FALSE) {
 
   l <- length(x)
 
-  if (l < 2) {
-    if (!self) {
-      return(matrix(0, 0, 0))
-    } else {
-      return(combSelf_internal(x))
-    }
-  } else {}
-
-  if (l == length(y)) {
-    m <- comb2_interal(x)
+  if (l >= length(y)) {
+    m <- comb2_internal(x)
   } else {
     yLeft <- y[!(y%in%x)]
     m <- cbind(rep(x, each = length(yLeft)),
                rep(yLeft, l))
     m <- rbind(m,
-               comb2_interal(x))
+               comb2_internal(x))
   }
 
   if (bidirect) {
@@ -156,5 +135,6 @@ combWhole_internal <- function(x, y, self = FALSE, bidirect = FALSE) {
 ##' @keywords internal
 combSelf_internal <- function(x) {
   m <- cbind(x, x)
+  colnames(m) <- NULL
   return(m)
 }
