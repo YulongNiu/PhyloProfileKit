@@ -17,7 +17,7 @@ setClass(Class = 'PP',
 
 ##' This class represents the data structure of phylogenetic profile with linkage indices.
 ##'
-##' @slot idx An integer matrix. It validates the rownames and colnames of the profile matrix.
+##' @slot idx An integer matrix with two columns. It validates the rownames and colnames of the profile matrix.
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @exportClass PPIdx
 ##' 
@@ -29,17 +29,6 @@ setClass(Class = 'PPIdx',
            valiMat_internal(d, 'indices')
          })
 
-
-## Test <- function(x) {
-##   if (!(is.numeric(x) &&
-##         is.matrix(x))) {
-##     return('haha')
-##   } else {
-##     TRUE
-##   }
-## }
-
-## tmp3 <- new('idx', matrix(sample(1:10, 3 * 2), ncol = 2))
 
 ## ## validate boundary
 ## ## validate integer

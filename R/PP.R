@@ -40,9 +40,9 @@ setMethod(f = 'show',
 
 ##' The constructor the \code{PP} class
 ##'
-##' Construct a \code{PP} object from a matrix.
+##' Construct a \code{PP} object from a numeric matrix.
 ##'
-##' @title Constructor
+##' @title Constructor of \code{PP}
 ##' @param value A numeric matrix.
 ##' @return A \code{PP} object.
 ##' @examples

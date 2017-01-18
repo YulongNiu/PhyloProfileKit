@@ -2,7 +2,7 @@
 % Please edit documentation in R/PP.R
 \name{PP}
 \alias{PP}
-\title{Constructor}
+\title{Constructor of \code{PP}}
 \usage{
 PP(value)
 }
@@ -16,7 +16,7 @@ A \code{PP} object.
 The constructor the \code{PP} class
 }
 \details{
-Construct a \code{PP} object from a matrix.
+Construct a \code{PP} object from a numeric matrix.
 }
 \examples{
 require('magrittr')
