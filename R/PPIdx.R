@@ -37,58 +37,65 @@ setMethod(f = 'show',
 
 ##' The constructor the \code{PPIdx} class
 ##'
-##' Construct a \code{PP} object from a character matrix.
+##' Construct a \code{PP} object.
 ##'
 ##' @title Constructor of \code{PPIdx}
 ##' @param p A \code{PP} object
-##' @param x A character matrix with two columns. The linkages containing proteins not in \code{p} (profile) are removed.
+##' @param x A character matrix with two columns or a character vector. Proteins not in \code{p} (profile) are removed.
+##' @param ... Additional parameters if \code{x} is a character vector.
 ##' @return A \code{PPIdx} object
 ##' @examples
 ##' require('magrittr')
 ##'
-##' ## construct a PP object without dimnames
 ##' ppBinning <- sample(0:1, 10 * 20, replace = TRUE) %>% matrix(ncol = 20) %>% PP
 ##' linkM <- sample(1:30, 20 * 2, replace = TRUE) %>% paste0('protein', .) %>% matrix(ncol = 2)
-##' ppBinIdx <- PPIdx(linkM, ppBinning)
+##' ppBinIdx <- PPIdx(ppBinning, linkM)
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @importFrom magrittr %>%
+##' @importFrom magrittr %>% %<>%
 ##' @export
 ##' 
-PPIdx <- function(p, x) {
+PPIdx <- function(p, x, ...) {
 
   ## whole proteins
-  wp <- rownames(p@.Data)
+  wp <- rownames(p)
 
   if (is.matrix(x) &&
       is.character(x)) {
-
-    colSize <- ncol(x)
-    rowSize <- nrow(x)
-
-    ## check 0 row or 0 columns
-    if (colSize == 0 ||
-        rowSize == 0) {
-      return(new('PPIdx', p, idx = x))
-    } else {}
-
-    ## check colnames
-    if (is.null(colnames(x))) {
-      colnames(x) <- c('From', 'To')
-    } else {}
-
-    ## check rownames
-    if (is.null(rownames(x))) {
-      rownames(x) <- paste0('link', seq_len(rowSize))
-    } else{}
-
+    ## x is a character matrix
     ## check linkage proteins in wp, NA if not in wp
-    vcheck <- c(x) %>% match(wp) %>% matrix(ncol = 2, dimnames = dimnames(x))
-    hasLogic <- !(is.na(vcheck[, 1]) | is.na(vcheck[, 2]))
-    vcheck <- vcheck[hasLogic, , drop = FALSE]
-
-    return(new('PPIdx', p, idx = vcheck))
-  } else {
+    x %<>% c %>% match(wp) %>% matrix(ncol = 2, dimnames = dimnames(x))
+    hasLogic <- !(is.na(x[, 1]) | is.na(x[, 2]))
+    x <- x[hasLogic, , drop = FALSE]
+  }
+  else if (is.character(x) &&
+           is.null(dim(x))) {
+    ## x is a character vector
+    x %<>% combWhole_internal(...)
+  }
+  else {
     return(x)
   }
+
+  colSize <- ncol(x)
+  rowSize <- nrow(x)
+
+  ## check 0 row or 0 columns
+  if (colSize == 0 ||
+      rowSize == 0) {
+    return(new('PPIdx', p, idx = x))
+  } else {}
+
+  ## check colnames
+  if (is.null(colnames(x))) {
+    colnames(x) <- c('From', 'To')
+  } else {}
+
+  ## check rownames
+  if (is.null(rownames(x))) {
+    rownames(x) <- paste0('link', seq_len(rowSize))
+  } else{}
+
+  return(new('PPIdx', p, idx = x))
+
 }
 
