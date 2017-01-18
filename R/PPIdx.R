@@ -40,8 +40,8 @@ setMethod(f = 'show',
 ##' Construct a \code{PP} object from a character matrix.
 ##'
 ##' @title Constructor of \code{PPIdx}
-##' @param value A character matrix with two columns. The linkages containing proteins not in \code{p} (profile) are removed.
 ##' @param p A \code{PP} object
+##' @param x A character matrix with two columns. The linkages containing proteins not in \code{p} (profile) are removed.
 ##' @return A \code{PPIdx} object
 ##' @examples
 ##' require('magrittr')
@@ -54,41 +54,41 @@ setMethod(f = 'show',
 ##' @importFrom magrittr %>%
 ##' @export
 ##' 
-PPIdx <- function(value, p) {
+PPIdx <- function(p, x) {
 
   ## whole proteins
   wp <- rownames(p@.Data)
 
-  if (is.matrix(value) &&
-      is.character(value)) {
+  if (is.matrix(x) &&
+      is.character(x)) {
 
-    colSize <- ncol(value)
-    rowSize <- nrow(value)
+    colSize <- ncol(x)
+    rowSize <- nrow(x)
 
     ## check 0 row or 0 columns
     if (colSize == 0 ||
         rowSize == 0) {
-      return(new('PPIdx', p, idx = value))
+      return(new('PPIdx', p, idx = x))
     } else {}
 
     ## check colnames
-    if (is.null(colnames(value))) {
-      colnames(value) <- c('From', 'To')
+    if (is.null(colnames(x))) {
+      colnames(x) <- c('From', 'To')
     } else {}
 
     ## check rownames
-    if (is.null(rownames(value))) {
-      rownames(value) <- paste0('link', seq_len(rowSize))
+    if (is.null(rownames(x))) {
+      rownames(x) <- paste0('link', seq_len(rowSize))
     } else{}
 
     ## check linkage proteins in wp, NA if not in wp
-    vcheck <- c(value) %>% match(wp) %>% matrix(ncol = 2, dimnames = dimnames(value))
+    vcheck <- c(x) %>% match(wp) %>% matrix(ncol = 2, dimnames = dimnames(x))
     hasLogic <- !(is.na(vcheck[, 1]) | is.na(vcheck[, 2]))
     vcheck <- vcheck[hasLogic, , drop = FALSE]
 
     return(new('PPIdx', p, idx = vcheck))
   } else {
-    return(value)
+    return(x)
   }
 }
 

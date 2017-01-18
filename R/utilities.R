@@ -106,12 +106,15 @@ comb2_internal <- function(x) {
 ##' 
 combWhole_internal <- function(x, y, self = FALSE, bidirect = FALSE) {
 
+  ## check x
+  x <- x[x %in% y]
+  
   l <- length(x)
 
   if (l >= length(y)) {
     m <- comb2_internal(x)
   } else {
-    yLeft <- y[!(y%in%x)]
+    yLeft <- y[!(y %in% x)]
     m <- cbind(rep(x, each = length(yLeft)),
                rep(yLeft, l))
     m <- rbind(m,

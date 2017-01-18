@@ -43,7 +43,7 @@ setMethod(f = 'show',
 ##' Construct a \code{PP} object from a numeric matrix.
 ##'
 ##' @title Constructor of \code{PP}
-##' @param value A numeric matrix.
+##' @param x A numeric matrix.
 ##' @return A \code{PP} object.
 ##' @examples
 ##' require('magrittr')
@@ -59,34 +59,34 @@ setMethod(f = 'show',
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @export
 ##'
-PP <- function(value) {
+PP <- function(x) {
 
-  if (is.matrix(value) &&
-      is.numeric(value)) {
+  if (is.matrix(x) &&
+      is.numeric(x)) {
 
-    colSize <- ncol(value)
-    rowSize <- nrow(value)
+    colSize <- ncol(x)
+    rowSize <- nrow(x)
 
     ## check 0 row or 0 columns
     if (colSize == 0 ||
         rowSize == 0) {
-      return(as(value, 'PP'))
+      return(as(x, 'PP'))
     } else {}
 
     ## check colnames
-    if (is.null(colnames(value))) {
-      colnames(value) <- paste0('spe', seq_len(colSize))
+    if (is.null(colnames(x))) {
+      colnames(x) <- paste0('spe', seq_len(colSize))
     } else {}
 
     ## check rownames
-    if (is.null(rownames(value))) {
-      rownames(value) <- paste0('protein', seq_len(rowSize))
+    if (is.null(rownames(x))) {
+      rownames(x) <- paste0('protein', seq_len(rowSize))
     } else{}
 
     ## transfer
-    return(as(value, 'PP'))
+    return(as(x, 'PP'))
   } else {
-    return(value)
+    return(x)
   }
 }
 
