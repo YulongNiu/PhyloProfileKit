@@ -29,11 +29,11 @@ DolloDistBatch(): Dollo's parsimony distance in batch mode.
 \examples{
 require('ape')
 
-descPath <- system.file('extdata', package = "PhyloProfile")
-tree <- read.nexus(file.path(descPath, 'bioinfoTree.nex'))
+descPath <- system.file('extdata', 'bioinfoTree.nex', package = "PhyloProfile")
+tree <- read.nexus(descPath)
 pathList <- nodepath(tree)
 
-pair1 <- file.path(descPath, 'bioinfoGenepair1.txt')
+pair1 <- system.file('extdata', 'bioinfoGenepair1.txt', package = "PhyloProfile")
 oneP <- read.table(pair1, sep = '\\t', row.names = 1)
 sampleP <- matrix(sample(0:1, nrow(oneP) * 1000, replace = TRUE), ncol = 1000)
 colnames(sampleP) <- paste0('gene', 1:1000)

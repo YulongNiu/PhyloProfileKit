@@ -1,10 +1,9 @@
 ---
 title: "PhyloProfile: a R package for phylogenetic profiling"
 author: "\\
+Yulong Niu \\
 
-	Yulong Niu \\
-
-        College of Life Sciences, Sichuan University, China"
+College of Life Sciences, Sichuan University, China"
 date: "`r Sys.Date()`"
 bibliography: PhyloProfileRef.bib
 csl: nature.csl
@@ -72,7 +71,7 @@ Phylogenetic profiling is a bioinformatic technique used to show protein presenc
 
 As increasing numbers of sequenced genomes have become available, various online tools and databases has been developed [@cheng2015protphylo; @sadreyev2015phylogene; @ott2012napp; @szklarczyk2014string; @cromar2016phylopro2]. However, systematically analysis of user-defined phylogenetic profile on local computers is still a slow and tedious process. Here, we provided a R package named *[PhyloProfile](https://github.com/YulongNiu/PhyloProfile)* for analyzing and visualizing phylogenetic profiles.
 
-# Construction of phylogenetic profiles
+# Construct phylogenetic profiles
 
 In *[PhyloProfile](https://github.com/YulongNiu/PhyloProfile)*
 , a profile with $n$ proteins across $m$ organisms is denoted as a $n \times m$ matrix containing either binning or continuous data. A binning matrix uses 0 and 1 to represent the homologous absence and presence, respectively. A continuous matrix usually consists of specific sequence similarities, for example BLAST bit scores, which need to be normalized before further analysis.
@@ -115,7 +114,7 @@ PPSTRING(speID = 9606, top = 5, n = 2)
 
 Set `top = 'all'` for complete human profile, and increase `n` to accelerate the download process if multiple cores are supported on your system.
 
-## Normalization of bit score profiles
+## Normalize bit score profiles
 
 Two normalization methods, SVD[@franceschini2015svd; @psomopoulos2013detection] and NPP[@tabach2013identification; @tabach2013human; @sadreyev2015phylogene], are provided for the pre-process of bit score profiles.
 
@@ -132,6 +131,16 @@ Norm(ppRawBit, method = 'SVD', bitCutoff = 100, bitReset = 0, minConserve = 12, 
 ## NPP
 Norm(ppRawBit, method = 'NPP', bitCutoff = 60, bitReset = 1, minConserve = 12)
 ```
+
+# Linkage analysis
+
+## Prepare linkage data
+
+
+
+# Misc.
+
+## Convert STRING protein IDs
 
 
 # Homepage

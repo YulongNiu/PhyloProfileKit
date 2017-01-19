@@ -39,8 +39,9 @@ Rcpp::NumericMatrix SVDNorm(Rcpp::NumericMatrix rawBitM,
                             double minConserve,
                             double trimming) {
 
-  // keep rownames
+  // keep dimnames
   CharacterVector rn = rownames(rawBitM);
+  CharacterVector cn = colnames(rawBitM);
   mat rawBitMArma(rawBitM.begin(), rawBitM.nrow(), rawBitM.ncol(), false);
 
   // step1: rawBitM < bitCutoff to bitReset
@@ -56,6 +57,7 @@ Rcpp::NumericMatrix SVDNorm(Rcpp::NumericMatrix rawBitM,
   // step3: L^2 SVD normalization
   NumericMatrix norP(rawBitMArma.n_rows, rawBitMArma.n_cols, rawBitMArma.begin());
   rownames(norP) = rn;
+  colnames(norP) = cn;
 
   NumericMatrix resultM = SVDPhy(norP,
                                  bitReset = bitReset,
@@ -81,6 +83,7 @@ Rcpp::NumericMatrix SVDPhy(Rcpp::NumericMatrix bitM,
 
   //keep rownames
   CharacterVector rn = rownames(bitM);
+  CharacterVector cn = colnames(bitM);
   mat bitMArma(bitM.begin(), bitM.nrow(), bitM.ncol(), false);
 
   uvec dimV(2);
@@ -100,7 +103,8 @@ Rcpp::NumericMatrix SVDPhy(Rcpp::NumericMatrix bitM,
   U = U.rows(filteredIdx);
 
   // trim species
-  mat UTrimmed = U.cols(regspace<uvec>(0, round(trimming * U.n_cols) - 1));
+  uword keepNum = round(trimming * U.n_cols);
+  mat UTrimmed = U.cols(regspace<uvec>(0, keepNum - 1));
 
   // L^2 normalization
   mat normU = normalise(UTrimmed, 2, 1);
@@ -109,6 +113,7 @@ Rcpp::NumericMatrix SVDPhy(Rcpp::NumericMatrix bitM,
   NumericVector filteredIdxCpp(filteredIdx.begin(), filteredIdx.end());
   NumericMatrix resultM(normU.n_rows, normU.n_cols, normU.begin());
   rownames(resultM) = rn[filteredIdxCpp];
+  colnames(resultM) = cn[seq_len(keepNum) - 1];
 
   return resultM;
 }

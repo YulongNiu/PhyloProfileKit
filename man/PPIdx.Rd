@@ -43,7 +43,7 @@ PPIdx(ppBinning, 1:3, nrow(ppBinning))
 ## with self linkages
 PPIdx(ppBinning, 1:3, 1:3, self = TRUE)
 ## with bidirectional linkages
-PPIdx(ppBinning, 1:3, 1:3, bidirect = TRUE)
+PPIdx(ppBinning, 1:3, 1:3, self = TRUE, bidirect = TRUE)
 }
 \author{
 Yulong Niu \email{niuylscu@gmail.com}

@@ -61,9 +61,7 @@ double SimJaccard(arma::mat pairProfile) {
   vec t = pairProfile.col(1);
   vec combVec = f + 2*t;
 
-  uvec inter = find(combVec == 3);
-
-  double A = inter.n_elem;
+  double A = sum(combVec == 3);
 
   double jac = A / (sum(f) + sum(t) - A);
 
@@ -106,9 +104,7 @@ arma::uword DistHamming(arma::mat pairProfile) {
   vec f = pairProfile.col(0);
   vec t = pairProfile.col(1);
 
-  uvec neq = find(f != t);
-
-  uword ham = neq.n_elem;
+  uword ham = sum(f != t);
 
   return ham;
 
