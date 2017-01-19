@@ -47,20 +47,22 @@ SimDistBatch <- function(ftMat, profileMat, FUN, n = 1) {
 ##' @rdname simdist
 ##' @importFrom bioDist mutualInfo
 ##' @export
-SimMIConti <- function(pairProfile) {
+SimMIContiR <- function(pairProfile) {
   return(as.numeric(mutualInfo(t(pairProfile))))
 }
 
 
-## library('Rcpp')
-## library('RcppArmadillo')
-## library('microbenchmark')
-## ## library('PhyloProfile')
-## sourceCpp('../src/simDistCpp.cpp')
+library('Rcpp')
+library('RcppArmadillo')
+library('microbenchmark')
+## library('PhyloProfile')
+sourceCpp('../src/MI.cpp')
 
-## microbenchmark(
-##   'R' = for(i in 1:1000){SimCorR(matrix(rnorm(10000), ncol = 2))},
-##   'arma2' = for(i in 1:1000){SimCor(matrix(rnorm(10000), ncol = 2))},
-##   'arma' = for(i in 1:1000){SimCor2(matrix(rnorm(10000), ncol = 2))}
-## )
+n <- 100
+
+microbenchmark(
+  'R' = for(i in 1:10){SimMIContiR(matrix(rnorm(10000), ncol = 2))},
+  'arma' = for(i in 1:10){SimMIConti(matrix(rnorm(10000), ncol = 2), 10)},
+  'armaCor' = for(i in 1:10){SimCor(matrix(rnorm(10000), ncol = 2))}
+)
 
