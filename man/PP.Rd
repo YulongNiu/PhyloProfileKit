@@ -4,10 +4,10 @@
 \alias{PP}
 \title{Constructor of \code{PP}}
 \usage{
-PP(value)
+PP(x)
 }
 \arguments{
-\item{value}{A numeric matrix.}
+\item{x}{A numeric matrix.}
 }
 \value{
 A \code{PP} object.

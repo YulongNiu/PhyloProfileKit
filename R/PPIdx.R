@@ -41,15 +41,31 @@ setMethod(f = 'show',
 ##'
 ##' @title Constructor of \code{PPIdx}
 ##' @param p A \code{PP} object
-##' @param x A character matrix with two columns or a character vector. Proteins not in \code{p} (profile) are removed.
-##' @param ... Additional parameters if \code{x} is a character vector.
-##' @return A \code{PPIdx} object
+##' @param x A character matrix with two columns or a numeric vector. Proteins not in \code{p} (profile) are removed. The numeric vector indicates the indices of proteins.
+##' @param ... Additional parameters if \code{x} is a numeric vector.
+##' \itemize{
+##'   \item \code{y}: Another numeric vector used to generate paired linkages with \code{x}. Every element of \code{x} should be in \code{y}.
+##'   \item \code{self}: Whether include self pairs.
+##'   \item \code{bidirect}: Whether to include two directions.
+##' }
+##' @return A \code{PPIdx} object.
 ##' @examples
 ##' require('magrittr')
 ##'
 ##' ppBinning <- sample(0:1, 10 * 20, replace = TRUE) %>% matrix(ncol = 20) %>% PP
+##'
+##' ## pre-built linkages
 ##' linkM <- sample(1:30, 20 * 2, replace = TRUE) %>% paste0('protein', .) %>% matrix(ncol = 2)
-##' ppBinIdx <- PPIdx(ppBinning, linkM)
+##' PPIdx(ppBinning, linkM)
+##'
+##' ## within top 3 proteins
+##' PPIdx(ppBinning, 1:3, 1:3)
+##' ## top 3 proteins with whole profiles
+##' PPIdx(ppBinning, 1:3, nrow(ppBinning))
+##' ## with self linkages
+##' PPIdx(ppBinning, 1:3, 1:3, self = TRUE)
+##' ## with bidirectional linkages
+##' PPIdx(ppBinning, 1:3, 1:3, self = TRUE, bidirect = TRUE)
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom magrittr %>% %<>%
 ##' @export
@@ -67,7 +83,7 @@ PPIdx <- function(p, x, ...) {
     hasLogic <- !(is.na(x[, 1]) | is.na(x[, 2]))
     x <- x[hasLogic, , drop = FALSE]
   }
-  else if (is.character(x) &&
+  else if (is.numeric(x) &&
            is.null(dim(x))) {
     ## x is a character vector
     x %<>% combWhole_internal(...)

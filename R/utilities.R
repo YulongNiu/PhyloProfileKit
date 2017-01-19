@@ -98,7 +98,7 @@ comb2_internal <- function(x) {
 }
 
 
-##' @param y The whole vector, and every element of \code{x} should be in \code{y}.
+##' @param y Another vector, and every element of \code{x} should be in \code{y}.
 ##' @param self Whether include self pairs.
 ##' @param bidirect Whether to include two directions.
 ##' @rdname comb
@@ -108,7 +108,7 @@ combWhole_internal <- function(x, y, self = FALSE, bidirect = FALSE) {
 
   ## check x
   x <- x[x %in% y]
-  
+
   l <- length(x)
 
   if (l >= length(y)) {
@@ -129,6 +129,8 @@ combWhole_internal <- function(x, y, self = FALSE, bidirect = FALSE) {
     m <- rbind(m, combSelf_internal(x))
    } else {}
 
+  colnames(m) <- NULL
+
   return(m)
 }
 
@@ -138,6 +140,5 @@ combWhole_internal <- function(x, y, self = FALSE, bidirect = FALSE) {
 ##' @keywords internal
 combSelf_internal <- function(x) {
   m <- cbind(x, x)
-  colnames(m) <- NULL
   return(m)
 }

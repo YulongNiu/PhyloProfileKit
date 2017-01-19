@@ -86,8 +86,8 @@ library('PhyloProfile')
 library('magrittr')
 library('STRINGdb')
 
-descPath <- system.file('extdata', package = 'PhyloProfile')
-bioinfoPMat <- read.csv(file.path(descPath, 'bioinfoProfile.csv'), row.names = 1) %>% as.matrix
+descPath <- system.file('extdata', 'bioinfoProfile.csv', package = 'PhyloProfile')
+bioinfoPMat <- descPath %>% read.csv %>% as.matrix
 bioinfoP <- PP(bioinfoPMat)
 
 ## binning matrix

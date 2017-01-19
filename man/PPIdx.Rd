@@ -4,29 +4,46 @@
 \alias{PPIdx}
 \title{Constructor of \code{PPIdx}}
 \usage{
-PPIdx(value, p)
+PPIdx(p, x, ...)
 }
 \arguments{
-\item{value}{A character matrix with two columns. The linkages containing proteins not in \code{p} (profile) are removed.}
-
 \item{p}{A \code{PP} object}
+
+\item{x}{A character matrix with two columns or a numeric vector. Proteins not in \code{p} (profile) are removed. The numeric vector indicates the indices of proteins.}
+
+\item{...}{Additional parameters if \code{x} is a numeric vector.
+\itemize{
+  \item \code{y}: Another numeric vector used to generate paired linkages with \code{x}. Every element of \code{x} should be in \code{y}.
+  \item \code{self}: Whether include self pairs.
+  \item \code{bidirect}: Whether to include two directions.
+}}
 }
 \value{
-A \code{PPIdx} object
+A \code{PPIdx} object.
 }
 \description{
 The constructor the \code{PPIdx} class
 }
 \details{
-Construct a \code{PP} object from a character matrix.
+Construct a \code{PP} object.
 }
 \examples{
 require('magrittr')
 
-## construct a PP object without dimnames
 ppBinning <- sample(0:1, 10 * 20, replace = TRUE) \%>\% matrix(ncol = 20) \%>\% PP
+
+## pre-built linkages
 linkM <- sample(1:30, 20 * 2, replace = TRUE) \%>\% paste0('protein', .) \%>\% matrix(ncol = 2)
-ppBinIdx <- PPIdx(linkM, ppBinning)
+PPIdx(ppBinning, linkM)
+
+## within top 3 proteins
+PPIdx(ppBinning, 1:3, 1:3)
+## top 3 proteins with whole profiles
+PPIdx(ppBinning, 1:3, nrow(ppBinning))
+## with self linkages
+PPIdx(ppBinning, 1:3, 1:3, self = TRUE)
+## with bidirectional linkages
+PPIdx(ppBinning, 1:3, 1:3, bidirect = TRUE)
 }
 \author{
 Yulong Niu \email{niuylscu@gmail.com}
