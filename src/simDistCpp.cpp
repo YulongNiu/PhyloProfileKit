@@ -10,7 +10,7 @@ using namespace arma;
 //'
 //' SimCor(): Person's correlation coefficient.
 //' SimJaccard(): Jaccard similarity.
-//' SimMI(): Mutual information.
+//' SimMIBin(): Mutual information.
 //' SimMIConti(): Mutual information for continuous variables
 //' DistHamming(): Hamming distance.
 //' DistEuclidean(): Euclidean distance.
@@ -28,8 +28,8 @@ using namespace arma;
 //' ## Jaccard similarity
 //' jacAB <- SimJaccard(ab)
 //' ## Mutual information
-//' MIAB <- SimMI(ab)
-//' MIABConti <- SimMIConti(ab)
+//' MIAB <- SimMIBin(ab)
+//' MIABConti <- SimMIConti(ab, bin = 10)
 //' ## Hamming distance
 //' hamAB <- DistHamming(ab)
 //' ## Eulidean distance
@@ -73,7 +73,7 @@ double SimJaccard(arma::mat pairProfile) {
 //' @rdname simdist
 //' @export
 // [[Rcpp::export]]
-double SimMI(arma::mat pairProfile) {
+double SimMIBin(arma::mat pairProfile) {
 
   vec f = pairProfile.col(0);
   vec t = pairProfile.col(1);

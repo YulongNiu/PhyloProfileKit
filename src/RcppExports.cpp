@@ -55,6 +55,90 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// SimMIConti
+double SimMIConti(arma::mat pairProfile, arma::uword bin);
+RcppExport SEXP PhyloProfile_SimMIConti(SEXP pairProfileSEXP, SEXP binSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type pairProfile(pairProfileSEXP);
+    Rcpp::traits::input_parameter< arma::uword >::type bin(binSEXP);
+    rcpp_result_gen = Rcpp::wrap(SimMIConti(pairProfile, bin));
+    return rcpp_result_gen;
+END_RCPP
+}
+// Info
+double Info(arma::uvec x, double n);
+RcppExport SEXP PhyloProfile_Info(SEXP xSEXP, SEXP nSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::uvec >::type x(xSEXP);
+    Rcpp::traits::input_parameter< double >::type n(nSEXP);
+    rcpp_result_gen = Rcpp::wrap(Info(x, n));
+    return rcpp_result_gen;
+END_RCPP
+}
+// HistTwo
+arma::uvec HistTwo(arma::vec x, arma::vec y, arma::uword bin);
+RcppExport SEXP PhyloProfile_HistTwo(SEXP xSEXP, SEXP ySEXP, SEXP binSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::vec >::type x(xSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type y(ySEXP);
+    Rcpp::traits::input_parameter< arma::uword >::type bin(binSEXP);
+    rcpp_result_gen = Rcpp::wrap(HistTwo(x, y, bin));
+    return rcpp_result_gen;
+END_RCPP
+}
+// FindInter
+arma::uvec FindInter(arma::vec x, arma::vec interval);
+RcppExport SEXP PhyloProfile_FindInter(SEXP xSEXP, SEXP intervalSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::vec >::type x(xSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type interval(intervalSEXP);
+    rcpp_result_gen = Rcpp::wrap(FindInter(x, interval));
+    return rcpp_result_gen;
+END_RCPP
+}
+// FindInterSingle
+arma::uword FindInterSingle(double value, arma::vec interval);
+RcppExport SEXP PhyloProfile_FindInterSingle(SEXP valueSEXP, SEXP intervalSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type value(valueSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type interval(intervalSEXP);
+    rcpp_result_gen = Rcpp::wrap(FindInterSingle(value, interval));
+    return rcpp_result_gen;
+END_RCPP
+}
+// gInter
+arma::vec gInter(arma::vec x, arma::uword bin);
+RcppExport SEXP PhyloProfile_gInter(SEXP xSEXP, SEXP binSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::vec >::type x(xSEXP);
+    Rcpp::traits::input_parameter< arma::uword >::type bin(binSEXP);
+    rcpp_result_gen = Rcpp::wrap(gInter(x, bin));
+    return rcpp_result_gen;
+END_RCPP
+}
+// CountRepeat
+arma::uvec CountRepeat(arma::uvec x);
+RcppExport SEXP PhyloProfile_CountRepeat(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::uvec >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(CountRepeat(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 // NPPNorm
 Rcpp::NumericMatrix NPPNorm(Rcpp::NumericMatrix rawBitM, double bitCutoff, double bitReset, double minConserve);
 RcppExport SEXP PhyloProfile_NPPNorm(SEXP rawBitMSEXP, SEXP bitCutoffSEXP, SEXP bitResetSEXP, SEXP minConserveSEXP) {
@@ -120,14 +204,14 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// SimMI
-double SimMI(arma::mat pairProfile);
-RcppExport SEXP PhyloProfile_SimMI(SEXP pairProfileSEXP) {
+// SimMIBin
+double SimMIBin(arma::mat pairProfile);
+RcppExport SEXP PhyloProfile_SimMIBin(SEXP pairProfileSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< arma::mat >::type pairProfile(pairProfileSEXP);
-    rcpp_result_gen = Rcpp::wrap(SimMI(pairProfile));
+    rcpp_result_gen = Rcpp::wrap(SimMIBin(pairProfile));
     return rcpp_result_gen;
 END_RCPP
 }

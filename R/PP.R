@@ -57,6 +57,7 @@ setMethod(f = 'show',
 ##'                        dimnames = list(paste0('protein', 1:10),
 ##'                                        paste0('spe', 1:20))) %>% PP
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @importFrom methods as
 ##' @export
 ##'
 PP <- function(x) {

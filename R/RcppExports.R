@@ -74,6 +74,38 @@ MergeList <- function(x) {
     .Call('PhyloProfile_MergeList', PACKAGE = 'PhyloProfile', x)
 }
 
+#' @inheritParams SimCor
+#' @param bin Integer.
+#' @rdname simdist
+#' @export
+SimMIConti <- function(pairProfile, bin) {
+    .Call('PhyloProfile_SimMIConti', PACKAGE = 'PhyloProfile', pairProfile, bin)
+}
+
+Info <- function(x, n) {
+    .Call('PhyloProfile_Info', PACKAGE = 'PhyloProfile', x, n)
+}
+
+HistTwo <- function(x, y, bin) {
+    .Call('PhyloProfile_HistTwo', PACKAGE = 'PhyloProfile', x, y, bin)
+}
+
+FindInter <- function(x, interval) {
+    .Call('PhyloProfile_FindInter', PACKAGE = 'PhyloProfile', x, interval)
+}
+
+FindInterSingle <- function(value, interval) {
+    .Call('PhyloProfile_FindInterSingle', PACKAGE = 'PhyloProfile', value, interval)
+}
+
+gInter <- function(x, bin) {
+    .Call('PhyloProfile_gInter', PACKAGE = 'PhyloProfile', x, bin)
+}
+
+CountRepeat <- function(x) {
+    .Call('PhyloProfile_CountRepeat', PACKAGE = 'PhyloProfile', x)
+}
+
 #' NPP normalization
 #'
 #' Algorithm:
@@ -143,7 +175,7 @@ SVDPhy <- function(bitM, bitReset, minConserve, trimming) {
 #'
 #' SimCor(): Person's correlation coefficient.
 #' SimJaccard(): Jaccard similarity.
-#' SimMI(): Mutual information.
+#' SimMIBin(): Mutual information.
 #' SimMIConti(): Mutual information for continuous variables
 #' DistHamming(): Hamming distance.
 #' DistEuclidean(): Euclidean distance.
@@ -161,8 +193,8 @@ SVDPhy <- function(bitM, bitReset, minConserve, trimming) {
 #' ## Jaccard similarity
 #' jacAB <- SimJaccard(ab)
 #' ## Mutual information
-#' MIAB <- SimMI(ab)
-#' MIABConti <- SimMIConti(ab)
+#' MIAB <- SimMIBin(ab)
+#' MIABConti <- SimMIConti(ab, bin = 10)
 #' ## Hamming distance
 #' hamAB <- DistHamming(ab)
 #' ## Eulidean distance
@@ -186,8 +218,8 @@ SimJaccard <- function(pairProfile) {
 #' @inheritParams SimCor
 #' @rdname simdist
 #' @export
-SimMI <- function(pairProfile) {
-    .Call('PhyloProfile_SimMI', PACKAGE = 'PhyloProfile', pairProfile)
+SimMIBin <- function(pairProfile) {
+    .Call('PhyloProfile_SimMIBin', PACKAGE = 'PhyloProfile', pairProfile)
 }
 
 #' @inheritParams SimCor

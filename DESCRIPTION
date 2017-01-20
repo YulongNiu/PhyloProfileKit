@@ -30,8 +30,7 @@ Imports:
     ape,
     methods,
     magrittr,
-    STRINGdb,
-    bioDist
+    STRINGdb
 Suggests:
     testthat,
     BiocStyle,

@@ -68,6 +68,7 @@ setMethod(f = 'show',
 ##' PPIdx(ppBinning, 1:3, 1:3, self = TRUE, bidirect = TRUE)
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom magrittr %>% %<>%
+##' @importFrom methods new
 ##' @export
 ##' 
 PPIdx <- function(p, x, ...) {

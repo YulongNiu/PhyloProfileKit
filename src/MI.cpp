@@ -5,7 +5,10 @@
 using namespace Rcpp;
 using namespace arma;
 
-
+//' @inheritParams SimCor
+//' @param bin Integer.
+//' @rdname simdist
+//' @export
 // [[Rcpp::export]]
 double SimMIConti(arma::mat pairProfile,
                   arma::uword bin) {
@@ -94,7 +97,21 @@ arma::uword FindInterSingle(double value,
 arma::vec gInter (arma::vec x,
                   arma::uword bin) {
 
-  return linspace<vec>(x.min() * 1.001, x.max(), bin + 1);
+  double minVal = x.min();
+  double maxVal = x.max();
+  double d = maxVal - minVal;
+  vec b;
+
+  if (d == 0) {
+    d = abs(minVal);
+    b = linspace<vec>(minVal - d / 1000, maxVal + d / 1000, bin + 1);
+  } else {
+    b = linspace<vec>(minVal, maxVal, bin + 1);
+    b(0) -= d / 1000;
+    b(bin) += d / 1000;
+  }
+
+  return b;
 
 }
 

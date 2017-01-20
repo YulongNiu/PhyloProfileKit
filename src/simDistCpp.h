@@ -8,7 +8,7 @@ double SimCor(arma::mat pairProfile);
 
 double SimJaccard(arma::mat pairProfile);
 
-double SimMI(arma::mat pairProfile);
+double SimMIBin(arma::mat pairProfile);
 
 arma::uword DistHamming(arma::mat pairProfile);
 
