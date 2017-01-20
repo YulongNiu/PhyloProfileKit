@@ -75,6 +75,32 @@ MergeList <- function(x) {
 }
 
 #' @inheritParams SimCor
+#' @rdname simdist
+#' @export
+SimMIBin <- function(pairProfile) {
+    .Call('PhyloProfile_SimMIBin', PACKAGE = 'PhyloProfile', pairProfile)
+}
+
+#' Utilities for MI
+#'
+#' \code{eachMI()}: Info for a cell.
+#' \code{Info()}: Entropy.
+#' \code{HistTwo()}: Joint counts of two vectors.
+#' \code{FindInter()}: Interval indices of a vector.
+#' \code{FindInterSingle()}: Interval index of a value.
+#' \code{gInter()}: Generate an interval vector, inspired from the \code{cut()} function of the \code{base} package.
+#' \code{CountRepeat()}: Repeat counts of a vector.
+#'
+#' @param p1, p2, p3: Counts of variables in cells.
+#' @param n Total variables.
+#' @author Yulong Niu \email{niuylscu@@gmail.com}
+#' @rdname utilities-MI
+#' @keywords internal
+eachMI <- function(p1, p2, p3, n) {
+    .Call('PhyloProfile_eachMI', PACKAGE = 'PhyloProfile', p1, p2, p3, n)
+}
+
+#' @inheritParams SimCor
 #' @param bin Integer.
 #' @rdname simdist
 #' @export
@@ -82,26 +108,48 @@ SimMIConti <- function(pairProfile, bin) {
     .Call('PhyloProfile_SimMIConti', PACKAGE = 'PhyloProfile', pairProfile, bin)
 }
 
-Info <- function(x, n) {
-    .Call('PhyloProfile_Info', PACKAGE = 'PhyloProfile', x, n)
+#' @param v Histogram of counts.
+#' @inheritParams eachMI
+#' @rdname utilities-MI
+#' @keywords internal
+Info <- function(v, n) {
+    .Call('PhyloProfile_Info', PACKAGE = 'PhyloProfile', v, n)
 }
 
+#' @inheritParams SimMIConti
+#' @param x, y Numeric vector.
+#' @rdname utilities-MI
+#' @keywords internal
 HistTwo <- function(x, y, bin) {
     .Call('PhyloProfile_HistTwo', PACKAGE = 'PhyloProfile', x, y, bin)
 }
 
+#' @inheritParams HistTwo
+#' @param internal Interval numeric vector.
+#' @rdname utilities-MI
+#' @keywords internal
 FindInter <- function(x, interval) {
     .Call('PhyloProfile_FindInter', PACKAGE = 'PhyloProfile', x, interval)
 }
 
+#' @inheritParams FindInter
+#' @param value Number.
+#' @rdname utilities-MI
+#' @keywords internal
 FindInterSingle <- function(value, interval) {
     .Call('PhyloProfile_FindInterSingle', PACKAGE = 'PhyloProfile', value, interval)
 }
 
+#' @inheritParams HistTwo
+#' @rdname utilities-MI
+#' @keywords internal
 gInter <- function(x, bin) {
     .Call('PhyloProfile_gInter', PACKAGE = 'PhyloProfile', x, bin)
 }
 
+#' @inheritParams HistTwo
+#' @rdname utilities-MI
+#' @keywords internal
 CountRepeat <- function(x) {
     .Call('PhyloProfile_CountRepeat', PACKAGE = 'PhyloProfile', x)
 }
@@ -175,8 +223,8 @@ SVDPhy <- function(bitM, bitReset, minConserve, trimming) {
 #'
 #' SimCor(): Person's correlation coefficient.
 #' SimJaccard(): Jaccard similarity.
-#' SimMIBin(): Mutual information.
-#' SimMIConti(): Mutual information for continuous variables
+#' SimMIBin(): Mutual information for binning data.
+#' SimMIConti(): Mutual information for continuous data.
 #' DistHamming(): Hamming distance.
 #' DistEuclidean(): Euclidean distance.
 #'
@@ -200,7 +248,6 @@ SVDPhy <- function(bitM, bitReset, minConserve, trimming) {
 #' ## Eulidean distance
 #' euAB <- DistEuclidean(ab)
 #' @author Yulong Niu \email{niuylscu@@gmail.com}
-#' @importFrom stats cor
 #' @rdname simdist
 #' @seealso SimDistBatch
 #' @export
@@ -218,13 +265,6 @@ SimJaccard <- function(pairProfile) {
 #' @inheritParams SimCor
 #' @rdname simdist
 #' @export
-SimMIBin <- function(pairProfile) {
-    .Call('PhyloProfile_SimMIBin', PACKAGE = 'PhyloProfile', pairProfile)
-}
-
-#' @inheritParams SimCor
-#' @rdname simdist
-#' @export
 DistHamming <- function(pairProfile) {
     .Call('PhyloProfile_DistHamming', PACKAGE = 'PhyloProfile', pairProfile)
 }
@@ -234,10 +274,5 @@ DistHamming <- function(pairProfile) {
 #' @export
 DistEuclidean <- function(pairProfile) {
     .Call('PhyloProfile_DistEuclidean', PACKAGE = 'PhyloProfile', pairProfile)
-}
-
-#' @keywords internal
-eachMI <- function(p1, p2, p3, n) {
-    .Call('PhyloProfile_eachMI', PACKAGE = 'PhyloProfile', p1, p2, p3, n)
 }
 

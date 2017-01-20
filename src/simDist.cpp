@@ -1,17 +1,16 @@
 #include <RcppArmadillo.h>
 // [[Rcpp::depends(RcppArmadillo)]]
-#include "simDistCpp.h"
+#include "simDist.h"
 
 using namespace Rcpp;
 using namespace arma;
-
 
 //' Similarity or distance of paired phylogenetic profile
 //'
 //' SimCor(): Person's correlation coefficient.
 //' SimJaccard(): Jaccard similarity.
-//' SimMIBin(): Mutual information.
-//' SimMIConti(): Mutual information for continuous variables
+//' SimMIBin(): Mutual information for binning data.
+//' SimMIConti(): Mutual information for continuous data.
 //' DistHamming(): Hamming distance.
 //' DistEuclidean(): Euclidean distance.
 //'
@@ -35,7 +34,6 @@ using namespace arma;
 //' ## Eulidean distance
 //' euAB <- DistEuclidean(ab)
 //' @author Yulong Niu \email{niuylscu@@gmail.com}
-//' @importFrom stats cor
 //' @rdname simdist
 //' @seealso SimDistBatch
 //' @export
@@ -69,30 +67,7 @@ double SimJaccard(arma::mat pairProfile) {
 }
 
 
-//' @inheritParams SimCor
-//' @rdname simdist
-//' @export
-// [[Rcpp::export]]
-double SimMIBin(arma::mat pairProfile) {
 
-  vec f = pairProfile.col(0);
-  vec t = pairProfile.col(1);
-  vec combVec = f + 2*t;
-
-  double N = pairProfile.n_rows;
-  uvec Avec = find(combVec == 3);
-  double A = Avec.n_elem;
-  uvec Bvec = find(combVec == 1);
-  double B = Bvec.n_elem;
-  uvec Cvec = find(combVec == 2);
-  double C = Cvec.n_elem;
-  double D = N - A - B - C;
-
-  double I = eachMI(A, B, C, N) + eachMI(B, A, D, N) + eachMI(C, A, D, N) + eachMI(D, C, B, N);
-
-  return I;
-
-}
 
 
 //' @inheritParams SimCor
@@ -127,16 +102,4 @@ double DistEuclidean(arma::mat pairProfile) {
 }
 
 
-//' @keywords internal
-// [[Rcpp::export]]
-double eachMI(double p1,
-              double p2,
-              double p3,
-              double n) {
-  if (p1 == 0) {
-    return 0.0;
-  } else {
-    return p1 * log(n * p1 / ((p1 + p2) * (p1 + p3))) / n;
-  }
-}
 

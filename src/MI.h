@@ -4,10 +4,17 @@
 #include <RcppArmadillo.h>
 #include <Rcpp.h>
 
+double SimMIBin(arma::mat pairProfile);
+
+double eachMI(double p1,
+              double p2,
+              double p3,
+              double n);
+
 double SimMIConti(arma::mat pairProfile,
                   arma::uword bin);
 
-double Info(arma::uvec x,
+double Info(arma::uvec v,
             double n);
 
 arma::uvec HistTwo(arma::vec x,

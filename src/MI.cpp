@@ -6,6 +6,55 @@ using namespace Rcpp;
 using namespace arma;
 
 //' @inheritParams SimCor
+//' @rdname simdist
+//' @export
+// [[Rcpp::export]]
+double SimMIBin(arma::mat pairProfile) {
+
+  vec f = pairProfile.col(0);
+  vec t = pairProfile.col(1);
+  vec combVec = f + 2*t;
+
+  double N = f.n_elem;
+  double A = sum(combVec == 3);
+  double B = sum(combVec == 1);
+  double C = sum(combVec == 2);
+  double D = N - A - B - C;
+
+  double I = eachMI(A, B, C, N) + eachMI(B, A, D, N) + eachMI(C, A, D, N) + eachMI(D, C, B, N);
+
+  return I;
+
+}
+
+//' Utilities for MI
+//'
+//' \code{eachMI()}: Info for a cell.
+//' \code{Info()}: Entropy.
+//' \code{HistTwo()}: Joint counts of two vectors.
+//' \code{FindInter()}: Interval indices of a vector.
+//' \code{FindInterSingle()}: Interval index of a value.
+//' \code{gInter()}: Generate an interval vector, inspired from the \code{cut()} function of the \code{base} package.
+//' \code{CountRepeat()}: Repeat counts of a vector.
+//'
+//' @param p1, p2, p3: Counts of variables in cells.
+//' @param n Total variables.
+//' @author Yulong Niu \email{niuylscu@@gmail.com}
+//' @rdname utilities-MI
+//' @keywords internal
+// [[Rcpp::export]]
+double eachMI(double p1,
+              double p2,
+              double p3,
+              double n) {
+  if (p1 == 0) {
+    return 0.0;
+  } else {
+    return p1 * log(n * p1 / ((p1 + p2) * (p1 + p3))) / n;
+  }
+}
+
+//' @inheritParams SimCor
 //' @param bin Integer.
 //' @rdname simdist
 //' @export
@@ -27,11 +76,15 @@ double SimMIConti(arma::mat pairProfile,
 }
 
 
+//' @param v Histogram of counts.
+//' @inheritParams eachMI
+//' @rdname utilities-MI
+//' @keywords internal
 // [[Rcpp::export]]
-double Info(arma::uvec x,
+double Info(arma::uvec v,
             double n) {
 
-  uvec xPos = x(find(x != 0));
+  uvec xPos = v(find(v != 0));
 
   vec xPosV = conv_to<vec>::from(xPos);
 
@@ -40,6 +93,10 @@ double Info(arma::uvec x,
   return -sum(p % log(p));
 }
 
+//' @inheritParams SimMIConti
+//' @param x, y Numeric vector.
+//' @rdname utilities-MI
+//' @keywords internal
 // [[Rcpp::export]]
 arma::uvec HistTwo(arma::vec x,
                    arma::vec y,
@@ -62,7 +119,10 @@ arma::uvec HistTwo(arma::vec x,
 
 }
 
-
+//' @inheritParams HistTwo
+//' @param internal Interval numeric vector.
+//' @rdname utilities-MI
+//' @keywords internal
 // [[Rcpp::export]]
 arma::uvec FindInter(arma::vec x,
                      arma::vec interval) {
@@ -77,6 +137,10 @@ arma::uvec FindInter(arma::vec x,
   return idx;
 }
 
+//' @inheritParams FindInter
+//' @param value Number.
+//' @rdname utilities-MI
+//' @keywords internal
 // [[Rcpp::export]]
 arma::uword FindInterSingle(double value,
                             arma::vec interval) {
@@ -93,6 +157,9 @@ arma::uword FindInterSingle(double value,
 
 }
 
+//' @inheritParams HistTwo
+//' @rdname utilities-MI
+//' @keywords internal
 // [[Rcpp::export]]
 arma::vec gInter (arma::vec x,
                   arma::uword bin) {
@@ -115,7 +182,9 @@ arma::vec gInter (arma::vec x,
 
 }
 
-
+//' @inheritParams HistTwo
+//' @rdname utilities-MI
+//' @keywords internal
 // [[Rcpp::export]]
 arma::uvec CountRepeat (arma::uvec x) {
 
