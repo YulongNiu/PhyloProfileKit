@@ -4,13 +4,13 @@
 \alias{PPSTRING}
 \title{Constructor from the STRING database}
 \usage{
-PPSTRING(speID, top = 10, symbets = FALSE, STRINGnorm = FALSE, n = 1,
+PPSTRING(speID, idx = 1:10, symbets = FALSE, STRINGnorm = FALSE, n = 1,
   verbose = FALSE)
 }
 \arguments{
 \item{speID}{Number. NCBI taxonomy identifier must be present in the STRING database. Use \code{get_STRING_species()} from the STRINGdb package to determine supported organisms.}
 
-\item{top}{Number or "all". Top number of proteins or the whole genome (set as "all")}
+\item{idx}{A numeric vector or "all".}
 
 \item{symbets}{Whether to keep only symmetrical best hits.}
 
@@ -31,11 +31,11 @@ Retrieve the bit score matrix from a give organism. The default bit score thresh
 }
 \examples{
 ## human top 5 proteins
-PPSTRING(9606, top = 5, n = 2)
+PPSTRING(9606, idx = 1:5, n = 2)
 
 \dontrun{
 ## all human proteins
-PPRCSTRING(9606, top = "all", n = 4)
+PPRCSTRING(9606, idx = "all", n = 4)
 }
 }
 \author{

@@ -109,10 +109,10 @@ Retrieve the profile of 5 human proteins:
 ``` {r}
 ## species id of Homo sapiens is 9606
 ## continuous matrix
-PPSTRING(speID = 9606, top = 5, n = 2)
+PPSTRING(speID = 9606, idx = 1:5, n = 2)
 ```
 
-Set `top = 'all'` for complete human profile, and increase `n` to accelerate the download process if multiple cores are supported on your system.
+Set `idx = 'all'` for complete human profile, and increase `n` to accelerate the download process if multiple cores are supported on your system.
 
 ## Normalize bit score profiles
 
@@ -135,6 +135,7 @@ Norm(ppRawBit, method = 'NPP', bitCutoff = 60, bitReset = 1, minConserve = 12)
 # Linkage analysis
 
 ## Prepare linkage data
+
 
 
 
