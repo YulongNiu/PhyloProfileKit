@@ -9,20 +9,22 @@
 \alias{SimMIConti}
 \title{similarity and distance}
 \usage{
-SimMIBin(pairProfile)
+SimMIBin(f, t)
 
-SimMIConti(pairProfile, bin)
+SimMIConti(f, t, bin)
 
-SimCor(pairProfile)
+SimCor(f, t)
 
-SimJaccard(pairProfile)
+SimJaccard(f, t)
 
-DistHamming(pairProfile)
+DistHamming(f, t)
 
-DistEuclidean(pairProfile)
+DistEuclidean(f, t)
 }
 \arguments{
-\item{pairProfile}{A paired phylogenetic profile, columns are genes and rows are species.}
+\item{f}{Numeric vector indicating a gene profile.}
+
+\item{t}{Numeric vector indicating a gene profile.}
 
 \item{bin}{Integer.}
 }
@@ -33,29 +35,30 @@ A numeric value.
 Similarity or distance of paired phylogenetic profile
 }
 \details{
-SimCor(): Person's correlation coefficient.
-SimJaccard(): Jaccard similarity.
-SimMIBin(): Mutual information for binning data.
-SimMIConti(): Mutual information for continuous data.
-DistHamming(): Hamming distance.
-DistEuclidean(): Euclidean distance.
+\code{SimCor()}: Person's correlation coefficient.
+\code{SimJaccard()}: Jaccard similarity.
+\code{SimMIBin()}: Mutual information for binning data.
+\code{SimMIConti()}: Mutual information for continuous data.
+\code{DistHamming()}: Hamming distance.
+\code{DistEuclidean()}: Euclidean distance.
 }
 \examples{
 ## alpha and beta subunits from the F-type ATP synthase.
 data(fatp)
-ab <- t(fatp$atpPhylo[c('ATP5A1', 'ATP5B'), ])
+a <- t(fatp$atpPhylo['ATP5A1', ])
+b <- t(fatp$atpPhylo['ATP5B', ])
 
 ## Person's correlation coefficient
-corAB <- SimCor(ab)
+corAB <- SimCor(a, b)
 ## Jaccard similarity
-jacAB <- SimJaccard(ab)
+jacAB <- SimJaccard(a, b)
 ## Mutual information
-MIAB <- SimMIBin(ab)
-MIABConti <- SimMIConti(ab, bin = 10)
+MIAB <- SimMIBin(a, b)
+MIABConti <- SimMIConti(a, b, bin = 10)
 ## Hamming distance
-hamAB <- DistHamming(ab)
+hamAB <- DistHamming(a, b)
 ## Eulidean distance
-euAB <- DistEuclidean(ab)
+euAB <- DistEuclidean(a, b)
 }
 \author{
 Yulong Niu \email{niuylscu@gmail.com}

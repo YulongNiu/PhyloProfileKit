@@ -37,12 +37,12 @@ setGeneric(name = 'Norm',
            def = function(x, method, ...){standardGeneric('Norm')})
 
 
-##' @param x Object with at least profile and linkage indices.
-##' @param n The number of CPUs or processors.
-##' @param FUN Functions to process paired linkages.
-##' @param ... Additional parameters passed to \code{FUN}.
-##' @rdname Batch-methods
-##' @export
-##' 
-setGeneric(name = 'Batch',
-           def = function(x, n, FUN, ...){standardGeneric('Batch')})
+## ##' @param x Object with at least profile and linkage indices.
+## ##' @param n The number of CPUs or processors.
+## ##' @param FUN Functions to process paired linkages.
+## ##' @param ... Additional parameters passed to \code{FUN}.
+## ##' @rdname Batch-methods
+## ##' @export
+## ##' 
+## setGeneric(name = 'Batch',
+##            def = function(x, n, FUN, ...){standardGeneric('Batch')})

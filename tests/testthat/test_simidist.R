@@ -70,7 +70,7 @@ for(i in 1:testNum) {
   pptmp <- matrix(rnorm(2 * speNum), ncol = 2)
 
   sd1[i] <- SimCorR(pptmp)
-  sd2[i] <- SimCor(pptmp)
+  sd2[i] <- SimCor(pptmp[, 1], pptmp[, 2])
 }
 
 test_that('Pearson correlation coefficient are equal in two versions.', {
@@ -84,7 +84,7 @@ for(i in 1:testNum) {
   pptmp <- matrix(rnorm(2 * speNum), ncol = 2)
 
   sd1[i] <- SimMIContiR(pptmp)
-  sd2[i] <- SimMIConti(pptmp, bin = 10)
+  sd2[i] <- SimMIConti(pptmp[, 1], pptmp[, 2], bin = 10)
 
 }
 
@@ -99,7 +99,7 @@ for(i in 1:testNum) {
   pptmp <- matrix(sample(0:1, 2 * speNum, replace = TRUE), ncol = 2)
 
   sd1[i] <- SimMIBinR(pptmp)
-  sd2[i] <- SimMIBin(pptmp)
+  sd2[i] <- SimMIBin(pptmp[, 1], pptmp[, 2])
 }
 
 test_that('Binning MI similarity are equal in two versions.', {
@@ -113,7 +113,7 @@ for(i in 1:testNum) {
   pptmp <- matrix(sample(0:1, 2 * speNum, replace = TRUE), ncol = 2)
 
   sd1[i] <- SimJaccardR(pptmp)
-  sd2[i] <- SimJaccard(pptmp)
+  sd2[i] <- SimJaccard(pptmp[, 1], pptmp[, 2])
 }
 
 test_that('Jaccard similarity are equal in two versions.', {
@@ -127,7 +127,7 @@ for(i in 1:testNum) {
   pptmp <- matrix(rnorm(2 * speNum), ncol = 2)
 
   sd1[i] <- DistHammingR(pptmp)
-  sd2[i] <- DistHamming(pptmp)
+  sd2[i] <- DistHamming(pptmp[, 1], pptmp[, 2])
 }
 
 test_that('Hamming distances are equal in two versions.', {
@@ -141,7 +141,7 @@ for(i in 1:testNum) {
   pptmp <- matrix(rnorm(2 * speNum), ncol = 2)
 
   sd1[i] <- DistEuclideanR(pptmp)
-  sd2[i] <- DistEuclidean(pptmp)
+  sd2[i] <- DistEuclidean(pptmp[, 1], pptmp[, 2])
   sd3[i] <- as.numeric(dist(t(pptmp), method = 'euclidean'))
 }
 

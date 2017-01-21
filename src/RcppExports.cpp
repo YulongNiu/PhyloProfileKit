@@ -56,13 +56,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // SimMIBin
-double SimMIBin(arma::mat pairProfile);
-RcppExport SEXP PhyloProfile_SimMIBin(SEXP pairProfileSEXP) {
+double SimMIBin(arma::vec f, arma::vec t);
+RcppExport SEXP PhyloProfile_SimMIBin(SEXP fSEXP, SEXP tSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat >::type pairProfile(pairProfileSEXP);
-    rcpp_result_gen = Rcpp::wrap(SimMIBin(pairProfile));
+    Rcpp::traits::input_parameter< arma::vec >::type f(fSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type t(tSEXP);
+    rcpp_result_gen = Rcpp::wrap(SimMIBin(f, t));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -81,14 +82,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // SimMIConti
-double SimMIConti(arma::mat pairProfile, arma::uword bin);
-RcppExport SEXP PhyloProfile_SimMIConti(SEXP pairProfileSEXP, SEXP binSEXP) {
+double SimMIConti(arma::vec f, arma::vec t, arma::uword bin);
+RcppExport SEXP PhyloProfile_SimMIConti(SEXP fSEXP, SEXP tSEXP, SEXP binSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat >::type pairProfile(pairProfileSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type f(fSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type t(tSEXP);
     Rcpp::traits::input_parameter< arma::uword >::type bin(binSEXP);
-    rcpp_result_gen = Rcpp::wrap(SimMIConti(pairProfile, bin));
+    rcpp_result_gen = Rcpp::wrap(SimMIConti(f, t, bin));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -208,46 +210,50 @@ BEGIN_RCPP
 END_RCPP
 }
 // SimCor
-double SimCor(arma::mat pairProfile);
-RcppExport SEXP PhyloProfile_SimCor(SEXP pairProfileSEXP) {
+double SimCor(arma::vec f, arma::vec t);
+RcppExport SEXP PhyloProfile_SimCor(SEXP fSEXP, SEXP tSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat >::type pairProfile(pairProfileSEXP);
-    rcpp_result_gen = Rcpp::wrap(SimCor(pairProfile));
+    Rcpp::traits::input_parameter< arma::vec >::type f(fSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type t(tSEXP);
+    rcpp_result_gen = Rcpp::wrap(SimCor(f, t));
     return rcpp_result_gen;
 END_RCPP
 }
 // SimJaccard
-double SimJaccard(arma::mat pairProfile);
-RcppExport SEXP PhyloProfile_SimJaccard(SEXP pairProfileSEXP) {
+double SimJaccard(arma::vec f, arma::vec t);
+RcppExport SEXP PhyloProfile_SimJaccard(SEXP fSEXP, SEXP tSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat >::type pairProfile(pairProfileSEXP);
-    rcpp_result_gen = Rcpp::wrap(SimJaccard(pairProfile));
+    Rcpp::traits::input_parameter< arma::vec >::type f(fSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type t(tSEXP);
+    rcpp_result_gen = Rcpp::wrap(SimJaccard(f, t));
     return rcpp_result_gen;
 END_RCPP
 }
 // DistHamming
-arma::uword DistHamming(arma::mat pairProfile);
-RcppExport SEXP PhyloProfile_DistHamming(SEXP pairProfileSEXP) {
+arma::uword DistHamming(arma::vec f, arma::vec t);
+RcppExport SEXP PhyloProfile_DistHamming(SEXP fSEXP, SEXP tSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat >::type pairProfile(pairProfileSEXP);
-    rcpp_result_gen = Rcpp::wrap(DistHamming(pairProfile));
+    Rcpp::traits::input_parameter< arma::vec >::type f(fSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type t(tSEXP);
+    rcpp_result_gen = Rcpp::wrap(DistHamming(f, t));
     return rcpp_result_gen;
 END_RCPP
 }
 // DistEuclidean
-double DistEuclidean(arma::mat pairProfile);
-RcppExport SEXP PhyloProfile_DistEuclidean(SEXP pairProfileSEXP) {
+double DistEuclidean(arma::vec f, arma::vec t);
+RcppExport SEXP PhyloProfile_DistEuclidean(SEXP fSEXP, SEXP tSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat >::type pairProfile(pairProfileSEXP);
-    rcpp_result_gen = Rcpp::wrap(DistEuclidean(pairProfile));
+    Rcpp::traits::input_parameter< arma::vec >::type f(fSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type t(tSEXP);
+    rcpp_result_gen = Rcpp::wrap(DistEuclidean(f, t));
     return rcpp_result_gen;
 END_RCPP
 }

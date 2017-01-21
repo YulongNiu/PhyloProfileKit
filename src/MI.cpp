@@ -9,10 +9,9 @@ using namespace arma;
 //' @rdname simdist
 //' @export
 // [[Rcpp::export]]
-double SimMIBin(arma::mat pairProfile) {
+double SimMIBin(arma::vec f,
+                arma::vec t) {
 
-  vec f = pairProfile.col(0);
-  vec t = pairProfile.col(1);
   vec combVec = f + 2*t;
 
   double N = f.n_elem;
@@ -59,14 +58,11 @@ double eachMI(double p1,
 //' @rdname simdist
 //' @export
 // [[Rcpp::export]]
-double SimMIConti(arma::mat pairProfile,
+double SimMIConti(arma::vec f,
+                  arma::vec t,
                   arma::uword bin) {
 
   double MI;
-
-  vec f = pairProfile.col(0);
-  vec t = pairProfile.col(1);
-
   double n = f.n_elem;
 
   MI = Info(hist(f, bin), n) + Info(hist(t, bin), n) - Info(HistTwo(f, t, bin), n);

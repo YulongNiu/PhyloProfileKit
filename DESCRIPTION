@@ -60,6 +60,7 @@ Collate:
     'dataDef.R'
     'develFile.R'
     'gloableChkVar.R'
+    'paraFrame.R'
     'plotCorMat.R'
     'plotElements.R'
     'plotProfile.R'

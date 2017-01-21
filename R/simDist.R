@@ -31,7 +31,7 @@ SimDistBatch <- function(ftMat, profileMat, FUN, n = 1) {
   batchVec <- foreach(i = 1:ppiNum, .combine = c) %dopar% {
     print(paste0('It is running ', i, ' in a total of ', ppiNum, '.'))
     genepair <- profileMat[, geneNames %in% ftMat[i, 1:2]]
-    eachSD <- FUN(genepair)
+    eachSD <- FUN(genepair[, 1], genepair[, 2])
 
     return(eachSD)
   }

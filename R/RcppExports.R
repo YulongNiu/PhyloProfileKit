@@ -77,8 +77,8 @@ MergeList <- function(x) {
 #' @inheritParams SimCor
 #' @rdname simdist
 #' @export
-SimMIBin <- function(pairProfile) {
-    .Call('PhyloProfile_SimMIBin', PACKAGE = 'PhyloProfile', pairProfile)
+SimMIBin <- function(f, t) {
+    .Call('PhyloProfile_SimMIBin', PACKAGE = 'PhyloProfile', f, t)
 }
 
 #' Utilities for MI
@@ -104,8 +104,8 @@ eachMI <- function(p1, p2, p3, n) {
 #' @param bin Integer.
 #' @rdname simdist
 #' @export
-SimMIConti <- function(pairProfile, bin) {
-    .Call('PhyloProfile_SimMIConti', PACKAGE = 'PhyloProfile', pairProfile, bin)
+SimMIConti <- function(f, t, bin) {
+    .Call('PhyloProfile_SimMIConti', PACKAGE = 'PhyloProfile', f, t, bin)
 }
 
 #' @param v Histogram of counts.
@@ -221,58 +221,60 @@ SVDPhy <- function(bitM, bitReset, minConserve, trimming) {
 
 #' Similarity or distance of paired phylogenetic profile
 #'
-#' SimCor(): Person's correlation coefficient.
-#' SimJaccard(): Jaccard similarity.
-#' SimMIBin(): Mutual information for binning data.
-#' SimMIConti(): Mutual information for continuous data.
-#' DistHamming(): Hamming distance.
-#' DistEuclidean(): Euclidean distance.
+#' \code{SimCor()}: Person's correlation coefficient.
+#' \code{SimJaccard()}: Jaccard similarity.
+#' \code{SimMIBin()}: Mutual information for binning data.
+#' \code{SimMIConti()}: Mutual information for continuous data.
+#' \code{DistHamming()}: Hamming distance.
+#' \code{DistEuclidean()}: Euclidean distance.
 #'
 #' @title similarity and distance
-#' @param pairProfile A paired phylogenetic profile, columns are genes and rows are species.
+#' @param f Numeric vector indicating a gene profile.
+#' @param t Numeric vector indicating a gene profile.
 #' @return A numeric value.
 #' @examples
 #' ## alpha and beta subunits from the F-type ATP synthase.
 #' data(fatp)
-#' ab <- t(fatp$atpPhylo[c('ATP5A1', 'ATP5B'), ])
+#' a <- t(fatp$atpPhylo['ATP5A1', ])
+#' b <- t(fatp$atpPhylo['ATP5B', ])
 #'
 #' ## Person's correlation coefficient
-#' corAB <- SimCor(ab)
+#' corAB <- SimCor(a, b)
 #' ## Jaccard similarity
-#' jacAB <- SimJaccard(ab)
+#' jacAB <- SimJaccard(a, b)
 #' ## Mutual information
-#' MIAB <- SimMIBin(ab)
-#' MIABConti <- SimMIConti(ab, bin = 10)
+#' MIAB <- SimMIBin(a, b)
+#' MIABConti <- SimMIConti(a, b, bin = 10)
 #' ## Hamming distance
-#' hamAB <- DistHamming(ab)
+#' hamAB <- DistHamming(a, b)
 #' ## Eulidean distance
-#' euAB <- DistEuclidean(ab)
+#' euAB <- DistEuclidean(a, b)
 #' @author Yulong Niu \email{niuylscu@@gmail.com}
 #' @rdname simdist
 #' @seealso SimDistBatch
 #' @export
-SimCor <- function(pairProfile) {
-    .Call('PhyloProfile_SimCor', PACKAGE = 'PhyloProfile', pairProfile)
+SimCor <- function(f, t) {
+    .Call('PhyloProfile_SimCor', PACKAGE = 'PhyloProfile', f, t)
 }
 
 #' @inheritParams SimCor
 #' @rdname simdist
 #' @export
-SimJaccard <- function(pairProfile) {
-    .Call('PhyloProfile_SimJaccard', PACKAGE = 'PhyloProfile', pairProfile)
+SimJaccard <- function(f, t) {
+    .Call('PhyloProfile_SimJaccard', PACKAGE = 'PhyloProfile', f, t)
 }
 
 #' @inheritParams SimCor
 #' @rdname simdist
 #' @export
-DistHamming <- function(pairProfile) {
-    .Call('PhyloProfile_DistHamming', PACKAGE = 'PhyloProfile', pairProfile)
+DistHamming <- function(f, t) {
+    .Call('PhyloProfile_DistHamming', PACKAGE = 'PhyloProfile', f, t)
 }
 
 #' @inheritParams SimCor
 #' @rdname simdist
 #' @export
-DistEuclidean <- function(pairProfile) {
-    .Call('PhyloProfile_DistEuclidean', PACKAGE = 'PhyloProfile', pairProfile)
+DistEuclidean <- function(f, t) {
+    .Call('PhyloProfile_DistEuclidean', PACKAGE = 'PhyloProfile', f, t)
 }
 
