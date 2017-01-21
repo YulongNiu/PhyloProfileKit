@@ -15,7 +15,7 @@ DolloDistBatch(ftMat, profileMat, edgeMat, tipPath, n = 1)
 
 \item{tipPath}{A list of ancestors of each gain tips. In each elements, the first one is the root.}
 
-\item{n}{The number of CPUs or processors, and the default value is 1.}
+\item{n}{Number of CPUs.}
 }
 \value{
 A numeric vector.

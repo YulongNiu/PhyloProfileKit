@@ -1,35 +1,48 @@
-## ##' Parallel framework for \code{PPIdx} and \code{PPTreeIdx}.
-## ##'
-## ##' \code{Batch()}: Batch process.
-## ##'
-## ##' @title Parallel framework
-## ##' @param p 
-## ##' @param ft 
-## ##' @param n 
-## ##' @param ... 
-## ##' @return 
-## ##' @examples 
-## ##' @author Yulong Niu \email{niuylscu@@gmail.com}
-## Batch <- function(p, ft, n = 1, FUN, ...) {
+##' @include AllClasses.R AllGenerics.R
+NULL
 
-##   ## register multiple core
-##   registerDoParallel(cores = n)
+##' Parallel framework for \code{PPIdx} and \code{PPTreeIdx}.
+##'
+##' \code{Batch()}: Parallel framework to analysis paired profiles in batch mode.
+##'
+##' @title Parallel framework
+##' @inheritParams Batch
+##' @return A numeric vector.
+##' @examples
+##' require('magrittr')
+##'
+##' ## Person correlation coefficient
+##' ppBinIdx <- sample(0:1, 10 * 20, replace = TRUE) %>% matrix(ncol = 20) %>% PP %>% PPIdx(1:3, 1:3)
+##' Batch(ppBinIdx, n = 2, cor)
+##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @importFrom doParallel registerDoParallel stopImplicitCluster
+##' @importFrom foreach foreach %dopar%
+##' @rdname Batch-methods
+##' @exportMethod Batch
+##'
+setMethod(f = 'Batch',
+          signature = c(x = 'PPIdx'),
+          definition = function(x, n = 1, FUN, ...) {
 
-##   ppiNames <- rownames(ft)
-##   ppiNum <- nrow(ft)
+            ## register multiple core
+            registerDoParallel(cores = n)
 
-##   batchVec <- foreach(i = 1:ppiNum, .combine = c) %dopar% {
-##     ## print(paste0('It is running ', i, ' in a total of ', ppiNum, '.'))
-##     f <- t(p[ft[i, 1], ])
-##     t <- t(p[ft[i, 2], ])
-##     eachSD <- FUN(f, t, ...)
+            p <- t(x@.Data)
+            ft <- x@idx
+            ppiNames <- rownames(ft)
+            ppiNum <- nrow(ft)
 
-##     return(eachSD)
-##   }
+            batchVec <- foreach(i = 1:ppiNum, .combine = c) %dopar% {
+              ## print(paste0('It is running ', i, ' in a total of ', ppiNum, '.'))
+              f <- p[ft[i, 1], ]
+              t <- p[ft[i, 2], ]
+              eachSD <- FUN(f, t, ...)
 
-##   ## stop multiple core
-##   stopImplicitCluster()
+              return(eachSD)
+            }
 
-##   return(batchVec)
+            ## stop multiple core
+            stopImplicitCluster()
 
-## }
+            return(batchVec)
+          })

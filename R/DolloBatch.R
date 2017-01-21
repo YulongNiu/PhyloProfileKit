@@ -3,7 +3,9 @@
 ##' DolloDistBatch(): Dollo's parsimony distance in batch mode.
 ##'
 ##' @title Batch process of Dollo's parsimony distance.
-##' @inheritParams SimDistBatch
+##' @param ftMat A two column matrix which should at least have rownames.
+##' @param profileMat The phylogenetic profile data with 1 and 0 denoting the presence and absence of orthologous, respectively. It is a named numeric matrix, columns are genes and rows are species.
+##' @param n Number of CPUs.
 ##' @inheritParams DolloDist
 ##' @return A numeric vector.
 ##' @examples

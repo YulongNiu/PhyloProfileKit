@@ -76,7 +76,7 @@ MergeList <- function(x) {
 
 #' @inheritParams SimCor
 #' @rdname simdist
-#' @export
+#' @keywords internal
 SimMIBin <- function(f, t) {
     .Call('PhyloProfile_SimMIBin', PACKAGE = 'PhyloProfile', f, t)
 }
@@ -103,7 +103,7 @@ eachMI <- function(p1, p2, p3, n) {
 #' @inheritParams SimCor
 #' @param bin Integer.
 #' @rdname simdist
-#' @export
+#' @keywords internal
 SimMIConti <- function(f, t, bin) {
     .Call('PhyloProfile_SimMIConti', PACKAGE = 'PhyloProfile', f, t, bin)
 }
@@ -222,58 +222,45 @@ SVDPhy <- function(bitM, bitReset, minConserve, trimming) {
 #' Similarity or distance of paired phylogenetic profile
 #'
 #' \code{SimCor()}: Person's correlation coefficient.
+#'
 #' \code{SimJaccard()}: Jaccard similarity.
+#'
 #' \code{SimMIBin()}: Mutual information for binning data.
+#'
 #' \code{SimMIConti()}: Mutual information for continuous data.
+#'
 #' \code{DistHamming()}: Hamming distance.
+#'
 #' \code{DistEuclidean()}: Euclidean distance.
 #'
 #' @title similarity and distance
 #' @param f Numeric vector indicating a gene profile.
 #' @param t Numeric vector indicating a gene profile.
 #' @return A numeric value.
-#' @examples
-#' ## alpha and beta subunits from the F-type ATP synthase.
-#' data(fatp)
-#' a <- t(fatp$atpPhylo['ATP5A1', ])
-#' b <- t(fatp$atpPhylo['ATP5B', ])
-#'
-#' ## Person's correlation coefficient
-#' corAB <- SimCor(a, b)
-#' ## Jaccard similarity
-#' jacAB <- SimJaccard(a, b)
-#' ## Mutual information
-#' MIAB <- SimMIBin(a, b)
-#' MIABConti <- SimMIConti(a, b, bin = 10)
-#' ## Hamming distance
-#' hamAB <- DistHamming(a, b)
-#' ## Eulidean distance
-#' euAB <- DistEuclidean(a, b)
 #' @author Yulong Niu \email{niuylscu@@gmail.com}
 #' @rdname simdist
-#' @seealso SimDistBatch
-#' @export
+#' @keywords internal
 SimCor <- function(f, t) {
     .Call('PhyloProfile_SimCor', PACKAGE = 'PhyloProfile', f, t)
 }
 
 #' @inheritParams SimCor
 #' @rdname simdist
-#' @export
+#' @keywords internal
 SimJaccard <- function(f, t) {
     .Call('PhyloProfile_SimJaccard', PACKAGE = 'PhyloProfile', f, t)
 }
 
 #' @inheritParams SimCor
 #' @rdname simdist
-#' @export
+#' @keywords internal
 DistHamming <- function(f, t) {
     .Call('PhyloProfile_DistHamming', PACKAGE = 'PhyloProfile', f, t)
 }
 
 #' @inheritParams SimCor
 #' @rdname simdist
-#' @export
+#' @keywords internal
 DistEuclidean <- function(f, t) {
     .Call('PhyloProfile_DistEuclidean', PACKAGE = 'PhyloProfile', f, t)
 }

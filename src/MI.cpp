@@ -7,7 +7,7 @@ using namespace arma;
 
 //' @inheritParams SimCor
 //' @rdname simdist
-//' @export
+//' @keywords internal
 // [[Rcpp::export]]
 double SimMIBin(arma::vec f,
                 arma::vec t) {
@@ -56,7 +56,7 @@ double eachMI(double p1,
 //' @inheritParams SimCor
 //' @param bin Integer.
 //' @rdname simdist
-//' @export
+//' @keywords internal
 // [[Rcpp::export]]
 double SimMIConti(arma::vec f,
                   arma::vec t,

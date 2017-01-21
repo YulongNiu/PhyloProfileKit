@@ -8,37 +8,24 @@ using namespace arma;
 //' Similarity or distance of paired phylogenetic profile
 //'
 //' \code{SimCor()}: Person's correlation coefficient.
+//'
 //' \code{SimJaccard()}: Jaccard similarity.
+//'
 //' \code{SimMIBin()}: Mutual information for binning data.
+//'
 //' \code{SimMIConti()}: Mutual information for continuous data.
+//'
 //' \code{DistHamming()}: Hamming distance.
+//'
 //' \code{DistEuclidean()}: Euclidean distance.
 //'
 //' @title similarity and distance
 //' @param f Numeric vector indicating a gene profile.
 //' @param t Numeric vector indicating a gene profile.
 //' @return A numeric value.
-//' @examples
-//' ## alpha and beta subunits from the F-type ATP synthase.
-//' data(fatp)
-//' a <- t(fatp$atpPhylo['ATP5A1', ])
-//' b <- t(fatp$atpPhylo['ATP5B', ])
-//'
-//' ## Person's correlation coefficient
-//' corAB <- SimCor(a, b)
-//' ## Jaccard similarity
-//' jacAB <- SimJaccard(a, b)
-//' ## Mutual information
-//' MIAB <- SimMIBin(a, b)
-//' MIABConti <- SimMIConti(a, b, bin = 10)
-//' ## Hamming distance
-//' hamAB <- DistHamming(a, b)
-//' ## Eulidean distance
-//' euAB <- DistEuclidean(a, b)
 //' @author Yulong Niu \email{niuylscu@@gmail.com}
 //' @rdname simdist
-//' @seealso SimDistBatch
-//' @export
+//' @keywords internal
 // [[Rcpp::export]]
 double SimCor(arma::vec f,
               arma::vec t) {
@@ -51,7 +38,7 @@ double SimCor(arma::vec f,
 
 //' @inheritParams SimCor
 //' @rdname simdist
-//' @export
+//' @keywords internal
 // [[Rcpp::export]]
 double SimJaccard(arma::vec f,
                   arma::vec t) {
@@ -67,7 +54,7 @@ double SimJaccard(arma::vec f,
 
 //' @inheritParams SimCor
 //' @rdname simdist
-//' @export
+//' @keywords internal
 // [[Rcpp::export]]
 arma::uword DistHamming(arma::vec f,
                         arma::vec t) {
@@ -80,7 +67,7 @@ arma::uword DistHamming(arma::vec f,
 
 //' @inheritParams SimCor
 //' @rdname simdist
-//' @export
+//' @keywords internal
 // [[Rcpp::export]]
 double DistEuclidean(arma::vec f,
                      arma::vec t) {

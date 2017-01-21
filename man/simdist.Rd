@@ -36,34 +36,19 @@ Similarity or distance of paired phylogenetic profile
 }
 \details{
 \code{SimCor()}: Person's correlation coefficient.
-\code{SimJaccard()}: Jaccard similarity.
-\code{SimMIBin()}: Mutual information for binning data.
-\code{SimMIConti()}: Mutual information for continuous data.
-\code{DistHamming()}: Hamming distance.
-\code{DistEuclidean()}: Euclidean distance.
-}
-\examples{
-## alpha and beta subunits from the F-type ATP synthase.
-data(fatp)
-a <- t(fatp$atpPhylo['ATP5A1', ])
-b <- t(fatp$atpPhylo['ATP5B', ])
 
-## Person's correlation coefficient
-corAB <- SimCor(a, b)
-## Jaccard similarity
-jacAB <- SimJaccard(a, b)
-## Mutual information
-MIAB <- SimMIBin(a, b)
-MIABConti <- SimMIConti(a, b, bin = 10)
-## Hamming distance
-hamAB <- DistHamming(a, b)
-## Eulidean distance
-euAB <- DistEuclidean(a, b)
+\code{SimJaccard()}: Jaccard similarity.
+
+\code{SimMIBin()}: Mutual information for binning data.
+
+\code{SimMIConti()}: Mutual information for continuous data.
+
+\code{DistHamming()}: Hamming distance.
+
+\code{DistEuclidean()}: Euclidean distance.
 }
 \author{
 Yulong Niu \email{niuylscu@gmail.com}
 }
-\seealso{
-SimDistBatch
-}
+\keyword{internal}
 

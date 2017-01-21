@@ -36,7 +36,7 @@ BayesTraitsBatch(ftMat, profileMat, n = 1, ...)
 
 \item{profileMat}{The phylogenetic profile data with 1 and 0 denoting the presence and absence of orthologous, respectively. It is a named numeric matrix, columns are genes and rows are species.}
 
-\item{n}{The number of CPUs or processors, and the default value is 1.}
+\item{n}{Number of CPUs.}
 }
 \value{
 BayesTraitsMode(): Harmonic mean.
