@@ -74,7 +74,7 @@ As increasing numbers of sequenced genomes have become available, various online
 # Construct phylogenetic profiles
 
 In *[PhyloProfile](https://github.com/YulongNiu/PhyloProfile)*
-, a profile with $n$ proteins across $m$ organisms is denoted as a $n \times m$ matrix containing either binning or continuous data. A binning matrix uses 0 and 1 to represent the homologous absence and presence, respectively. A continuous matrix usually consists of specific sequence similarities, for example BLAST bit scores, which need to be normalized before further analysis.
+, a profile with $n$ proteins across $m$ organisms is denoted as a $n \times m$ matrix containing either binning or continuous data. A binning profile uses 0 and 1 to represent the homologous absence and presence, respectively. A continuous profile usually consists of specific sequence similarities, for example BLAST bit scores, which need to be normalized before further analysis.
 
 ## Read profiles from local files
 
@@ -86,11 +86,11 @@ library('magrittr')
 library('STRINGdb')
 
 descPath <- system.file('extdata', 'bioinfoProfile.csv', package = 'PhyloProfile')
-bioinfoPMat <- descPath %>% read.csv %>% as.matrix
-bioinfoP <- PP(bioinfoPMat)
+sceMat <- descPath %>% read.csv(row.names = 1) %>% as.matrix
+sceP <- PP(sceMat)
 
-## binning matrix
-bioinfoP
+## binning profile
+sceP
 ```
 
 ## Retrieve profiles from the STRING database
@@ -108,7 +108,7 @@ Retrieve the profile of 5 human proteins:
 
 ``` {r}
 ## species id of Homo sapiens is 9606
-## continuous matrix
+## continuous profile
 PPSTRING(speID = 9606, idx = 1:5, n = 2)
 ```
 
@@ -134,14 +134,39 @@ Norm(ppRawBit, method = 'NPP', bitCutoff = 60, bitReset = 1, minConserve = 12)
 
 # Linkage analysis
 
-## Prepare linkage data
+## Prepare linkages
 
+The basic phylogenetic profiling is to analyze the relationships of paired proteins, which is also known as "linkages". `PPIdx()` is used to prepare pre-defined linkages and store linkage indices into a `PPIdx` class object.
 
+``` {r}
+## randomly generate 10 linkages
+linkM <- sceP %>% rownames %>% sample(2 * 10) %>% matrix(ncol = 2)
+sceL <- PPIdx(sceP, linkM)
+sceL
+```
+
+For a batch of interested proteins, `PPIdx()` also facilities to generate linkages within these proteins or linkages with the rest whole proteome.
+
+``` {r eval=FALSE}
+## indices of interested proteins, for example 5 random proteins from `sceP`
+p <- c("6321976", "6321639", "6323007", "6320376", "10383799")
+pIdx <- p %>% match(rownames(sceP))
+
+## within linkages
+PPIdx(sceP, pIdx, pIdx)
+## with self linkages, for example "6321976" --> "6321976"
+PPIdx(sceP, pIdx, pIdx, self = TRUE)
+
+## linkages with rest whole proteome 
+PPIdx(sceP, pIdx, 1:nrow(sceP))
+```
 
 
 # Misc.
 
 ## Convert STRING protein IDs
+
+## Objects and methods in *PhyloProfile*
 
 
 # Homepage

@@ -39,7 +39,7 @@ PPIdx(ppBinning, linkM)
 ## within top 3 proteins
 PPIdx(ppBinning, 1:3, 1:3)
 ## top 3 proteins with whole profiles
-PPIdx(ppBinning, 1:3, nrow(ppBinning))
+PPIdx(ppBinning, 1:3, 1:nrow(ppBinning))
 ## with self linkages
 PPIdx(ppBinning, 1:3, 1:3, self = TRUE)
 ## with bidirectional linkages
