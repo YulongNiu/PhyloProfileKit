@@ -49,7 +49,7 @@ setGeneric(name = 'Batch',
 
 
 ##' @param x A \code{PP} object.
-##' @param method A character string. Supported similarity or distance methods:
+##' @param method A character string.
 ##' \itemize{
 ##'   \item \code{"SimCor"}: Person's correlation coefficient.
 ##'   \item \code{"SimJaccard"}: Jaccard similarity.

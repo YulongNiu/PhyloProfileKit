@@ -1,9 +1,9 @@
-##' @include AllClasses.R AllGenerics.R utilities.R paraFrame.R
+##' @include utilities.R Batch.R
 NULL
 
 ##' Similarity or distance.
 ##'
-##' SimDist(): Similarity and distance of paired profiles.
+##' Similarity and distance of paired profiles.
 ##'
 ##' @title Batch process of similarity and distance.
 ##' @return A numeric vector

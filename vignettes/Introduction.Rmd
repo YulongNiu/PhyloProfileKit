@@ -5,7 +5,7 @@ Yulong Niu \\
 
 College of Life Sciences, Sichuan University, China"
 date: "`r Sys.Date()`"
-bibliography: PhyloProfileRef.bib
+bibliography: Ref.bib
 csl: nature.csl
 output:
   BiocStyle::html_document:
