@@ -1,12 +1,11 @@
 ---
 title: "PhyloProfile: a R package for phylogenetic profiling"
 author: "\\
+Yulong Niu \\
 
-	Yulong Niu \\
-
-        College of Life Sciences, Sichuan University, China"
+College of Life Sciences, Sichuan University, China"
 date: "`r Sys.Date()`"
-bibliography: PhyloProfileRef.bib
+bibliography: Ref.bib
 csl: nature.csl
 output:
   BiocStyle::html_document:
@@ -35,7 +34,7 @@ library('STRINGdb')
 
 # Abstract
 
-[PhyloProfile](https://github.com/YulongNiu/PhyloProfile) contains various analysis methods and visualization of phylogenetic profiles. 
+[PhyloProfile](https://github.com/YulongNiu/PhyloProfile) contains various analysis methods and visyuxianualization of phylogenetic profiles. 
 
 ## Preprocess
 
@@ -72,10 +71,10 @@ Phylogenetic profiling is a bioinformatic technique used to show protein presenc
 
 As increasing numbers of sequenced genomes have become available, various online tools and databases has been developed [@cheng2015protphylo; @sadreyev2015phylogene; @ott2012napp; @szklarczyk2014string; @cromar2016phylopro2]. However, systematically analysis of user-defined phylogenetic profile on local computers is still a slow and tedious process. Here, we provided a R package named *[PhyloProfile](https://github.com/YulongNiu/PhyloProfile)* for analyzing and visualizing phylogenetic profiles.
 
-# Construction of phylogenetic profiles
+# Construct phylogenetic profiles
 
 In *[PhyloProfile](https://github.com/YulongNiu/PhyloProfile)*
-, a profile with $n$ proteins across $m$ organisms is denoted as a $n \times m$ matrix containing either binning or continuous data. A binning matrix uses 0 and 1 to represent the homologous absence and presence, respectively. A continuous matrix usually consists of specific sequence similarities, for example BLAST bit scores, which need to be normalized before further analysis.
+, a profile with $n$ proteins across $m$ organisms is denoted as a $n \times m$ matrix containing either binning or continuous data. A binning profile uses 0 and 1 to represent the homologous absence and presence, respectively. A continuous profile usually consists of specific sequence similarities, for example BLAST bit scores, which need to be normalized before further analysis.
 
 ## Read profiles from local files
 
@@ -86,12 +85,12 @@ library('PhyloProfile')
 library('magrittr')
 library('STRINGdb')
 
-descPath <- system.file('extdata', package = 'PhyloProfile')
-bioinfoPMat <- read.csv(file.path(descPath, 'bioinfoProfile.csv'), row.names = 1) %>% as.matrix
-bioinfoP <- PP(bioinfoPMat)
+descPath <- system.file('extdata', 'bioinfoProfile.csv', package = 'PhyloProfile')
+sceMat <- descPath %>% read.csv(row.names = 1) %>% as.matrix
+sceP <- PP(sceMat)
 
-## binning matrix
-bioinfoP
+## binning profile
+sceP
 ```
 
 ## Retrieve profiles from the STRING database
@@ -109,11 +108,75 @@ Retrieve the profile of 5 human proteins:
 
 ``` {r}
 ## species id of Homo sapiens is 9606
-## continuous matrix
-PPSTRING(speID = 9606, top = 5, n = 2)
+## continuous profile
+PPSTRING(speID = 9606, idx = 1:5, n = 2)
 ```
 
-Set `top = 'all'` for complete human profile, and increase `n` to accelerate the download process if multiple cores are supported on your system.
+Set `idx = 'all'` for complete human profile, and increase `n` to accelerate the download process if multiple cores are supported on your system.
+
+## Normalize bit score profiles
+
+Two normalization methods, SVD[@franceschini2015svd; @psomopoulos2013detection] and NPP[@tabach2013identification; @tabach2013human; @sadreyev2015phylogene], are provided for the pre-process of bit score profiles.
+
+``` {r eval=FALSE}
+## simulation of a bit score profile with 2000 proteins and 1000 organisms
+ppRawBit <- sample(0:200, 2000 * 1000, replace = TRUE) %>% matrix(nrow = 2000) %>% PP
+
+## SVD
+Norm(ppRawBit, method = 'SVD', bitCutoff = 100, bitReset = 0, minConserve = 12, trimming = 0.8)
+
+## NPP
+Norm(ppRawBit, method = 'NPP', bitCutoff = 60, bitReset = 1, minConserve = 12)
+```
+
+# Linkage analysis
+
+## Prepare linkages
+
+The basic phylogenetic profiling is to analyze the relationships of paired proteins, which is also known as "linkages". `PPIdx()` is used to prepare pre-defined linkages and store linkage indices into a `PPIdx` class object.
+
+``` {r}
+## randomly generate 10 linkages
+linkM <- sceP %>% rownames %>% sample(2 * 10) %>% matrix(ncol = 2)
+sceL <- PPIdx(sceP, linkM)
+sceL
+```
+
+For a batch of interested proteins, `PPIdx()` also facilities to generate linkages within these proteins or linkages with the rest whole proteome.
+
+``` {r eval=FALSE}
+## indices of interested proteins, for example 5 random proteins from `sceP`
+p <- c("6321976", "6321639", "6323007", "6320376", "10383799")
+pIdx <- p %>% match(rownames(sceP))
+
+## within linkages
+PPIdx(sceP, pIdx, pIdx)
+## with self linkages, for example "6321976" --> "6321976"
+PPIdx(sceP, pIdx, pIdx, self = TRUE)
+
+## linkages with rest whole proteome 
+PPIdx(sceP, pIdx, 1:nrow(sceP))
+```
+
+## Co-occurrency methods
+
+Five common-used co-occurrency methods are supported to calculated similarity or distance of linkages.
+
+``` {r}
+## mutual information
+SimDist(sceL, 'SimMI', n = 2)
+```
+
+## Model-based methods
+
+
+
+# Misc.
+
+## Convert STRING protein IDs
+
+## Objects and methods in *PhyloProfile*
+
 
 # Homepage
 

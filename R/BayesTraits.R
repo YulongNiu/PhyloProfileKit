@@ -147,7 +147,7 @@ BayesTraits <- function(...){
 } 
 
 
-##' @inheritParams SimDistBatch
+##' @inheritParams DolloDistBatch
 ##' @inheritParams BayesTraits
 ##' @importFrom doParallel registerDoParallel stopImplicitCluster
 ##' @importFrom foreach foreach %dopar%

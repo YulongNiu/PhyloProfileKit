@@ -60,7 +60,7 @@ arma::uvec InferGainNodes(Rcpp::List gainList) {
 
   if (gainNum > 1) {
     for (uword i = 0; i < gainANum; ++i) {
-      uword eachRepeatNum = CountRepeatIdx(i, gainA);
+      uword eachRepeatNum = sum(gainA == gainA(i));
       if (eachRepeatNum < gainNum) {
         ancestor = gainA[i - 1];
         break;
@@ -154,28 +154,3 @@ arma::uvec MergeList(Rcpp::List x) {
   return mergedX;
 
 }
-
-
-//' @param idx Index
-//' @param y A unsigned integer vector
-//' @return Repeat number of y[idx] in y.
-//' @rdname dollo
-//' @keywords internal
-// [[Rcpp::export]]
-arma::uword CountRepeatIdx(arma::uword idx,
-                           arma::uvec y) {
-
-  uword repeatNum = 0;
-  uword yNum = y.size();
-  uword target = y[idx];
-
-  for (uword i = 0; i < yNum; ++i) {
-    if (target == y[i]) {
-      ++repeatNum;
-    } else {}
-  }
-
-  return repeatNum;
-}
-
-

@@ -1,39 +1,40 @@
+##' @include utilities.R
+NULL
+
 ##' This class represents the data structure of phylogenetic profile.
 ##'
-##' @slot .Data An integer matrix or a numeric matrix, of which the rows are genes/proteins and columns are species. It validates the rownames and colnames of the matrix.
+##' @slot .Data An integer matrix or a numeric matrix, of which the rows are genes/proteins and columns are species. It validates the rownames and colnames of the profile matrix.
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @importFrom magrittr %>%
 ##' @exportClass PP
 ##' 
 setClass(Class = 'PP',
          contains = 'matrix',
          validity = function(object) {
            d <- object@.Data
-
-           ## 1. validate numeric matrix
-           if (!is.numeric(d) ||
-               !is.matrix(d)) {
-             warn <- 'The PP (.Data slot) should be an integer matrix of a numeric matrix.' %>% return
-           } else {}
-
-           ## 2. validate rownames and colnames
-           if (ncol(d) == 0 ||
-               nrow(d) == 0){
-             return(TRUE)
-           } else {
-             if (is.null(rownames(d)) ||
-                 is.null(rownames(d))) {
-               warn <- 'The PP (.Data slot) needs rownames or colnames.' %>% return
-             } else {return(TRUE)}
-           }
+           valiMat_internal(d, 'profile')
          })
 
-## ## validate nrow and ncol
-## ## validate rownames
-## setClass(Class = 'idx',
-##          contains = 'matrix')
 
-## tmp3 <- new('idx', matrix(sample(1:10, 3 * 2), ncol = 2))
+setClass('big.matrix',
+         slot = c(address = 'externalptr'))
+
+setClassUnion(name = 'PPMat',
+              member = c('matrix', 'big.matrix'))
+
+##' This class represents the data structure of phylogenetic profile with linkage indices.
+##'
+##' @slot idx An integer matrix with two columns. It validates the rownames and colnames of the profile matrix.
+##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @exportClass PPIdx
+##' 
+setClass(Class = 'PPIdx',
+         slots = c(idx = 'PPMat'),
+         contains = 'PP',
+         validity = function(object) {
+           d <- object@idx
+           valiMat_internal(d, 'indices')
+         })
+
 
 ## ## validate boundary
 ## ## validate integer

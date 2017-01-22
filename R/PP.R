@@ -2,10 +2,10 @@
 NULL
 
 
-##' Show method for \code{PP} objects
+##' Show method for \code{PP} and \code{PPIdx} objects
 ##'
 ##' @title Show methods
-##' @param object A \code{PP} object.
+##' @param object A \code{PP}/\code{PPIdx} object.
 ##' @return Show messages.
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom utils str
@@ -16,36 +16,37 @@ NULL
 setMethod(f = 'show',
           signature = 'PP',
           definition = function(object){
-            d <- object@.Data
+
+            p <- object@.Data
 
             ##~~~~~~~~~~~~~head~~~~~~~~~~~~
             cat('---\n')
             cat('description: "phylogenetic profile"\n')
             cat('class: ', class(object), '\n')
-            if (isBinMat_internal(d)) {
-              cat('type: "binning"', '\n')
+            if (isBinMat_internal(p)) {
+              cat('profile: "binning"', '\n')
             } else {
-              cat('type: "continuous"', '\n')
+              cat('profile: "continuous"', '\n')
             }
-            cat('#species: ', ncol(d), '\n')
-            cat('#proteins: ', nrow(d), '\n')
+            cat('#species: ', ncol(p), '\n')
+            cat('#proteins: ', nrow(p), '\n')
             cat('---\n')
             ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-            str(d)
+            str(p)
 
           })
 
 
 ##' The constructor the \code{PP} class
 ##'
-##' Construct a \code{PP} object from a matrix.
+##' Construct a \code{PP} object from a numeric matrix.
 ##'
-##' @title Constructor
-##' @param value A numeric matrix.
+##' @title Constructor of \code{PP}
+##' @param x A numeric matrix.
 ##' @return A \code{PP} object.
 ##' @examples
-##' require("magrittr")
+##' require('magrittr')
 ##'
 ##' ## construct a PP object without dimnames
 ##' ppBinning <- sample(0:1, 10 * 20, replace = TRUE) %>% matrix(ncol = 20) %>% PP
@@ -56,36 +57,37 @@ setMethod(f = 'show',
 ##'                        dimnames = list(paste0('protein', 1:10),
 ##'                                        paste0('spe', 1:20))) %>% PP
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @importFrom magrittr %>%
+##' @importFrom methods as
 ##' @export
 ##'
-PP <- function(value) {
+PP <- function(x) {
 
-  if (class(value) == 'matrix') {
+  if (is.matrix(x) &&
+      is.numeric(x)) {
 
-    colSize <- ncol(value)
-    rowSize <- nrow(value)
+    colSize <- ncol(x)
+    rowSize <- nrow(x)
 
     ## check 0 row or 0 columns
     if (colSize == 0 ||
         rowSize == 0) {
-      value %>% as('PP') %>% return
+      return(as(x, 'PP'))
     } else {}
 
     ## check colnames
-    if (is.null(colnames(value))) {
-      colnames(value) <- paste0('spe', seq_len(colSize))
+    if (is.null(colnames(x))) {
+      colnames(x) <- paste0('spe', seq_len(colSize))
     } else {}
 
     ## check rownames
-    if (is.null(rownames(value))) {
-      rownames(value) <- paste0('protein', seq_len(rowSize))
+    if (is.null(rownames(x))) {
+      rownames(x) <- paste0('protein', seq_len(rowSize))
     } else{}
 
     ## transfer
-    value %>% as('PP') %>% return
+    return(as(x, 'PP'))
   } else {
-    value %>% return
+    return(x)
   }
 }
 
@@ -106,7 +108,7 @@ PP <- function(value) {
 ##' \code{PPData(x) <- value}: An update PP object.
 ##'
 ##' @examples
-##' require(magrittr)
+##' require('magrittr')
 ##' ppContinuous <- matrix(rnorm(10 * 20),
 ##'                        ncol = 20,
 ##'                        dimnames = list(paste0('protein', 1:10),
@@ -125,7 +127,6 @@ PP <- function(value) {
 ##' ppContinuous
 ##'
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @importFrom magrittr %>%
 ##' @rdname PPData-methods
 ##' @exportMethod PPData
 ##'
@@ -192,4 +193,3 @@ setMethod(f = '[<-',
 ## TODO:
 ## cbind
 ## rbind
-

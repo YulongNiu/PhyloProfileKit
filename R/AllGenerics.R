@@ -35,3 +35,39 @@ setGeneric(name = 'PPData<-',
 ##' 
 setGeneric(name = 'Norm',
            def = function(x, method, ...){standardGeneric('Norm')})
+
+
+##' @param x Object with at least profile and linkage indices.
+##' @param n The number of CPUs or processors.
+##' @param FUN Functions to process paired linkages.
+##' @param ... Additional parameters passed to \code{FUN}.
+##' @rdname Batch-methods
+##' @export
+##' 
+setGeneric(name = 'Batch',
+           def = function(x, FUN, ..., n){standardGeneric('Batch')})
+
+
+##' @param x A \code{PP} object.
+##' @param method A character string.
+##' \itemize{
+##'   \item \code{"SimCor"}: Person's correlation coefficient.
+##'   \item \code{"SimJaccard"}: Jaccard similarity.
+##'   \item \code{"SimMI"}: Mutual information.
+##'   \item \code{"DistHamming"}: Hamming distance.
+##'   \item \code{"DistEuclidean"}: Euclidean distance.
+##' }
+##'
+##' \code{"SimCor"} and \code{"DistHamming"} are not recommended for binning profiles.
+##' @param ... Additional parameters passed to \code{method}.
+##' \itemize{
+##'   \item \code{bin}: Integer. The number of breaks in the \code{"MI"} method for continuous profiles.
+##' }
+##' @inheritParams Batch
+##' @rdname SimDist-methods
+##' @export
+##' 
+setGeneric(name = 'SimDist',
+           def = function(x, method, ..., n){standardGeneric('SimDist')})
+
+

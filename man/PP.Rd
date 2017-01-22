@@ -2,12 +2,12 @@
 % Please edit documentation in R/PP.R
 \name{PP}
 \alias{PP}
-\title{Constructor}
+\title{Constructor of \code{PP}}
 \usage{
-PP(value)
+PP(x)
 }
 \arguments{
-\item{value}{A numeric matrix.}
+\item{x}{A numeric matrix.}
 }
 \value{
 A \code{PP} object.
@@ -16,10 +16,10 @@ A \code{PP} object.
 The constructor the \code{PP} class
 }
 \details{
-Construct a \code{PP} object from a matrix.
+Construct a \code{PP} object from a numeric matrix.
 }
 \examples{
-require("magrittr")
+require('magrittr')
 
 ## construct a PP object without dimnames
 ppBinning <- sample(0:1, 10 * 20, replace = TRUE) \%>\% matrix(ncol = 20) \%>\% PP

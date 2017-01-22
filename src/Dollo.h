@@ -6,9 +6,6 @@
 
 arma::uvec MergeList(Rcpp::List x);
 
-arma::uword CountRepeatIdx(arma::uword idx,
-                           arma::uvec y);
-
 arma::uvec InferGainNodes(Rcpp::List gainList);
 
 arma::imat InferEdge(arma::umat edgeMat,
