@@ -107,6 +107,8 @@ comb2_internal <- function(x) {
 combWhole_internal <- function(x, y, self = FALSE, bidirect = FALSE) {
 
   ## check x
+  ## first unique x
+  x <- unique(x)
   x <- x[x %in% y]
 
   l <- length(x)

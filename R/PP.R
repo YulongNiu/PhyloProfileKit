@@ -193,4 +193,3 @@ setMethod(f = '[<-',
 ## TODO:
 ## cbind
 ## rbind
-
