@@ -119,11 +119,8 @@ Set `idx = 'all'` for complete human profile, and increase `n` to accelerate the
 Two normalization methods, SVD[@franceschini2015svd; @psomopoulos2013detection] and NPP[@tabach2013identification; @tabach2013human; @sadreyev2015phylogene], are provided for the pre-process of bit score profiles.
 
 ``` {r eval=FALSE}
-## simulation of a bit score profile
-ppRawBit <- matrix(sample(0:200, 2000 * 1000, replace = TRUE),
-                   ncol = 1000,
-                   dimnames = list(paste0('protein', 1:2000),
-                                   paste0('spe', 1:1000))) %>% PP
+## simulation of a bit score profile with 2000 proteins and 1000 organisms
+ppRawBit <- sample(0:200, 2000 * 1000, replace = TRUE) %>% matrix(nrow = 2000) %>% PP
 
 ## SVD
 Norm(ppRawBit, method = 'SVD', bitCutoff = 100, bitReset = 0, minConserve = 12, trimming = 0.8)
@@ -160,6 +157,18 @@ PPIdx(sceP, pIdx, pIdx, self = TRUE)
 ## linkages with rest whole proteome 
 PPIdx(sceP, pIdx, 1:nrow(sceP))
 ```
+
+## Co-occurrency methods
+
+Five common-used co-occurrency methods are supported to calculated similarity or distance of linkages.
+
+``` {r}
+## mutual information
+SimDist(sceL, 'SimMI', n = 2)
+```
+
+## Model-based methods
+
 
 
 # Misc.

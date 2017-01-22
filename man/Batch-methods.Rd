@@ -6,18 +6,18 @@
 \alias{Batch,PPIdx-method}
 \title{Parallel framework}
 \usage{
-Batch(x, n, FUN, ...)
+Batch(x, FUN, ..., n)
 
-\S4method{Batch}{PPIdx}(x, n = 1, FUN, ...)
+\S4method{Batch}{PPIdx}(x, FUN, ..., n = 1)
 }
 \arguments{
 \item{x}{Object with at least profile and linkage indices.}
 
-\item{n}{The number of CPUs or processors.}
-
 \item{FUN}{Functions to process paired linkages.}
 
 \item{...}{Additional parameters passed to \code{FUN}.}
+
+\item{n}{The number of CPUs or processors.}
 }
 \value{
 A numeric vector.
@@ -33,7 +33,7 @@ require('magrittr')
 
 ## Person correlation coefficient
 ppBinIdx <- sample(0:1, 10 * 20, replace = TRUE) \%>\% matrix(ncol = 20) \%>\% PP \%>\% PPIdx(1:3, 1:3)
-Batch(ppBinIdx, n = 2, cor)
+Batch(ppBinIdx, cor, n = 2)
 }
 \author{
 Yulong Niu \email{niuylscu@gmail.com}

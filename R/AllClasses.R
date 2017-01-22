@@ -15,6 +15,12 @@ setClass(Class = 'PP',
          })
 
 
+setClass('big.matrix',
+         slot = c(address = 'externalptr'))
+
+setClassUnion(name = 'PPMat',
+              member = c('matrix', 'big.matrix'))
+
 ##' This class represents the data structure of phylogenetic profile with linkage indices.
 ##'
 ##' @slot idx An integer matrix with two columns. It validates the rownames and colnames of the profile matrix.
@@ -22,7 +28,7 @@ setClass(Class = 'PP',
 ##' @exportClass PPIdx
 ##' 
 setClass(Class = 'PPIdx',
-         slots = c(idx = 'matrix'),
+         slots = c(idx = 'PPMat'),
          contains = 'PP',
          validity = function(object) {
            d <- object@idx

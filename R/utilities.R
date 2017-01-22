@@ -34,16 +34,18 @@ isBinMat_internal <- function(x) {
 
 ##' @param x A numeric matrix.
 ##' @param warnName A character string indicating the class names.
+##' @importFrom bigmemory is.big.matrix
 ##' @rdname utilities
 ##' @keywords internal
 ##' 
 valiMat_internal <- function(x, warnName) {
 
-  warnNumMat <- 'The %name% should be an matrix.'
+  warnNumMat <- 'The %name% should be a matrix or big.matrix.'
   warnMatName <- 'The %name% needs rownames or colnames.'
 
   ## 1. validate numeric matrix
-  if (!is.matrix(x)) {
+  if (!(is.matrix(x) ||
+        is.big.matrix(x))) {
     warn <- sub('%name%', warnName, warnNumMat)
     return(warn)
   } else {}

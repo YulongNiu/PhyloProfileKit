@@ -4,7 +4,7 @@
 \alias{PPIdx}
 \title{Constructor of \code{PPIdx}}
 \usage{
-PPIdx(p, x, ...)
+PPIdx(p, x, ..., bigmat = FALSE)
 }
 \arguments{
 \item{p}{A \code{PP} object}
@@ -17,6 +17,8 @@ PPIdx(p, x, ...)
   \item \code{self}: Whether include self pairs.
   \item \code{bidirect}: Whether to include two directions.
 }}
+
+\item{bigmat}{Whether store the indices as a big matrix. Set it as \code{TRUE} if the number of index is large.}
 }
 \value{
 A \code{PPIdx} object.
@@ -44,6 +46,9 @@ PPIdx(ppBinning, 1:3, 1:nrow(ppBinning))
 PPIdx(ppBinning, 1:3, 1:3, self = TRUE)
 ## with bidirectional linkages
 PPIdx(ppBinning, 1:3, 1:3, self = TRUE, bidirect = TRUE)
+
+## bigmatrix
+PPIdx(ppBinning, 1:10, 1:nrow(ppBinning), bigmat = TRUE)
 }
 \author{
 Yulong Niu \email{niuylscu@gmail.com}

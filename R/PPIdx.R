@@ -42,6 +42,7 @@ setMethod(f = 'show',
 ##' @title Constructor of \code{PPIdx}
 ##' @param p A \code{PP} object
 ##' @param x A character matrix with two columns or a numeric vector. Proteins not in \code{p} (profile) are removed. The numeric vector indicates the indices of proteins.
+##' @param bigmat Whether store the indices as a big matrix. Set it as \code{TRUE} if the number of index is large.
 ##' @param ... Additional parameters if \code{x} is a numeric vector.
 ##' \itemize{
 ##'   \item \code{y}: Another numeric vector used to generate paired linkages with \code{x}. Every element of \code{x} should be in \code{y}.
@@ -66,12 +67,16 @@ setMethod(f = 'show',
 ##' PPIdx(ppBinning, 1:3, 1:3, self = TRUE)
 ##' ## with bidirectional linkages
 ##' PPIdx(ppBinning, 1:3, 1:3, self = TRUE, bidirect = TRUE)
+##'
+##' ## bigmatrix
+##' PPIdx(ppBinning, 1:10, 1:nrow(ppBinning), bigmat = TRUE)
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom magrittr %>% %<>%
 ##' @importFrom methods new
+##' @importFrom bigmemory as.big.matrix
 ##' @export
 ##' 
-PPIdx <- function(p, x, ...) {
+PPIdx <- function(p, x, ..., bigmat = FALSE) {
 
   ## whole proteins
   wp <- rownames(p)
@@ -112,7 +117,11 @@ PPIdx <- function(p, x, ...) {
     rownames(x) <- paste0('link', seq_len(rowSize))
   } else{}
 
-  return(new('PPIdx', p, idx = x))
+  ## if big matrix
+  if (bigmat) {
+    x <- as.big.matrix(x)
+  } else {}
 
+  return(new('PPIdx', p, idx = x))
 }
 

@@ -30,6 +30,7 @@ Imports:
     ape,
     methods,
     magrittr,
+    bigmemory,
     STRINGdb
 Suggests:
     testthat,

@@ -20,7 +20,7 @@ NULL
 ##'
 setMethod(f = 'SimDist',
           signature = c(x = 'PPIdx'),
-          definition = function(x, n = 1, method, ...) {
+          definition = function(x, method, ..., n = 1) {
 
             if (isBinMat_internal(x@.Data)) {
               MI <- SimMIBin

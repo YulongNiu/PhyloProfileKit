@@ -13,7 +13,7 @@ NULL
 ##'
 ##' ## Person correlation coefficient
 ##' ppBinIdx <- sample(0:1, 10 * 20, replace = TRUE) %>% matrix(ncol = 20) %>% PP %>% PPIdx(1:3, 1:3)
-##' Batch(ppBinIdx, n = 2, cor)
+##' Batch(ppBinIdx, cor, n = 2)
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom doParallel registerDoParallel stopImplicitCluster
 ##' @importFrom foreach foreach %dopar%
@@ -24,12 +24,12 @@ NULL
 ##'
 setMethod(f = 'Batch',
           signature = c(x = 'PPIdx'),
-          definition = function(x, n = 1, FUN, ...) {
+          definition = function(x, FUN, ..., n = 1) {
 
             ## register multiple core
             registerDoParallel(cores = n)
 
-            p <- t(x@.Data)
+            p <- x@.Data
             ft <- x@idx
             ppiNames <- rownames(ft)
             ppiNum <- nrow(ft)

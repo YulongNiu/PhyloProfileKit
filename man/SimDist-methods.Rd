@@ -6,14 +6,12 @@
 \alias{SimDist,PPIdx-method}
 \title{Batch process of similarity and distance.}
 \usage{
-SimDist(x, n, method, ...)
+SimDist(x, method, ..., n)
 
-\S4method{SimDist}{PPIdx}(x, n = 1, method, ...)
+\S4method{SimDist}{PPIdx}(x, method, ..., n = 1)
 }
 \arguments{
 \item{x}{A \code{PP} object.}
-
-\item{n}{The number of CPUs or processors.}
 
 \item{method}{A character string.
 \itemize{
@@ -30,6 +28,8 @@ SimDist(x, n, method, ...)
 \itemize{
   \item \code{bin}: Integer. The number of breaks in the \code{"MI"} method for continuous profiles.
 }}
+
+\item{n}{The number of CPUs or processors.}
 }
 \value{
 A numeric vector

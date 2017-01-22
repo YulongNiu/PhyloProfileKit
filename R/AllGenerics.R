@@ -45,7 +45,7 @@ setGeneric(name = 'Norm',
 ##' @export
 ##' 
 setGeneric(name = 'Batch',
-           def = function(x, n, FUN, ...){standardGeneric('Batch')})
+           def = function(x, FUN, ..., n){standardGeneric('Batch')})
 
 
 ##' @param x A \code{PP} object.
@@ -68,6 +68,6 @@ setGeneric(name = 'Batch',
 ##' @export
 ##' 
 setGeneric(name = 'SimDist',
-           def = function(x, n, method, ...){standardGeneric('SimDist')})
+           def = function(x, method, ..., n){standardGeneric('SimDist')})
 
 
