@@ -113,9 +113,7 @@ arma::imat InferEdge(arma::umat edgeMat,
   return glMat;
 }
 
-
-//' @param pr1 1st "presence-absence" pattern.
-//' @param pr2 2nd "presence-absence" pattern.
+//' @inheritParams SimCor
 //' @inheritParams InferEdge
 //' @return A number indicating the Dollo's parsimony distance.
 //' @rdname dollo
@@ -124,11 +122,11 @@ arma::imat InferEdge(arma::umat edgeMat,
 // [[Rcpp::export]]
 arma::uword DolloDist(arma::umat edgeMat,
                       Rcpp::List tipPath,
-                      Rcpp::NumericVector pr1,
-                      Rcpp::NumericVector pr2) {
+                      Rcpp::NumericVector f,
+                      Rcpp::NumericVector t) {
 
-  imat glMat1 = InferEdge(edgeMat, tipPath, pr1);
-  imat glMat2 = InferEdge(edgeMat, tipPath, pr2);
+  imat glMat1 = InferEdge(edgeMat, tipPath, f);
+  imat glMat2 = InferEdge(edgeMat, tipPath, t);
 
   uword dist = accu(abs((glMat1.col(0) - glMat1.col(1)) - (glMat2.col(0) - glMat2.col(1))));
 
