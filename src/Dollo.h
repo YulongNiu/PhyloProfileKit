@@ -14,7 +14,7 @@ arma::imat InferEdge(arma::umat edgeMat,
 
 arma::uword DolloDist(arma::umat edgeMat,
                       Rcpp::List tipPath,
-                      Rcpp::NumericVector pr1,
-                      Rcpp::NumericVector pr2);
+                      Rcpp::NumericVector f,
+                      Rcpp::NumericVector t);
 
 #endif

@@ -11,7 +11,7 @@ InferGainNodes(gainList)
 
 InferEdge(edgeMat, tipPath, pr)
 
-DolloDist(edgeMat, tipPath, pr1, pr2)
+DolloDist(edgeMat, tipPath, f, t)
 
 MergeList(x)
 }
@@ -24,9 +24,9 @@ MergeList(x)
 
 \item{pr}{A numeric vector indicates the "presence-absence" pattern."pr" should be in the same order with the tips of tree}
 
-\item{pr1}{1st "presence-absence" pattern.}
+\item{f}{Numeric vector indicating a gene profile.}
 
-\item{pr2}{2nd "presence-absence" pattern.}
+\item{t}{Numeric vector indicating a gene profile.}
 
 \item{x}{A list only contains unsigned interger vectors.}
 }

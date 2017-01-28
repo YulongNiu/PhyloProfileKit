@@ -19,7 +19,7 @@ using namespace arma;
 //'
 //' \code{DistEuclidean()}: Euclidean distance.
 //'
-//' @title similarity and distance
+//' @title Similarity and distance
 //' @param f Numeric vector indicating a gene profile.
 //' @param t Numeric vector indicating a gene profile.
 //' @return A numeric value.

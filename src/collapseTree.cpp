@@ -6,7 +6,18 @@ using namespace Rcpp;
 using namespace arma;
 
 
-//' @rdname collapseTree
+//' Collapse phylogenetic profiles by the phylogenetic tree
+//'
+//' The branches with same profile pattern are merged.
+//'
+//' @title Collapse tree
+//' @return A numeric matrix with two columns representing collapsed two profiles.
+//' @param tipNum A int value. Tip (species) number.
+//' @inheritParams SimCor
+//' @inheritParams InferEdge
+//' @references \href{http://rsif.royalsocietypublishing.org/content/5/19/151}{collapse tree description}
+//' @author Yulong Niu \email{niuylscu@@gmail.com}
+//' @keywords internal
 // [[Rcpp::export]]
 arma::umat CollapseTree(arma::umat edgeMat,
                         arma::uword tipNum,
@@ -72,6 +83,15 @@ arma::umat CollapseTree(arma::umat edgeMat,
 }
 
 
+//' Test two rows are equal
+//'
+//' Pairwise comparison tow rows
+//'
+//' @title Compare two rows Test
+//' @return logic value.
+//' @param m A numeric matrix with two rows.
+//' @author Yulong Niu \email{niuylscu@@gmail.com}
+//' @keywords internal
 // [[Rcpp::export]]
 bool isTwoRowsEqual(arma::umat m) {
   return sum(m.row(0) == m.row(1)) == m.n_cols;

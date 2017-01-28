@@ -6,6 +6,31 @@
 
 using namespace Rcpp;
 
+// CollapseTree
+arma::umat CollapseTree(arma::umat edgeMat, arma::uword tipNum, arma::uvec f, arma::uvec t);
+RcppExport SEXP PhyloProfile_CollapseTree(SEXP edgeMatSEXP, SEXP tipNumSEXP, SEXP fSEXP, SEXP tSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::umat >::type edgeMat(edgeMatSEXP);
+    Rcpp::traits::input_parameter< arma::uword >::type tipNum(tipNumSEXP);
+    Rcpp::traits::input_parameter< arma::uvec >::type f(fSEXP);
+    Rcpp::traits::input_parameter< arma::uvec >::type t(tSEXP);
+    rcpp_result_gen = Rcpp::wrap(CollapseTree(edgeMat, tipNum, f, t));
+    return rcpp_result_gen;
+END_RCPP
+}
+// isTwoRowsEqual
+bool isTwoRowsEqual(arma::umat m);
+RcppExport SEXP PhyloProfile_isTwoRowsEqual(SEXP mSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::umat >::type m(mSEXP);
+    rcpp_result_gen = Rcpp::wrap(isTwoRowsEqual(m));
+    return rcpp_result_gen;
+END_RCPP
+}
 // InferGainNodes
 arma::uvec InferGainNodes(Rcpp::List gainList);
 RcppExport SEXP PhyloProfile_InferGainNodes(SEXP gainListSEXP) {
@@ -31,16 +56,16 @@ BEGIN_RCPP
 END_RCPP
 }
 // DolloDist
-arma::uword DolloDist(arma::umat edgeMat, Rcpp::List tipPath, Rcpp::NumericVector pr1, Rcpp::NumericVector pr2);
-RcppExport SEXP PhyloProfile_DolloDist(SEXP edgeMatSEXP, SEXP tipPathSEXP, SEXP pr1SEXP, SEXP pr2SEXP) {
+arma::uword DolloDist(arma::umat edgeMat, Rcpp::List tipPath, Rcpp::NumericVector f, Rcpp::NumericVector t);
+RcppExport SEXP PhyloProfile_DolloDist(SEXP edgeMatSEXP, SEXP tipPathSEXP, SEXP fSEXP, SEXP tSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< arma::umat >::type edgeMat(edgeMatSEXP);
     Rcpp::traits::input_parameter< Rcpp::List >::type tipPath(tipPathSEXP);
-    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type pr1(pr1SEXP);
-    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type pr2(pr2SEXP);
-    rcpp_result_gen = Rcpp::wrap(DolloDist(edgeMat, tipPath, pr1, pr2));
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type f(fSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type t(tSEXP);
+    rcpp_result_gen = Rcpp::wrap(DolloDist(edgeMat, tipPath, f, t));
     return rcpp_result_gen;
 END_RCPP
 }

@@ -7,7 +7,7 @@
 \alias{SimJaccard}
 \alias{SimMIBin}
 \alias{SimMIConti}
-\title{similarity and distance}
+\title{Similarity and distance}
 \usage{
 SimMIBin(f, t)
 
