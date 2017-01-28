@@ -1,5 +1,5 @@
-#ifndef _MICPP_H_
-#define _MICPP_H_
+#ifndef _MI_H_
+#define _MI_H_
 
 #include <RcppArmadillo.h>
 #include <Rcpp.h>

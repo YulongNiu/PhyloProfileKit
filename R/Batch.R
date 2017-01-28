@@ -18,8 +18,7 @@ NULL
 ##' @importFrom doParallel registerDoParallel stopImplicitCluster
 ##' @importFrom foreach foreach %dopar%
 ##' @rdname Batch-methods
-##' @seealso
-##' Batch process of similarity/distance \code{\link{SimDist}}.
+##' @seealso Batch process of similarity/distance \code{\link{SimDist}}.
 ##' @exportMethod Batch
 ##'
 setMethod(f = 'Batch',

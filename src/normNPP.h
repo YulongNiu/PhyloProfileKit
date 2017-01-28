@@ -1,5 +1,5 @@
-#ifndef _NORMNPPCPP_H_
-#define _NORMNPPCPP_H_
+#ifndef _NORMNPP_H_
+#define _NORMNPP_H_
 
 #include <RcppArmadillo.h>
 #include <Rcpp.h>
