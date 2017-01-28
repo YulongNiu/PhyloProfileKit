@@ -25,20 +25,16 @@ arma::umat CollapseTree(arma::umat edgeMat,
   // initiate cm(collapseMat)
   umat cm(0, 4);
 
-  cout << tipMat << endl;
-  cout << nodeMat << endl;
+  while (true) {
+    uvec uniqNodes = unique(tipMat.col(0));
 
-  while(true) {
-    uvec eachNodes = tipMat.col(0);
-    uvec uniqNodes = unique(eachNodes);
-
-    if (uniqNodes.n_elem == eachNodes.n_elem) {
+    if (uniqNodes.n_elem == tipMat.n_rows) {
       cm = join_cols(cm, tipMat);
       break;
     }  else {}
 
     for (uword i = 0; i < uniqNodes.n_elem; ++i) {
-      uvec nodeIdx = eachNodes == uniqNodes(i);
+      uvec nodeIdx = tipMat.col(0) == uniqNodes(i);
 
       if (sum(nodeIdx) > 1) {
         // one node has multiple tips
@@ -48,8 +44,6 @@ arma::umat CollapseTree(arma::umat edgeMat,
           // 1. construct the new vec
           urowvec newV(4);
           uvec rpIdx = find(nodeMat.col(1) == uniqNodes(i));
-          cout << nodeMat.row(rpIdx(0)).subvec(0, 1) << endl;
-          cout << tipMulM << endl;
           newV.subvec(0, 1) = nodeMat.row(rpIdx(0)).subvec(0, 1);
           newV.subvec(2, 3) = tipMulM.row(0).subvec(2, 3);
 
@@ -66,12 +60,6 @@ arma::umat CollapseTree(arma::umat edgeMat,
           tipMat = tipMat.rows(find(1 - nodeIdx));
         }
       } else {}
-
-      cout << i << endl;
-
-      cout << tipMat << endl;
-
-      cout << cm << endl;
     }
   }
   return cm;
@@ -80,5 +68,6 @@ arma::umat CollapseTree(arma::umat edgeMat,
 
 // [[Rcpp::export]]
 bool isTwoRowsEqual(arma::umat m) {
-  return sum(abs(m.row(0) - m.row(1))) == 0;
+  return sum(m.row(0) == m.row(1)) == m.n_cols;
 }
+
