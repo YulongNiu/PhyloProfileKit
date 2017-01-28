@@ -64,9 +64,13 @@ sourceCpp('../src/collapseTree.cpp')
 
 set.seed(123456)
 testTree <- rtree(10)
-
 tmp1 <- c(1, 0, 1, 0, 1, 0, 0, 1, 0, 0)
 tmp2 <- c(1, 1, 1, 0, 0, 1, 1, 0, 0, 0)
+CollapseTree(testTree$edge, 10, tmp1, tmp2)
+
+testTree <- rtree(2)
+tmp1 <- c(1, 1)
+tmp2 <- c(0, 0)
 CollapseTree(testTree$edge, 10, tmp1, tmp2)
 
 pathList <- nodepath(testTree)

@@ -25,6 +25,12 @@ arma::umat CollapseTree(arma::umat edgeMat,
   // initiate cm(collapseMat)
   umat cm(0, 4);
 
+  if (all(f == f(0)) &&
+      all(t == t(0))) {
+    // f and t have same gain/loss pattern
+    return tipMat.row(0).cols(2, 3);
+  } else {}
+
   while (true) {
     uvec uniqNodes = unique(tipMat.col(0));
 
@@ -62,7 +68,7 @@ arma::umat CollapseTree(arma::umat edgeMat,
       } else {}
     }
   }
-  return cm;
+  return cm.cols(2, 3);
 }
 
 
