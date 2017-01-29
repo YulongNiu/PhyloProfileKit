@@ -24,9 +24,9 @@ setMethod(f = 'show',
             cat('description: "phylogenetic profile"\n')
             cat('class: ', class(object), '\n')
             if (isBinMat_internal(p)) {
-              cat('profile: "binning"', '\n')
+              cat('profile: binning', '\n')
             } else {
-              cat('profile: "continuous"', '\n')
+              cat('profile: continuous', '\n')
             }
             cat('#species: ', ncol(p), '\n')
             cat('#proteins: ', nrow(p), '\n')
