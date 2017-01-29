@@ -18,7 +18,7 @@ setMethod(f = 'show',
             cat('---\n')
             cat('description: "phylogenetic profile with linkage indices"\n')
             cat('class: ', class(object), '\n')
-             if (isBinMat_internal(p)) {
+            if (isBinMat_internal(p)) {
               cat('profile: "binning"', '\n')
             } else {
               cat('profile: "continuous"', '\n')

@@ -5,6 +5,7 @@ NULL
 ##'
 ##' Similarity and distance of paired profiles.
 ##'
+##' @inheritParams SimDist
 ##' @title Batch process of similarity and distance.
 ##' @return A numeric vector
 ##' @examples
@@ -36,7 +37,12 @@ setMethod(f = 'SimDist',
                         DistEulidean = DistEuclidean)
 
             bv <- Batch(x = x, n = n, FUN = m, ...)
-            return(bv)
 
+            bvRes <- new('PPResult',
+                         bv,
+                         idx = x@idx,
+                         pnames = rownames(x@.Data),
+                         method = method)
+            return(bvRes)
           })
 
