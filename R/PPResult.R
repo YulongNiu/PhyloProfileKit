@@ -26,3 +26,30 @@ setMethod(f = 'show',
             str(object@idx)
             str(object@pnames)
             })
+
+
+##' Show method for \code{PP} and \code{PPIdx} objects
+##'
+##' @title Show methods
+##' @param x A \code{PPResult} object.
+##' @param row.names
+##' @param optional
+##' @param ...
+##' @return data.frame of profiling results.
+##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @seealso \code{\link[base]{as.data.frame}}
+##' @exportMethod as.data.frame
+##'
+setMethod(f = 'as.data.frame',
+          signature = c(x = 'PPResult'),
+          definition = function(x, row.names = NULL, optional = FALSE, ...) {
+            pn <- x@pnames
+            idx <- x@idx
+            res <- data.frame(pn[idx[, 1]],
+                              pn[idx[, 2]],
+                              x@.Data)
+            rownames(res) <- rownames(idx)
+            colnames(res) <- c(colnames(idx), x@method)
+
+            return(res)
+          })

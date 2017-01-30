@@ -71,3 +71,4 @@ setGeneric(name = 'SimDist',
            def = function(x, method, ..., n){standardGeneric('SimDist')})
 
 
+
