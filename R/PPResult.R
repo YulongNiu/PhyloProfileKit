@@ -28,11 +28,13 @@ setMethod(f = 'show',
             })
 
 
-##' Show method for \code{PP} and \code{PPIdx} objects
+##' Output of profiling results.
 ##'
-##' @title Show methods
+##' Convert profiling results into a data frame with protein/gene names.
+##'
+##' @title Profiling results
 ##' @param x A \code{PPResult} object.
-##' @param row.names
+##' @param row.names 
 ##' @param optional
 ##' @param ...
 ##' @return data.frame of profiling results.
