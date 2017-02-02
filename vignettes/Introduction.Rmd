@@ -155,7 +155,7 @@ PPIdx(sceP, pIdx, pIdx)
 PPIdx(sceP, pIdx, pIdx, self = TRUE)
 
 ## linkages with rest whole proteome 
-PPIdx(sceP, pIdx, 1:nrow(sceP))
+PPIdx(sceP, pIdx, 1:nrow(sceP), bigmat = TRUE)
 ```
 
 ## Co-occurrency methods

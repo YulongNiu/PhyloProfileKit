@@ -46,7 +46,7 @@ as.data.frame.PPResult <- function(x, ...) {
 
 ##' @method head PPResult
 ##' @importFrom magrittr %>%
-##' @importFrom utils head
+##' @importFrom bigmemory head
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @export
 ##'
@@ -63,7 +63,7 @@ head.PPResult <- function(x, n = 6L, ...) {
 
 ##' @method tail PPResult
 ##' @importFrom magrittr %>%
-##' @importFrom utils tail
+##' @importFrom bigmemory tail
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @export
 ##'
