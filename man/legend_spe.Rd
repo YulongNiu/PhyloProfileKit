@@ -32,4 +32,3 @@ grid.arrange(speLeg, ncol = 1)
 \author{
 Yulong Niu \email{niuylscu@gmail.com}
 }
-
