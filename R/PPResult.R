@@ -55,7 +55,7 @@ head.PPResult <- function(x, n = 6L, ...) {
   headx <- new('PPResult',
                head(x@.Data, n, ...),
                idx = head(x@idx, n, ...),
-               pnames = head(x@pnames, n, ...),
+               pnames = x@pnames,
                method = x@method)
   headx %>% as.data.frame %>% return
 }
@@ -72,7 +72,7 @@ tail.PPResult <- function(x, n = 6L, ...) {
   tailx <- new('PPResult',
                tail(x@.Data, n, ...),
                idx = tail(x@idx, n, ...),
-               pnames = tail(x@pnames, n, ...),
+               pnames = x@pnames,
                method = x@method)
   tailx %>% as.data.frame %>% return
 }
