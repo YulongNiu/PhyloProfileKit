@@ -3,8 +3,8 @@
 \docType{methods}
 \name{PPData}
 \alias{PPData}
-\alias{PPData,PP-method}
 \alias{PPData<-}
+\alias{PPData,PP-method}
 \alias{PPData<-,PP-method}
 \title{Select and replace \code{PP} data}
 \usage{
@@ -61,4 +61,3 @@ ppContinuous
 \author{
 Yulong Niu \email{niuylscu@gmail.com}
 }
-

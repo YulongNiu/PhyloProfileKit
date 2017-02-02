@@ -43,10 +43,9 @@ rownames(ft) <- paste0('p_', 1:nrow(ft))
 
 DolloDistBatch(ftMat = ft, profileMat = sampleP, edgeMat = tree$edge, tipPath = pathList, n = 2)
 }
-\author{
-Yulong Niu \email{niuylscu@gmail.com}
-}
 \seealso{
 dollo
 }
-
+\author{
+Yulong Niu \email{niuylscu@gmail.com}
+}

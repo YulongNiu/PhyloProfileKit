@@ -22,4 +22,3 @@ A empty white block used as interval to organize plot
 Yulong Niu \email{niuylscu@gmail.com}
 }
 \keyword{internal}
-

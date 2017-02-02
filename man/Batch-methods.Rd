@@ -35,10 +35,9 @@ require('magrittr')
 ppBinIdx <- sample(0:1, 10 * 20, replace = TRUE) \%>\% matrix(ncol = 20) \%>\% PP \%>\% PPIdx(1:3, 1:3)
 Batch(ppBinIdx, cor, n = 2)
 }
-\author{
-Yulong Niu \email{niuylscu@gmail.com}
-}
 \seealso{
 Batch process of similarity/distance \code{\link{SimDist}}.
 }
-
+\author{
+Yulong Niu \email{niuylscu@gmail.com}
+}

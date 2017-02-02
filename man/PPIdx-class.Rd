@@ -12,7 +12,7 @@ This class represents the data structure of phylogenetic profile with linkage in
 \describe{
 \item{\code{idx}}{An integer matrix with two columns. It validates the rownames and colnames of the profile.}
 }}
+
 \author{
 Yulong Niu \email{niuylscu@gmail.com}
 }
-

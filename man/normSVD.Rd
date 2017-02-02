@@ -41,13 +41,12 @@ Step3: L^2 SVD normalization.
 
 The core SVD normalization is retrieved from the SVD-Phy package with performance modification.
 }
-\author{
-Yulong Niu \email{niuylscu@gmail.com}
-}
 \references{
 \href{https://bitbucket.org/andrea/svd-phy}{SVD-Phy package}
 
 \href{http://bioinformatics.oxfordjournals.org/content/suppl/2015/11/25/btv696.DC1/SVD-Phy-supplementary-material.docx}{SVD description}
 }
+\author{
+Yulong Niu \email{niuylscu@gmail.com}
+}
 \keyword{internal}
-

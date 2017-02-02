@@ -33,4 +33,3 @@ Select or replace parts of a \code{PP} object
 \author{
 Yulong Niu \email{niuylscu@gmail.com}
 }
-

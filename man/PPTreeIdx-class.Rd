@@ -12,10 +12,10 @@ This class represents the data structure of the phylogenetic profile with linkag
 \describe{
 \item{\code{tree}}{A numeric vector representing the profiling data.}
 }}
-\author{
-Yulong Niu \email{niuylscu@gmail.com}
-}
+
 \seealso{
 The raw definition of \code{\link[ape]{phylo}}.
 }
-
+\author{
+Yulong Niu \email{niuylscu@gmail.com}
+}

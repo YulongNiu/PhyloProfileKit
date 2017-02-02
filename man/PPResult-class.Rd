@@ -18,7 +18,7 @@ This class represents the data structure of phylogenetic profiling results.
 
 \item{\code{method}}{A character string indicating the profiling method.}
 }}
+
 \author{
 Yulong Niu \email{niuylscu@gmail.com}
 }
-

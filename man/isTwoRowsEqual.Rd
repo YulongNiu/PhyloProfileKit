@@ -22,4 +22,3 @@ Pairwise comparison tow rows
 Yulong Niu \email{niuylscu@gmail.com}
 }
 \keyword{internal}
-

@@ -28,30 +28,51 @@ setMethod(f = 'show',
             })
 
 
-##' Output of profiling results.
-##'
-##' Convert profiling results into a data frame with protein/gene names.
-##'
-##' @title Profiling results
-##' @param x A \code{PPResult} object.
-##' @param row.names 
-##' @param optional
-##' @param ...
-##' @return data.frame of profiling results.
+##' @method as.data.frame PPResult
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @seealso \code{\link[base]{as.data.frame}}
-##' @exportMethod as.data.frame
+##' @export
 ##'
-setMethod(f = 'as.data.frame',
-          signature = c(x = 'PPResult'),
-          definition = function(x, row.names = NULL, optional = FALSE, ...) {
-            pn <- x@pnames
-            idx <- x@idx
-            res <- data.frame(pn[idx[, 1]],
-                              pn[idx[, 2]],
-                              x@.Data)
-            rownames(res) <- rownames(idx)
-            colnames(res) <- c(colnames(idx), x@method)
+as.data.frame.PPResult <- function(x, ...) {
+  pn <- x@pnames
+  idx <- x@idx
+  res <- data.frame(pn[idx[, 1]],
+                    pn[idx[, 2]],
+                    x@.Data)
+  rownames(res) <- rownames(idx)
+  colnames(res) <- c(colnames(idx), x@method)
 
-            return(res)
-          })
+  return(res)
+}
+
+##' @method head PPResult
+##' @importFrom magrittr %>%
+##' @importFrom utils head
+##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @export
+##'
+head.PPResult <- function(x, n = 6L, ...) {
+
+  headx <- new('PPResult',
+               head(x@.Data, n, ...),
+               idx = head(x@idx, n, ...),
+               pnames = head(x@pnames, n, ...),
+               method = x@method)
+  headx %>% as.data.frame %>% return
+}
+
+
+##' @method tail PPResult
+##' @importFrom magrittr %>%
+##' @importFrom utils tail
+##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @export
+##'
+tail.PPResult <- function(x, n = 6L, ...) {
+
+  tailx <- new('PPResult',
+               tail(x@.Data, n, ...),
+               idx = tail(x@idx, n, ...),
+               pnames = tail(x@pnames, n, ...),
+               method = x@method)
+  tailx %>% as.data.frame %>% return
+}

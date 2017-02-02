@@ -51,4 +51,3 @@ SimDist(f1, n = 2, 'SimMI')
 \author{
 Yulong Niu \email{niuylscu@gmail.com}
 }
-

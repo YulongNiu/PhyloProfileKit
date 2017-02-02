@@ -24,11 +24,10 @@ Collapse phylogenetic profiles by the phylogenetic tree
 \details{
 The branches with same profile pattern are merged.
 }
-\author{
-Yulong Niu \email{niuylscu@gmail.com}
-}
 \references{
 \href{http://rsif.royalsocietypublishing.org/content/5/19/151}{collapse tree description}
 }
+\author{
+Yulong Niu \email{niuylscu@gmail.com}
+}
 \keyword{internal}
-

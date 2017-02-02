@@ -13,10 +13,9 @@ A list containing three objects:
 "genecol" is the vector of colors corresponding to the genes in "atpPhylo".
 "domain" is the domain names corresponding to the "speCol"
 }
-\author{
-Yulong Niu \email{niuylscu@gmail.com}
-}
 \references{
 Unpublished data from Yulong Niu
 }
-
+\author{
+Yulong Niu \email{niuylscu@gmail.com}
+}
