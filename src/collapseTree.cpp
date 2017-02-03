@@ -6,7 +6,7 @@ using namespace Rcpp;
 using namespace arma;
 
 
-//' Collapse phylogenetic profiles by the phylogenetic tree
+//' Collapse phylogenetic profiles according to the phylogenetic tree
 //'
 //' The branches with same profile pattern are merged.
 //'

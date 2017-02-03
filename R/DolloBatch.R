@@ -53,3 +53,10 @@ DolloDistBatch <- function(ftMat, profileMat, edgeMat, tipPath, n = 1) {
 
   return(batchVec)
 }
+
+
+## setMethod(f = 'Dollo',
+##           signature = c(x = 'PPTreeIdx'),
+##           definition = function(x, ..., n = 1) {
+
+##           })

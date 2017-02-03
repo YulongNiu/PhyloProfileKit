@@ -4,14 +4,17 @@
 \name{SimDist}
 \alias{SimDist}
 \alias{SimDist,PPIdx-method}
+\alias{SimDist,PPTreeIdx-method}
 \title{Batch process of similarity and distance.}
 \usage{
 SimDist(x, method, ..., n)
 
 \S4method{SimDist}{PPIdx}(x, method, ..., n = 1)
+
+\S4method{SimDist}{PPTreeIdx}(x, method, ..., n = 1)
 }
 \arguments{
-\item{x}{A \code{PP} object.}
+\item{x}{A \code{PPIdx}/\code{PPTreeIdx} object.}
 
 \item{method}{A character string.
 \itemize{
@@ -32,21 +35,29 @@ SimDist(x, method, ..., n)
 \item{n}{The number of CPUs or processors.}
 }
 \value{
-A numeric vector
+A numeric vector.
 }
 \description{
 Similarity or distance.
 }
 \details{
-Similarity and distance of paired profiles.
+Similarity and distance of paired profiles. If \code{PPTreeIdx} is object is input, the paired profile is collapsed according to the phylogenetic tree.
 }
 \examples{
 require('magrittr')
-data(fatp)
+require('ape')
+
+tree <- system.file('extdata', 'bioinfoTree.nex', package = "PhyloProfile") \%>\% read.nexus
+ppPath <- system.file('extdata', 'bioinfoProfile.csv', package = "PhyloProfile")
+
+sceP <- descPath \%>\% read.csv(row.names = 1) \%>\% as.matrix \%>\% PP
+sceL <- PPIdx(sceP, 1:5, 1:5)
+sceT <- PPTreeIdx(sceL, tree)
 
 ## Mutual information
-f1 <- fatp$atpPhylo \%>\% PP \%>\% PPIdx(1:6, 1:6)
-SimDist(f1, n = 2, 'SimMI')
+SimDist(sceL, 'SimMI', n = 2)
+simDist(sceT, 'SimMI', n = 2)
+
 }
 \author{
 Yulong Niu \email{niuylscu@gmail.com}

@@ -26,7 +26,7 @@ require('ape')
 
 ppLink <- sample(0:1, 10 * 20, replace = TRUE) \%>\% matrix(ncol = 20) \%>\% PP \%>\% PPIdx(1:5, 1:5)
 
-ppTree <- rtree(10, tip.label = paste0('spe', 10:1))
+ppTree <- rtree(8, tip.label = paste0('spe', 8:1))
 PPTreeIdx(ppLink, ppTree)
 }
 \author{

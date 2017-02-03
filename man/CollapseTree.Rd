@@ -19,7 +19,7 @@ CollapseTree(edgeMat, tipNum, f, t)
 A numeric matrix with two columns representing collapsed two profiles.
 }
 \description{
-Collapse phylogenetic profiles by the phylogenetic tree
+Collapse phylogenetic profiles according to the phylogenetic tree
 }
 \details{
 The branches with same profile pattern are merged.

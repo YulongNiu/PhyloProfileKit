@@ -48,7 +48,7 @@ setGeneric(name = 'Batch',
            def = function(x, FUN, ..., n){standardGeneric('Batch')})
 
 
-##' @param x A \code{PP} object.
+##' @param x A \code{PPIdx}/\code{PPTreeIdx} object.
 ##' @param method A character string.
 ##' \itemize{
 ##'   \item \code{"SimCor"}: Person's correlation coefficient.
@@ -70,5 +70,13 @@ setGeneric(name = 'Batch',
 setGeneric(name = 'SimDist',
            def = function(x, method, ..., n){standardGeneric('SimDist')})
 
+
+##' @param x A \code{PP} object.
+##' @inheritParams SimDist
+##' @rdname ChooseSimDistFun-methods
+##' @keywords internal
+##' 
+setGeneric(name = 'ChooseSimDistFun',
+           def = function(x, method, ...){standardGeneric('ChooseSimDistFun')})
 
 
