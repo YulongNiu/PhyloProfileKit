@@ -46,4 +46,6 @@ setMethod(f = 'Dollo',
                          idx = x@idx,
                          pnames = rownames(x@.Data),
                          method = 'Dollo')
+
+            return(bvRes)
           })
