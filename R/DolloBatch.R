@@ -45,5 +45,5 @@ setMethod(f = 'Dollo',
                          bv,
                          idx = x@idx,
                          pnames = rownames(x@.Data),
-                         method = method)
+                         method = 'Dollo')
           })
