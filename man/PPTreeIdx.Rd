@@ -24,7 +24,7 @@ Construct a \code{PP} object. The species (columns) are in the same order of phy
 require('magrittr')
 require('ape')
 
-ppLink <- sample(0:1, 10 * 20, replace = TRUE) \%>\% matrix(ncol = 20) \%>\% PP \%>\% PPIdx(1:5, 1:5)
+ppLink <- sample(0:1, 10 * 20, replace = TRUE) \%>\% matrix(ncol = 20) \%>\% PP \%>\% PPIdx(1:6, 1:6)
 
 ppTree <- rtree(8, tip.label = paste0('spe', 8:1))
 PPTreeIdx(ppLink, ppTree)

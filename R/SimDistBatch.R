@@ -3,7 +3,7 @@ NULL
 
 ##' Similarity or distance.
 ##'
-##' Similarity and distance of paired profiles. If \code{PPTreeIdx} is object is input, the paired profile is collapsed according to the phylogenetic tree.
+##' Similarity and distance of paired profiles. If the input is a \code{PPTreeIdx} object, the paired profile is collapsed according to the phylogenetic tree.
 ##'
 ##' @inheritParams SimDist
 ##' @title Batch process of similarity and distance.
@@ -16,7 +16,7 @@ NULL
 ##' ppPath <- system.file('extdata', 'bioinfoProfile.csv', package = "PhyloProfile")
 ##'
 ##' sceP <- ppPath %>% read.csv(row.names = 1) %>% as.matrix %>% PP
-##' sceL <- PPIdx(sceP, 1:5, 1:5)
+##' sceL <- PPIdx(sceP, 1:6, 1:6)
 ##' sceT <- PPTreeIdx(sceL, tree)
 ##'
 ##' ## Mutual information
