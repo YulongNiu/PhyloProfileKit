@@ -11,20 +11,16 @@ setMethod(f = 'show',
           signature = 'PPResult',
           definition = function(object){
 
-            res <- object@.Data
-
             ##~~~~~~~~~~~~~head~~~~~~~~~~~~
             cat('---\n')
             cat('description: "phylogenetic profiling results"\n')
             cat('class: ', class(object), '\n')
             cat('method: ', object@method, '\n')
-            cat('#linkages: ', length(res), '\n')
+            cat('#linkages: ', length(object@.Data), '\n')
             cat('---\n')
             ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-            str(res)
-            str(object@idx)
-            str(object@pnames)
+            str(object)
             })
 
 
