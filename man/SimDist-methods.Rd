@@ -50,13 +50,13 @@ require('ape')
 tree <- system.file('extdata', 'bioinfoTree.nex', package = "PhyloProfile") \%>\% read.nexus
 ppPath <- system.file('extdata', 'bioinfoProfile.csv', package = "PhyloProfile")
 
-sceP <- descPath \%>\% read.csv(row.names = 1) \%>\% as.matrix \%>\% PP
+sceP <- ppPath \%>\% read.csv(row.names = 1) \%>\% as.matrix \%>\% PP
 sceL <- PPIdx(sceP, 1:5, 1:5)
 sceT <- PPTreeIdx(sceL, tree)
 
 ## Mutual information
 SimDist(sceL, 'SimMI', n = 2)
-simDist(sceT, 'SimMI', n = 2)
+SimDist(sceT, 'SimMI', n = 2)
 
 }
 \author{
