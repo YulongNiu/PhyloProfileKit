@@ -32,11 +32,11 @@ BayesTraitsBatch(ftMat, profileMat, n = 1, ...)
 
 \item{...}{Inherit parameters from the "BayesTraitsMode()" in this package.}
 
-\item{ftMat}{A two column matrix which should at least have rownames.}
+\item{ftMat}{Paired profiles.}
 
-\item{profileMat}{The phylogenetic profile data with 1 and 0 denoting the presence and absence of orthologous, respectively. It is a named numeric matrix, columns are genes and rows are species.}
+\item{profileMat}{Profiles.}
 
-\item{n}{Number of CPUs.}
+\item{n}{The number of CPUs or processors.}
 }
 \value{
 BayesTraitsMode(): Harmonic mean.

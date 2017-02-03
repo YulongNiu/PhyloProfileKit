@@ -13,7 +13,8 @@ NULL
 ##'
 ##' ## Person correlation coefficient
 ##' ppBinIdx <- sample(0:1, 10 * 20, replace = TRUE) %>% matrix(ncol = 20) %>% PP %>% PPIdx(1:3, 1:3)
-##' Batch(ppBinIdx, cor, n = 2)
+##' testfun <- function(f, t) {sum(f * t)}
+##' Batch(ppBinIdx, testfun, n = 2)
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom doParallel registerDoParallel stopImplicitCluster
 ##' @importFrom foreach foreach %dopar%
@@ -37,7 +38,7 @@ setMethod(f = 'Batch',
               ## print(paste0('It is running ', i, ' in a total of ', ppiNum, '.'))
               f <- p[ft[i, 1], ]
               t <- p[ft[i, 2], ]
-              eachSD <- FUN(f, t, ...)
+              eachSD <- FUN(f = f, t = t, ...)
 
               return(eachSD)
             }
@@ -47,3 +48,5 @@ setMethod(f = 'Batch',
 
             return(batchVec)
           })
+
+

@@ -33,7 +33,8 @@ require('magrittr')
 
 ## Person correlation coefficient
 ppBinIdx <- sample(0:1, 10 * 20, replace = TRUE) \%>\% matrix(ncol = 20) \%>\% PP \%>\% PPIdx(1:3, 1:3)
-Batch(ppBinIdx, cor, n = 2)
+testfun <- function(f, t) {sum(f * t)}
+Batch(ppBinIdx, testfun, n = 2)
 }
 \seealso{
 Batch process of similarity/distance \code{\link{SimDist}}.

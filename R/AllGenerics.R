@@ -80,3 +80,12 @@ setGeneric(name = 'ChooseSimDistFun',
            def = function(x, method, ...){standardGeneric('ChooseSimDistFun')})
 
 
+
+##' @param x \code{PPTreeIdx} object.
+##' @param ... Additional parameters.
+##' @inheritParams Batch
+##' @rdname Dollo-methods
+##' @export
+##' 
+setGeneric(name = 'Dollo',
+           def = function(x, ..., n){standardGeneric('Dollo')})

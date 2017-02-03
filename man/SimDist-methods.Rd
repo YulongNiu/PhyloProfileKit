@@ -5,7 +5,7 @@
 \alias{SimDist}
 \alias{SimDist,PPIdx-method}
 \alias{SimDist,PPTreeIdx-method}
-\title{Batch process of similarity and distance.}
+\title{Batch process of similarity and distance}
 \usage{
 SimDist(x, method, ..., n)
 
@@ -35,10 +35,10 @@ SimDist(x, method, ..., n)
 \item{n}{The number of CPUs or processors.}
 }
 \value{
-A numeric vector.
+A \code{PPResult} object.
 }
 \description{
-Similarity or distance.
+Similarity or distance
 }
 \details{
 Similarity and distance of paired profiles. If the input is a \code{PPTreeIdx} object, the paired profile is collapsed according to the phylogenetic tree.

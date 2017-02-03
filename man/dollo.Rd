@@ -31,11 +31,11 @@ MergeList(x)
 \item{x}{A list only contains unsigned interger vectors.}
 }
 \value{
-InferGainNodes(): A vector (with tips) of 1 and 0.
+\code{InferGainNodes()}: A vector (with tips) of 1 and 0.
 
-DolloDist(): An integer.
+\code{DolloDist()}: An integer.
 
-InferEdge(): A numeric edge present and absent matrix.
+\code{InferEdge()}: A numeric edge present and absent matrix.
 
 A number indicating the Dollo's parsimony distance.
 
@@ -49,28 +49,11 @@ Algorithm:
 1. Find the latest common ancestors (LCA) for all gain tips.
 2. Select the nodes from each tip to the LCA.
 
-InferGainNodes(): Infer the present nodes and tips.
+\code{InferGainNodes()}: Infer the present nodes and tips.
 
-DolloDist(): Infer the Dollo's parsimony distance.
+\code{DolloDist()}: Infer the Dollo's parsimony distance.
 
-InferEdge(): Infer the present and absent of each edges.
-}
-\examples{
-## example tree
-library('ape')
-testTreeText <- '((((t1, t2),(t3, t4)),t5), (t6, (t7, t8)));'
-testTree <- read.tree(text = testTreeText)
-plot(testTree)
-
-## node path
-pathList <- nodepath(testTree)
-InferGainNodes(pathList[1])
-InferGainNodes(pathList[1:3])
-
-InferEdge(testTree$edge, pathList, c(0, 0, 0, 0, 1, 1, 1, 1))
-
-DolloDist(testTree$edge, pathList, c(0, 0, 0, 0, 1, 1, 1, 1), c(0, 0, 0, 0, 0, 1, 1, 1))
-DolloDist(testTree$edge, pathList, c(1, 1, 1, 1, 1, 0, 0, 1), c(0, 0, 0, 0, 1, 0, 0, 1))
+\code{InferEdge()}: Infer the present and absent of each edges.
 }
 \references{
 \url{https://www.ncbi.nlm.nih.gov/pubmed/?term=17535793}

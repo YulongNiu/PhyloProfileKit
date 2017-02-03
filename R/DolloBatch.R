@@ -1,62 +1,49 @@
-##' Dollo's parsimony distance of input phylogenetic profiles
+##' @include AllClasses.R AllGenerics.R Batch.R
+NULL
+
+##' Dollo's parsimony distance
 ##'
-##' DolloDistBatch(): Dollo's parsimony distance in batch mode.
+##' Dollo's parsimony distance of paired profiles.
 ##'
-##' @title Batch process of Dollo's parsimony distance.
-##' @param ftMat A two column matrix which should at least have rownames.
-##' @param profileMat The phylogenetic profile data with 1 and 0 denoting the presence and absence of orthologous, respectively. It is a named numeric matrix, columns are genes and rows are species.
-##' @param n Number of CPUs.
-##' @inheritParams DolloDist
-##' @return A numeric vector.
+##' @inheritParams Dollo
+##' @title Batch process of Dollo's parsimony distance
+##' @return A \code{PPResult} object.
 ##' @examples
+##' require('magrittr')
 ##' require('ape')
 ##'
-##' descPath <- system.file('extdata', 'bioinfoTree.nex', package = "PhyloProfile")
-##' tree <- read.nexus(descPath)
-##' pathList <- nodepath(tree)
+##' tree <- system.file('extdata', 'bioinfoTree.nex', package = "PhyloProfile") %>% read.nexus
+##' ppPath <- system.file('extdata', 'bioinfoProfile.csv', package = "PhyloProfile")
 ##'
-##' pair1 <- system.file('extdata', 'bioinfoGenepair1.txt', package = "PhyloProfile")
-##' oneP <- read.table(pair1, sep = '\t', row.names = 1)
-##' sampleP <- matrix(sample(0:1, nrow(oneP) * 1000, replace = TRUE), ncol = 1000)
-##' colnames(sampleP) <- paste0('gene', 1:1000)
-##' rownames(sampleP) <- rownames(oneP)
-##' ft <- matrix(paste0('gene', sample(1:1000, 10)), ncol = 2)
-##' rownames(ft) <- paste0('p_', 1:nrow(ft))
-##'
-##' DolloDistBatch(ftMat = ft, profileMat = sampleP, edgeMat = tree$edge, tipPath = pathList, n = 2)
-##' @seealso dollo
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @importFrom doParallel registerDoParallel stopImplicitCluster
-##' @importFrom foreach foreach %dopar%
-##' @export
+##' sceP <- ppPath %>% read.csv(row.names = 1) %>% as.matrix %>% PP
+##' sceT <- PPIdx(sceP, 1:6, 1:6) %>% PPTreeIdx(tree)
+##' Dollo(sceT, n = 2)
 ##' 
-DolloDistBatch <- function(ftMat, profileMat, edgeMat, tipPath, n = 1) {
+##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @importFrom ape nodepath
+##' @rdname Dollo-methods
+##' @references \href{https://www.ncbi.nlm.nih.gov/pubmed/?term=17535793}{Dollo's parsimony description}
 
-  ## register multiple core
-  registerDoParallel(cores = n)
+##' @exportMethod Dollo
+##'
+setMethod(f = 'Dollo',
+          signature = c(x = 'PPTreeIdx'),
+          definition = function(x, ..., n = 1) {
 
-  ppiNames <- rownames(ftMat)
-  ppiNum <- nrow(ftMat)
+            tree <- x@tree
+            em <- tree$edge
+            tp <- nodepath(tree)
 
-  geneNames <- colnames(profileMat)
+            bv <- Batch(x = x,
+                        FUN = DolloDist,
+                        edgeMat = em,
+                        tipPath = tp,
+                        ...,
+                        n = n)
 
-  batchVec <- foreach(i = 1:ppiNum, .combine = c) %dopar% {
-    print(paste0('It is running ', i, ' in a total of ', ppiNum, '.'))
-    genepair <- profileMat[, geneNames %in% ftMat[i, 1:2]]
-    eachSD <- DolloDist(edgeMat, tipPath, genepair[, 1], genepair[, 2])
-
-    return(eachSD)
-  }
-
-  ## stop multiple core
-  stopImplicitCluster()
-
-  return(batchVec)
-}
-
-
-## setMethod(f = 'Dollo',
-##           signature = c(x = 'PPTreeIdx'),
-##           definition = function(x, ..., n = 1) {
-
-##           })
+            bvRes <- new('PPResult',
+                         bv,
+                         idx = x@idx,
+                         pnames = rownames(x@.Data),
+                         method = method)
+          })

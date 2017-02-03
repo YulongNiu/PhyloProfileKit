@@ -147,7 +147,9 @@ BayesTraits <- function(...){
 } 
 
 
-##' @inheritParams DolloDistBatch
+##' @param ftMat Paired profiles.
+##' @param profileMat Profiles.
+##' @inheritParams Batch
 ##' @inheritParams BayesTraits
 ##' @importFrom doParallel registerDoParallel stopImplicitCluster
 ##' @importFrom foreach foreach %dopar%

@@ -1,13 +1,13 @@
-##' @include utilities.R Batch.R
+##' @include AllClasses.R AllGenerics.R utilities.R Batch.R
 NULL
 
-##' Similarity or distance.
+##' Similarity or distance
 ##'
 ##' Similarity and distance of paired profiles. If the input is a \code{PPTreeIdx} object, the paired profile is collapsed according to the phylogenetic tree.
 ##'
 ##' @inheritParams SimDist
-##' @title Batch process of similarity and distance.
-##' @return A numeric vector.
+##' @title Batch process of similarity and distance
+##' @return A \code{PPResult} object.
 ##' @examples
 ##' require('magrittr')
 ##' require('ape')
@@ -66,7 +66,7 @@ setMethod(f = 'SimDist',
               fnew <- ftMat[, 1]
               tnew <- ftMat[, 2]
 
-              return(M(f, t, ...))
+              return(M(fnew, tnew, ...))
             }
 
             tree <- x@tree

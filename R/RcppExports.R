@@ -36,41 +36,24 @@ isTwoRowsEqual <- function(m) {
 #' 1. Find the latest common ancestors (LCA) for all gain tips.
 #' 2. Select the nodes from each tip to the LCA.
 #'
-#' InferGainNodes(): Infer the present nodes and tips.
+#' \code{InferGainNodes()}: Infer the present nodes and tips.
 #'
-#' DolloDist(): Infer the Dollo's parsimony distance.
+#' \code{DolloDist()}: Infer the Dollo's parsimony distance.
 #'
-#' InferEdge(): Infer the present and absent of each edges.
+#' \code{InferEdge()}: Infer the present and absent of each edges.
 #'
 #' @title Dollo's parsimony distance
 #' @param gainList A list of ancestors of each gain tips. In each elements, the first one is the root.
 #' @return
 #'
-#' InferGainNodes(): A vector (with tips) of 1 and 0.
+#' \code{InferGainNodes()}: A vector (with tips) of 1 and 0.
 #'
-#' DolloDist(): An integer.
+#' \code{DolloDist()}: An integer.
 #'
-#' InferEdge(): A numeric edge present and absent matrix.
-#'
-#' @examples
-#' ## example tree
-#' library('ape')
-#' testTreeText <- '((((t1, t2),(t3, t4)),t5), (t6, (t7, t8)));'
-#' testTree <- read.tree(text = testTreeText)
-#' plot(testTree)
-#'
-#' ## node path
-#' pathList <- nodepath(testTree)
-#' InferGainNodes(pathList[1])
-#' InferGainNodes(pathList[1:3])
-#'
-#' InferEdge(testTree$edge, pathList, c(0, 0, 0, 0, 1, 1, 1, 1))
-#'
-#' DolloDist(testTree$edge, pathList, c(0, 0, 0, 0, 1, 1, 1, 1), c(0, 0, 0, 0, 0, 1, 1, 1))
-#' DolloDist(testTree$edge, pathList, c(1, 1, 1, 1, 1, 0, 0, 1), c(0, 0, 0, 0, 1, 0, 0, 1))
+#' \code{InferEdge()}: A numeric edge present and absent matrix.
 #' @author Yulong Niu \email{niuylscu@@gmail.com}
 #' @rdname dollo
-#' @export
+#' @keywords internal
 InferGainNodes <- function(gainList) {
     .Call('PhyloProfile_InferGainNodes', PACKAGE = 'PhyloProfile', gainList)
 }
@@ -79,7 +62,7 @@ InferGainNodes <- function(gainList) {
 #' @param tipPath  A list of ancestors of each gain tips. In each elements, the first one is the root.
 #' @param pr A numeric vector indicates the "presence-absence" pattern."pr" should be in the same order with the tips of tree
 #' @rdname dollo
-#' @export
+#' @keywords internal
 InferEdge <- function(edgeMat, tipPath, pr) {
     .Call('PhyloProfile_InferEdge', PACKAGE = 'PhyloProfile', edgeMat, tipPath, pr)
 }
@@ -89,7 +72,7 @@ InferEdge <- function(edgeMat, tipPath, pr) {
 #' @return A number indicating the Dollo's parsimony distance.
 #' @rdname dollo
 #' @references \url{https://www.ncbi.nlm.nih.gov/pubmed/?term=17535793}
-#' @export
+#' @keywords internal
 DolloDist <- function(edgeMat, tipPath, f, t) {
     .Call('PhyloProfile_DolloDist', PACKAGE = 'PhyloProfile', edgeMat, tipPath, f, t)
 }
