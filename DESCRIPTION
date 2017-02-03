@@ -44,7 +44,7 @@ RoxygenNote: 6.0.0
 VignetteBuilder: knitr
 LinkingTo: Rcpp,
     RcppArmadillo
-Collate:
+Collate: 
     'utilities.R'
     'AllClasses.R'
     'AllGenerics.R'
@@ -56,6 +56,7 @@ Collate:
     'Norm.R'
     'PPIdx.R'
     'PPResult.R'
+    'PPTreeIdx.R'
     'PlotState.R'
     'RcppChk.R'
     'RcppExports.R'

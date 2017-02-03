@@ -28,7 +28,7 @@ setMethod(f = 'Batch',
             ## register multiple core
             registerDoParallel(cores = n)
 
-            p <- x@.Data
+            p <- PPData(x)
             ft <- x@idx
             ppiNames <- rownames(ft)
             ppiNum <- nrow(ft)
