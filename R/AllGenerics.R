@@ -96,7 +96,7 @@ setGeneric(name = 'Dollo',
 ##'   \item \code{BayesTraitsPath}: Full path of the program \href{http://www.evolution.reading.ac.uk/BayesTraits.html}{BayesTraits}.
 ##'   \item \code{method}: Either "MCMC" or "ML" (Maximum Likelihood) method. "ML" is set as default.
 ##' }
-##' Parameters if \code{method} is set as \code{"MCMC"}:
+##' Parameters only used in \code{MCMC}:
 ##' \itemize{
 ##'   \item \code{priorAll}: Prior distribution.
 ##'   \item \code{iterNum}:  Iteration number with default value 1010000.

@@ -18,7 +18,7 @@ NULL
 ##'
 ##' sceP <- ppPath %>% read.csv(row.names = 1) %>% as.matrix %>% PP
 ##' sceT <- PPIdx(sceP, 1:6, 1:6) %>% PPTreeIdx(tree)
-##' 
+##'
 ##' \dontrun{
 ##' ## replace "BTPath" with the full path of BayesTraits in your system, for example in Linux/OS
 ##' ## \code{BTPath <- '/program/BayesTraitsV2/BayesTraitsV2'}
@@ -189,17 +189,3 @@ BayesTraitsTest <- function(...){
 
   return(bayesRes)
 }
-
-## BayesTraits('/home/Yulong/Biotools/BayesTraitsV2/BayesTraitsV2',
-##             '/home/Yulong/RESEARCH/NewRpkg/ppt/PhyloProTree/inst/extdata/bioinfoTree.nex',
-##             '/home/Yulong/RESEARCH/NewRpkg/ppt/PhyloProTree/inst/extdata/bioinfoGenepair1.txt',
-##             method = 'ML')
-
-## oneP <- read.table('/home/Yulong/RESEARCH/NewRpkg/ppt/PhyloProTree/inst/extdata/bioinfoGenepair1.txt', sep = '\t', row.names = 1)
-## sampleP <- matrix(sample(0:1, nrow(oneP) * 1000, replace = TRUE), ncol = 1000)
-## colnames(sampleP) <- paste0('gene', 1:1000)
-## rownames(sampleP) <- rownames(oneP)
-## ft <- matrix(paste0('gene', sample(1:1000, 10)), ncol = 2)
-## rownames(ft) <- paste0('p_', 1:nrow(ft))
-
-## BayesTraitsBatch(ftMat = ft, profileMat = sampleP, n = 2, BayesTraitsPath = '/home/Yulong/Biotools/BayesTraitsV2/BayesTraitsV2', treeFilePath = '/home/Yulong/RESEARCH/NewRpkg/ppt/PhyloProTree/inst/extdata/bioinfoTree.nex')
