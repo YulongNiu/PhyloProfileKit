@@ -51,6 +51,7 @@ library('STRINGdb')
     * mutual information
     * Hamming distance
     * Euclidean distance
+    * co-occurrency method with collapsed tree
 + Model-based methods
     * Maximum likelihood
     * Dollo parsimony distance
@@ -67,9 +68,9 @@ library('STRINGdb')
 
 # Introduction
 
-Phylogenetic profiling is a bioinformatic technique used to show protein presence and absence across a large number of species. This genomic-context method is based on the assumption that functionally related proteins are likely to evolve in a correlated manner [@pellegrini1999assigning]. It has been successfully applied to detect novel physical protein-protein interactions, new components of biological complexes, and potential linkages in signaling pathways or metabolic processes [@kensche2008practical].
+Phylogenetic profiling is a bioinformatic technique used to show presence and absence of homologous across a large number of species. This genomic-context method is based on the assumption that functionally related proteins are likely to been evolved in a correlated manner [@pellegrini1999assigning]. It has been successfully applied to detect novel physical protein-protein interactions, new components of biological complexes, and potential linkages in signaling pathways or metabolic processes [@kensche2008practical].
 
-As increasing numbers of sequenced genomes have become available, various online tools and databases has been developed [@cheng2015protphylo; @sadreyev2015phylogene; @ott2012napp; @szklarczyk2014string; @cromar2016phylopro2]. However, systematically analysis of user-defined phylogenetic profile on local computers is still a slow and tedious process. Here, we provided a R package named *[PhyloProfile](https://github.com/YulongNiu/PhyloProfile)* for analyzing and visualizing phylogenetic profiles.
+As increasing numbers of sequenced genomes have become available, various phylogenetic profiling online tools and databases has been developed [@cheng2015protphylo; @sadreyev2015phylogene; @ott2012napp; @szklarczyk2014string; @cromar2016phylopro2]. However, systematically analysis of user-defined phylogenetic profile on local computers is still a slow and tedious process. Here, we provided a R package named *[PhyloProfile](https://github.com/YulongNiu/PhyloProfile)* for analyzing and visualizing phylogenetic profiles.
 
 # Construct phylogenetic profiles
 
