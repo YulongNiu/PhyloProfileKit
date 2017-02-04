@@ -34,7 +34,7 @@ library('STRINGdb')
 
 # Abstract
 
-[PhyloProfile](https://github.com/YulongNiu/PhyloProfile) contains various analysis methods and visyuxianualization of phylogenetic profiles. 
+[PhyloProfile](https://github.com/YulongNiu/PhyloProfile) contains various analysis methods and visualization of phylogenetic profiles. 
 
 ## Preprocess
 
@@ -74,24 +74,38 @@ As increasing numbers of sequenced genomes have become available, various phylog
 
 # Construct phylogenetic profiles
 
-In *[PhyloProfile](https://github.com/YulongNiu/PhyloProfile)*
-, a profile with $n$ proteins across $m$ organisms is denoted as a $n \times m$ matrix containing either binning or continuous data. A binning profile uses 0 and 1 to represent the homologous absence and presence, respectively. A continuous profile usually consists of specific sequence similarities, for example BLAST bit scores, which need to be normalized before further analysis.
+In *[PhyloProfile](https://github.com/YulongNiu/PhyloProfile)*, a profile with $n$ proteins across $m$ organisms is denoted as a $n \times m$ matrix containing either binning or continuous data. A binning profile uses 0 and 1 to represent the homologous absence and presence, respectively. A continuous profile usually consists of specific sequence similarities, for example BLAST bit scores, which need to be normalized before further analysis. 
 
 ## Read profiles from local files
 
-`PP()` is designed to coerce a matrix to a `PP` class object, for example we read a published profile [@barker2007constrained] stored in a csv-formed file. 
+Normally, a profile can be easily stored as a numeric matrix. In *[PhyloProfile](https://github.com/YulongNiu/PhyloProfile)* a new class named `PP` is created to manipulate a profile, and `PP()` is designed to coerce a regular matrix to a `PP` object. The unique row names of a profile representing protein IDs are particularly important, because the following analysis use them as indices. If row names are missing, `PP()` will automatically creates them, *e.g.* `protein1` and `protein2`, however meaningful names such as [ensembl ID](http://useast.ensembl.org/index.html) or [NCBI gene ID](https://www.ncbi.nlm.nih.gov/gene) are highly recommended. Here, we read a published profile [@barker2007constrained] stored in a csv-formed file. 
 
 ```{r}
 library('PhyloProfile')
 library('magrittr')
 library('STRINGdb')
 
-descPath <- system.file('extdata', 'bioinfoProfile.csv', package = 'PhyloProfile')
+pPath <- system.file('extdata', 'bioinfoProfile.csv', package = 'PhyloProfile')
 sceMat <- descPath %>% read.csv(row.names = 1) %>% as.matrix
 sceP <- PP(sceMat)
 
 ## binning profile
 sceP
+```
+
+The `PP` class is directly inherited from the matrix, so the extractor `[` and `rownames()`/`colnames()` work well for a `PP` object. Moreover, `PPData()`is used to extract and replace the profile data.
+
+
+``` {r eval=FALSE}
+## profile of top ten proteins
+sceP[1:10, ]
+
+## querying rownames
+rownames(sceP)
+
+## extract and replace profile
+PPData(sceP)
+PPData(sceP) <- sample(0:1, 5 * 20) %>% matrix(nrow = 5)
 ```
 
 ## Retrieve profiles from the STRING database
