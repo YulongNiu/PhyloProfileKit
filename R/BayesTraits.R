@@ -4,7 +4,7 @@ NULL
 
 ##' BayesTraits
 ##'
-##' A wrapper of the BayesTraits test of paired profiles. Please download and install \href{BayesTraits}{http://www.evolution.reading.ac.uk/BayesTraits.html}.
+##' A wrapper of the BayesTraits test of paired profiles. Please download and install \href{http://www.evolution.reading.ac.uk/BayesTraits.html}{BayesTraits}.
 ##'
 ##' @inheritParams BayesTraits
 ##' @title Batch process of BayesTraits
@@ -58,7 +58,7 @@ setMethod(f = 'BayesTraits',
 
             ## write tree
             treeFile <- 'tree.nex'
-            write.nexus(x@tree, treeFile)
+            write.nexus(x@tree, file = treeFile)
             tn <- colnames(x@.Data)
 
             bv <- Batch(x = x,

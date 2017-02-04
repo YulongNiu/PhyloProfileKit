@@ -93,7 +93,7 @@ setGeneric(name = 'Dollo',
 
 ##' @param ... Additional parameters
 ##' \itemize{
-##'   \item \code{BayesTraitsPath}: Full path of the program \href{BayesTraits}{http://www.evolution.reading.ac.uk/BayesTraits.html}.
+##'   \item \code{BayesTraitsPath}: Full path of the program \href{http://www.evolution.reading.ac.uk/BayesTraits.html}{BayesTraits}.
 ##'   \item \code{method}: Either "MCMC" or "ML" (Maximum Likelihood) method. "ML" is set as default.
 ##' }
 ##' Parameters if \code{method} is set as \code{"MCMC"}:

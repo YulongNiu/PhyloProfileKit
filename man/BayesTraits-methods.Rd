@@ -15,7 +15,7 @@ BayesTraits(x, ..., n)
 
 \item{...}{Additional parameters
 \itemize{
-  \item \code{BayesTraitsPath}: Full path of the program \href{BayesTraits}{http://www.evolution.reading.ac.uk/BayesTraits.html}.
+  \item \code{BayesTraitsPath}: Full path of the program \href{http://www.evolution.reading.ac.uk/BayesTraits.html}{BayesTraits}.
   \item \code{method}: Either "MCMC" or "ML" (Maximum Likelihood) method. "ML" is set as default.
 }
 Parameters if \code{method} is set as \code{"MCMC"}:
@@ -33,7 +33,7 @@ A \code{PPResult} object.
 BayesTraits
 }
 \details{
-A wrapper of the BayesTraits test of paired profiles. Please download and install \href{BayesTraits}{http://www.evolution.reading.ac.uk/BayesTraits.html}.
+A wrapper of the BayesTraits test of paired profiles. Please download and install \href{http://www.evolution.reading.ac.uk/BayesTraits.html}{BayesTraits}.
 }
 \examples{
 require('magrittr')
