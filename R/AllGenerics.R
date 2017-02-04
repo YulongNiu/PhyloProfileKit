@@ -93,8 +93,18 @@ setGeneric(name = 'Dollo',
 
 ##' @param ... Additional parameters
 ##' \itemize{
+##'   \item \code{BayesTraitsPath}: Full path of the program \href{BayesTraits}{http://www.evolution.reading.ac.uk/BayesTraits.html}.
+##'   \item \code{method}: Either "MCMC" or "ML" (Maximum Likelihood) method. "ML" is set as default.
+##' }
+##' Parameters if \code{method} is set as \code{"MCMC"}:
+##' \itemize{
+##'   \item \code{priorAll}: Prior distribution.
+##'   \item \code{iterNum}:  Iteration number with default value 1010000.
 ##' }
 ##' @inheritParams Dollo
+##' @rdname BayesTraits-methods
+##' @export
+##' 
 setGeneric(name = 'BayesTraits',
            def = function(x, ..., n) {standardGeneric('BayesTraits')})
 

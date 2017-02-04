@@ -1,10 +1,92 @@
+##' @include AllClasses.R AllGenerics.R Batch.R
+NULL
+
+
 ##' BayesTraits
 ##'
-##' BayesTraitsMode(): Test the functinal linkages by BayesTraits using independent or dependent mode. 
+##' A wrapper of the BayesTraits test of paired profiles. Please download and install \href{BayesTraits}{http://www.evolution.reading.ac.uk/BayesTraits.html}.
 ##'
-##' BayesTraits(): Test the a pair of functional linkage.
+##' @inheritParams BayesTraits
+##' @title Batch process of BayesTraits
+##' @return A \code{PPResult} object.
+##' @examples
+##' require('magrittr')
+##' require('ape')
 ##'
-##' BayesTraitsBatch(): Test a batch of functional linkages
+##' tree <- system.file('extdata', 'bioinfoTree.nex', package = "PhyloProfile") %>% read.nexus
+##' ppPath <- system.file('extdata', 'bioinfoProfile.csv', package = "PhyloProfile")
+##'
+##' sceP <- ppPath %>% read.csv(row.names = 1) %>% as.matrix %>% PP
+##' sceT <- PPIdx(sceP, 1:6, 1:6) %>% PPTreeIdx(tree)
+##' \dontrun{
+##' ## replace "BTPath" with the full path of BayesTraits in your system, for example in Linux/OS
+##' ## \code{BTPath <- '/program/BayesTraitsV2/BayesTraitsV2'}
+##' ## or in Windows
+##' ## \code{BTPath <- '/program/BayesTraitsV2/BayesTraitsV2.exe'}
+##' BayesTraits(sceT, BayesTraitsPath = BTPath, n = 2)
+##' }
+##'
+##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @importFrom ape write.nexus
+##' @rdname BayesTraits-methods
+##' @references \href{http://www.evolution.reading.ac.uk/BayesTraits.html}{BayesTraits program}
+##' @references \url{https://www.ncbi.nlm.nih.gov/pubmed/?term=17090580}
+##' @references \url{https://www.ncbi.nlm.nih.gov/pubmed/?term=16103904}
+##' @exportMethod BayesTraits
+##'
+setMethod(f = 'BayesTraits',
+          signature = c(x = 'PPTreeIdx'),
+          definition = function(x, ..., n = 1) {
+
+            bt_internal <- function(f, t, tipsName, treeFilePath, uniID, ...) {
+              genepair <- cbind(tipsName, f, t)
+
+              ## write local file
+              filename <- paste('genepair', i, '.txt', sep = '')
+              write.table(genepair, col.names = FALSE, quote = FALSE, sep = '\t', file = filename)
+
+              logLR <- BayesTraitsTest(treeFilePath = treeFilePath,
+                                       binFilePath = filename,
+                                       uniID = uniID,
+                                       ...)$logFactor
+
+              ## remove local file
+              file.remove(filename)
+
+              return(logLR)
+            }
+
+            ## write tree
+            treeFile <- 'tree.nex'
+            write.nexus(x@tree, treeFile)
+            tn <- colnames(x@.Data)
+
+            bv <- Batch(x = x,
+                        FUN = bt_internal,
+                        tipsName = tn,
+                        treeFilePath = treeFile,
+                        uniID = i,
+                        ...,
+                        n = n)
+
+            ## remove tree file
+            file.remove(treeFile)
+
+            bvRes <- new('PPResult',
+                         bv,
+                         idx = x@idx,
+                         pnames = rownames(x@.Data),
+                         method = 'BayesTraits')
+
+            return(bvRes)
+          })
+
+
+##' BayesTraits Mode
+##'
+##' \code{BayesTraitsMode()}: Test the functinal linkages by BayesTraits using independent or dependent mode.
+##'
+##' \code{BayesTraitsTest()}: Test the a pair of functional linkage.
 ##'
 ##' @title Use BayesTraits to test the functional linkages.
 ##' @param BayesTraitsPath Full path of the program BayesTraits.
@@ -16,38 +98,14 @@
 ##' @param method Either 'MCMC' or 'ML' (Maximum Likelihood) method.
 ##' @param mode Either 'Indep' for independent and 'Dep' for dependent.
 ##' @return
-##' 
-##' BayesTraitsMode(): Harmonic mean.
+##' \code{BayesTraitsMode()}: Harmonic mean.
 ##'
-##' BayesTraits(): A list.
-##'
-##' BayesTraitsBatch(): A list.
-##' 
-##' @examples
-\dontrun{
-## replace "BTPath" with the full path of BayesTraits in your computer
-## all absence in the profile
-BayesTraits(BTPath, tree, pair00)
-## all presence in the profile
-BayesTraits(BTPath, tree, pair11)
-## a nomal profile
-BayesTraits(BTPath, tree, pair1)
-##'
-## examples from BayesTraits
-BayesTraits(BTPath, BTtree, BTpair)
-BayesTraits(BTPath, BTtree, BTpair, method = 'MCMC')
-##'
-## batch
-BayesTraitsBatch(ftMat = ft, profileMat = sampleP, n = 2,
-BayesTraitsPath = BTPath, treeFilePath = BTtree)
-}
+##' \code{BayesTraitsTest()}: A list.
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @references \url{http://www.evolution.reading.ac.uk/BayesTraits.html}
-##' @references \url{https://www.ncbi.nlm.nih.gov/pubmed/?term=17090580}
-##' @references \url{https://www.ncbi.nlm.nih.gov/pubmed/?term=16103904}
 ##' @importFrom utils read.table write.table
 ##' @rdname Bayes
-##' @export
+##' @keywords internal
+##'
 BayesTraitsMode <- function(BayesTraitsPath,
                             treeFilePath,
                             binFilePath,
@@ -114,8 +172,9 @@ BayesTraitsMode <- function(BayesTraitsPath,
 ##' @param ... Inherit parameters from the "BayesTraitsMode()" in this package.
 ##' @importFrom stats pchisq
 ##' @rdname Bayes
-##' @export
-BayesTraits <- function(...){
+##' @keywords internal
+##'
+BayesTraitsTest <- function(...){
 
   indepMean <- BayesTraitsMode(..., mode = 'Indep')
   depMean <- BayesTraitsMode(..., mode = 'Dep')
@@ -131,50 +190,6 @@ BayesTraits <- function(...){
                    p = pValue)
 
   return(bayesRes)
-}
-
-
-##' @param ftMat Paired profiles.
-##' @param profileMat Profiles.
-##' @inheritParams Batch
-##' @inheritParams BayesTraits
-##' @importFrom doParallel registerDoParallel stopImplicitCluster
-##' @importFrom foreach foreach %dopar%
-##' @importFrom utils write.table
-##' @rdname Bayes
-##' @export
-BayesTraitsBatch <- function(ftMat, profileMat, n = 1, ...) {
-
-  ## register multiple core
-  registerDoParallel(cores = n)
-
-  ppiNames <- rownames(ftMat)
-  ppiNum <- nrow(ftMat)
-
-  geneNames <- colnames(profileMat)
-
-  pathList <- foreach(i = 1:ppiNum) %dopar% {
-    print(paste0('It is running ', i, ' in a total of ', ppiNum, '.'))
-    genepair <- profileMat[, geneNames %in% ftMat[i, 1:2]]
-
-    ## write local file
-    filename <- paste('genepair', i, '.txt', sep = '')
-    write.table(genepair, col.names = FALSE, quote = FALSE, sep = '\t', file = filename)
-
-    logLR <- BayesTraits(binFilePath = filename, uniID = i, ...)
-
-    ## remove local file
-    file.remove(filename)
-
-    return(logLR)
-  }
-
-  names(pathList) <- ppiNames
-
-  ## stop multiple core
-  stopImplicitCluster()
-
-  return(pathList)
 }
 
 ## BayesTraits('/home/Yulong/Biotools/BayesTraitsV2/BayesTraitsV2',

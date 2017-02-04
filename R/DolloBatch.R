@@ -18,12 +18,11 @@ NULL
 ##' sceP <- ppPath %>% read.csv(row.names = 1) %>% as.matrix %>% PP
 ##' sceT <- PPIdx(sceP, 1:6, 1:6) %>% PPTreeIdx(tree)
 ##' Dollo(sceT, n = 2)
-##' 
+##'
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom ape nodepath
 ##' @rdname Dollo-methods
 ##' @references \href{https://www.ncbi.nlm.nih.gov/pubmed/?term=17535793}{Dollo's parsimony description}
-
 ##' @exportMethod Dollo
 ##'
 setMethod(f = 'Dollo',
