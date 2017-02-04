@@ -89,3 +89,14 @@ setGeneric(name = 'ChooseSimDistFun',
 ##' 
 setGeneric(name = 'Dollo',
            def = function(x, ..., n){standardGeneric('Dollo')})
+
+
+##' @param ... Additional parameters
+##' \itemize{
+##' }
+##' @inheritParams Dollo
+setGeneric(name = 'BayesTraits',
+           def = function(x, ..., n) {standardGeneric('BayesTraits')})
+
+
+

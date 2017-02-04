@@ -24,42 +24,23 @@
 ##' BayesTraitsBatch(): A list.
 ##' 
 ##' @examples
+\dontrun{
+## replace "BTPath" with the full path of BayesTraits in your computer
+## all absence in the profile
+BayesTraits(BTPath, tree, pair00)
+## all presence in the profile
+BayesTraits(BTPath, tree, pair11)
+## a nomal profile
+BayesTraits(BTPath, tree, pair1)
 ##'
-##' descPath <- system.file('extdata', package = "PhyloProTree")
-##' 
-##' tree <- file.path(descPath, 'bioinfoTree.nex')
-##' pair00 <- file.path(descPath, 'bioinfoGenepair00.txt')
-##' pair11 <- file.path(descPath, 'bioinfoGenepair11.txt')
-##' pair1 <- file.path(descPath, 'bioinfoGenepair1.txt')
+## examples from BayesTraits
+BayesTraits(BTPath, BTtree, BTpair)
+BayesTraits(BTPath, BTtree, BTpair, method = 'MCMC')
 ##'
-##' BTtree <- file.path(descPath, 'Primates.trees')
-##' BTpair <- file.path(descPath, 'Primates.txt')
-##'
-##' oneP <- read.table(pair1, sep = '\t', row.names = 1)
-##' sampleP <- matrix(sample(0:1, nrow(oneP) * 1000, replace = TRUE), ncol = 1000)
-##' colnames(sampleP) <- paste0('gene', 1:1000)
-##' rownames(sampleP) <- rownames(oneP)
-##' ft <- matrix(paste0('gene', sample(1:1000, 10)), ncol = 2)
-##' rownames(ft) <- paste0('p_', 1:nrow(ft))
-##' 
-##' \dontrun{
-##' ## replace "BTPath" with the full path of BayesTraits in your computer
-##' ## all absence in the profile
-##' BayesTraits(BTPath, tree, pair00)
-##' ## all presence in the profile
-##' BayesTraits(BTPath, tree, pair11)
-##' ## a nomal profile
-##' BayesTraits(BTPath, tree, pair1)
-##'
-##' ## examples from BayesTraits
-##' BayesTraits(BTPath, BTtree, BTpair)
-##' BayesTraits(BTPath, BTtree, BTpair, method = 'MCMC')
-##'
-##' ## batch
-##' BayesTraitsBatch(ftMat = ft, profileMat = sampleP, n = 2,
-##' BayesTraitsPath = BTPath, treeFilePath = BTtree)
-##' }
-##' 
+## batch
+BayesTraitsBatch(ftMat = ft, profileMat = sampleP, n = 2,
+BayesTraitsPath = BTPath, treeFilePath = BTtree)
+}
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @references \url{http://www.evolution.reading.ac.uk/BayesTraits.html}
 ##' @references \url{https://www.ncbi.nlm.nih.gov/pubmed/?term=17090580}
@@ -67,12 +48,20 @@
 ##' @importFrom utils read.table write.table
 ##' @rdname Bayes
 ##' @export
-BayesTraitsMode <- function(BayesTraitsPath, treeFilePath, binFilePath, method = 'ML', priorAll = 'exp 10', iterNum = 1010000, mode = 'Indep', uniID = '1') {
+BayesTraitsMode <- function(BayesTraitsPath,
+                            treeFilePath,
+                            binFilePath,
+                            method = 'ML',
+                            priorAll = 'exp 10',
+                            iterNum = 1010000,
+                            mode = 'Indep',
+                            uniID = '1') {
 
   ## check if all present or all absent
   profile <- read.table(binFilePath, sep = '\t', row.names = 1)
 
-  if (sum(profile) == 0 || sum(profile) == 2 * nrow(profile)) {
+  if (all(profile == 1) ||
+      all(profile == 0)) {
     return(0)
   } else {}
 
@@ -96,26 +85,27 @@ BayesTraitsMode <- function(BayesTraitsPath, treeFilePath, binFilePath, method =
     orderMat <- matrix(c(modeType, simuType, 'Run'), ncol = 1)
   }
   orderFileName <- paste('orderFile_', uniID, '.txt', sep = '')
-  write.table(orderMat, row.names = FALSE, col.names = FALSE, quote = FALSE, file =orderFileName)
+  write.table(orderMat, row.names = FALSE, col.names = FALSE, quote = FALSE, file = orderFileName)
 
   ## run BayesTraits
   runFileName <- paste('run_', uniID, '.txt', sep = '')
   system(paste(BayesTraitsPath, treeFilePath, binFilePath, '<', orderFileName, '>', runFileName))
 
   ## get harmonic mean
+  resStr <- readLines(runFileName)
+  dataVec <- unlist(strsplit(resStr[length(resStr) - 1], split = '\t', fixed = TRUE))
   if (method == 'MCMC') {
-    harMean <- system(paste("sed -e '$!{h;d;}' -e x ", runFileName, " | awk '{print $3}'", sep = ''), intern = TRUE)
+    harMean <- as.numeric(dataVec[3])
   }
   else if (method == 'ML') {
-    harMean <- system(paste("sed -e '$!{h;d;}' -e x ", runFileName," | awk '{print $2}'", sep = ''), intern = TRUE)
+    harMean <- as.numeric(dataVec[2])
   }
-  harMean <- as.numeric(harMean)
 
   ## rm file
   interFileName <- dir(pattern = paste(binFilePath, '.log*', sep = ''))
   moveFileName <- c(orderFileName, runFileName, interFileName)
   file.remove(moveFileName)
-  
+
   return(harMean)
 }
 
@@ -126,25 +116,22 @@ BayesTraitsMode <- function(BayesTraitsPath, treeFilePath, binFilePath, method =
 ##' @rdname Bayes
 ##' @export
 BayesTraits <- function(...){
-  
+
   indepMean <- BayesTraitsMode(..., mode = 'Indep')
   depMean <- BayesTraitsMode(..., mode = 'Dep')
 
   ## chisqure test
   ## 2 * (Mean_dep - Mean_indep)
   logFactor <- 2 * (depMean - indepMean)
-  
-  ## not right
-  ## pValue <- pchisq(logFactor, df = 4)
   pValue <- 1 - pchisq(logFactor, df = 4)
 
   bayesRes <- list(indepMean = indepMean,
                    depMean = depMean,
                    logFactor = logFactor,
                    p = pValue)
-  
+
   return(bayesRes)
-} 
+}
 
 
 ##' @param ftMat Paired profiles.
@@ -173,12 +160,12 @@ BayesTraitsBatch <- function(ftMat, profileMat, n = 1, ...) {
     ## write local file
     filename <- paste('genepair', i, '.txt', sep = '')
     write.table(genepair, col.names = FALSE, quote = FALSE, sep = '\t', file = filename)
-    
+
     logLR <- BayesTraits(binFilePath = filename, uniID = i, ...)
 
     ## remove local file
     file.remove(filename)
-    
+
     return(logLR)
   }
 
