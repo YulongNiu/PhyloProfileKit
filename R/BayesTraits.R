@@ -23,7 +23,7 @@ NULL
 ##' ## \code{BTPath <- '/program/BayesTraitsV2/BayesTraitsV2'}
 ##' ## or in Windows
 ##' ## \code{BTPath <- '/program/BayesTraitsV2/BayesTraitsV2.exe'}
-##' BayesTraits(sceT, BayesTraitsPath = BTPath, n = 2)
+##' BayesTraits(sceT, BayesTraitsPath = BTPath, method = 'ML', n = 2)
 ##' }
 ##'
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
@@ -38,11 +38,11 @@ setMethod(f = 'BayesTraits',
           signature = c(x = 'PPTreeIdx'),
           definition = function(x, ..., n = 1) {
 
-            bt_internal <- function(eachArg, tipsName, treeFilePath, ...) {
-              genepair <- cbind(tipsName, eachArg$f, eachArg$t)
+            bt_internal <- function(eachArg, treeFilePath, ...) {
+              genepair <- cbind(eachArg$f, eachArg$t)
 
               ## write local file
-              filename <- paste('genepair', i, '.txt', sep = '')
+              filename <- paste('genepair', eachArg$uniID, '.txt', sep = '')
               write.table(genepair, col.names = FALSE, quote = FALSE, sep = '\t', file = filename)
 
               logLR <- BayesTraitsTest(treeFilePath = treeFilePath,
@@ -59,11 +59,9 @@ setMethod(f = 'BayesTraits',
             ## write tree
             treeFile <- 'tree.nex'
             write.nexus(x@tree, file = treeFile)
-            tn <- colnames(x@.Data)
 
             bv <- Batch(x = x,
                         FUN = bt_internal,
-                        tipsName = tn,
                         treeFilePath = treeFile,
                         ...,
                         n = n)

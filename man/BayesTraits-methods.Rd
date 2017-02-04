@@ -49,7 +49,7 @@ sceT <- PPIdx(sceP, 1:6, 1:6) \%>\% PPTreeIdx(tree)
 ## \\code{BTPath <- '/program/BayesTraitsV2/BayesTraitsV2'}
 ## or in Windows
 ## \\code{BTPath <- '/program/BayesTraitsV2/BayesTraitsV2.exe'}
-BayesTraits(sceT, BayesTraitsPath = BTPath, n = 2)
+BayesTraits(sceT, BayesTraitsPath = BTPath, method = 'ML', n = 2)
 }
 
 }
