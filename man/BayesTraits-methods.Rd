@@ -44,12 +44,13 @@ ppPath <- system.file('extdata', 'bioinfoProfile.csv', package = "PhyloProfile")
 
 sceP <- ppPath \%>\% read.csv(row.names = 1) \%>\% as.matrix \%>\% PP
 sceT <- PPIdx(sceP, 1:6, 1:6) \%>\% PPTreeIdx(tree)
+
 \dontrun{
 ## replace "BTPath" with the full path of BayesTraits in your system, for example in Linux/OS
 ## \\code{BTPath <- '/program/BayesTraitsV2/BayesTraitsV2'}
 ## or in Windows
 ## \\code{BTPath <- '/program/BayesTraitsV2/BayesTraitsV2.exe'}
-BayesTraits(sceT, BayesTraitsPath = BTPath, method = 'ML', n = 2)
+BayesTraits(sceT, BayesTraitsPath = BTPath, n = 2)
 }
 
 }
