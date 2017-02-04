@@ -38,8 +38,8 @@ setMethod(f = 'BayesTraits',
           signature = c(x = 'PPTreeIdx'),
           definition = function(x, ..., n = 1) {
 
-            bt_internal <- function(f, t, tipsName, treeFilePath, uniID, ...) {
-              genepair <- cbind(tipsName, f, t)
+            bt_internal <- function(eachArg, tipsName, treeFilePath, ...) {
+              genepair <- cbind(tipsName, eachArg$f, eachArg$t)
 
               ## write local file
               filename <- paste('genepair', i, '.txt', sep = '')
@@ -47,7 +47,7 @@ setMethod(f = 'BayesTraits',
 
               logLR <- BayesTraitsTest(treeFilePath = treeFilePath,
                                        binFilePath = filename,
-                                       uniID = uniID,
+                                       uniID = eachArg$uniID,
                                        ...)$logFactor
 
               ## remove local file
@@ -65,7 +65,6 @@ setMethod(f = 'BayesTraits',
                         FUN = bt_internal,
                         tipsName = tn,
                         treeFilePath = treeFile,
-                        uniID = i,
                         ...,
                         n = n)
 

@@ -39,7 +39,7 @@ setGeneric(name = 'Norm',
 
 ##' @param x Object with at least profile and linkage indices.
 ##' @param n The number of CPUs or processors.
-##' @param FUN Functions to process paired linkages.
+##' @param FUN Functions to process paired linkages. The \code{FUN} has two parameters, the first parameter is a list \code{list(f = f, t = t, uniID = i)} in which \code{f} and \code{t} is two numeric vector indicating two single profile and \code{uniID} is the current index for parallel programming, and the second parameter is \code{...} used for additional arguments.
 ##' @param ... Additional parameters passed to \code{FUN}.
 ##' @rdname Batch-methods
 ##' @export

@@ -31,10 +31,15 @@ setMethod(f = 'SimDist',
           signature = c(x = 'PPIdx'),
           definition = function(x, method, ..., n = 1) {
 
+            sd_internal <- function(eachArg, M, ...) {
+              return(M(eachArg$f, eachArg$t, ...))
+            }
+
             M <- ChooseSimDistFun(x, method)
 
             bv <- Batch(x = x,
-                        FUN = M,
+                        FUN = sd_internal,
+                        M = M,
                         ...,
                         n = n)
 
@@ -57,12 +62,12 @@ setMethod(f = 'SimDist',
           signature = c(x = 'PPTreeIdx'),
           definition = function(x, method, ..., n = 1) {
 
-            ct_internal <- function(f, t, edgeMat, tipNum, M, ...) {
+            ct_internal <- function(eachArg, edgeMat, tipNum, M, ...) {
 
               ftMat <- CollapseTree(edgeMat = edgeMat,
                                     tipNum = tipNum,
-                                    f = f,
-                                    t = t)
+                                    f = eachArg$f,
+                                    t = eachArg$t)
               fnew <- ftMat[, 1]
               tnew <- ftMat[, 2]
 

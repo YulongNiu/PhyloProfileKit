@@ -29,12 +29,19 @@ setMethod(f = 'Dollo',
           signature = c(x = 'PPTreeIdx'),
           definition = function(x, ..., n = 1) {
 
+            dollo_internal <- function(eachArg, edgeMat, tipPath, ...) {
+              return(DolloDist(edgeMat = edgeMat,
+                               tipPath = tipPath,
+                               f = eachArg$f,
+                               t = eachArg$t))
+            }
+
             tree <- x@tree
             em <- tree$edge
             tp <- nodepath(tree)
 
             bv <- Batch(x = x,
-                        FUN = DolloDist,
+                        FUN = dollo_internal,
                         edgeMat = em,
                         tipPath = tp,
                         ...,
