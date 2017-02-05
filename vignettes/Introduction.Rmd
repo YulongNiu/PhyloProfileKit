@@ -41,6 +41,7 @@ library('STRINGdb')
 ``` {r macro, echo=FALSE, results='hide', message=FALSE}
 phyloprofile <- function() {"*[PhyloProfile](https://github.com/YulongNiu/PhyloProfile)*"}
 Robject <- function(x){sub('%obj%', x, '<span style="background-color:#F0F0F0;color:#404040;font-family:\'Lucida Console\', monospace">%obj%</span>')}
+Rclass <- function(x){sub('%obj%', x, '<span style="font-family:\'Times New Roman\', Times, serif;font-style: italic">%obj%</span>')}
 ```
 
 # Abstract
@@ -89,7 +90,7 @@ In `r phyloprofile()`, a profile with $n$ proteins across $m$ organisms is denot
 
 ## Read profiles from local files
 
-Normally, a profile can be easily stored as a numeric matrix. In `r phyloprofile()` a new class named `PP` is created to manipulate a profile, and `PP()` is designed to coerce a regular matrix to a `PP` object. The unique row names of a profile representing protein IDs are particularly important, because the following analysis use them as indices. If row names are missing, `PP()` will automatically creates them, *e.g.* `protein1` and `protein2`, however meaningful names such as [ensembl ID](http://useast.ensembl.org/index.html) or [NCBI gene ID](https://www.ncbi.nlm.nih.gov/gene) are highly recommended. Here, we read in a published profile [@barker2007constrained] called `r Robject('secP')`, which is originally stored in a csv-formed file.
+Normally, a profile can be easily stored as a numeric matrix. In `r phyloprofile()` a new class named `r Rclass('PP')` created to manipulate a profile, and `PP()` is designed to coerce a regular matrix to a `r Rclass('PP')` object. The unique row names of a profile representing protein IDs are particularly important, because the following analysis use them as indices. If row names are missing, `PP()` will automatically creates them, *e.g.* `protein1` and `protein2`, however meaningful names such as [ensembl ID](http://useast.ensembl.org/index.html) or [NCBI gene ID](https://www.ncbi.nlm.nih.gov/gene) are highly recommended. Here, we read in a published profile [@barker2007constrained] called `r Robject('secP')`, which is originally stored in a csv-formed file.
 
 ```{r}
 library('PhyloProfile')
