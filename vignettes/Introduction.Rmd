@@ -18,6 +18,14 @@ vignette: >
   %\usepackage[utf8]{inputenc}
 ---
 
+
+<!-- \definecolor{codecolor}{RGB}{64,64,64} -->
+<!-- \newcommand{\texttt}[2][codecolor]{\textcolor{#1}{\hl{\ttfamily#2}}} -->
+<!-- \newcommand{\Rcode}[1]{\texttt{#1}} -->
+<!-- \newcommand{\Rfunction}[1]{\texttt[functioncolor]{#1}} -->
+<!-- \newcommand{\Robject}[1]{\Rcode{#1}} -->
+<!-- \newcommand{\Rclass}[1]{\textit{#1}} -->
+
 ```{r style, echo=FALSE, results="asis", message=FALSE}
 BiocStyle::markdown()
 knitr::opts_chunk$set(tidy = FALSE,
@@ -25,16 +33,19 @@ knitr::opts_chunk$set(tidy = FALSE,
                       message = FALSE)
 ```
 
-
 ```{r echo=FALSE, results='hide', message=FALSE}
 library('PhyloProfile')
 library('magrittr')
 library('STRINGdb')
 ```
 
+``` {r macro, echo=FALSE}
+phyloprofile <- function() {"*[PhyloProfile](https://github.com/YulongNiu/PhyloProfile)*"}
+```
+
 # Abstract
 
-[PhyloProfile](https://github.com/YulongNiu/PhyloProfile) contains various analysis methods and visualization of phylogenetic profiles. 
+`r phyloprofile()` contains various analysis methods and visualization of phylogenetic profiles. 
 
 ## Preprocess
 
@@ -70,15 +81,15 @@ library('STRINGdb')
 
 Phylogenetic profiling is a bioinformatic technique used to show presence and absence of homologous across a large number of species. This genomic-context method is based on the assumption that functionally related proteins are likely to been evolved in a correlated manner [@pellegrini1999assigning]. It has been successfully applied to detect novel physical protein-protein interactions, new components of biological complexes, and potential linkages in signaling pathways or metabolic processes [@kensche2008practical].
 
-As increasing numbers of sequenced genomes have become available, various phylogenetic profiling online tools and databases has been developed [@cheng2015protphylo; @sadreyev2015phylogene; @ott2012napp; @szklarczyk2014string; @cromar2016phylopro2]. However, systematically analysis of user-defined phylogenetic profile on local computers is still a slow and tedious process. Here, we provided a R package named *[PhyloProfile](https://github.com/YulongNiu/PhyloProfile)* for analyzing and visualizing phylogenetic profiles.
+As increasing numbers of sequenced genomes have become available, various phylogenetic profiling online tools and databases has been developed [@cheng2015protphylo; @sadreyev2015phylogene; @ott2012napp; @szklarczyk2014string; @cromar2016phylopro2]. However, systematically analysis of user-defined phylogenetic profile on local computers is still a slow and tedious process. Here, we provided a R package named `r phyloprofile()` for analyzing and visualizing phylogenetic profiles.
 
 # Construct phylogenetic profiles
 
-In *[PhyloProfile](https://github.com/YulongNiu/PhyloProfile)*, a profile with $n$ proteins across $m$ organisms is denoted as a $n \times m$ matrix containing either binning or continuous data. A binning profile uses 0 and 1 to represent the homologous absence and presence, respectively. A continuous profile usually consists of specific sequence similarities, for example BLAST bit scores, which need to be normalized before further analysis. 
+In `r phyloprofile()`, a profile with $n$ proteins across $m$ organisms is denoted as a $n \times m$ matrix containing either binning or continuous data. A binning profile uses 0 and 1 to represent the homologous absence and presence, respectively. A continuous profile usually consists of specific sequence similarities, for example BLAST bit scores, which need to be normalized before further analysis. 
 
 ## Read profiles from local files
 
-Normally, a profile can be easily stored as a numeric matrix. In *[PhyloProfile](https://github.com/YulongNiu/PhyloProfile)* a new class named `PP` is created to manipulate a profile, and `PP()` is designed to coerce a regular matrix to a `PP` object. The unique row names of a profile representing protein IDs are particularly important, because the following analysis use them as indices. If row names are missing, `PP()` will automatically creates them, *e.g.* `protein1` and `protein2`, however meaningful names such as [ensembl ID](http://useast.ensembl.org/index.html) or [NCBI gene ID](https://www.ncbi.nlm.nih.gov/gene) are highly recommended. Here, we read a published profile [@barker2007constrained] stored in a csv-formed file. 
+Normally, a profile can be easily stored as a numeric matrix. In `r phyloprofile()` a new class named `PP` is created to manipulate a profile, and `PP()` is designed to coerce a regular matrix to a `PP` object. The unique row names of a profile representing protein IDs are particularly important, because the following analysis use them as indices. If row names are missing, `PP()` will automatically creates them, *e.g.* `protein1` and `protein2`, however meaningful names such as [ensembl ID](http://useast.ensembl.org/index.html) or [NCBI gene ID](https://www.ncbi.nlm.nih.gov/gene) are highly recommended. Here, we read in a published profile [@barker2007constrained] originally stored in a csv-formed file \redstyle{sceP} \newstyle{HELLO}. \wbalsup{HELLO}
 
 ```{r}
 library('PhyloProfile')
@@ -86,7 +97,7 @@ library('magrittr')
 library('STRINGdb')
 
 pPath <- system.file('extdata', 'bioinfoProfile.csv', package = 'PhyloProfile')
-sceMat <- descPath %>% read.csv(row.names = 1) %>% as.matrix
+sceMat <- pPath %>% read.csv(row.names = 1) %>% as.matrix
 sceP <- PP(sceMat)
 
 ## binning profile
@@ -104,8 +115,9 @@ sceP[1:10, ]
 rownames(sceP)
 
 ## extract and replace profile
-PPData(sceP)
-PPData(sceP) <- sample(0:1, 5 * 20) %>% matrix(nrow = 5)
+testP <- sceP
+PPData(testP)
+PPData(testP) <- sample(0:1, 5 * 20) %>% matrix(nrow = 5)
 ```
 
 ## Retrieve profiles from the STRING database
@@ -114,20 +126,20 @@ The [STRING](http://string-db.org/) database (version 10) provides raw BLAST bit
 
 The organisms supported by STRING:
 
-```{r}
+```{r eval=FALSE}
 sp <- get_STRING_species(version = '10', species_name = NULL)
 head(sp)
 ```
 
 Retrieve the profile of 5 human proteins:
 
-``` {r}
+``` {r eval=FALSE}
 ## species id of Homo sapiens is 9606
 ## continuous profile
 PPSTRING(speID = 9606, idx = 1:5, n = 2)
 ```
 
-Set `idx = 'all'` for complete human profile, and increase `n` to accelerate the download process if multiple cores are supported on your system.
+Set `idx = 'all'` for complete human profile, and increase `n` to accelerate the download process if multiple cores are supported.
 
 ## Normalize bit score profiles
 
@@ -183,6 +195,11 @@ SimDist(sceL, 'SimMI', n = 2)
 ```
 
 ## Model-based methods
+
+
+
+## Case studies
+
 
 
 

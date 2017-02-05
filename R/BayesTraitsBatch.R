@@ -21,9 +21,9 @@ NULL
 ##'
 ##' \dontrun{
 ##' ## replace "BTPath" with the full path of BayesTraits in your system, for example in Linux/OS
-##' ## \code{BTPath <- '/program/BayesTraitsV2/BayesTraitsV2'}
+##' ## BTPath <- '/program/BayesTraitsV2/BayesTraitsV2'
 ##' ## or in Windows
-##' ## \code{BTPath <- '/program/BayesTraitsV2/BayesTraitsV2.exe'}
+##' ## BTPath <- '/program/BayesTraitsV2/BayesTraitsV2.exe'
 ##' BayesTraits(sceT, BayesTraitsPath = BTPath, n = 2)
 ##' }
 ##'
