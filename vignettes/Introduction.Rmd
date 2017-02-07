@@ -73,17 +73,17 @@ Rclass <- function(x){sub('%obj%', x, '<span style="font-family:\'Times New Roma
 
 # Introduction
 
-Phylogenetic profiling is a bioinformatic technique used to show presence and absence of homologous across a large number of species. This genomic-context method is based on the assumption that functionally related proteins are likely to been evolved in a correlated manner [@pellegrini1999assigning]. It has been successfully applied to detect novel physical protein-protein interactions, new components of biological complexes, and potential linkages in signaling pathways or metabolic processes [@kensche2008practical].
+Phylogenetic profiling is a bioinformatic technique used to show the presence and absence of homologous across a large number of species. This genomic-context method is based on the assumption that functionally related proteins are likely to been evolved in a correlated pattern [@pellegrini1999assigning]. It has been successfully applied to detect novel physical protein-protein interactions, new components of biological complexes, and potential linkages in signaling pathways or metabolic processes [@kensche2008practical].
 
-As increasing numbers of sequenced genomes have become available, various phylogenetic profiling online tools and databases has been developed [@cheng2015protphylo; @sadreyev2015phylogene; @ott2012napp; @szklarczyk2014string; @cromar2016phylopro2]. However, systematically analysis of user-defined phylogenetic profile on local computers is still a slow and tedious process. Here, we provided a R package named `r phyloprofile()` for analyzing and visualizing phylogenetic profiles.
+As increasing numbers of sequenced genomes have become available, various phylogenetic profiling online tools and databases have been developed [@cheng2015protphylo; @sadreyev2015phylogene; @ott2012napp; @szklarczyk2014string; @cromar2016phylopro2]. However, systematically analysis of user-defined phylogenetic profile on local computers is still a slow and tedious process. Here, we provide a R package named `r phyloprofile()` for analyzing and visualizing phylogenetic profiles.
 
 # Construct phylogenetic profiles
 
-In `r phyloprofile()`, a profile with $n$ proteins across $m$ organisms is denoted as a $n \times m$ matrix containing either binning or continuous data. A binning profile uses 0 and 1 to represent the homologous absence and presence, respectively. A continuous profile usually consists of specific sequence similarities, for example BLAST bit scores, which need to be normalized before further analysis. 
+In `r phyloprofile()`, a profile with $n$ proteins across $m$ organisms is denoted as a $n \times m$ matrix containing either binning or continuous data. A binning profile uses 0 and 1 to represent the homologous absence and presence, respectively. For example, if the value in the $i$-th row and $j$-th column is 1, it tells the $i$-th protein has corresponding homologous in the $j$-th organism. A continuous profile usually consists of specific sequence similarities, for example BLAST bit scores, which need to be normalized before further analysis. 
 
 ## Read profiles from local files
 
-Normally, a profile can be easily stored as a numeric matrix. In `r phyloprofile()` a new class named `r Rclass('PP')` created to manipulate a profile, and `PP()` is designed to coerce a regular matrix to a `r Rclass('PP')` object. The unique row names of a profile representing protein IDs are particularly important, because the following analysis use them as indices. If row names are missing, `PP()` will automatically creates them, *e.g.* `protein1` and `protein2`, however meaningful names such as [ensembl ID](http://useast.ensembl.org/index.html) or [NCBI gene ID](https://www.ncbi.nlm.nih.gov/gene) are highly recommended. Here, we read in a published profile [@barker2007constrained] called `r Robject('secP')`, which is originally stored in a csv-formed file.
+Normally, a profile can be easily stored as a numeric matrix. In `r phyloprofile()` a new class named `r Rclass('PP')` is created to manipulate a profile, and `PP()` is designed to coerce a regular matrix to a `r Rclass('PP')` object. The unique row names of a profile representing protein IDs are particularly important, because the following analysis use them as indices. If row names are missing, `PP()` will automatically creates them, *e.g.* `protein1` and `protein2`, however meaningful names such as [ensembl ID](http://useast.ensembl.org/index.html) or [NCBI gene ID](https://www.ncbi.nlm.nih.gov/gene) are highly recommended. Here, we read in a published profile [@barker2007constrained] called `r Robject('secP')`, which is originally stored in a csv-formed file.
 
 ```{r}
 library('PhyloProfile')
@@ -98,14 +98,14 @@ sceP <- PP(sceMat)
 sceP
 ```
 
-The `r Rclass('PP')` class is directly inherited from the `r Rclass('matrix')`, so the extractor `[` and `rownames()`/`colnames()` work well for a `r Rclass('PP')` object. Moreover, `PPData()` is used to extract and replace the profile data.
+The `r Rclass('PP')` class is directly inherited from the `r Rclass('matrix')` class, so the extractor `[` and `rownames()`/`colnames()` work well for a `r Rclass('PP')` object. Moreover, `PPData()` is used to extract and replace the profile data.
 
 
 ``` {r eval=FALSE}
 ## profile of top ten proteins
 sceP[1:10, ]
 
-## querying rownames
+## query rownames
 rownames(sceP)
 
 ## extract and replace profile
