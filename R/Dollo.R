@@ -78,4 +78,3 @@
 ##   'dollo' = for(i in 1:testNum){DolloDist(testTree$edge, pathList, gainMat1[, i], gainMat2[, i])},
 ##   'collapse' = for(i in 1:testNum){CollapseTree(testTree$edge, Ntip(testTree), gainMat1[, i], gainMat2[, i])}
 ## )
-

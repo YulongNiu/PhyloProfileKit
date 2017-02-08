@@ -18,7 +18,7 @@ vignette: >
   %\usepackage[utf8]{inputenc}
 ---
 
-```{r style, echo=FALSE, results="asis", message=FALSE}
+```{r style, echo=FALSE, results='asis', message=FALSE}
 BiocStyle::markdown()
 knitr::opts_chunk$set(tidy = FALSE,
                       warning = FALSE,
@@ -188,7 +188,34 @@ SimDist(sceL, 'SimMI', n = 2)
 
 # Misc.
 
-## Convert STRING protein IDs
+## Convert STRING protein ID
+
+Protein ID (row names) of profiles retrieved from the STRING database are stored in a special format `r Robject('specieID.EnsemblID')`. The following scripts use the `r Biocpkg('biomaRt')` package to convert STRING IDs to other formats such as Entrez ID.
+
+```{r eval=FALSE}
+library('PhyloProfile')
+library('magrittr')
+library('biomaRt')
+
+## STRING profile
+hsa5p <- PPSTRING(speID = 9606, idx = 1:5, n = 2)
+
+## step 1: extract Esembl ID
+esemblIDs <- hsa5p %>%
+  rownames %>%
+  strsplit(split = '.', fixed = TRUE) %>%
+  sapply('[', 2)
+
+## step 2: check supported formats
+ensembl <- useMart('ensembl', dataset = 'hsapiens_gene_ensembl')
+listFilters(ensembl)
+
+## step 3: convert to entrez ID
+Anno <- getBM(attributes = c('ensembl_peptide_id', 'entrezgene'),
+              filters = 'ensembl_peptide_id',
+              value = esemblIDs,
+              mart = ensembl)
+```
 
 ## Objects and methods in *PhyloProfile*
 
@@ -202,7 +229,7 @@ Please visit [PhyloProfile homepage](https://github.com/YulongNiu/PhyloProfile) 
 
 Here is the output of `sessionInfo()` on the system on which this document was compiled:
 
-```{r echo=FALSE}
+```{r eval=FALSE}
 sessionInfo()
 ```
 
