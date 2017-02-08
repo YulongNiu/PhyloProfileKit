@@ -25,12 +25,6 @@ knitr::opts_chunk$set(tidy = FALSE,
                       message = FALSE)
 ```
 
-```{r echo=FALSE, results='hide', message=FALSE}
-library('PhyloProfile')
-library('magrittr')
-library('STRINGdb')
-```
-
 ``` {r macro, echo=FALSE, results='hide', message=FALSE}
 phyloprofile <- function() {"*[PhyloProfile](https://github.com/YulongNiu/PhyloProfile)*"}
 Robject <- function(x){sub('%obj%', x, '<span style="background-color:#F0F0F0;color:#404040;font-family:\'Lucida Console\', monospace">%obj%</span>')}
@@ -83,12 +77,12 @@ In `r phyloprofile()`, a profile with $n$ proteins across $m$ organisms is denot
 
 ## Read profiles from local files
 
-Normally, a profile can be easily stored as a numeric matrix. In `r phyloprofile()` a new class named `r Rclass('PP')` is created to manipulate a profile, and `PP()` is designed to coerce a regular matrix to a `r Rclass('PP')` object. The unique row names of a profile representing protein IDs are particularly important, because the following analysis use them as indices. If row names are missing, `PP()` will automatically creates them, *e.g.* `protein1` and `protein2`, however meaningful names such as [ensembl ID](http://useast.ensembl.org/index.html) or [NCBI gene ID](https://www.ncbi.nlm.nih.gov/gene) are highly recommended. Here, we read in a published profile [@barker2007constrained] called `r Robject('secP')`, which is originally stored in a csv-formed file.
+Normally, a profile can be easily stored as a numeric matrix. In `r phyloprofile()` a new class named `r Rclass('PP')` is created to manipulate a profile, and `PP()` is designed to coerce a regular matrix to a `r Rclass('PP')` object. The unique row names of a profile representing protein IDs are particularly important, because the following analysis use them as indices. If row names are missing, `PP()` will automatically creates them, *e.g.* `protein1` and `protein2`, however meaningful names such as [ensembl ID](http://useast.ensembl.org/index.html) or [NCBI gene ID](https://www.ncbi.nlm.nih.gov/gene) are highly recommended. Here, we read in a published profile [@barker2007constrained] called `r Robject('secP')`, which is originally stored in a csv-formed file. In this vignette, we used some "pipe-like" operators, *e.g.* `%>%` and `%<>%` from the `r CRANpkg('magrittr')` package to improve readability of 
+codes.
 
 ```{r}
-library('PhyloProfile')
 library('magrittr')
-library('STRINGdb')
+library('PhyloProfile')
 
 pPath <- system.file('extdata', 'bioinfoProfile.csv', package = 'PhyloProfile')
 sceMat <- pPath %>% read.csv(row.names = 1) %>% as.matrix
@@ -116,24 +110,20 @@ PPData(testP) <- sample(0:1, 5 * 20) %>% matrix(nrow = 5)
 
 ## Retrieve profiles from the STRING database
 
-The [STRING](http://string-db.org/) database (version 10) provides raw BLAST bit scores of the best hit for more than 2,000 organisms. The bit score matrix (continuous matrix) can be obtained by `PPSTRING()`. 
+The [STRING](http://string-db.org/) database (version 10) provides raw BLAST bit scores of the best hit for more than 2,000 organisms, and it is perfectly suitable for generating raw bit score profiles with the `r Biocpkg('STRINGdb')` package. The `get_STRING_species()` gives a glance of supported organisms in STRING.
 
-The organisms supported by STRING:
-
-```{r eval=FALSE}
+```{r}
+library('STRINGdb')
 sp <- get_STRING_species(version = '10', species_name = NULL)
 head(sp)
 ```
 
-Retrieve the profile of 5 human proteins:
+The bit score profile that is a continuous profile can be obtained by `PPSTRING()` according to the taxonomy ID (`r Robject('species_id')` in the above outputs), for example `r Robject('9606')` for *Homo sapiens*. In the following example, we retrieve the profile of 5 human proteins. Set `idx = 'all'` for a complete human profile, and increase `n` to accelerate the download process if multiple cores are supported.
 
 ``` {r eval=FALSE}
-## species id of Homo sapiens is 9606
-## continuous profile
+## A continuous profile
 PPSTRING(speID = 9606, idx = 1:5, n = 2)
 ```
-
-Set `idx = 'all'` for complete human profile, and increase `n` to accelerate the download process if multiple cores are supported.
 
 ## Normalize bit score profiles
 
