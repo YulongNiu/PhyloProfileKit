@@ -125,9 +125,33 @@ The bit score profile that is a continuous profile can be obtained by `PPSTRING(
 PPSTRING(speID = 9606, idx = 1:5, n = 2)
 ```
 
-## Normalize bit score profiles
+## Normalize raw bit score profiles
 
-Two normalization methods, SVD[@franceschini2015svd; @psomopoulos2013detection] and NPP[@tabach2013identification; @tabach2013human; @sadreyev2015phylogene], are provided for the pre-process of bit score profiles.
+Two normalization methods, SVD[@franceschini2015svd; @psomopoulos2013detection] and NPP[@tabach2013identification; @tabach2013human; @sadreyev2015phylogene], are provided for the pre-process of raw bit score profiles.
+
+The algorithm of NPP for a $n \times m$ profile $P$:
+
+1. For each bit score, it is set as `bitReset` if it lower than the `bitCutoff`.
+
+2. For each protein (row), if its number of homologous (with bit score > `bitReset`) across $m$ organisms is lower than `mimConserve`, the protein is removed because of its poor conservation.
+
+3. Normalizing proteins: for the $i$-th row, the bit score $p_{ij}$ is normalized as $\
+log_2(p_{ij}/p_{maxi})$, where $p_{maxi}$ is the maximum bit score in the $i$-th row.
+
+4. Normalizing species (columns): for the $j$-th column, the bit score $p_{ij}$ is normalized as $(p_{ij} - \mu_j)/\sigma_j$, which is also known as the [z-score](https://en.wikipedia.org/wiki/Standard_score), where $\mu_j$ and $\sigma_j$ is the mean and the standard deviation of the $j$-th column, respectively.
+
+The algorithm of SVD for a $n \times m$ profile $P$:
+
+1. The first step is the same as the one in NPP.
+
+2. Normalizing proteins: for the $i$-th row, the bit score $p_{ij}$ is normalized as $p_{ij}/p_{maxi}$, where $p_{maxi}$ is the maximum bit score in the $i$-th row.
+
+3. [SVD](https://en.wikipedia.org/wiki/Singular_value_decomposition) of the profile that $\boldsymbol{P = U{\Sigma}V'}$, where $\boldsymbol{U}$ is the unitary matrix. The profile $P'$ then is defined as the top `trimming` (30% for example) columns of $\boldsymbol{U}$. 
+
+4. Similar to the second step of NPP, poor conserved proteins are marked in the original profile $P$, and removed in $P'$.
+
+5. [Euclidean normalization](https://en.wikipedia.org/wiki/Norm_(mathematics)) of species in $P'$: for the $j$-th column, the bit score $p_{ij}$ is normalized as $\sqrt{\sum_{j=1}^{n'}p_{ij}^2}$.
+
 
 ``` {r eval=FALSE}
 ## simulation of a bit score profile with 2000 proteins and 1000 organisms

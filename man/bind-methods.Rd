@@ -35,15 +35,20 @@ ppC <- matrix(rnorm(10 * 20),
               dimnames = list(paste0('protein', 1:10),
                               paste0('spe', 1:20))) \%>\% PP
 
-ppM <- matrix(rnorm(10 * 20),
+ppM1 <- matrix(rnorm(10 * 20),
               ncol = 20,
-              dimnames = list(paste0('protein', 11:20),
+              dimnames = list(paste0('protein', 1:10),
                               paste0('spe', 21:40)))
 
-cbind(ppC, ppM)
-cbind(ppC, PP(ppM))
-rbind(ppC, ppM)
-rbind(ppC, PP(ppM))
+ppM2 <- matrix(rnorm(10 * 20),
+              ncol = 20,
+              dimnames = list(paste0('protein', 11:20),
+                              paste0('spe', 1:20)))
+
+cbind(ppC, ppM1)
+cbind(ppC, PP(ppM1))
+rbind(ppC, ppM2)
+rbind(ppC, PP(ppM2))
 }
 \author{
 Yulong Niu \email{niuylscu@gmail.com}
