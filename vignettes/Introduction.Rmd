@@ -190,7 +190,7 @@ PPIdx(sceP, pIdx, pIdx)
 ## with self linkages, for example "6321976" --> "6321976"
 PPIdx(sceP, pIdx, pIdx, self = TRUE)
 
-## considering linkage directions,
+## considering linkage directions
 ## for example "6321976" --> "6323007" and "6323007" --> "6321976" are different
 PPIdx(sceP, pIdx, pIdx, bidirect = TRUE)
 
@@ -200,6 +200,13 @@ PPIdx(sceP, pIdx, 1:nrow(sceP), bigmat = TRUE)
 ## whole proteome linkages
 PPIdx(sceP, 1:nrow(sceP), 1:nrow(sceP), bigmat = TRUE)
 ```
+
+## Combine profiles with phylogenetic trees
+
+The phylogenetic profiling can be enhanced by combining other types of biological data, and the phylogenetic tree is widely used to trace the evolutionary processes (reviewed by Kensche *et.al.* [@kensche2008practical]).
+
+
+
 
 ## Co-occurrency methods
 
