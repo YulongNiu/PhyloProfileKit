@@ -229,7 +229,7 @@ Please visit [PhyloProfile homepage](https://github.com/YulongNiu/PhyloProfile) 
 
 Here is the output of `sessionInfo()` on the system on which this document was compiled:
 
-```{r eval=FALSE}
+```{r echo=FALSE}
 sessionInfo()
 ```
 
