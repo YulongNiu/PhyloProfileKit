@@ -92,7 +92,7 @@ sceP <- PP(sceMat)
 sceP
 ```
 
-The `r Rclass('PP')` class is directly inherited from the `r Rclass('matrix')` class, so the extractor `[` and `rownames()`/`colnames()` work well for a `r Rclass('PP')` object. Moreover, `PPData()` is used to extract and replace the profile data.
+The `r Rclass('PP')` class is directly inherited from the `r Rclass('matrix')` class, so the extractor `[`, `rownames()`/`colnames()`, and `rbind()`/`cbind()` work well for a `r Rclass('PP')` object. Moreover, `PPData()` is used to extract and replace the profile data.
 
 
 ``` {r eval=FALSE}
@@ -135,10 +135,9 @@ The algorithm of NPP for a $n \times m$ profile $P$:
 
 2. For each protein (row), if its number of homologous (with bit score > `bitReset`) across $m$ organisms is lower than `mimConserve`, the protein is removed because of its poor conservation.
 
-3. Normalizing proteins: for the $i$-th row, the bit score $p_{ij}$ is normalized as $\
-log_2(p_{ij}/p_{maxi})$, where $p_{maxi}$ is the maximum bit score in the $i$-th row.
+3. Normalizing proteins: for the $i$-th row, the bit score $p_{ij}$ is normalized as $\log_2(p_{ij}/p_{maxi})$, where $p_{maxi}$ is the maximum bit score in the $i$-th row.
 
-4. Normalizing species (columns): for the $j$-th column, the bit score $p_{ij}$ is normalized as $(p_{ij} - \mu_j)/\sigma_j$, which is also known as the [z-score](https://en.wikipedia.org/wiki/Standard_score), where $\mu_j$ and $\sigma_j$ is the mean and the standard deviation of the $j$-th column, respectively.
+4. Normalizing species (columns): for the $j$-th column, the bit score $p_{ij}$ is normalized as $(p_{ij} - \mu_j)/\sigma_j$, which is also known as the [z-score](https://en.wikipedia.org/wiki/Standard_score), where $\mu_j$ and $\sigma_j$ is the mean and the standard deviation of the $j$-th column, respectively. Compare to the original profile $P$, the NPP normalized profile $P'$ ($n' \times m$) has the same organism number $m$, but may contain less proteins.
 
 The algorithm of SVD for a $n \times m$ profile $P$:
 
@@ -148,36 +147,37 @@ The algorithm of SVD for a $n \times m$ profile $P$:
 
 3. [SVD](https://en.wikipedia.org/wiki/Singular_value_decomposition) of the profile that $\boldsymbol{P = U{\Sigma}V'}$, where $\boldsymbol{U}$ is the unitary matrix. The profile $P'$ then is defined as the top `trimming` (30% for example) columns of $\boldsymbol{U}$. 
 
-4. Similar to the second step of NPP, poor conserved proteins are marked in the original profile $P$, and removed in $P'$.
+4. Similar to the second step of NPP, poor conserved proteins are marked in the original profile $P$, and removed in $P'$ ($n' \times m'$).
 
-5. [Euclidean normalization](https://en.wikipedia.org/wiki/Norm_(mathematics)) of species in $P'$: for the $j$-th column, the bit score $p_{ij}$ is normalized as $\sqrt{\sum_{j=1}^{n'}p_{ij}^2}$.
+5. [Euclidean normalization](https://en.wikipedia.org/wiki/Norm_(mathematics)) of species in $P'$: for the $j$-th column, the bit score $p_{ij}$ is normalized as $\sqrt{\sum_{j=1}^{m'}p_{ij}^2}$. The SVD normalized profile $P'$ may have less organisms and proteins than those in the original profile $P$.
 
 
 ``` {r eval=FALSE}
 ## simulation of a bit score profile with 2000 proteins and 1000 organisms
 ppRawBit <- sample(0:200, 2000 * 1000, replace = TRUE) %>% matrix(nrow = 2000) %>% PP
 
-## SVD
-Norm(ppRawBit, method = 'SVD', bitCutoff = 100, bitReset = 0, minConserve = 12, trimming = 0.8)
-
 ## NPP
 Norm(ppRawBit, method = 'NPP', bitCutoff = 60, bitReset = 1, minConserve = 12)
+
+## SVD
+Norm(ppRawBit, method = 'SVD', bitCutoff = 100, bitReset = 0, minConserve = 12, trimming = 0.8)
 ```
 
 # Linkage analysis
 
 ## Prepare linkages
 
-The basic phylogenetic profiling is to analyze the relationships of paired proteins, which is also known as "linkages". `PPIdx()` is used to prepare pre-defined linkages and store linkage indices into a `PPIdx` class object.
+The basic phylogenetic profiling is to analyze the relationships of paired proteins, which is also known as "linkages". The `r Robject('linkM')` below is a 2-column matrix, of which each row contains a pair of protein IDs. `PPIdx()` is used to prepare and store linkage indices corresponding to the profile `r Robject('sceP')` into a `r Rclass('PPIdx')` class object `r Robject('sceL')`. For example, the linkage `r Robject('"6323698" --> "10383785"')` is converted to indices `r Robject('4232 --> 203')`. Note that linkages containing protein IDs not in the profile are automatically removed.
 
 ``` {r}
 ## randomly generate 10 linkages
-linkM <- sceP %>% rownames %>% sample(2 * 10) %>% matrix(ncol = 2)
+linkM <- sceP %>% rownames %T>% {set.seed(12345)} %>% sample(2 * 10) %>% matrix(ncol = 2)
 sceL <- PPIdx(sceP, linkM)
 sceL
 ```
 
-For a batch of interested proteins, `PPIdx()` also facilities to generate linkages within these proteins or linkages with the rest whole proteome.
+For a batch of interested proteins, `PPIdx()` also facilities to generate linkages within these proteins or linkages with the rest whole proteome. In this case, `PPIdx()` accepts protein indices like `r Robject('pIdx')` below, **but not protein IDs**. Please consider set `bigmat = TRUE` if the linkage number is large.
+
 
 ``` {r eval=FALSE}
 ## indices of interested proteins, for example 5 random proteins from `sceP`
@@ -186,11 +186,19 @@ pIdx <- p %>% match(rownames(sceP))
 
 ## within linkages
 PPIdx(sceP, pIdx, pIdx)
+
 ## with self linkages, for example "6321976" --> "6321976"
 PPIdx(sceP, pIdx, pIdx, self = TRUE)
 
+## considering linkage directions,
+## for example "6321976" --> "6323007" and "6323007" --> "6321976" are different
+PPIdx(sceP, pIdx, pIdx, bidirect = TRUE)
+
 ## linkages with rest whole proteome 
 PPIdx(sceP, pIdx, 1:nrow(sceP), bigmat = TRUE)
+
+## whole proteome linkages
+PPIdx(sceP, 1:nrow(sceP), 1:nrow(sceP), bigmat = TRUE)
 ```
 
 ## Co-occurrency methods
@@ -199,7 +207,8 @@ Five common-used co-occurrency methods are supported to calculated similarity or
 
 ``` {r}
 ## mutual information
-SimDist(sceL, 'SimMI', n = 2)
+sceLMI <- SimDist(sceL, 'SimMI', n = 2)
+head(sceLMI)
 ```
 
 ## Model-based methods
