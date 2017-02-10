@@ -68,8 +68,8 @@ setMethod(f = 'SimDist',
                                     tipNum = tipNum,
                                     f = eachArg$f,
                                     t = eachArg$t)
-              fnew <- ftMat[, 1]
-              tnew <- ftMat[, 2]
+              fnew <- ftMat[, 3]
+              tnew <- ftMat[, 4]
 
               return(M(fnew, tnew, ...))
             }

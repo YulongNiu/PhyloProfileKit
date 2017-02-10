@@ -16,7 +16,7 @@ CollapseTree(edgeMat, tipNum, f, t)
 \item{t}{Numeric vector indicating a gene profile.}
 }
 \value{
-A numeric matrix with two columns representing collapsed two profiles.
+A numeric matrix with four columns: first two are collapsed edges and last two represent collapsed two profiles.
 }
 \description{
 Collapse phylogenetic profiles according to the phylogenetic tree

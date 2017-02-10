@@ -11,7 +11,7 @@ using namespace arma;
 //' The branches with same profile pattern are merged.
 //'
 //' @title Collapse tree
-//' @return A numeric matrix with two columns representing collapsed two profiles.
+//' @return A numeric matrix with four columns: first two are collapsed edges and last two represent collapsed two profiles.
 //' @param tipNum A int value. Tip (species) number.
 //' @inheritParams SimCor
 //' @inheritParams InferEdge
@@ -39,7 +39,7 @@ arma::umat CollapseTree(arma::umat edgeMat,
   if (all(f == f(0)) &&
       all(t == t(0))) {
     // f and t have same gain/loss pattern
-    return tipMat.row(0).cols(2, 3);
+    return tipMat.row(0);
   } else {}
 
   while (true) {
@@ -79,7 +79,7 @@ arma::umat CollapseTree(arma::umat edgeMat,
       } else {}
     }
   }
-  return cm.cols(2, 3);
+  return cm;
 }
 
 

@@ -65,6 +65,7 @@ Collate:
     'dataDef.R'
     'develFile.R'
     'gloableChkVar.R'
+    'plotCollapseTree.R'
     'plotCorMat.R'
     'plotElements.R'
     'plotProfile.R'

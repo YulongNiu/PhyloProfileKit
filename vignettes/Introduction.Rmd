@@ -204,7 +204,7 @@ PPIdx(sceP, 1:nrow(sceP), 1:nrow(sceP), bigmat = TRUE)
 
 ## Combine profiles with phylogenetic trees
 
-The phylogenetic profiling can be enhanced by combining other types of biological data, and the phylogenetic tree is widely used to trace the evolutionary processes (reviewed by Kensche *et.al.* [@kensche2008practical]). In `r phyloprofile()`, `PPTreeIdx()` is used to combine the a profile, a tree, and linkage indices into a new class `r Rclass('PPTreeIdx')` object. `r Robject('sceTree')` is the phylogenetic tree, which is a `r Rclass('phylo')` class object from the `r CRANpkg('ape')` package. Note that when combined with a tree, the organism of the profile missing in the tree are removed.
+The phylogenetic profiling can be enhanced by combining other types of biological data, and the phylogenetic tree is widely used to trace the evolutionary processes (reviewed by Kensche *et.al.* [@kensche2008practical]). In `r phyloprofile()`, `PPTreeIdx()` is used to combine the a profile, a [rooted tree](https://www.ncbi.nlm.nih.gov/Class/NAWBIS/Modules/Phylogenetics/phylo9.html), and linkage indices into a new class `r Rclass('PPTreeIdx')` object. `r Robject('sceTree')` is the phylogenetic tree, which is a `r Rclass('phylo')` class object from the `r CRANpkg('ape')` package. Note that when combined with a tree, the organism of the profile missing in the tree are removed.
 
 ``` {r}
 sceTree <- system.file('extdata', 'bioinfoTree.nex', package = "PhyloProfile") %>% read.nexus
@@ -252,13 +252,16 @@ $$
 Eu(X, Y) = \sqrt{\sum\limits_{i=1}^m(x_i - y_i)^2}
 $$
 
-All the methods work well for a binning profile, while `SimCor` and `DistEulidean` are recommended for the NPP and SVD normalized profiles, respectively.
+All the methods work well for a binning profile, whereas `SimCor` and `DistEulidean` are recommended for the NPP and SVD normalized profiles, respectively. `head()`/`tail()`/`as.data.frame()` are used to extract profiling results.
 
 ``` {r}
-## mutual information
+## mutual information with two cores
+## increase n to accelerate profiling 
 sceLMI <- SimDist(sceL, method = 'SimMI', n = 2)
 head(sceLMI)
 ```
+
+## 
 
 ## Model-based methods
 
