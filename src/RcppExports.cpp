@@ -259,7 +259,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // DistHamming
-arma::uword DistHamming(arma::vec f, arma::vec t);
+double DistHamming(arma::vec f, arma::vec t);
 RcppExport SEXP PhyloProfile_DistHamming(SEXP fSEXP, SEXP tSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;

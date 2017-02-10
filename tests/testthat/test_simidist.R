@@ -19,7 +19,7 @@ SimJaccardR <- function(pairProfile) {
 
 
 DistHammingR <- function(pairProfile) {
-  return(sum(pairProfile[, 1] != pairProfile[, 2]))
+  return(sum(abs(pairProfile[, 1] - pairProfile[, 2])))
 }
 
 
