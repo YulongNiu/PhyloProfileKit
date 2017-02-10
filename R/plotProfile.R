@@ -1,4 +1,4 @@
-##' Legend of species in phylogenetic profilings 
+##' Legend of species in phylogenetic profilings
 ##'
 ##' Legend annotating the species categories, like the class or phylum.
 ##' @title Phylo legend

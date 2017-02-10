@@ -16,12 +16,12 @@ theme_pp <- function(...) {
         axis.title = element_blank(),
         axis.ticks.length = unit(0, 'mm'),
         axis.line = element_blank(),
-        panel.margin = unit(0, 'mm'),
+        panel.spacing = unit(0, 'mm'),
         panel.grid = element_blank(),
         panel.border = element_blank(),
         panel.background = element_blank(),
         plot.margin = unit(c(0, 0, 0, 0), 'line'),
-        legend.margin = unit(0, 'mm'),
+        legend.spacing = unit(0, 'mm'),
         ...)
 }
 
@@ -67,9 +67,9 @@ geom_emptyblock<- function(...) {
 geom_legend <- function(g, ...) {
   ## !!!Be aware of this dirty walkaround!!!
   pdf(file = NULL)
-  g <- ggplotGrob(g + theme(legend.margin = unit(0, 'mm'), ...))$grobs
+  g <- ggplotGrob(g + theme(legend.spacing = unit(0, 'mm'), ...))$grobs
   dev.off()
-  
+
   legend <- g[[which(sapply(g, function(x) x$name) == "guide-box")]]
 
   return(legend)
