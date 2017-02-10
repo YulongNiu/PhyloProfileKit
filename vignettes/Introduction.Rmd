@@ -82,6 +82,7 @@ codes.
 
 ```{r}
 library('magrittr')
+library('ape')
 library('PhyloProfile')
 
 pPath <- system.file('extdata', 'bioinfoProfile.csv', package = 'PhyloProfile')
@@ -203,10 +204,13 @@ PPIdx(sceP, 1:nrow(sceP), 1:nrow(sceP), bigmat = TRUE)
 
 ## Combine profiles with phylogenetic trees
 
-The phylogenetic profiling can be enhanced by combining other types of biological data, and the phylogenetic tree is widely used to trace the evolutionary processes (reviewed by Kensche *et.al.* [@kensche2008practical]).
+The phylogenetic profiling can be enhanced by combining other types of biological data, and the phylogenetic tree is widely used to trace the evolutionary processes (reviewed by Kensche *et.al.* [@kensche2008practical]). In `r phyloprofile()`, `PPTreeIdx()` is used to combine the a profile, a tree, and linkage indices into a new class `r Rclass('PPTreeIdx')` object. `r Robject('sceTree')` is the phylogenetic tree, which is a `r Rclass('phylo')` class object from the `r CRANpkg('ape')` package. Note that when combined with a tree, the organism of the profile missing in the tree are removed.
 
-
-
+``` {r}
+sceTree <- system.file('extdata', 'bioinfoTree.nex', package = "PhyloProfile") %>% read.nexus
+sceTreeL <- PPTreeIdx(sceL, sceTree)
+sceTreeL
+```
 
 ## Co-occurrency methods
 
@@ -221,6 +225,7 @@ head(sceLMI)
 ## Model-based methods
 
 
+## Downstream analysis
 
 # Case studies
 
