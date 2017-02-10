@@ -23,7 +23,7 @@ setClassUnion(name = 'PPMat',
 
 ##' This class represents the data structure of phylogenetic profile with linkage indices.
 ##'
-##' @slot idx An integer matrix with two columns. It validates the rownames and colnames of the profile matrix.
+##' @slot idx An integer matrix with two columns. It validates the rownames and colnames of the profile.
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @exportClass PPIdx
 ##' 
@@ -36,20 +36,32 @@ setClass(Class = 'PPIdx',
          })
 
 
-## ## validate boundary
-## ## validate integer
-## setClass(Class = 'ppBin',
-##          slots = c(ppData = 'pp', selectIdx = 'idx'))
+##' This class represents the data structure of phylogenetic profiling results.
+##'
+##' @slot .Data A numeric vector representing the profiling data.
+##' @slot idx An integer matrix with two columns. It validates the rownames and colnames of the profile.
+##' @slot pnames A character vector storing rownames (protein names) of the profile.
+##' @slot method A character string indicating the profiling method.
+##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @exportClass PPResult
+##' 
+setClass(Class = 'PPResult',
+         slots = c(idx = 'PPMat', pnames = 'character', method = 'character'),
+         contains = 'numeric')
 
-## tmp4 <- new('ppBin', ppData = tmp1, selectIdx = tmp3)
+
+structure(list(), class = 'phylo')
+
+setOldClass('phylo')
 
 
-## ## validate boundary
-## ## validate numeric
-## setClass(Class = 'ppCont',
-##          slots = c(ppData = 'pp', selectIdx = 'idx'))
-## tmp5 <- new('ppCont', ppData = tmp2, selectIdx = tmp3)
-
-## setClassUnion(name = 'ppIdx',
-##               members = c('ppBin', 'ppCont'))
-
+##' This class represents the data structure of the phylogenetic profile with linkage indices and a phylogenetic tree.
+##'
+##' @slot tree A numeric vector representing the profiling data.
+##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @seealso The raw definition of \code{\link[ape]{phylo}}.
+##' @exportClass PPTreeIdx
+##' 
+setClass(Class = 'PPTreeIdx',
+         slots = c(tree = 'phylo'),
+         contains = 'PPIdx')

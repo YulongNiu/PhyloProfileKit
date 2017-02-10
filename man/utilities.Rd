@@ -30,4 +30,3 @@ Additional utilities
 \code{valiMat_internal()}: Validate a numeric matrix with row names and column names.
 }
 \keyword{internal}
-

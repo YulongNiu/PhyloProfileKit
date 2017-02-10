@@ -22,4 +22,3 @@ A totally blank gpplot2 theme expect for legend
 Yulong Niu \email{niuylscu@gmail.com}
 }
 \keyword{internal}
-

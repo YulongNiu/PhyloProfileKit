@@ -24,7 +24,7 @@ isBinMat_internal <- function(x) {
     return(uniqVec == 0 || uniqVec == 1)
   }
   else if (lenV == 2) {
-    return(all.equal(uniqVec, 0:1))
+    return(identical(uniqVec, 0:1))
   }
   else {
     return(FALSE)

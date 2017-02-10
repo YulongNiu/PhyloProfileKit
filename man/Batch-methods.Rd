@@ -13,7 +13,7 @@ Batch(x, FUN, ..., n)
 \arguments{
 \item{x}{Object with at least profile and linkage indices.}
 
-\item{FUN}{Functions to process paired linkages.}
+\item{FUN}{Functions to process paired linkages. The \code{FUN} has two parameters, the first parameter is a list \code{list(f = f, t = t, uniID = i)} in which \code{f} and \code{t} is two numeric vector indicating two single profile and \code{uniID} is the current index for parallel programming, and the second parameter is \code{...} used for additional arguments.}
 
 \item{...}{Additional parameters passed to \code{FUN}.}
 
@@ -33,12 +33,12 @@ require('magrittr')
 
 ## Person correlation coefficient
 ppBinIdx <- sample(0:1, 10 * 20, replace = TRUE) \%>\% matrix(ncol = 20) \%>\% PP \%>\% PPIdx(1:3, 1:3)
-Batch(ppBinIdx, cor, n = 2)
-}
-\author{
-Yulong Niu \email{niuylscu@gmail.com}
+testfun <- function(eachArg, ...) {sum(eachArg$f * eachArg$t)}
+Batch(ppBinIdx, testfun, n = 2)
 }
 \seealso{
 Batch process of similarity/distance \code{\link{SimDist}}.
 }
-
+\author{
+Yulong Niu \email{niuylscu@gmail.com}
+}

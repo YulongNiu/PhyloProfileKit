@@ -19,7 +19,7 @@ using namespace arma;
 //'
 //' \code{DistEuclidean()}: Euclidean distance.
 //'
-//' @title similarity and distance
+//' @title Similarity and distance
 //' @param f Numeric vector indicating a gene profile.
 //' @param t Numeric vector indicating a gene profile.
 //' @return A numeric value.
@@ -56,10 +56,14 @@ double SimJaccard(arma::vec f,
 //' @rdname simdist
 //' @keywords internal
 // [[Rcpp::export]]
-arma::uword DistHamming(arma::vec f,
-                        arma::vec t) {
+double DistHamming(arma::vec f,
+                   arma::vec t) {
 
-  uword ham = sum(f != t);
+  // Hamming distance
+  // uword ham = sum(f != t);
+
+  // Manhattan distance
+  double ham = sum(abs(f - t));
 
   return ham;
 

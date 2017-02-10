@@ -39,7 +39,7 @@ setGeneric(name = 'Norm',
 
 ##' @param x Object with at least profile and linkage indices.
 ##' @param n The number of CPUs or processors.
-##' @param FUN Functions to process paired linkages.
+##' @param FUN Functions to process paired linkages. The \code{FUN} has two parameters, the first parameter is a list \code{list(f = f, t = t, uniID = i)} in which \code{f} and \code{t} is two numeric vector indicating two single profile and \code{uniID} is the current index for parallel programming, and the second parameter is \code{...} used for additional arguments.
 ##' @param ... Additional parameters passed to \code{FUN}.
 ##' @rdname Batch-methods
 ##' @export
@@ -48,7 +48,7 @@ setGeneric(name = 'Batch',
            def = function(x, FUN, ..., n){standardGeneric('Batch')})
 
 
-##' @param x A \code{PP} object.
+##' @param x A \code{PPIdx}/\code{PPTreeIdx} object.
 ##' @param method A character string.
 ##' \itemize{
 ##'   \item \code{"SimCor"}: Person's correlation coefficient.
@@ -69,5 +69,44 @@ setGeneric(name = 'Batch',
 ##' 
 setGeneric(name = 'SimDist',
            def = function(x, method, ..., n){standardGeneric('SimDist')})
+
+
+##' @param x A \code{PP} object.
+##' @inheritParams SimDist
+##' @rdname ChooseSimDistFun-methods
+##' @keywords internal
+##' 
+setGeneric(name = 'ChooseSimDistFun',
+           def = function(x, method, ...){standardGeneric('ChooseSimDistFun')})
+
+
+
+##' @param x \code{PPTreeIdx} object.
+##' @param ... Additional parameters.
+##' @inheritParams Batch
+##' @rdname Dollo-methods
+##' @export
+##' 
+setGeneric(name = 'Dollo',
+           def = function(x, ..., n){standardGeneric('Dollo')})
+
+
+##' @param ... Additional parameters
+##' \itemize{
+##'   \item \code{BayesTraitsPath}: Full path of the program \href{http://www.evolution.reading.ac.uk/BayesTraits.html}{BayesTraits}.
+##'   \item \code{method}: Either "MCMC" or "ML" (Maximum Likelihood) method. "ML" is set as default.
+##' }
+##' Parameters only used in \code{MCMC}:
+##' \itemize{
+##'   \item \code{priorAll}: Prior distribution.
+##'   \item \code{iterNum}:  Iteration number with default value 1010000.
+##' }
+##' @inheritParams Dollo
+##' @rdname BayesTraits-methods
+##' @export
+##' 
+setGeneric(name = 'BayesTraits',
+           def = function(x, ..., n) {standardGeneric('BayesTraits')})
+
 
 

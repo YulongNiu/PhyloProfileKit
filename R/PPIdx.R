@@ -11,14 +11,14 @@ setMethod(f = 'show',
           signature = 'PPIdx',
           definition = function(object){
 
-            p <- object@.Data
+            p <- PPData(object)
             idx <- object@idx
 
             ##~~~~~~~~~~~~~head~~~~~~~~~~~~
             cat('---\n')
             cat('description: "phylogenetic profile with linkage indices"\n')
             cat('class: ', class(object), '\n')
-             if (isBinMat_internal(p)) {
+            if (isBinMat_internal(p)) {
               cat('profile: "binning"', '\n')
             } else {
               cat('profile: "continuous"', '\n')
@@ -29,8 +29,7 @@ setMethod(f = 'show',
             cat('---\n')
             ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-            str(p)
-            str(idx)
+            str(object)
 
             })
 
@@ -40,7 +39,7 @@ setMethod(f = 'show',
 ##' Construct a \code{PP} object.
 ##'
 ##' @title Constructor of \code{PPIdx}
-##' @param p A \code{PP} object
+##' @param p A \code{PP} object.
 ##' @param x A character matrix with two columns or a numeric vector. Proteins not in \code{p} (profile) are removed. The numeric vector indicates the indices of proteins.
 ##' @param bigmat Whether store the indices as a big matrix. Set it as \code{TRUE} if the number of index is large.
 ##' @param ... Additional parameters if \code{x} is a numeric vector.

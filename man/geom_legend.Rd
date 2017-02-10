@@ -20,9 +20,6 @@ ggplot legend
 \details{
 Retrieve the ggplot legend from a given ggplot2 object. This function may cause a blank display device, a dirty method is used to walkaround.
 }
-\author{
-Yulong Niu \email{niuylscu@gmail.com}
-}
 \references{
 \url{https://github.com/hadley/ggplot2/wiki/Share-a-legend-between-two-ggplot2-graphs}
 
@@ -30,5 +27,7 @@ Yulong Niu \email{niuylscu@gmail.com}
 
 \url{https://github.com/hadley/ggplot2/issues/809}
 }
+\author{
+Yulong Niu \email{niuylscu@gmail.com}
+}
 \keyword{internal}
-

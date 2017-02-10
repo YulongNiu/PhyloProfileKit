@@ -10,8 +10,8 @@ double SimCor(arma::vec f,
 double SimJaccard(arma::vec f,
                   arma::vec t);
 
-arma::uword DistHamming(arma::vec f,
-                        arma::vec t);
+double DistHamming(arma::vec f,
+                   arma::vec t);
 
 double DistEuclidean(arma::vec f,
                      arma::vec t);

@@ -9,7 +9,7 @@ Description: It contains various analysis methods and visualization of
     Circos plot, and D3 network. Retrieving phylogenetic profile from the STRING
     database. Downstream analysis includes expanding known gene-sets, significant
     gene-set analysis.
-Version: 0.4.1
+Version: 0.4.2
 Authors@R: person("Yulong", "Niu", email = "niuylscu@gmail.com", role = c("aut", "cre"))
 Maintainer: Yulong Niu <niuylscu@gmail.com>
 Depends:
@@ -40,21 +40,23 @@ Suggests:
 ByteCompile: true
 License: GPL
 LazyData: true
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 VignetteBuilder: knitr
 LinkingTo: Rcpp,
     RcppArmadillo
-Collate:
+Collate: 
     'utilities.R'
     'AllClasses.R'
     'AllGenerics.R'
     'Batch.R'
-    'BayesTraits.R'
+    'BayesTraitsBatch.R'
     'Dollo.R'
     'DolloBatch.R'
     'PP.R'
     'Norm.R'
     'PPIdx.R'
+    'PPResult.R'
+    'PPTreeIdx.R'
     'PlotState.R'
     'RcppChk.R'
     'RcppExports.R'
@@ -63,6 +65,7 @@ Collate:
     'dataDef.R'
     'develFile.R'
     'gloableChkVar.R'
+    'plotCollapseTree.R'
     'plotCorMat.R'
     'plotElements.R'
     'plotProfile.R'

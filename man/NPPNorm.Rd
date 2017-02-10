@@ -32,11 +32,10 @@ Step3: in each row (species), log2(x/max(x));
 
 Step4: z-score for each column.
 }
-\author{
-Yulong Niu \email{niuylscu@gmail.com}
-}
 \references{
 \href{http://www.nature.com/nature/journal/v493/n7434/extref/nature11779-s1.pdf}{NPP description}
 }
+\author{
+Yulong Niu \email{niuylscu@gmail.com}
+}
 \keyword{internal}
-

@@ -1,5 +1,5 @@
-#ifndef _NORMSVDCPP_H_
-#define _NORMSVDCPP_H_
+#ifndef _NORMSVD_H_
+#define _NORMSVD_H_
 
 #include <RcppArmadillo.h>
 #include <Rcpp.h>

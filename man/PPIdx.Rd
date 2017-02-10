@@ -7,7 +7,7 @@
 PPIdx(p, x, ..., bigmat = FALSE)
 }
 \arguments{
-\item{p}{A \code{PP} object}
+\item{p}{A \code{PP} object.}
 
 \item{x}{A character matrix with two columns or a numeric vector. Proteins not in \code{p} (profile) are removed. The numeric vector indicates the indices of proteins.}
 
@@ -53,4 +53,3 @@ PPIdx(ppBinning, 1:10, 1:nrow(ppBinning), bigmat = TRUE)
 \author{
 Yulong Niu \email{niuylscu@gmail.com}
 }
-

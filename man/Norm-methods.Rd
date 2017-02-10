@@ -50,9 +50,6 @@ Norm(ppRawBit, method = 'SVD', bitCutoff = 100, bitReset = 0, minConserve = 12, 
 ## NPP
 Norm(ppRawBit, method = 'NPP', bitCutoff = 60, bitReset = 1, minConserve = 12)
 }
-\author{
-Yulong Niu \email{niuylscu@gmail.com}
-}
 \references{
 \href{https://bitbucket.org/andrea/svd-phy}{SVD-Phy package}
 
@@ -60,4 +57,6 @@ Yulong Niu \email{niuylscu@gmail.com}
 
 \href{http://www.nature.com/nature/journal/v493/n7434/extref/nature11779-s1.pdf}{NPP description}
 }
-
+\author{
+Yulong Niu \email{niuylscu@gmail.com}
+}

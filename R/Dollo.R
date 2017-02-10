@@ -58,21 +58,23 @@
 ## library('ape')
 ## library('Rcpp')
 ## library('RcppArmadillo')
+## library('PhyloProfile')
 
-## sourceCpp('../src/Dollo.cpp')
-## sourceCpp('../src/simDistCpp.cpp')
+## sourceCpp('../src/collapseTree.cpp')
 
 ## set.seed(123456)
-## testTree <- rtree(1000)
-## pathList <- nodepath(testTree)
 ## testNum <- 1000
+## tipNum <- 100
+## testTree <- rtree(tipNum)
+## pathList <- nodepath(testTree)
+
 
 ## set.seed(123123)
-## gainMat1 <- matrix(sample(0:1, testNum * 1000, replace = TRUE), ncol = testNum)
+## gainMat1 <- matrix(sample(0:1, testNum * tipNum, replace = TRUE), ncol = testNum)
 ## set.seed(456456)
-## gainMat2 <- matrix(sample(0:1, testNum * 1000, replace = TRUE), ncol = testNum)
+## gainMat2 <- matrix(sample(0:1, testNum * tipNum, replace = TRUE), ncol = testNum)
 
 ## microbenchmark(
-##   'gain' = for(i in 1:testNum){DolloDist(testTree$edge, pathList, gainMat1[, i], gainMat2[, i])}
+##   'dollo' = for(i in 1:testNum){DolloDist(testTree$edge, pathList, gainMat1[, i], gainMat2[, i])},
+##   'collapse' = for(i in 1:testNum){CollapseTree(testTree$edge, Ntip(testTree), gainMat1[, i], gainMat2[, i])}
 ## )
-

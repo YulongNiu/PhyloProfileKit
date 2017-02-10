@@ -33,4 +33,3 @@ ppContinuous <- matrix(rnorm(10 * 20),
 \author{
 Yulong Niu \email{niuylscu@gmail.com}
 }
-

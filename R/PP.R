@@ -5,7 +5,7 @@ NULL
 ##' Show method for \code{PP} and \code{PPIdx} objects
 ##'
 ##' @title Show methods
-##' @param object A \code{PP}/\code{PPIdx} object.
+##' @param object A \code{PP}/\code{PPIdx}/\code{PPResult}/\code{PPTreeIdx} object.
 ##' @return Show messages.
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom utils str
@@ -24,16 +24,16 @@ setMethod(f = 'show',
             cat('description: "phylogenetic profile"\n')
             cat('class: ', class(object), '\n')
             if (isBinMat_internal(p)) {
-              cat('profile: "binning"', '\n')
+              cat('profile: binning', '\n')
             } else {
-              cat('profile: "continuous"', '\n')
+              cat('profile: continuous', '\n')
             }
             cat('#species: ', ncol(p), '\n')
             cat('#proteins: ', nrow(p), '\n')
             cat('---\n')
             ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-            str(p)
+            str(object)
 
           })
 
@@ -189,7 +189,72 @@ setMethod(f = '[<-',
           })
 
 
+##' Row bind or column bind of a \code{PP} object
+##'
+##' \code{rbind(..., deparse.level = 1)}: Row bind a \code{PP} object with another \code{PP} object or a named numeric matrix.
+##'
+##' \code{cbind(..., deparse.level = 1)}: Column bind a \code{PP} object with another \code{PP} object or a named numeric matrix.
+##'
+##' @title rbind or cbind PP objects
+##' @param x A \code{PP} object .
+##' @param y A \code{PP} object or a named numeric matrix.
+##' @param ... Additional parameters.
+##' @return A \code{PP} object.
+##' @examples
+##' require('magrittr')
+##' ppC <- matrix(rnorm(10 * 20),
+##'               ncol = 20,
+##'               dimnames = list(paste0('protein', 1:10),
+##'                               paste0('spe', 1:20))) %>% PP
+##'
+##' ppM1 <- matrix(rnorm(10 * 20),
+##'               ncol = 20,
+##'               dimnames = list(paste0('protein', 1:10),
+##'                               paste0('spe', 21:40)))
+##'
+##' ppM2 <- matrix(rnorm(10 * 20),
+##'               ncol = 20,
+##'               dimnames = list(paste0('protein', 11:20),
+##'                               paste0('spe', 1:20)))
+##'
+##' cbind(ppC, ppM1)
+##' cbind(ppC, PP(ppM1))
+##' rbind(ppC, ppM2)
+##' rbind(ppC, PP(ppM2))
+##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @importFrom methods rbind2 is
+##' @rdname bind-methods
+##' @exportMethod rbind2
+##'
+setMethod(f = 'rbind2',
+          signature = c(x = 'PP'),
+          definition = function(x, y, ...) {
+            if (is(y, 'PP')) {
+              PPData(x) <- rbind2(PPData(x), PPData(y))
+            }
+            else if (is(y, 'matrix')) {
+              PPData(x) <- rbind2(PPData(x), y)
+            }
+            else {}
 
-## TODO:
-## cbind
-## rbind
+            return(x)
+          })
+
+##' @importFrom methods cbind2 is
+##' @rdname bind-methods
+##' @exportMethod cbind2
+##'
+setMethod(f = 'cbind2',
+          signature = c(x = 'PP'),
+          definition = function(x, y, ...) {
+            if (is(y, 'PP')) {
+              PPData(x) <- cbind2(PPData(x), PPData(y))
+            }
+            else if (is(y, 'matrix')) {
+              PPData(x) <- cbind2(PPData(x), y)
+            }
+            else {}
+
+            return(x)
+          })
+

@@ -2,8 +2,8 @@
 % Please edit documentation in R/utilities.R
 \name{comb2_internal}
 \alias{comb2_internal}
-\alias{combSelf_internal}
 \alias{combWhole_internal}
+\alias{combSelf_internal}
 \title{Combination}
 \usage{
 comb2_internal(x)
@@ -38,4 +38,3 @@ Combination functions
 Yulong Niu \email{niuylscu@gmail.com}
 }
 \keyword{internal}
-
