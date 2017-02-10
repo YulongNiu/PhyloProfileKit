@@ -150,7 +150,7 @@ The algorithm of SVD for a $n \times m$ profile $P$:
 
 4. Similar to the second step of NPP, poor conserved proteins are marked in the original profile $P$, and removed in $P'$ ($n' \times m'$).
 
-5. [Euclidean normalization](https://en.wikipedia.org/wiki/Norm_(mathematics)) of species in $P'$: for the $j$-th column, the bit score $p_{ij}$ is normalized as $\sqrt{\sum_{j=1}^{m'}p_{ij}^2}$. The SVD normalized profile $P'$ may have less organisms and proteins than those in the original profile $P$.
+5. [Euclidean normalization](https://en.wikipedia.org/wiki/Norm_(mathematics)) of species in $P'$: for the $i$-th row, the bit score $p_{ij}$ is normalized as $p_{ij}/\sqrt{\sum_{i=1}^{m'}p_{ij}^2}$. The SVD normalized profile $P'$ may have less organisms and proteins than those in the original profile $P$.
 
 
 ``` {r eval=FALSE}
@@ -214,11 +214,47 @@ sceTreeL
 
 ## Co-occurrency methods
 
-Five common-used co-occurrency methods are supported to calculated similarity or distance of linkages.
+Five common-used co-occurrency methods [@pellegrini1999assigning; @kensche2008practical; @glazko2004detection] are supported to calculated similarity or distance of linkages by `SimDist()`. For each pair of proteins in a $n \times m$ profile $P$, for example $X$ and $Y$:
+
+* `method = 'SimJaccard'` for Jaccard similarity 
+
+$$
+J(X, Y) = \frac{\left\lvert\{i{\mid}x_i=1{\cap}y_i=1\}\right\rvert}
+{\left\lvert\{i{\mid}x_i=1{\cup}y_i=1\}\right\rvert}
+$$
+
+* `method = 'SimCor'` for Pearson correlation coefficient
+
+$$
+cor(X, Y) = \frac{\sum\limits_{i=1}^m(x_i-\overline{X})(y_i-\overline{Y})}
+{(m-1)S_XS_Y}
+$$
+
+where $\overline{X}$ and $\overline{Y}$ are the sample mean of $X$ and $Y$, and $S_X$ and $S_Y$ are the sample standard deviations of $X$ and $Y$, respectively.
+
+* `method = 'SimMI'` for mutual information
+
+$$
+I(X, Y) = \int_Y\int_Xp(x, y)\log\left(\frac{p(x, y)}{p(x)p(y)}\right)\mathrm{d}x\mathrm{d}y
+$$
+
+where $p(x, y)$ is the joint probability density function of $X$ and $Y$, $p(x)$ and $p(y)$ is the marginal probability density function of $X$ and $Y$, respectively.
+
+* `method = 'DistHamming'` for Hamming distance 
+
+$$
+H(X, Y) = \sum\limits_{i=1}^m\lvert x_i-y_i \rvert
+$$
+
+* `method = 'DistEulidean'` for Euclidean distance 
+
+$$
+Eu(X, Y) = \sqrt{\sum\limits_{i=1}^m(x_i - y_i)^2}
+$$
 
 ``` {r}
 ## mutual information
-sceLMI <- SimDist(sceL, 'SimMI', n = 2)
+sceLMI <- SimDist(sceL, method = 'SimMI', n = 2)
 head(sceLMI)
 ```
 
