@@ -4,3 +4,8 @@
 .Rbuildignore
 .Rproj.user/
 .directory
+
+# object and shared objects
+*.o
+*.so
+*.dll
