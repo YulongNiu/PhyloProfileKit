@@ -1,4 +1,4 @@
-pp_tile <- function(x, shift = 0, ...) {
+pp_tile <- function(x, ...) {
 
   xlen <- length(x)
   m <- data.frame(x = rep(0, xlen),
@@ -10,7 +10,7 @@ pp_tile <- function(x, shift = 0, ...) {
     labs(x = NULL, y = NULL) +
     scale_y_continuous(expand = c(0, 0), breaks = NULL) +
     scale_x_continuous(expand = c(0, 0), breaks = NULL) +
-    scale_fill_manual(values = levels(m$fill)) +
+    ## scale_fill_manual(values = colour) +
     theme_pp(legend.position='none')
 
   tGrid <- grid.arrange(tObj, ncol = 1)

@@ -1,10 +1,47 @@
-
+##' Add \code{ggplot} and \code{gtable} objects
+##'
+##' @title Add methods
+##' @param e1 A \code{ggplot} or code{gtable} object.
+##' @param e2 A \code{ggplot} or code{gtable} object.
+##' @return A \code{gtable} object
+##' @examples
+##' require('ggplot2')
+##'
+##' p <- ggplot(mtcars, aes(mpg, wt)) +
+##'   geom_point(aes(colour = factor(cyl)))
+##' p + p
+##' p + (p + scale_colour_manual(values = c("red","blue", "green")))
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @export
+##' @importFrom gridExtra grid.arrange
+##' @importFrom gglot2 ggplotGrob
+##' @rdname add-methods
+##' @exportMethod '+'
 ##' 
-`+.gtable` <- function(x, y) {
-  return(cbind(x, y))
-}
+setMethod(f = '+',
+          signature = c(e1 = 'ANY', e2 = 'ANY'),
+          definition = function(e1, e2) {
+
+            ## check obj is ggplot or gtable
+            checkg_internal <- function(x) {
+              ifelse(inherits(x, 'ggplot') ||
+                     inherits(x, 'gtable'),
+                     TRUE,
+                     FALSE)
+            }
+
+            stopifnot(checkg_internal(e1) &&
+                      checkg_internal(e2))
+
+            if (inherits(e1, 'ggplot')) {
+              e1 <- ggplotGrob(e1)
+            }
+            else if (inherits(e2, 'ggplot')) {
+              e2 <- ggplotGrob(e2)
+            }
+            else {}
+
+            return(grid.arrange(e1, e2, ncol = 2))
+          })
 
 ##' Add plot object to \code{pmat}.
 ##'

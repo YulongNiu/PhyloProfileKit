@@ -72,3 +72,4 @@ Collate:
     'plotProfile.R'
     'pp_plotelem.R'
     'pp_text.R'
+    'pp_tile.R'

@@ -66,7 +66,7 @@ setClass(Class = 'PPTreeIdx',
          slots = c(tree = 'phylo'),
          contains = 'PPIdx')
 
-
+##' @import gtable
 setOldClass('gtable')
 
 ##' This class represents the data structure of matrix-like plot.
@@ -77,7 +77,6 @@ setOldClass('gtable')
 ##' @slot top top plot.
 ##' @slot bottom bottom plot.
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @import gtable
 ##' @exportClass gmat
 ##' 
 setClass(Class = 'gmat',
@@ -86,6 +85,4 @@ setClass(Class = 'gmat',
                    left = 'gtable',
                    top = 'gtable',
                    bottom = 'gtable'))
-
-
 
