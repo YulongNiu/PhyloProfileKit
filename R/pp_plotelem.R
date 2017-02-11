@@ -39,10 +39,10 @@ geom_emptyblock<- function(...) {
   emptyData <- data.frame(x = 1, y = 1)
   empty <- ggplot(emptyData) +
     geom_point(aes_string('x', 'y'), colour='white', ...) +
-      labs(x = NULL, y = NULL) +
-        scale_y_continuous(expand = c(0, 0), breaks = NULL) +
-          scale_x_continuous(expand = c(0, 0), breaks = NULL) +
-            theme_pp(legend.position='none')
+    labs(x = NULL, y = NULL) +
+    scale_y_continuous(expand = c(0, 0), breaks = NULL) +
+    scale_x_continuous(expand = c(0, 0), breaks = NULL) +
+    theme_pp(legend.position='none')
 
   return(empty)
 }

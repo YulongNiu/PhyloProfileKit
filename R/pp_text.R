@@ -26,10 +26,10 @@ pp_htext <- function(x, shift = 0.5, ...) {
   xlen <- length(x)
   m <- data.frame(x = rep(0, xlen),
                   y = seq(shift, xlen - shift, 1),
-                  text = x)
+                  label = x)
 
-  tObj <- ggplot(m, aes_string('x', 'y', label = 'text')) +
-    geom_text(...) +
+  tObj <- ggplot(m, aes_string('x', 'y')) +
+    geom_text(aes_string(label = 'label'), ...) +
     labs(x = NULL, y = NULL) +
     scale_x_continuous(expand = c(0, 0), breaks = NULL) +
     scale_y_continuous(expand = c(0, 0), limits = c(0, xlen), breaks = NULL) +
@@ -49,10 +49,10 @@ pp_vtext <- function(x, shift = 0.5, ...) {
   xlen <- length(x)
   m <- data.frame(y = rep(0, xlen),
                   x = seq(shift, xlen - shift, 1),
-                  text = x)
+                  label = x)
 
-  tObj <- ggplot(m, aes_string('x', 'y', label = 'text')) +
-    geom_text(...) +
+  tObj <- ggplot(m, aes_string('x', 'y')) +
+    geom_text(aes_string(label = 'label'), ...) +
     labs(x = NULL, y = NULL) +
     scale_y_continuous(expand = c(0, 0), breaks = NULL) +
     scale_x_continuous(expand = c(0, 0), limits = c(0, xlen), breaks = NULL) +
