@@ -16,6 +16,7 @@ Depends:
     R (>= 3.2.1)
 Imports:
     ggplot2,
+    gtable,
     reshape2,
     RColorBrewer,
     ggdendro,
@@ -52,6 +53,7 @@ Collate:
     'BayesTraitsBatch.R'
     'Dollo.R'
     'DolloBatch.R'
+    'GridTable.R'
     'PP.R'
     'Norm.R'
     'PPIdx.R'
