@@ -6,80 +6,15 @@
   return(cbind(x, y))
 }
 
-
-## ##' Add plot object to \code{gmat}.
-## ##'
-## ##' \code{atleft()}: at left.
-## ##'
-## ##' \code{atright()}: at right.
-## ##'
-## ##' \code{attop()}: at top.
-## ##'
-## ##' \code{atbottom()}: at bottom.
-## ##' 
-## ##' @title Add locations
-## ##' @inheritParams atleft
-## ##' @return A \code{gmat} object.
-## ##' @examples
-## ##' require('gridExtra')
-## ##' require('ggplot2')
-## ##'
-## ##' p <- qplot(1,1)
-## ##' new('gmat') %@<% grid.arrange(p)
-## ##' @author Yulong Niu \email{niuylscu@@gmail.com}
-## ##' @rdname location-methods
-## ##' @exportMethod atleft
-## ##'
-## setMethod(f = 'atleft',
-##           signature = c(x = 'gmat', y = 'gtable'),
-##           definition = function(x, y, ...) {
-##             x@left <- y
-##             return(x)
-##           })
-
-## ##' @inheritParams atleft
-## ##' @rdname location-methods
-## ##' @exportMethod atright
-## ##'
-## setMethod(f = 'atright',
-##           signature = c(x = 'gmat', y = 'gtable'),
-##           definition = function(x, y, ...) {
-##             x@right <- y
-##             return(x)
-##           })
-
-## ##' @inheritParams atleft
-## ##' @rdname location-methods
-## ##' @exportMethod attop
-## ##'
-## setMethod(f = 'attop',
-##           signature = c(x = 'gmat', y = 'gtable'),
-##           definition = function(x, y, ...) {
-##             x@top <- y
-##             return(x)
-##           })
-
-## ##' @inheritParams atleft
-## ##' @rdname location-methods
-## ##' @exportMethod atbottom
-## ##' 
-## setMethod(f = 'atbottom',
-##           signature = c(x = 'gmat', y = 'gtable'),
-##           definition = function(x, y, ...) {
-##             x@bottom <- y
-##             return(x)
-##           })
-
-
 ##' Add plot object to \code{pmat}.
 ##'
-##' \code{atleft()}: at left.
+##' \code{atleft()}/%@<%: at left.
 ##'
-##' \code{atright()}: at right.
+##' \code{atright()}/%@>%: at right.
 ##'
-##' \code{attop()}: at top.
+##' \code{attop()}/%@^%: at top.
 ##'
-##' \code{atbottom()}: at bottom.
+##' \code{atbottom()}/%@v%: at bottom.
 ##'
 ##' @title Add locations
 ##' @param x A \code{pmat} object.
@@ -113,7 +48,7 @@ atright <- function(x, y) {
 ##' @inheritParams atleft
 ##' @rdname loc
 ##' @export
-##' 
+##'
 attop <- function(x, y) {
   x@top <- y
   return(x)
@@ -127,23 +62,29 @@ atbottom <- function(x, y) {
   return(x)
 }
 
+##' @inheritParams atleft
 ##' @rdname loc
 ##' @export
 ##'
 `%@<%` <- atleft
 
+##' @inheritParams atleft
 ##' @rdname loc
 ##' @export
 ##'
 `%@>%` <- atright
 
+##' @inheritParams atleft
 ##' @rdname loc
 ##' @export
 ##'
 `%@^%` <- attop
 
+##' @inheritParams atleft
 ##' @rdname loc
 ##' @export
 ##'
 `%@v%` <- atbottom
+
+
 

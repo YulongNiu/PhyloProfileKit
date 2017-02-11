@@ -39,13 +39,13 @@ A \code{pmat} object.
 Add plot object to \code{pmat}.
 }
 \details{
-\code{atleft()}: at left.
+\code{atleft()}/%@<%: at left.
 
-\code{atright()}: at right.
+\code{atright()}/%@>%: at right.
 
-\code{attop()}: at top.
+\code{attop()}/%@^%: at top.
 
-\code{atbottom()}: at bottom.
+\code{atbottom()}/%@v%: at bottom.
 }
 \examples{
 require('gridExtra')
