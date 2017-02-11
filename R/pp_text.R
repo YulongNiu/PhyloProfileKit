@@ -63,13 +63,3 @@ pp_vtext <- function(x, shift = 0.5, ...) {
   return(tGrid)
 }
 
-
-source('AllClasses.R')
-source('AllGenerics.R')
-library(gtable)
-library(ggplot2)
-library(gridExtra)
-source('gmat.R')
-
-p <- ggplot(mtcars, aes(mpg, wt)) + geom_point(aes(colour = factor(cyl)))
-

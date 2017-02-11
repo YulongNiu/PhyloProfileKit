@@ -6,42 +6,47 @@
 ##' @return A \code{gtable} object
 ##' @examples
 ##' require('ggplot2')
+##' require('gridExtra')
 ##'
 ##' p <- ggplot(mtcars, aes(mpg, wt)) +
 ##'   geom_point(aes(colour = factor(cyl)))
-##' p + p
-##' p + (p + scale_colour_manual(values = c("red","blue", "green")))
+##' p %@+% p
+##' p %@+% grid.arrange(qplot(1,1), ncol = 1)
+##' p %@+% (p + scale_colour_manual(values = c('red', 'blue', 'green')))
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom gridExtra grid.arrange
-##' @importFrom gglot2 ggplotGrob
-##' @rdname add-methods
-##' @exportMethod '+'
+##' @importFrom ggplot2 ggplotGrob
+##' @rdname addinloc
+##' @export
 ##' 
-setMethod(f = '+',
-          signature = c(e1 = 'ANY', e2 = 'ANY'),
-          definition = function(e1, e2) {
+atadd <- function(e1, e2) {
 
-            ## check obj is ggplot or gtable
-            checkg_internal <- function(x) {
-              ifelse(inherits(x, 'ggplot') ||
-                     inherits(x, 'gtable'),
-                     TRUE,
-                     FALSE)
-            }
+  ## check obj is ggplot or gtable
+  checkg_internal <- function(x) {
+    ifelse(inherits(x, 'ggplot') ||
+           inherits(x, 'gtable'),
+           TRUE,
+           FALSE)
+  }
 
-            stopifnot(checkg_internal(e1) &&
-                      checkg_internal(e2))
+  stopifnot(checkg_internal(e1) &&
+            checkg_internal(e2))
 
-            if (inherits(e1, 'ggplot')) {
-              e1 <- ggplotGrob(e1)
-            }
-            else if (inherits(e2, 'ggplot')) {
-              e2 <- ggplotGrob(e2)
-            }
-            else {}
+  if (inherits(e1, 'ggplot')) {
+    e1 <- ggplotGrob(e1)
+  }
+  else if (inherits(e2, 'ggplot')) {
+    e2 <- ggplotGrob(e2)
+  }
+  else {}
 
-            return(grid.arrange(e1, e2, ncol = 2))
-          })
+  return(grid.arrange(e1, e2, ncol = 2))
+}
+
+##' @rdname addinloc
+##' @export
+##'
+`%@+%` <- atadd
 
 ##' Add plot object to \code{pmat}.
 ##'
