@@ -109,4 +109,35 @@ setGeneric(name = 'BayesTraits',
            def = function(x, ..., n) {standardGeneric('BayesTraits')})
 
 
+## ##' @param x \code{gmat} object.
+## ##' @param y \code{gtable} object.
+## ##' @param ... Additional parameters.
+## ##' @rdname location-methods
+## ##' @export
+## ##' 
+## setGeneric(name = 'atleft',
+##            def = function(x, y, ...){standardGeneric('atleft')})
 
+
+## ##' @inheritParams atleft
+## ##' @rdname location-methods
+## ##' @export
+## ##' 
+## setGeneric(name = 'atright',
+##            def = function(x, y, ...){standardGeneric('atright')})
+
+
+## ##' @inheritParams atleft
+## ##' @rdname location-methods
+## ##' @export
+## ##' 
+## setGeneric(name = 'attop',
+##            def = function(x, y, ...){standardGeneric('attop')})
+
+
+## ##' @inheritParams atleft
+## ##' @rdname location-methods
+## ##' @export
+## ##' 
+## setGeneric(name = 'atbottom',
+##            def = function(x, y, ...){standardGeneric('atbottom')})
