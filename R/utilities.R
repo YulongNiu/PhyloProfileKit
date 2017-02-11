@@ -11,7 +11,7 @@
 ##' \code{isBinMat_internal()}: Logic.
 ##'
 ##' \code{valiMat_internal()}: \code{TRUE} or a warning message.
-##' 
+##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @rdname utilities
 ##' @importFrom magrittr %>%
 ##' @keywords internal
