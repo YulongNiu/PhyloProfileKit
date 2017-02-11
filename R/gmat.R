@@ -62,25 +62,21 @@ atbottom <- function(x, y) {
   return(x)
 }
 
-##' @inheritParams atleft
 ##' @rdname loc
 ##' @export
 ##'
 `%@<%` <- atleft
 
-##' @inheritParams atleft
 ##' @rdname loc
 ##' @export
 ##'
 `%@>%` <- atright
 
-##' @inheritParams atleft
 ##' @rdname loc
 ##' @export
 ##'
 `%@^%` <- attop
 
-##' @inheritParams atleft
 ##' @rdname loc
 ##' @export
 ##'
