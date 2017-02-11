@@ -69,5 +69,6 @@ Collate:
     'gmat.R'
     'plotCollapseTree.R'
     'plotCorMat.R'
-    'plotElements.R'
     'plotProfile.R'
+    'pp_plotelem.R'
+    'pp_text.R'

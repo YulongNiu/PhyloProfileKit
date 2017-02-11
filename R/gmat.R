@@ -8,13 +8,13 @@
 
 ##' Add plot object to \code{pmat}.
 ##'
-##' \code{atleft()}/%@<%: at left.
+##' \code{atleft()}: at left.
 ##'
-##' \code{atright()}/%@>%: at right.
+##' \code{atright()}: at right.
 ##'
-##' \code{attop()}/%@^%: at top.
+##' \code{attop()}: at top.
 ##'
-##' \code{atbottom()}/%@v%: at bottom.
+##' \code{atbottom()}: at bottom.
 ##'
 ##' @title Add locations
 ##' @param x A \code{pmat} object.
@@ -81,6 +81,4 @@ atbottom <- function(x, y) {
 ##' @export
 ##'
 `%@v%` <- atbottom
-
-
 
