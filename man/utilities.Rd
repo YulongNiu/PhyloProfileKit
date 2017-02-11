@@ -29,4 +29,7 @@ Additional utilities
 
 \code{valiMat_internal()}: Validate a numeric matrix with row names and column names.
 }
+\author{
+Yulong Niu \email{niuylscu@gmail.com}
+}
 \keyword{internal}

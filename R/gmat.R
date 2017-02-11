@@ -1,21 +1,21 @@
-##' @method cbind gtable
+
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @export
 ##' 
 `+.gtable` <- function(x, y) {
-  return(cbind.gtable(x, y))
+  return(cbind(x, y))
 }
 
-##' Add plot object to \code{pmat}
+
+##' Add plot object to \code{pmat}.
 ##'
-##' \code{`%@<%`}: at left.
+##' %@<%: at left.
 ##'
-##' \code{`%@>%`}: at right.
+##' %@>%: at right.
 ##'
-##' \code{`%@^%`}: at top.
+##' %@^%: at top.
 ##'
-##' \code{`%@v%`}: at bottom.
-##'
+##' %@v%: at bottom.
 ##' @title Add locations
 ##' @param x A \code{pmat} object.
 ##' @param y A \code{ptable} object.
@@ -36,7 +36,7 @@
 }
 
 
-##' inheritParams %@<%
+##' @inheritParams "%@<%"
 ##' @rdname loc
 ##' @export
 ##' 
@@ -45,8 +45,8 @@
   return(x)
 }
 
-##' @method cbind gmat
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @inheritParams "%@<%"
+##' @rdname loc
 ##' @export
 ##' 
 `%@^%` <- function(x, y) {
@@ -54,7 +54,7 @@
   return(x)
 }
 
-##' inheritParams %@<%
+##' @inheritParams "%@<%"
 ##' @rdname loc
 ##' @export
 `%@v%` <- function(x, y) {
