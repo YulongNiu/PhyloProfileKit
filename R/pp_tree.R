@@ -18,7 +18,7 @@
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom ggplot2 ggplot geom_tile labs scale_x_continuous scale_y_continuous scale_y_reverse aes_string
 ##' @importFrom ape as.phylo Ntip
-##' @importFrom ggtree fortify
+##' @importFrom ggtree fortify.phylo
 ##' @seealso \code{\link[ggplot2]{geom_segment}}
 ##' @export
 ##' 
@@ -28,7 +28,7 @@ pp_tree <- function(x, ...) {
     x <- as.phylo(x)
   } else {}
 
-  segData <- ExtractSeg(fortify(x))
+  segData <- ExtractSeg(fortify.phylo(x))
 
   segData[, c(3, 4)] <- segData[, c(3, 4)] - 0.5
 

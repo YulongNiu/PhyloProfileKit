@@ -2,14 +2,14 @@
 % Please edit documentation in R/pp_tree.R
 \name{pp_tree}
 \alias{pp_tree}
-\title{pp plot tree}
+\title{pp plot trees and dendrograms}
 \usage{
 pp_tree(x, ...)
 }
 \arguments{
-\item{x}{A tree object}
+\item{x}{A \code{phylo} or a \code{hclust} data.}
 
-\item{...}{Parameters passed to \code{geom_tile()} in the ggplot2 package.}
+\item{...}{Parameters passed to \code{geom_segment()} in the ggplot2 package.}
 }
 \value{
 A \code{gg} class object
@@ -22,13 +22,16 @@ Plot phylogenetic trees and dendrograms
 }
 \examples{
 require('ggplot2')
+require('ape')
 
-pp_tile(rep(letters[1:3], 4))
-pp_tile(rep(LETTERS[1:2], 3)) + scale_fill_manual(values = c('red','blue', 'green'))
-pp_tile(rep(letters[1:3], 4)) + coord_flip()
+treePath <- system.file('extdata', 'bioinfoTree.nex', package = "PhyloProfile")
+sceTree <- read.nexus(treePath)
+
+pp_tree(sceTree)
+pp_tree(sceTree) + coord_flip() + scale_x_reverse()
 }
 \seealso{
-\code{\link[ggplot2]{geom_tile}}
+\code{\link[ggplot2]{geom_segment}}
 }
 \author{
 Yulong Niu \email{niuylscu@gmail.com}

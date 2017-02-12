@@ -2,7 +2,7 @@
 % Please edit documentation in R/pp_profile.R
 \name{pp_profile}
 \alias{pp_profile}
-\title{pp plot tiles}
+\title{pp plot profiles}
 \usage{
 pp_profile(x, ...)
 }
@@ -27,6 +27,7 @@ require('magrittr')
 ## a binning profile
 ppB <- sample(0:1, 5 * 20, replace = TRUE) \%>\% matrix(nrow = 5)
 pp_profile(ppB) + scale_fill_manual(values = c('grey91', 'steelblue'))
+
 ## a continuous profile
 ppC <- rnorm(5 * 20) \%>\% matrix(nrow = 5)
 pp_profile(ppC) + scale_fill_gradient2()
