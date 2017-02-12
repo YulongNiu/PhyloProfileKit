@@ -18,6 +18,7 @@
 ##' 
 pp_text <- function(x, shift = 0.5, ...) {
 
+
   xlen <- length(x)
   m <- data.frame(x = rep(0, xlen),
                   y = seq(shift, xlen - shift, 1),
@@ -32,3 +33,4 @@ pp_text <- function(x, shift = 0.5, ...) {
 
   return(tObj)
 }
+
