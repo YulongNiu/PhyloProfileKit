@@ -16,7 +16,7 @@
 ##' pp_vtext(rep(LETTERS[1:2], 3), colour = factor(rep(c('blue', 'red'), 3)))
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom ggplot2 ggplot geom_text labs scale_x_continuous scale_y_continuous scale_y_reverse aes_string
-##' @rdname plottext
+##' @rdname pp_text
 ##' @seealso \code{\link[ggplot2]{geom_text}}
 ##' @export
 ##' 
@@ -39,7 +39,7 @@ pp_htext <- function(x, shift = 0.5, ...) {
 
 
 ##' @inheritParams pp_htext
-##' @rdname plottext
+##' @rdname pp_text
 ##' @export
 ##' 
 pp_vtext <- function(x, shift = 0.5, ...) {
