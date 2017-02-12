@@ -7,7 +7,7 @@
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom ggplot2 element_blank theme_bw %+replace% theme
 ##' @importFrom grid unit
-##' @keywords internal
+##' @export
 ##' 
 theme_pp <- function(...) {
   theme_bw() %+replace%

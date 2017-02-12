@@ -309,6 +309,8 @@ Anno <- getBM(attributes = c('ensembl_peptide_id', 'entrezgene'),
 
 
 ```{r}
+library('ggplot2')
+
 pp_label <- function(x, shift = 0.5, ...) {
   xlen <- length(x)
   m <- data.frame(x = rep(0, xlen),

@@ -23,6 +23,8 @@ Plot text
 Plot text, for example column names and row names.
 }
 \examples{
+require(ggplot2)
+
 pp_text(letters[1:10], colour = 'grey55', size = 3)
 pp_text(rep(LETTERS[1:2], 3), colour = factor(rep(c('blue', 'red'), 3)))
 pp_text(letters[1:5]) + coord_flip()

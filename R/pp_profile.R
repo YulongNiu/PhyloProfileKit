@@ -7,6 +7,7 @@
 ##' @param ... Parameters passed to \code{geom_tile()} in the ggplot2 package.
 ##' @return A \code{gg} class object
 ##' @examples
+##' require('ggplot2')
 ##' require('magrittr')
 ##'
 ##' ## a binning profile
