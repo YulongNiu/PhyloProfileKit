@@ -17,7 +17,7 @@ pp_vtext(x, shift = 0.5, ...)
 \item{...}{Parameters passed to \code{geom_text()} in the ggplot2 package.}
 }
 \value{
-A \code{gtable} object
+A \code{gg} class object
 }
 \description{
 Plot text
@@ -31,7 +31,7 @@ Plot text, for example column names and row names.
 }
 \examples{
 pp_htext(letters[1:10], colour = 'grey55', size = 3)
-pp_vtext(rep(LETTERS[1:4], 3), size = 5)
+pp_vtext(rep(LETTERS[1:2], 3), colour = factor(rep(c('blue', 'red'), 3)))
 }
 \seealso{
 \code{\link[ggplot2]{geom_text}}

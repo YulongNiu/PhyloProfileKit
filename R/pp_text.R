@@ -10,13 +10,12 @@
 ##' @param x A character vector
 ##' @param shift A numeric value indicating shit scale.
 ##' @param ... Parameters passed to \code{geom_text()} in the ggplot2 package.
-##' @return A \code{gtable} object
+##' @return A \code{gg} class object
 ##' @examples
 ##' pp_htext(letters[1:10], colour = 'grey55', size = 3)
-##' pp_vtext(rep(LETTERS[1:4], 3), size = 5)
+##' pp_vtext(rep(LETTERS[1:2], 3), colour = factor(rep(c('blue', 'red'), 3)))
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom ggplot2 ggplot geom_text labs scale_x_continuous scale_y_continuous scale_y_reverse aes_string
-##' @importFrom gridExtra grid.arrange
 ##' @rdname plottext
 ##' @seealso \code{\link[ggplot2]{geom_text}}
 ##' @export
@@ -35,9 +34,7 @@ pp_htext <- function(x, shift = 0.5, ...) {
     scale_y_continuous(expand = c(0, 0), limits = c(0, xlen), breaks = NULL) +
     theme_pp(legend.position='none')
 
-  tGrid <- grid.arrange(tObj, ncol = 1)
-
-  return(tGrid)
+  return(tObj)
 }
 
 
@@ -58,8 +55,6 @@ pp_vtext <- function(x, shift = 0.5, ...) {
     scale_x_continuous(expand = c(0, 0), limits = c(0, xlen), breaks = NULL) +
     theme_pp(legend.position='none')
 
-  tGrid <- grid.arrange(tObj, ncol = 1)
-
-  return(tGrid)
+  return(tObj)
 }
 
