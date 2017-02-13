@@ -26,7 +26,7 @@ pp_tree <- function(x, ...) {
 
   if (inherits(x, 'hclust')) {
     x <- as.phylo(x)
-  } else {}
+} else {}
 
   segData <- ExtractSeg(fortify.phylo(x))
 
@@ -67,14 +67,23 @@ ExtractSeg <- function(d) {
   return(seg)
 }
 
-## require('PhyloProfile')
-## require('ggplot2')
-## require('ape')
-## require('ggtree')
-## treePath <- system.file('extdata', 'bioinfoTree.nex', package = "PhyloProfile")
-## sceTree <- read.nexus(treePath)
+require('PhyloProfile')
+require('ggplot2')
+require('ape')
+require('ggtree')
+treePath <- system.file('extdata', 'bioinfoTree.nex', package = "PhyloProfile")
+sceTree <- read.nexus(treePath)
 
-## pp_tree(sceTree) %@+% (ggtree(sceTree) + geom_tiplab(size=3, color="purple"))  %@+% (pp_tree(sceTree) + coord_flip() + scale_x_reverse()) %@+% pp_text(sceTree$tip.label)
+pp_tree(sceTree) %@+% (ggtree(sceTree) + geom_tiplab(size=3, color="purple"))  %@+% (pp_tree(sceTree) + coord_flip() + scale_x_reverse()) %@+% pp_text(sceTree$tip.label)
 
-## pp_tree(sceTree) %@+% pp_text(sceTree$tip.label) %@+% (ggtree(sceTree) + geom_tiplab(size=3, color="purple"))
+pp_tree(sceTree) %@+% pp_text(sceTree$tip.label) %@+% (ggtree(sceTree) + geom_tiplab(size=3, color="purple"))
 
+ggtree(sceTree) + geom_text2(aes(subset=!isTip, label=node), hjust=-.3) + geom_tiplab()
+
+plot(sceTree, edge.width = 2)
+nodelabels()
+tiplabels()
+
+library('Rcpp')
+library('RcppArmadillo')
+sourceCpp('../src/phylo2Mat.cpp')
