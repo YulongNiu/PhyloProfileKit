@@ -40,15 +40,15 @@ EachBranch(x, m)
 Deal with \code{phylo} class objects for plot
 }
 \details{
-\code{Phylo2Mat()}:
+\code{Phylo2Mat()}: x and y locations.
 
-\code{Phylo2MatX()}:
+\code{Phylo2MatX()}: x locations.
 
-\code{Phylo2MatY()}:
+\code{Phylo2MatY()}: y locations.
 
-\code{EachBranch()}:
+\code{EachBranch()}: y locations for each path.
 
-\code{InitM()}:
+\code{InitM()}: edge and edge length.
 }
 \author{
 Yulong Niu \email{niuylscu@gmail.com}

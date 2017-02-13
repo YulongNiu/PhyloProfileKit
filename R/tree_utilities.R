@@ -27,15 +27,15 @@ ExtractSeg <- function(d) {
 
 ##' Deal with \code{phylo} class objects for plot
 ##'
-##' \code{Phylo2Mat()}:
+##' \code{Phylo2Mat()}: x and y locations.
 ##'
-##' \code{Phylo2MatX()}:
+##' \code{Phylo2MatX()}: x locations.
 ##'
-##' \code{Phylo2MatY()}:
+##' \code{Phylo2MatY()}: y locations.
 ##'
-##' \code{EachBranch()}:
+##' \code{EachBranch()}: y locations for each path.
 ##'
-##' \code{InitM()}:
+##' \code{InitM()}: edge and edge length.
 ##'
 ##' @title tree utilities
 ##' @param x A \code{phylo} class

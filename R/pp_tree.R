@@ -4,6 +4,7 @@
 ##'
 ##' @title pp plot trees and dendrograms
 ##' @param x A \code{phylo} or a \code{hclust} data.
+##' @param shift A numeric value indicating shit scale.
 ##' @param ... Parameters passed to \code{geom_segment()} in the ggplot2 package.
 ##' @return A \code{gg} class object
 ##' @examples
@@ -16,14 +17,13 @@
 ##' pp_tree(sceTree)
 ##' pp_tree(sceTree) + coord_flip() + scale_x_reverse()
 ##' pp_tree(sceTree) %@+% pp_text(sceTree$tip.label)
-##' 
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom ggplot2 ggplot geom_tile labs scale_x_continuous scale_y_continuous scale_y_reverse aes_string
 ##' @importFrom ape as.phylo Ntip
 ##' @seealso \code{\link[ggplot2]{geom_segment}}
 ##' @export
 ##' 
-pp_tree <- function(x, ...) {
+pp_tree <- function(x, shift = -0.5, ...) {
 
   if (inherits(x, 'hclust')) {
     x <- as.phylo(x)
@@ -31,7 +31,7 @@ pp_tree <- function(x, ...) {
 
   segData <- ExtractSeg(Phylo2Mat(x))
 
-  segData[, c(3, 4)] <- segData[, c(3, 4)] - 0.5
+  segData[, c(3, 4)] <- segData[, c(3, 4)] + shift
 
   tObj <- ggplot(segData) +
     geom_segment(aes_string(x = 'x', y = 'y', xend = 'xend', yend = 'yend'), ...) +

@@ -4,10 +4,12 @@
 \alias{pp_tree}
 \title{pp plot trees and dendrograms}
 \usage{
-pp_tree(x, ...)
+pp_tree(x, shift = -0.5, ...)
 }
 \arguments{
 \item{x}{A \code{phylo} or a \code{hclust} data.}
+
+\item{shift}{A numeric value indicating shit scale.}
 
 \item{...}{Parameters passed to \code{geom_segment()} in the ggplot2 package.}
 }
@@ -30,7 +32,6 @@ sceTree <- read.nexus(treePath)
 pp_tree(sceTree)
 pp_tree(sceTree) + coord_flip() + scale_x_reverse()
 pp_tree(sceTree) \%@+\% pp_text(sceTree$tip.label)
-
 }
 \seealso{
 \code{\link[ggplot2]{geom_segment}}
