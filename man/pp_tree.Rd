@@ -29,6 +29,8 @@ sceTree <- read.nexus(treePath)
 
 pp_tree(sceTree)
 pp_tree(sceTree) + coord_flip() + scale_x_reverse()
+pp_tree(sceTree) \%@+\% pp_text(sceTree$tip.label)
+
 }
 \seealso{
 \code{\link[ggplot2]{geom_segment}}
