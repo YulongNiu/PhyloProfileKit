@@ -1,26 +1,49 @@
-##' @include AllClasses.R AllGenerics.R operators.R
-NULL
+##' @include AllClasses.R AllGenerics.R
 
-plot.gmat <- function(x, ...) {
+##' Plot method for \code{gmat} objects
+##'
+##' @title Plot methods
+##' @param x A \code{gmat}
+##' @param y Not set ("missing").
+##' @param ... Parameters passed to \code{grid.arrange()} in the gridExtra package.
+##' @return A \code{gtable} object.
+##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @importFrom graphics plot
+##' @importFrom gridExtra grid.arrange
+##' @rdname plot-methods
+##' @exportMethod plot
+##'
+setMethod(f = 'plot',
+          signature = c(x = 'gmat', y = 'missing'),
+          definition = function(x, y, ...) {
 
-  leftN <- length(x@left)
-  rightN <- length(x@right)
-  topN <- length(x@top)
-  bottomN <- length(x@bottom)
-  coreN <- length(x@core)
+            leftN <- length(x@left)
+            rightN <- length(x@right)
+            topN <- length(x@top)
+            bottomN <- length(x@bottom)
+            coreN <- length(x@core)
 
-  rowN <- topN + coreN + bottomN
-  colN <- leftN + coreN + rightN
+            rowN <- topN + coreN + bottomN
+            colN <- leftN + coreN + rightN
 
-  pList <- c(AddEmpty(x@top, leftN, rightN, coreN, reverse = TRUE),
-            c(rev(x@left), x@core, x@right),
-            AddEmpty(x@bottom, leftN, rightN, coreN, reverse = TRUE))
+            pList <- c(AddEmpty(x@top,
+                                leftN,
+                                rightN,
+                                coreN,
+                                reverse = TRUE),
+                       c(rev(x@left),
+                         x@core,
+                         x@right),
+                       AddEmpty(x@bottom,
+                                leftN,
+                                rightN,
+                                coreN,
+                                reverse = TRUE))
 
-  pObj <- grid.arrange(grobs = pList, ncol = colN, ...)
+            pObj <- grid.arrange(grobs = pList, ncol = colN, ...)
 
-  return(pObj)
-}
-
+            return(pObj)
+          })
 
 ##' Combine plot elements with empty blocks
 ##'
