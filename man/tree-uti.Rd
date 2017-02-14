@@ -2,28 +2,21 @@
 % Please edit documentation in R/tree_utilities.R
 \name{Phylo2Mat}
 \alias{Phylo2Mat}
-\alias{Phylo2MatX}
 \alias{Phylo2MatY}
 \alias{InitM}
-\alias{EachBranch}
+\alias{Phylo2MatX}
 \title{tree utilities}
 \usage{
 Phylo2Mat(x)
-
-Phylo2MatX(x)
 
 Phylo2MatY(x)
 
 InitM(x)
 
-EachBranch(x, m)
+Phylo2MatX(x)
 }
 \arguments{
 \item{x}{A \code{phylo} class}
-
-\item{m}{A numeric matrix indicating edge length}
-
-\item{x}{A numeric vector for a single path.}
 }
 \value{
 \code{Phylo2Mat()}: A data.frame indicating x and y locations.
@@ -33,8 +26,6 @@ EachBranch(x, m)
 \code{Phylo2MatY()}: A data.frame indicating y locations.
 
 \code{InitM()}: A numeric matrix indicating edge and edge length
-
-\code{EachBranch()}: A numeric matrix indicating y locations for each path.
 }
 \description{
 Deal with \code{phylo} class objects for plot
@@ -45,8 +36,6 @@ Deal with \code{phylo} class objects for plot
 \code{Phylo2MatX()}: x locations.
 
 \code{Phylo2MatY()}: y locations.
-
-\code{EachBranch()}: y locations for each path.
 
 \code{InitM()}: edge and edge length.
 }

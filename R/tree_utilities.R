@@ -33,8 +33,6 @@ ExtractSeg <- function(d) {
 ##'
 ##' \code{Phylo2MatY()}: y locations.
 ##'
-##' \code{EachBranch()}: y locations for each path.
-##'
 ##' \code{InitM()}: edge and edge length.
 ##'
 ##' @title tree utilities
@@ -49,7 +47,6 @@ ExtractSeg <- function(d) {
 ##'
 ##' \code{InitM()}: A numeric matrix indicating edge and edge length
 ##'
-##' \code{EachBranch()}: A numeric matrix indicating y locations for each path.
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @rdname tree-uti
 ##' @keywords internal
@@ -63,29 +60,6 @@ Phylo2Mat <- function(x) {
   return(m)
 }
 
-
-##' @inheritParams Phylo2Mat
-##' @importFrom magrittr  %<>%
-##' @importFrom ape Ntip nodepath
-##' @rdname tree-uti
-##' @keywords internal
-##' 
-Phylo2MatX <- function(x) {
-
-  initM <- InitM(x)[, c(1, 2, 4)]
-
-  locXList <- lapply(nodepath(x), EachBranch, initM)
-
-  locX <- do.call(rbind, locXList)
-  locX <- locX[!duplicated(locX), ]
-
-  locX %<>% rbind(c(Ntip(x) + 1, 0))
-  colnames(locX) <- c('node', 'x')
-
-  locX %<>% as.data.frame
-
-  return(locX)
-}
 
 ##' @inheritParams Phylo2Mat
 ##' @importFrom magrittr  %<>%
@@ -138,7 +112,6 @@ InitM <- function(x) {
 
   edgeMat <- x$edge
   tipNum <- Ntip(x)
-  edge <- x$edge.length
 
   edgeMat %<>% rbind(rep(tipNum + 1, 2))
 
@@ -147,32 +120,51 @@ InitM <- function(x) {
   initX[tipIdx] <- edgeMat[tipIdx, 2]
 
 
-  edgeMat %<>% cbind(initX) %>% cbind(c(edge, 0))
+  edgeMat %<>% cbind(initX)
 
   return(edgeMat)
 }
 
 
-##' @param x A numeric vector for a single path.
-##' @param m A numeric matrix indicating edge length
-##' @importFrom magrittr  %<>% %>%
+##' @inheritParams Phylo2Mat
+##' @importFrom magrittr  %<>%
 ##' @rdname tree-uti
 ##' @keywords internal
 ##' 
-EachBranch <- function(x, m) {
+Phylo2MatX <- function(x) {
 
-  edgeNum <- length(x) - 1
+  edgeMat <- x$edge
+  edge <- x$edge.length
 
-  initY <- numeric(edgeNum)
+  start <- root <- Ntip(x) + 1
+  startLen <- 0
 
-  for (i in 1:edgeNum) {
-    eachEdge <- c(x[i], x[i+1])
-    eachIdx <- which((m[, 1] == eachEdge[1]) &
-                     (m[, 2] == eachEdge[2]))
-    initY[i] <- m[eachIdx, 3]
+  while(TRUE) {
+    starttmp <- NULL
+    startLentmp <- NULL
+
+    for (i in seq_along(start)){
+      eachEndIdx <- edgeMat[, 1] == start[i]
+      if (sum(eachEndIdx) > 1) {
+        edge[eachEndIdx] <- edge[eachEndIdx] + startLen[i]
+        starttmp %<>% c(edgeMat[eachEndIdx, 2])
+        startLentmp %<>% c(edge[eachEndIdx])
+      } else {}
+    }
+
+    if (is.null(starttmp)) {
+      break
+    } else {
+      start <- starttmp
+      startLen <- startLentmp
+    }
   }
 
-  initY %<>% cumsum %>% cbind(x[2:length(x)], .)
+  locX <- rbind(cbind(edgeMat, edge),
+                c(root, root, 0))[, 2:3]
 
-  return(initY)
+  colnames(locX) <- c('node', 'x')
+  locX %<>% as.data.frame
+
+  return(locX)
 }
