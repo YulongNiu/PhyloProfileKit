@@ -27,7 +27,7 @@ require('gridExtra')
 p <- ggplot(mtcars, aes(mpg, wt)) +
   geom_point(aes(colour = factor(cyl)))
 p \%@+\% p
-p \%@+\% grid.arrange(qplot(1,1), ncol = 1)
+p \%@+\% grid.arrange(qplot(1,1)) \%@+\% p
 p \%@+\% (p + scale_colour_manual(values = c('red', 'blue', 'green')))
 }
 \author{

@@ -30,7 +30,7 @@ x \%@v\% y
 \arguments{
 \item{x}{A \code{pmat} object.}
 
-\item{y}{A \code{ptable} object.}
+\item{y}{A \code{ptable} or \code{ggplot} object.}
 }
 \value{
 A \code{pmat} object.
@@ -52,7 +52,7 @@ require('gridExtra')
 require('ggplot2')
 
 p <- qplot(1,1)
-new('gmat') \%@<\% grid.arrange(p)
+new('gmat') \%@<\% p
 }
 \author{
 Yulong Niu \email{niuylscu@gmail.com}
