@@ -48,7 +48,6 @@ Add plot object to \code{pmat}.
 \code{atbottom()}: at bottom.
 }
 \examples{
-require('gridExtra')
 require('ggplot2')
 
 p <- qplot(1,1)

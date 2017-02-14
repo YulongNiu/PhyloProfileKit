@@ -16,7 +16,6 @@ Depends:
     R (>= 3.2.1)
 Imports:
     ggplot2,
-    gtable,
     reshape2,
     RColorBrewer,
     ggdendro,
@@ -66,8 +65,8 @@ Collate:
     'dataDef.R'
     'develFile.R'
     'gloableChkVar.R'
-    'operators.R'
     'gmat.R'
+    'operators.R'
     'plotCollapseTree.R'
     'plotCorMat.R'
     'plotProfile.R'

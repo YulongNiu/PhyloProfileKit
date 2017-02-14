@@ -10,24 +10,23 @@ atadd(e1, e2)
 e1 \%@+\% e2
 }
 \arguments{
-\item{e1}{A \code{ggplot} or code{gtable} object.}
+\item{e1}{A \code{ggplot} or list.}
 
-\item{e2}{A \code{ggplot} or code{gtable} object.}
+\item{e2}{A \code{ggplot} or list.}
 }
 \value{
-A \code{gtable} object
+A list.
 }
 \description{
-Add \code{ggplot} and \code{gtable} objects
+Connect \code{ggplot} objects to a list.
 }
 \examples{
 require('ggplot2')
-require('gridExtra')
 
 p <- ggplot(mtcars, aes(mpg, wt)) +
   geom_point(aes(colour = factor(cyl)))
 p \%@+\% p
-p \%@+\% grid.arrange(qplot(1,1)) \%@+\% p
+p \%@+\% qplot(1,1) \%@+\% p
 p \%@+\% (p + scale_colour_manual(values = c('red', 'blue', 'green')))
 }
 \author{
