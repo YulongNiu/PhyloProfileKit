@@ -4,10 +4,12 @@
 \alias{pp_tile}
 \title{pp plot tiles}
 \usage{
-pp_tile(x, ...)
+pp_tile(x, legend = FALSE, ...)
 }
 \arguments{
 \item{x}{A character vector}
+
+\item{legend}{Whether to contain legends.}
 
 \item{...}{Parameters passed to \code{geom_tile()} in the ggplot2 package.}
 }

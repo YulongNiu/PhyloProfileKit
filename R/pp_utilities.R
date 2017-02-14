@@ -52,6 +52,3 @@ geom_legend <- function(g, ...) {
   return(legend)
 }
 
-
-
-

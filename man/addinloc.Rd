@@ -22,12 +22,16 @@ Connect \code{ggplot} objects to a list.
 }
 \examples{
 require('ggplot2')
+require('gridExtra')
 
 p <- ggplot(mtcars, aes(mpg, wt)) +
   geom_point(aes(colour = factor(cyl)))
 p \%@+\% p
-p \%@+\% qplot(1,1) \%@+\% p
+q <- p \%@+\% qplot(1,1) \%@+\% p
 p \%@+\% (p + scale_colour_manual(values = c('red', 'blue', 'green')))
+
+## plot
+grid.arrange(grobs = q, ncol = 1)
 }
 \author{
 Yulong Niu \email{niuylscu@gmail.com}

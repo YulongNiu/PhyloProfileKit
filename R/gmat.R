@@ -2,14 +2,23 @@
 NULL
 
 plot.gmat <- function(x, ...) {
-  nleft <- length(x@left)
-  nright <- length(x@right)
-  ntop <- length(x@top)
-  nbottom <- length(x@bottom)
 
+  leftN <- length(x@left)
+  rightN <- length(x@right)
+  topN <- length(x@top)
+  bottomN <- length(x@bottom)
+  coreN <- length(x@core)
 
+  rowN <- topN + coreN + bottomN
+  colN <- leftN + coreN + rightN
 
+  pList <- c(AddEmpty(x@top, leftN, rightN, coreN, reverse = TRUE),
+            c(rev(x@left), x@core, x@right),
+            AddEmpty(x@bottom, leftN, rightN, coreN, reverse = TRUE))
 
+  pObj <- grid.arrange(grobs = pList, ncol = colN, ...)
+
+  return(pObj)
 }
 
 

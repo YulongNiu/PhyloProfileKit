@@ -4,6 +4,7 @@
 ##'
 ##' @title pp plot profiles
 ##' @param x A numeric matrix.
+##' @param legend Whether to contain legends.
 ##' @param ... Parameters passed to \code{geom_tile()} in the ggplot2 package.
 ##' @return A \code{gg} class object
 ##' @examples
@@ -13,7 +14,7 @@
 ##' ## a binning profile
 ##' ppB <- sample(0:1, 5 * 20, replace = TRUE) %>% matrix(nrow = 5)
 ##' pp_profile(ppB) + scale_fill_manual(values = c('grey91', 'steelblue'))
-##' 
+##'
 ##' ## a continuous profile
 ##' ppC <- rnorm(5 * 20) %>% matrix(nrow = 5)
 ##' pp_profile(ppC) + scale_fill_gradient2()
@@ -22,7 +23,7 @@
 ##' @seealso \code{\link[ggplot2]{geom_tile}}
 ##' @export
 ##' 
-pp_profile <- function(x, ...) {
+pp_profile <- function(x, legend = FALSE, ...) {
 
   nr <- nrow(x)
   nc <- ncol(x)
@@ -41,6 +42,10 @@ pp_profile <- function(x, ...) {
     scale_y_continuous(expand = c(0, 0), breaks = NULL) +
     scale_x_continuous(expand = c(0, 0), breaks = NULL) +
     theme_pp(legend.position='none')
+
+  if (!legend) {
+    pObj <- pObj + theme_pp(legend.position='none')
+  } else {}
 
   return(pObj)
 }

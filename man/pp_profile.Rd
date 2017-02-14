@@ -4,10 +4,12 @@
 \alias{pp_profile}
 \title{pp plot profiles}
 \usage{
-pp_profile(x, ...)
+pp_profile(x, legend = FALSE, ...)
 }
 \arguments{
 \item{x}{A numeric matrix.}
+
+\item{legend}{Whether to contain legends.}
 
 \item{...}{Parameters passed to \code{geom_tile()} in the ggplot2 package.}
 }

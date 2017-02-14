@@ -4,12 +4,14 @@
 \alias{pp_text}
 \title{pp plot text}
 \usage{
-pp_text(x, shift = 0.5, ...)
+pp_text(x, shift = 0.5, legend = FALSE, ...)
 }
 \arguments{
 \item{x}{A character vector}
 
 \item{shift}{A numeric value indicating shit scale.}
+
+\item{legend}{Whether to contain legends.}
 
 \item{...}{Parameters passed to \code{geom_text()} in the ggplot2 package.}
 }
