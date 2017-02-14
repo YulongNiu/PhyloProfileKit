@@ -17,7 +17,7 @@ NULL
 ##' q <- p %@+% qplot(1,1) %@+% p
 ##' p %@+% (p + scale_colour_manual(values = c('red', 'blue', 'green')))
 ##'
-##' ## plot 
+##' ## plot
 ##' grid.arrange(grobs = q, ncol = 1)
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @rdname addinloc
