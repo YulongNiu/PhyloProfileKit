@@ -178,7 +178,7 @@ PlotPhyloProfile <- function(phyloData,
  
   
   ## plot empty block
-  emptyBlock <- geom_emptyblock()
+  emptyBlock <- pp_empty(colour = 'white')
 
   ## plotRes <- marrangeGrob(
   ##   list(empty, empty, empty, speBlockObj, geneDendroObj, geneNamesObj, geneBlockObj, phyloObj),

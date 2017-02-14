@@ -145,7 +145,7 @@ PlotPhyloCor <- function(phyloData,
 
   
   ## plot empty block
-  emptyBlock <- geom_emptyblock()
+  emptyBlock <- pp_empty(colour = 'white')
 
   ## plotRes <- list(geneDendroObj = geneDendroObj,
   ##                 geneRowNamesObj = geneRowNamesObj,

@@ -31,13 +31,8 @@ atadd <- function(e1, e2) {
   stopifnot(checkg_internal(e1) &&
             checkg_internal(e2))
 
-  if (inherits(e1, 'ggplot')) {
-    e1 <- grid.arrange(e1)
-  } else {}
-
-  if (inherits(e2, 'ggplot')) {
-    e2 <- grid.arrange(e2)
-  } else {}
+  e1 <- gg2t(e1)
+  e2 <- gg2t(e2)
 
   return(cbind(e1, e2))
 }
@@ -140,3 +135,6 @@ gg2t <- function(x) {
 
   return(x)
 }
+
+
+
