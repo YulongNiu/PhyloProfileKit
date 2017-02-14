@@ -22,9 +22,26 @@ plot.gmat <- function(x, ...) {
 }
 
 
+##' Combine plot elements with empty blocks
+##'
+##' @title Combine empty blocks
+##' @param x A list.
+##' @param leftN left number.
+##' @param rightN right number.
+##' @param coreN center number.
+##' @param reverse Reverse \code{x} or not.
+##' @return A list.
+##' @importFrom ggplot2 ggplotGrob
+##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @keywords internal
+##' 
 AddEmpty <- function(x, leftN, rightN, coreN, reverse = FALSE) {
 
-  if(reverse) {
+  if (length(x) == 0) {
+    return(x)
+  } else {}
+
+  if (reverse) {
     x <- rev(x)
   } else {}
 
@@ -41,3 +58,13 @@ AddEmpty <- function(x, leftN, rightN, coreN, reverse = FALSE) {
   return(l)
 }
 
+## library(PhyloProfile)
+## library(ggplot2)
+## library(gridExtra)
+## library(magrittr)
+
+## tmp1 <- matrix(sample(0:1, 10 * 40, replace = TRUE), ncol = 40)
+## rownames(tmp1) <- paste0('protein', 1:10)
+## colnames(tmp1) <- paste0('spe', 1:40)
+
+## tmp2 <- pp_profile(tmp1) %>% ascore %@<% (pp_text(rownames(tmp1)) %@+% pp_tile(rownames(tmp1))) %@^% pp_tile(colnames(tmp1)) %@v% pp_text(colnames(tmp1))
