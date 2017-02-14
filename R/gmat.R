@@ -1,21 +1,29 @@
-## ##' @include AllClasses.R AllGenerics.R operators.R
-## NULL
+##' @include AllClasses.R AllGenerics.R operators.R
+NULL
 
-## plot.gmat <- function(x, ...) {
-##   nleft <- ncol(x@left)
-##   nright <- ncol(x@right)
-##   ntop <- ncol(x@top)
-##   nbottom <- ncol(x@bottom)
-
-
+plot.gmat <- function(x, ...) {
+  nleft <- length(x@left)
+  nright <- length(x@right)
+  ntop <- length(x@top)
+  nbottom <- length(x@bottom)
 
 
-## }
 
 
-## AddEmpty <- function(x, conNum, rowNum, rev = FALSE) {
+}
 
-##   ## plot empty block
-##   eObj <- gg2t(pp_empty(colour = 'white'))
-## }
+
+AddEmpty <- function(x, leftN, rightN, reverse = FALSE) {
+
+  if(reverse = TRUE) {
+    tmp1 <- rev(tmp1)
+  } else {}
+
+  ## plot empty block
+  eObj <- ggplotGrob(pp_empty(colour = 'white'))
+
+  l <- lapply(1:(rowN, colN), function(x){eObj})
+
+
+}
 
