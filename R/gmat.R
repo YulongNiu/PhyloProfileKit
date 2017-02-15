@@ -11,6 +11,7 @@ NULL
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom graphics plot
 ##' @importFrom gridExtra grid.arrange
+##' @importFrom ggplot2 ggplotGrob
 ##' @rdname plot-methods
 ##' @exportMethod plot
 ##'
@@ -27,19 +28,24 @@ setMethod(f = 'plot',
             rowN <- topN + coreN + bottomN
             colN <- leftN + coreN + rightN
 
-            pList <- c(AddEmpty(x@top,
-                                leftN,
-                                rightN,
-                                coreN,
-                                reverse = TRUE),
-                       c(rev(x@left),
-                         x@core,
-                         x@right),
-                       AddEmpty(x@bottom,
-                                leftN,
-                                rightN,
-                                coreN,
-                                reverse = TRUE))
+            if (length(x@core) == 0) {
+              pList <- list(ggplotGrob(pp_empty(colour = 'white')))
+              colN <- 1
+            } else {
+              pList <- c(AddEmpty(x@top,
+                                  leftN,
+                                  rightN,
+                                  coreN,
+                                  reverse = TRUE),
+                         c(rev(x@left),
+                           x@core,
+                           x@right),
+                         AddEmpty(x@bottom,
+                                  leftN,
+                                  rightN,
+                                  coreN,
+                                  reverse = TRUE))
+            }
 
             pObj <- grid.arrange(grobs = pList, ncol = colN, ...)
 
