@@ -305,6 +305,31 @@ Anno <- getBM(attributes = c('ensembl_peptide_id', 'entrezgene'),
 
 ## Objects and methods in *PhyloProfile*
 
+## Define new plot elements ##
+
+
+```{r}
+library('ggplot2')
+
+pp_label <- function(x, shift = 0.5, ...) {
+  xlen <- length(x)
+  m <- data.frame(x = rep(0, xlen),
+                  y = seq(shift, xlen - shift, 1),
+                  label = x)
+
+  lObj <- ggplot(m, aes_string('x', 'y')) +
+    geom_label(aes_string(label = 'label'), ...) +
+    labs(x = NULL, y = NULL) +
+    scale_x_continuous(expand = c(0, 0), breaks = NULL) +
+    scale_y_continuous(expand = c(0, 0), limits = c(0, xlen), breaks = NULL) +
+    theme_pp(legend.position='none')
+
+  return(lObj)
+}
+
+p <- pp_label(rep(letters[1:3], 3), fill = rep(c('red', 'yellow', 'blue'), 3), colour = 'white', fontface = 'bold')
+```
+
 
 # Homepage
 

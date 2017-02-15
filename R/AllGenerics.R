@@ -108,5 +108,3 @@ setGeneric(name = 'Dollo',
 setGeneric(name = 'BayesTraits',
            def = function(x, ..., n) {standardGeneric('BayesTraits')})
 
-
-

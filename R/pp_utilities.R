@@ -7,7 +7,7 @@
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom ggplot2 element_blank theme_bw %+replace% theme
 ##' @importFrom grid unit
-##' @keywords internal
+##' @export
 ##' 
 theme_pp <- function(...) {
   theme_bw() %+replace%
@@ -16,37 +16,14 @@ theme_pp <- function(...) {
         axis.title = element_blank(),
         axis.ticks.length = unit(0, 'mm'),
         axis.line = element_blank(),
-        panel.margin = unit(0, 'mm'),
+        panel.spacing = unit(0, 'mm'),
         panel.grid = element_blank(),
         panel.border = element_blank(),
         panel.background = element_blank(),
         plot.margin = unit(c(0, 0, 0, 0), 'line'),
-        legend.margin = unit(0, 'mm'),
+        legend.spacing = unit(0, 'mm'),
         ...)
 }
-
-##' Empty white block
-##'
-##' A empty white block used as interval to organize plot
-##' @title Empty block
-##' @param ... ggplot2 geom_point() additional parameters
-##' @return ggplot2 object
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @importFrom ggplot2 ggplot geom_point labs aes_string scale_y_continuous scale_x_continuous
-##' @keywords internal
-##' 
-geom_emptyblock<- function(...) {
-  emptyData <- data.frame(x = 1, y = 1)
-  empty <- ggplot(emptyData) +
-    geom_point(aes_string('x', 'y'), colour='white', ...) +
-      labs(x = NULL, y = NULL) +
-        scale_y_continuous(expand = c(0, 0), breaks = NULL) +
-          scale_x_continuous(expand = c(0, 0), breaks = NULL) +
-            theme_pp(legend.position='none')
-
-  return(empty)
-}
-
 
 ##' ggplot legend
 ##'
@@ -67,14 +44,11 @@ geom_emptyblock<- function(...) {
 geom_legend <- function(g, ...) {
   ## !!!Be aware of this dirty walkaround!!!
   pdf(file = NULL)
-  g <- ggplotGrob(g + theme(legend.margin = unit(0, 'mm'), ...))$grobs
+  g <- ggplotGrob(g + theme(legend.spacing = unit(0, 'mm'), ...))$grobs
   dev.off()
-  
+
   legend <- g[[which(sapply(g, function(x) x$name) == "guide-box")]]
 
   return(legend)
 }
-
-
-
 

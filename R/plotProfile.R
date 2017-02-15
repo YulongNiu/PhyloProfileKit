@@ -1,4 +1,4 @@
-##' Legend of species in phylogenetic profilings 
+##' Legend of species in phylogenetic profilings
 ##'
 ##' Legend annotating the species categories, like the class or phylum.
 ##' @title Phylo legend
@@ -42,7 +42,7 @@ legend_spe <- function(classCol, ...) {
 ##' @param phyloData The phylogenetic profile data with 1 and 0 denoting the presence and absence of orthologous, respectively. The "phyloData" should be a numeric matrix, of which the row is gene and column is species. The "phyloData"has row names and column names which will be used for the dendrogram of row and column.
 ##' @param geneNameSize The size of gene names label, and the default value is 3.
 ##' @param geneNameCol The colour of gene names, and the default value is "grey55".
-##' @param geneBetweenBlockCol The space color between gene blocks, and the default value is "NA" meaning no space color. If the number of genes is samll, for example less than 20, setting it as 'white' is fine. 
+##' @param geneBetweenBlockCol The space color between gene blocks, and the default value is "NA" meaning no space color. If the number of genes is samll, for example less than 20, setting it as 'white' is fine.
 ##' @param presentCol The color of present 1, the default value is "steelblue".
 ##' @param absentCol The color of present 0, the default value is "grey91".
 ##' @param speCol A vector of colors with names of species, which are the same as colnames of "phyloData" (may not in the same order). 
@@ -178,7 +178,7 @@ PlotPhyloProfile <- function(phyloData,
  
   
   ## plot empty block
-  emptyBlock <- geom_emptyblock()
+  emptyBlock <- pp_empty(colour = 'white')
 
   ## plotRes <- marrangeGrob(
   ##   list(empty, empty, empty, speBlockObj, geneDendroObj, geneNamesObj, geneBlockObj, phyloObj),
