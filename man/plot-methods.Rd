@@ -17,6 +17,9 @@
 \value{
 A \code{gtable} object.
 }
+\description{
+Plot method for \code{gmat} objects
+}
 \author{
 Yulong Niu \email{niuylscu@gmail.com}
 }

@@ -1,4 +1,5 @@
 ##' @include AllClasses.R AllGenerics.R
+NULL
 
 ##' Plot method for \code{gmat} objects
 ##'
