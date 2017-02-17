@@ -1,9 +1,9 @@
-##' Legend of species in phylogenetic profilings
+##' Legend of species in phylogenetic profiling
 ##'
 ##' Legend annotating the species categories, like the class or phylum.
 ##' @title Phylo legend
 ##' @param classCol A vector of colors with the names defining the species categories.
-##' @param ... Parameters from geom_legend
+##' @param ... Parameters from pp_legend
 ##' @return ggplot2 object
 ##' @examples
 ##' data(fatp)
@@ -28,7 +28,7 @@ legend_spe <- function(classCol, ...) {
     geom_tile(aes_string(fill = 'fillCol')) +
       scale_fill_manual(values = unname(classCol), name = 'Taxa', labels = names(classCol))
 
-  speLegObj <- geom_legend(speBlockObj, ...)
+  speLegObj <- pp_legend(speBlockObj, ...)
 
   return(speLegObj)
 }
@@ -45,7 +45,7 @@ legend_spe <- function(classCol, ...) {
 ##' @param geneBetweenBlockCol The space color between gene blocks, and the default value is "NA" meaning no space color. If the number of genes is samll, for example less than 20, setting it as 'white' is fine.
 ##' @param presentCol The color of present 1, the default value is "steelblue".
 ##' @param absentCol The color of present 0, the default value is "grey91".
-##' @param speCol A vector of colors with names of species, which are the same as colnames of "phyloData" (may not in the same order). 
+##' @param speCol A vector of colors with names of species, which are the same as colnames of "phyloData" (may not in the same order).
 ##' @param geneCol A vector of colors with names of genes, which are the same as rownames of "phyloData" (may not in the same order).
 ##' @param widthsShinkage The shinkage width vector.
 ##' @param heightsShinkage The shinkage width vector.

@@ -32,7 +32,7 @@ PlotPhyloProfile(phyloData, geneNameSize = 3, geneNameCol = "grey55",
 
 \item{heightsShinkage}{The shinkage width vector.}
 
-\item{...}{Parameters from geom_legend}
+\item{...}{Parameters from pp_legend}
 }
 \value{
 A plot object.

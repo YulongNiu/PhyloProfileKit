@@ -9,13 +9,13 @@ legend_spe(classCol, ...)
 \arguments{
 \item{classCol}{A vector of colors with the names defining the species categories.}
 
-\item{...}{Parameters from geom_legend}
+\item{...}{Parameters from pp_legend}
 }
 \value{
 ggplot2 object
 }
 \description{
-Legend of species in phylogenetic profilings
+Legend of species in phylogenetic profiling
 }
 \details{
 Legend annotating the species categories, like the class or phylum.
