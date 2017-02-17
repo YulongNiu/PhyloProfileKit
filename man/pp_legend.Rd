@@ -21,7 +21,7 @@ ggplot legend
 Retrieve the ggplot legend from a given ggplot2.
 }
 \examples{
-require('ggplot')
+require('ggplot2')
 
 p <- ggplot(mtcars, aes(mpg, wt)) +
   geom_point(aes(colour = factor(cyl)))

@@ -7,7 +7,7 @@
 ##' @param ... Parameters passed to \code{theme()} in the ggplot2 package.
 ##' @return A \code{gtable} object.
 ##' @examples
-##' require('ggplot')
+##' require('ggplot2')
 ##'
 ##' p <- ggplot(mtcars, aes(mpg, wt)) +
 ##'   geom_point(aes(colour = factor(cyl)))

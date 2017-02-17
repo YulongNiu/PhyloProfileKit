@@ -7,7 +7,7 @@
 gg2list(x)
 }
 \arguments{
-\item{x}{A \code{ggplot} object.}
+\item{x}{A \code{ggplot} object or a \code{gtable} object.}
 }
 \value{
 A list.

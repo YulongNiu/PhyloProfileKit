@@ -115,7 +115,7 @@ atbottom <- function(x, y) {
 ##' Transfer to a list
 ##'
 ##' @title Transfer to list.
-##' @param x A \code{ggplot} object.
+##' @param x A \code{ggplot} object or a \code{gtable} object.
 ##' @return A list.
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom ggplot2 ggplotGrob
@@ -124,7 +124,11 @@ atbottom <- function(x, y) {
 gg2list <- function(x) {
   if (inherits(x, 'ggplot')) {
     x <- list(ggplotGrob(x))
-  } else {}
+  }
+  else if (inherits(x, 'gtable')){
+    x <- list()
+  }
+  else {}
 
   return(x)
 }
