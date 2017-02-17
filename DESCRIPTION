@@ -70,6 +70,7 @@ Collate:
     'plotCollapseTree.R'
     'plotCorMat.R'
     'plotProfile.R'
+    'plotprofile.R'
     'pp_empty.R'
     'pp_legend.R'
     'pp_profile.R'
@@ -77,5 +78,4 @@ Collate:
     'pp_theme.R'
     'pp_tile.R'
     'pp_tree.R'
-    'ppplot.R'
     'tree_utilities.R'

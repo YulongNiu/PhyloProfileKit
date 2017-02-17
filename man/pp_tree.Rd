@@ -7,7 +7,7 @@
 pp_tree(x, shift = -0.5, ...)
 }
 \arguments{
-\item{x}{A \code{phylo} or a \code{hclust} data.}
+\item{x}{A \code{phylo} or a \code{hclust} class object.}
 
 \item{shift}{A numeric value indicating shit scale.}
 

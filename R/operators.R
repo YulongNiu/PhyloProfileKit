@@ -60,7 +60,7 @@ atadd <- function(e1, e2) {
 ##' @export
 ##'
 atleft <- function(x, y) {
-  x@left <- gg2list(y)
+  x@left <- c(x@left, gg2list(y))
   return(x)
 }
 
@@ -70,7 +70,7 @@ atleft <- function(x, y) {
 ##' @export
 ##'
 atright <- function(x, y) {
-  x@right <- gg2list(y)
+  x@right <- c(x@right, gg2list(y))
   return(x)
 }
 
@@ -79,7 +79,7 @@ atright <- function(x, y) {
 ##' @export
 ##'
 attop <- function(x, y) {
-  x@top <- gg2list(y)
+  x@top <- c(x@top, gg2list(y))
   return(x)
 }
 
@@ -87,7 +87,7 @@ attop <- function(x, y) {
 ##' @rdname loc
 ##' @export
 atbottom <- function(x, y) {
-  x@bottom <- gg2list(y)
+  x@bottom <- c(x@bottom, gg2list(y))
   return(x)
 }
 
@@ -115,7 +115,7 @@ atbottom <- function(x, y) {
 ##' Transfer to a list
 ##'
 ##' @title Transfer to list.
-##' @param x A \code{ggplot} object or a \code{gtable} object.
+##' @param x A \code{ggplot}/\code{gtable} object.
 ##' @return A list.
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom ggplot2 ggplotGrob
@@ -126,7 +126,7 @@ gg2list <- function(x) {
     x <- list(ggplotGrob(x))
   }
   else if (inherits(x, 'gtable')){
-    x <- list()
+    x <- list(x)
   }
   else {}
 

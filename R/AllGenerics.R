@@ -108,3 +108,11 @@ setGeneric(name = 'Dollo',
 setGeneric(name = 'BayesTraits',
            def = function(x, ..., n) {standardGeneric('BayesTraits')})
 
+## ##' @param x \code{PP}/\code{PPTreeIdx} object.
+## ##' @param ... Additional parameters
+## ##' \itemize{
+## ##'   \item \code{}：
+## ##'   \item \code{}： 
+## ##' }
+## setGeneric(name = 'plotprofile',
+##            def = function(x, ..., n) {standardGeneric('plotprofile')})
