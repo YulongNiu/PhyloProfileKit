@@ -108,11 +108,19 @@ setGeneric(name = 'Dollo',
 setGeneric(name = 'BayesTraits',
            def = function(x, ..., n) {standardGeneric('BayesTraits')})
 
-## ##' @param x \code{PP}/\code{PPTreeIdx} object.
-## ##' @param ... Additional parameters
-## ##' \itemize{
-## ##'   \item \code{}：
-## ##'   \item \code{}： 
-## ##' }
-## setGeneric(name = 'plotprofile',
-##            def = function(x, ..., n) {standardGeneric('plotprofile')})
+
+##' @param x \code{PP}/\code{PPTreeIdx} object.
+##' @param method Distance method used in the \code{dist()}.
+##' @param ... Additional parameters
+##' \itemize{
+##'   \item \code{proSize}: A numeric value. Size of protein names.
+##'   \item \code{proGroup}: A factor indicating protein groups.
+##'   \item \code{proGroupCol}: A named character vector indicating protein group colour.
+##'   \item \code{speGroup}: A factor indicating species groups.
+##'   \item \code{speGroup}: A named character vector indicating species group colour.
+##' }
+##' @rdname plotprofile-methods
+##' @export
+##' 
+setGeneric(name = 'plotprofile',
+           def = function(x, method, ...) {standardGeneric('plotprofile')})

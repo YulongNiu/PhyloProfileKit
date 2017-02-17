@@ -1,3 +1,40 @@
+##' Plot phylogenetic profile with additional data
+##'
+##' \itemize{
+##'   \item x is a \code{PP} or \code{PPIdx} object: \code{method} works for both dimensions (proteins and species).
+##'   \item x is a \code{PPTreeIdx} object: \code{method} works only for rows (proteins).
+##' }
+##'
+##' @inheritParams plotprofile
+##' @title Wrapped profiles plot function.
+##' @return A \code{gtable} object.
+##' @examples
+##' data(fatp)
+##'
+##' plotprofile(PP(fatp$atpPhylo), method = NA)
+##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @rdname plotprofile-methods
+##' @exportMethod plotprofile
+##'
+setMethod(f = 'plotprofile',
+          signature = c(x = 'PP'),
+          definition = function(x, method, ...) {
+            p <- x@.Data
+
+            if (is.na(method)) {
+              pObj <- ProfileCore(p, ...)
+            } else {
+              hcPro <- hclust(dist(p, method = method))
+              hcSpe <- hclust(dist(t(p), method = method))
+              p <- p[hcPro$order, hcSpe$order]
+              pObj <- ProfileCore(p, ...) %@<% pp_tree(hcPro)
+            }
+
+            return(pObj)
+          })
+
+
+
 ##' The core plot of phylogenetic profile
 ##'
 ##' Plot of phylogenetic profile with protein names, a protein colour bar (optional), and a species colour bar (optional).
@@ -22,8 +59,9 @@ ProfileCore <- function(p,
                         speGroupCol = NA){
 
   ## define color
-  binColor <- c('0' = '#eff3ff', '1' = '#2171b5')
-  contiColor <- colorRampPalette(c('#eff3ff', '#bdd7e7', '#6baed6', '#2171b5'))(100)
+  blue4 <- c('#eff3ff', '#bdd7e7', '#6baed6', '#2171b5')
+  binColor <- c('0' = blue4[1], '1' = blue4[4])
+  contiColor <- colorRampPalette(blue4)(100)
 
   ## center
   cObj <- pp_profile(p)
@@ -35,7 +73,7 @@ ProfileCore <- function(p,
 
   ## left
   if (!is.na(proGroup)) {
-    lObj <- pp_tile(proNames) +
+    lObj <- pp_tile(proGroup) +
       scale_fill_manual(values = proGroupCol)
   } else {
     lObj <- list()
