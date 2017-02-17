@@ -4,6 +4,7 @@
 \alias{Phylo2Mat}
 \alias{Phylo2MatY}
 \alias{InitM}
+\alias{TipsOrderInPlot}
 \alias{Phylo2MatX}
 \title{tree utilities}
 \usage{
@@ -12,6 +13,8 @@ Phylo2Mat(x)
 Phylo2MatY(x)
 
 InitM(x)
+
+TipsOrderInPlot(x)
 
 Phylo2MatX(x)
 }
@@ -25,7 +28,9 @@ Phylo2MatX(x)
 
 \code{Phylo2MatY()}: A data.frame indicating y locations.
 
-\code{InitM()}: A numeric matrix indicating edge and edge length
+\code{InitM()}: A numeric matrix indicating edge and edge length.
+
+\code{TipsOrderInPlot()}: A numeric vector indicating the orders of tips in the tree plot.
 }
 \description{
 Deal with \code{phylo} class objects for plot
@@ -38,6 +43,8 @@ Deal with \code{phylo} class objects for plot
 \code{Phylo2MatY()}: y locations.
 
 \code{InitM()}: edge and edge length.
+
+\code{TipsOrderInPlot()}: Order of tips in the tree plot.
 
 Roles of \code{phylo} class:
 
