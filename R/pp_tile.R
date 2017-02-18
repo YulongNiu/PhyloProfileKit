@@ -4,8 +4,8 @@
 ##'
 ##' @title pp plot tiles
 ##' @param x A character vector
+##' @param legend.position Position of the legend and the default is "none" (no legend). See the \code{theme()} in the ggplot2 package.
 ##' @param ... Parameters passed to \code{geom_tile()} in the ggplot2 package.
-##' @param legend Whether to contain legends.
 ##' @return A \code{gg} class object
 ##' @examples
 ##' require('ggplot2')
@@ -16,9 +16,10 @@
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom ggplot2 ggplot geom_tile labs scale_x_continuous scale_y_continuous scale_y_reverse aes_string
 ##' @seealso \code{\link[ggplot2]{geom_tile}}
+##' @seealso \code{\link[ggplot2]{theme}}
 ##' @export
 ##' 
-pp_tile <- function(x, legend = FALSE, ...) {
+pp_tile <- function(x, legend.position = 'none', ...) {
 
   xlen <- length(x)
   m <- data.frame(x = rep(0, xlen),
@@ -29,11 +30,8 @@ pp_tile <- function(x, legend = FALSE, ...) {
     geom_tile(aes_string(fill = 'fill'), ...) +
     labs(x = NULL, y = NULL) +
     scale_y_continuous(expand = c(0, 0), breaks = NULL) +
-    scale_x_continuous(expand = c(0, 0), breaks = NULL)
-
-  if (!legend) {
-    tObj <- tObj + theme_pp(legend.position='none')
-  } else {}
+    scale_x_continuous(expand = c(0, 0), breaks = NULL) +
+    theme_pp(legend.position = legend.position)
 
   return(tObj)
 }

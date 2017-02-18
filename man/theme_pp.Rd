@@ -18,6 +18,9 @@ PhyloProfile theme
 \details{
 A totally blank gpplot2 theme expect for the legend
 }
+\seealso{
+\code{\link[ggplot2]{theme}}
+}
 \author{
 Yulong Niu \email{niuylscu@gmail.com}
 }

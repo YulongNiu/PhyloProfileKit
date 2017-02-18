@@ -4,14 +4,14 @@
 \alias{pp_text}
 \title{pp plot text}
 \usage{
-pp_text(x, shift = 0.5, legend = FALSE, ...)
+pp_text(x, shift = 0.5, legend.position = "none", ...)
 }
 \arguments{
 \item{x}{A character vector}
 
 \item{shift}{A numeric value indicating shit scale.}
 
-\item{legend}{Whether to contain legends.}
+\item{legend.position}{Position of the legend and the default is "none" (no legend). See the \code{theme()} in the ggplot2 package.}
 
 \item{...}{Parameters passed to \code{geom_text()} in the ggplot2 package.}
 }
@@ -33,6 +33,8 @@ pp_text(letters[1:5]) + coord_flip()
 }
 \seealso{
 \code{\link[ggplot2]{geom_text}}
+
+\code{\link[ggplot2]{theme}}
 }
 \author{
 Yulong Niu \email{niuylscu@gmail.com}

@@ -4,8 +4,7 @@
 ##'
 ##' @title pp plot profiles
 ##' @param x A numeric matrix.
-##' @param legend Whether to contain legends.
-##' @param ... Parameters passed to \code{geom_tile()} in the ggplot2 package.
+##' @inheritParams pp_tile
 ##' @return A \code{gg} class object
 ##' @examples
 ##' require('ggplot2')
@@ -21,9 +20,10 @@
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom ggplot2 ggplot geom_tile labs scale_x_continuous scale_y_continuous scale_y_reverse aes_string
 ##' @seealso \code{\link[ggplot2]{geom_tile}}
+##' @seealso \code{\link[ggplot2]{theme}}
 ##' @export
 ##' 
-pp_profile <- function(x, legend = FALSE, ...) {
+pp_profile <- function(x, legend.position = 'none', ...) {
 
   nr <- nrow(x)
   nc <- ncol(x)
@@ -41,11 +41,7 @@ pp_profile <- function(x, legend = FALSE, ...) {
     labs(x = NULL, y = NULL) +
     scale_y_continuous(expand = c(0, 0), breaks = NULL) +
     scale_x_continuous(expand = c(0, 0), breaks = NULL) +
-    theme_pp(legend.position='none')
-
-  if (!legend) {
-    pObj <- pObj + theme_pp(legend.position='none')
-  } else {}
+    theme_pp(legend.position = legend.position)
 
   return(pObj)
 }

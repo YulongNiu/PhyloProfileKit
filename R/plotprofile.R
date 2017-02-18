@@ -1,3 +1,6 @@
+##' @include AllClasses.R AllGenerics.R tree_utilities.R operators.R
+NULL
+
 ##' Plot phylogenetic profile with additional data
 ##'
 ##' \itemize{
@@ -65,6 +68,7 @@ ProfileCore <- function(p,
                         speGroupCol = NA){
 
   ## define color
+  ## blues from colorbrewer2.org
   blue4 <- c('#eff3ff', '#bdd7e7', '#6baed6', '#2171b5')
   binColor <- c('0' = blue4[1], '1' = blue4[4])
   contiColor <- colorRampPalette(blue4)(100)
@@ -78,7 +82,7 @@ ProfileCore <- function(p,
   }
 
   ## left
-  if (!is.na(proGroup)) {
+  if (!all(is.na(proGroup))) {
     lObj <- pp_tile(proGroup) +
       scale_fill_manual(values = proGroupCol)
   } else {
@@ -87,7 +91,7 @@ ProfileCore <- function(p,
   lObj <- lObj %@+% pp_text(rownames(p), size = proSize)
 
   ## top
-  if (!is.na(speGroup)) {
+  if (!all(is.na(speGroup))) {
     tObj <- pp_tile(speGroup) +
       scale_fill_manual(values = speGroupCol) +
       coord_flip()
@@ -99,3 +103,7 @@ ProfileCore <- function(p,
 
   return(pObj)
 }
+
+## gencol1 <- rep(0:1, c(6, 11))
+## pp_tile(factor(gencol1)) + scale_fill_manual(values = c('0' = '#F8766D', '1' = '#00BA38'))
+

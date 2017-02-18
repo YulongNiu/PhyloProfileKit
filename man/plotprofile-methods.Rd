@@ -39,7 +39,7 @@ Plot phylogenetic profile with additional data
 \examples{
 data(fatp)
 
-plotprofile(PP(fatp$atpPhylo), method = NA)
+plotprofile(PP(fatp$atpPhylo), method = 'euclidean')
 }
 \author{
 Yulong Niu \email{niuylscu@gmail.com}
