@@ -34,8 +34,6 @@ setMethod(f = 'plotprofile',
 
               ## the rownames(p) and hcPro$tip.label are the same
               hcOrder <- hcPro %>% as.phylo %>% OrderedTip
-              p <- p[hcOrder, hcSpe$order]
-
               pObj <- ProfileCore(p, rowIdx = hcOrder, colIdx = hcSpe$order, ...) %@<% pp_tree(hcPro)
             }
 

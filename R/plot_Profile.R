@@ -52,7 +52,7 @@ legend_spe <- function(classCol, ...) {
 ##' @inheritParams legend_spe
 ##' @return A plot object.
 ##' @examples
-##' data(fatp)
+##' data(fatp1)
 ##' ATPphyloPlot <- PlotPhyloProfile(fatp$atpPhylo, speCol = fatp$specol, geneCol = fatp$genecol,
 ##' classCol = fatp$domain, legend.position = 'left')
 ##' \dontrun{
