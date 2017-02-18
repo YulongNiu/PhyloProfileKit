@@ -15,7 +15,7 @@ plotprofile(x, method, ...)
 
 \item{method}{Distance method used in the \code{dist()}.}
 
-\item{...}{Additional parameters
+\item{...}{Additional parameters.
 \itemize{
   \item \code{proSize}: A numeric value. Size of protein names.
   \item \code{proGroup}: A factor indicating protein groups.

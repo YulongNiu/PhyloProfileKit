@@ -4,11 +4,15 @@
 \alias{ProfileCore}
 \title{Core plot of phylogenetic profile}
 \usage{
-ProfileCore(p, proSize = 3, proGroup = NA, proGroupCol = NA,
-  speGroup = NA, speGroupCol = NA)
+ProfileCore(p, rowIdx = 1:nrow(p), colIdx = 1:ncol(p), proSize = 3,
+  proGroup = NA, proGroupCol = NA, speGroup = NA, speGroupCol = NA)
 }
 \arguments{
 \item{p}{A integer matrix (binning profile).}
+
+\item{rowIdx}{A numeric vector indication row indices.}
+
+\item{colIdx}{A numeric vector indication column indices.}
 
 \item{proSize}{A numeric value. Size of protein names.}
 

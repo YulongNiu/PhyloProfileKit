@@ -24,7 +24,7 @@ pp_tile <- function(x, legend.position = 'none', ...) {
   xlen <- length(x)
   m <- data.frame(x = rep(0, xlen),
                   y = 1:xlen,
-                  fill = x)
+                  fill = factor(x))
 
   tObj <- ggplot(m, aes_string('x', 'y')) +
     geom_tile(aes_string(fill = 'fill'), ...) +

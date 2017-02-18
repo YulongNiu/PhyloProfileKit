@@ -36,7 +36,7 @@ setMethod(f = 'plotprofile',
               hcOrder <- hcPro %>% as.phylo %>% OrderedTip
               p <- p[hcOrder, hcSpe$order]
 
-              pObj <- ProfileCore(p, ...) %@<% pp_tree(hcPro)
+              pObj <- ProfileCore(p, rowIdx = hcOrder, colIdx = hcSpe$order, ...) %@<% pp_tree(hcPro)
             }
 
             return(pObj)
@@ -50,6 +50,8 @@ setMethod(f = 'plotprofile',
 ##'
 ##' @title Core plot of phylogenetic profile
 ##' @param p A integer matrix (binning profile).
+##' @param rowIdx A numeric vector indication row indices.
+##' @param colIdx A numeric vector indication column indices.
 ##' @param proSize A numeric value. Size of protein names.
 ##' @param proGroup A factor indicating protein groups.
 ##' @param proGroupCol A named character vector indicating protein group colour.
@@ -61,6 +63,8 @@ setMethod(f = 'plotprofile',
 ##' @keywords internal
 ##' 
 ProfileCore <- function(p,
+                        rowIdx = 1:nrow(p),
+                        colIdx = 1:ncol(p),
                         proSize = 3,
                         proGroup = NA,
                         proGroupCol = NA,
@@ -72,6 +76,11 @@ ProfileCore <- function(p,
   blue4 <- c('#eff3ff', '#bdd7e7', '#6baed6', '#2171b5')
   binColor <- c('0' = blue4[1], '1' = blue4[4])
   contiColor <- colorRampPalette(blue4)(100)
+
+  ## rearrange params
+  p <- p[rowIdx, colIdx]
+  proGroup <- proGroup[rowIdx]
+  speGroup <- speGroup[colIdx]
 
   ## center
   cObj <- pp_profile(p)
@@ -105,5 +114,6 @@ ProfileCore <- function(p,
 }
 
 ## gencol1 <- rep(0:1, c(6, 11))
-## pp_tile(factor(gencol1)) + scale_fill_manual(values = c('0' = '#F8766D', '1' = '#00BA38'))
+## gencol1 <- rep(c('Fo', 'F1'), c(6, 11))
+## pp_tile(gencol1) + scale_fill_manual(values = c('Fo' = '#F8766D', 'F1' = '#00BA38'))
 
