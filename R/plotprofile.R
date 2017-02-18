@@ -37,7 +37,17 @@ setMethod(f = 'plotprofile',
               pObj <- ProfileCore(p, rowIdx = hcOrder, colIdx = hcSpe$order, ...) %@<% pp_tree(hcPro)
             }
 
-            return(pObj)
+            ## pre-define widths and heights
+            preWidths <- c(0.9, 0.7, 0.3, 7)
+            preHeights <- c(0.3, 7)
+            w <- rev(rev(preWidths)[seq_along(c(pObj@left, pObj@core))])
+            h <- rev(rev(preWidths)[seq_along(c(pObj@top, pObj@core))])
+
+            plotObj <- plot(pObj,
+                            widths = w,
+                            heights = h)
+
+            return(plotObj)
           })
 
 
