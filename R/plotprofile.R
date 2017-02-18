@@ -11,7 +11,7 @@
 ##' @examples
 ##' data(fatp)
 ##'
-##' plotprofile(PP(fatp$atpPhylo), method = NA)
+##' plotprofile(PP(fatp$atpPhylo), method = 'euclidean')
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @rdname plotprofile-methods
 ##' @importFrom magrittr %>%
@@ -30,7 +30,7 @@ setMethod(f = 'plotprofile',
               hcSpe <- p %>% t %>% dist(method = method) %>% hclust(method = 'average')
 
               ## the rownames(p) and hcPro$tip.label are the same
-              hcOrder <- hcPro %>% as.phylo %>% OrderedTip %>% rev
+              hcOrder <- hcPro %>% as.phylo %>% OrderedTip
               p <- p[hcOrder, hcSpe$order]
 
               pObj <- ProfileCore(p, ...) %@<% pp_tree(hcPro)
