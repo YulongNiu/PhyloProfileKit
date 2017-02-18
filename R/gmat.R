@@ -11,7 +11,6 @@ NULL
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom graphics plot
 ##' @importFrom gridExtra grid.arrange
-##' @importFrom ggplot2 ggplotGrob
 ##' @rdname plot-methods
 ##' @exportMethod plot
 ##'
@@ -31,46 +30,16 @@ setMethod(f = 'plot',
             return(pObj)
           })
 
-##' Combine plot elements with empty blocks
+##' Construct the layout matrix of a \code{gmat} object.
 ##'
-##' @title Combine empty blocks
-##' @param x A list.
-##' @param leftN left number.
-##' @param rightN right number.
-##' @param coreN center number.
-##' @param reverse Reverse \code{x} or not.
-##' @return A list.
-##' @importFrom ggplot2 ggplotGrob
+##' @title Construct the layout matrix
+##' @param x A \code{gmat} object.
+##' @return A numeric matrix
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @rdname lay
 ##' @keywords internal
 ##' 
-AddEmpty <- function(x, leftN, rightN, coreN, reverse = FALSE) {
-
-  if (length(x) == 0) {
-    return(x)
-  } else {}
-
-  if (reverse) {
-    x <- rev(x)
-  } else {}
-
-  ## plot empty block
-  eObj <- ggplotGrob(pp_empty(colour = 'white'))
-
-  rowN <- length(x)
-  colN <- leftN + rightN + coreN
-
-  l <- lapply(1:(colN * rowN), function(x){eObj})
-  insertIdx <- seq(1, colN * rowN, by = colN) + leftN
-  l[insertIdx] <- x
-
-  return(l)
-}
-
-
-
 Lay <- function(x) {
-
   leftN <- length(x@left)
   rightN <- length(x@right)
   coreN <- length(x@core)
@@ -81,11 +50,13 @@ Lay <- function(x) {
              LaySide(x, side = 'bottom'))
 
   return(m)
-
 }
 
+##' @inheritParams Lay
+##' @rdname lay
+##' @keywords internal
+##' 
 LaySide <- function(x, side = 'top') {
-
   leftN <- length(x@left)
   rightN <- length(x@right)
   coreN <- length(x@core)
