@@ -18,36 +18,15 @@ NULL
 setMethod(f = 'plot',
           signature = c(x = 'gmat', y = 'missing'),
           definition = function(x, y, ...) {
+            obj <- c(rev(x@top),
+                     rev(x@left),
+                     x@core,
+                     x@right,
+                     x@bottom)
 
-            leftN <- length(x@left)
-            rightN <- length(x@right)
-            topN <- length(x@top)
-            bottomN <- length(x@bottom)
-            coreN <- length(x@core)
-
-            rowN <- topN + coreN + bottomN
-            colN <- leftN + coreN + rightN
-
-            if (length(x@core) == 0) {
-              pList <- list(ggplotGrob(pp_empty(colour = 'white')))
-              colN <- 1
-            } else {
-              pList <- c(AddEmpty(x@top,
-                                  leftN,
-                                  rightN,
-                                  coreN,
-                                  reverse = TRUE),
-                         c(rev(x@left),
-                           x@core,
-                           x@right),
-                         AddEmpty(x@bottom,
-                                  leftN,
-                                  rightN,
-                                  coreN,
-                                  reverse = TRUE))
-            }
-
-            pObj <- grid.arrange(grobs = pList, ncol = colN, ...)
+            pObj <- grid.arrange(grobs = obj,
+                                 layout_matrix = Lay(x),
+                                 ...)
 
             return(pObj)
           })
@@ -88,13 +67,51 @@ AddEmpty <- function(x, leftN, rightN, coreN, reverse = FALSE) {
   return(l)
 }
 
-## library(PhyloProfile)
-## library(ggplot2)
-## library(gridExtra)
-## library(magrittr)
 
-## tmp1 <- matrix(sample(0:1, 10 * 40, replace = TRUE), ncol = 40)
-## rownames(tmp1) <- paste0('protein', 1:10)
-## colnames(tmp1) <- paste0('spe', 1:40)
 
-## tmp2 <- pp_profile(tmp1) %>% ascore %@<% (pp_text(rownames(tmp1)) %@+% pp_tile(rownames(tmp1))) %@^% pp_tile(colnames(tmp1)) %@v% pp_text(colnames(tmp1))
+Lay <- function(x) {
+
+  leftN <- length(x@left)
+  rightN <- length(x@right)
+  coreN <- length(x@core)
+  topN <- length(x@top)
+
+  m <- rbind(LaySide(x, side = 'top'),
+             seq_len(leftN + coreN + rightN) + topN,
+             LaySide(x, side = 'bottom'))
+
+  return(m)
+
+}
+
+LaySide <- function(x, side = 'top') {
+
+  leftN <- length(x@left)
+  rightN <- length(x@right)
+  coreN <- length(x@core)
+  topN <- length(x@top)
+  bottomN <- length(x@bottom)
+
+  if (side == 'top') {
+    xn <- topN
+    xIdx <- seq_len(xn)
+  }
+  else if (side == 'bottom') {
+    xn <- bottomN
+    if (length(xn) > 0) {
+      xIdx <- seq_len(xn) + (topN + leftN + rightN + coreN)
+    } else {
+      xIdx <- seq_len(xn)
+    }
+  }
+  else {
+    stop('side must be "top" or "bottom".\n')
+  }
+
+  sideM <- matrix(ncol = (leftN + rightN + coreN),
+                  nrow = xn)
+  sideM[, (leftN + 1)] <- xIdx
+
+  return(sideM)
+}
+

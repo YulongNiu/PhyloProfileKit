@@ -111,6 +111,10 @@ ProfileCore <- function(p,
   return(pObj)
 }
 
-## plotprofile(PP(fatp$atpPhylo),
-##             method = 'euclidean',
-##             proGroup = )
+load('/home/Yulong/RESEARCH/NewRpkg/PhyloProfile/data/fatp.RData')
+p <- plotprofile(PP(fatp$atpPhylo),
+                 method = 'euclidean',
+                 proGroup = fatp$complex,
+                 proGroupCol = fatp$complexCol,
+                 speGroup = fatp$domain,
+                 speGroupCol = fatp$domainCol)
