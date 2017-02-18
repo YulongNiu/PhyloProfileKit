@@ -43,7 +43,7 @@ Plot correlation matrix of phylogenetic profiles.
 A combination plot of correlation matrix with genes and species clusters.
 }
 \examples{
-data(fatp)
+data(fatp1)
 ATPCorPlot <- PlotPhyloCor(fatp$atpPhylo, geneCol = fatp$genecol)
 \dontrun{
 require(grDevices)

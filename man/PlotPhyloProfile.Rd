@@ -44,7 +44,7 @@ Plot phylogenetic profiles with gene and species clusters.
 A combination plot of phylogenetic profiles with genes and species clusters.
 }
 \examples{
-data(fatp)
+data(fatp1)
 ATPphyloPlot <- PlotPhyloProfile(fatp$atpPhylo, speCol = fatp$specol, geneCol = fatp$genecol,
 classCol = fatp$domain, legend.position = 'left')
 \dontrun{
