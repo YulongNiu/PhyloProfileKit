@@ -35,7 +35,7 @@ ExtractSeg <- function(d) {
 ##'
 ##' \code{InitM()}: edge and edge length.
 ##'
-##' \code{TipsOrderInPlot()}: Order of tips in the tree plot.
+##' \code{OrderedTip()}: Ordered tips in the tree plot.
 ##'
 ##' Roles of \code{phylo} class:
 ##'
@@ -58,7 +58,7 @@ ExtractSeg <- function(d) {
 ##'
 ##' \code{InitM()}: A numeric matrix indicating edge and edge length.
 ##'
-##' \code{TipsOrderInPlot()}: A numeric vector indicating the orders of tips in the tree plot.
+##' \code{OrderedTip()}: A numeric vector indicating the orders of tips in the tree plot.
 ##'
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @rdname tree-uti
@@ -144,13 +144,14 @@ InitM <- function(x) {
 ##' @rdname tree-uti
 ##' @keywords internal
 ##' 
-TipsOrderInPlot <- function(x) {
+OrderedTip <- function(x) {
   tipNum <- Ntip(x)
 
-  m <- InitM(x)
-  tipO <- m[order(m[, 2]), ][1:tipNum, 3]
+  m <- InitM(x)[, 2]
+  otIdx <- m[m <= tipNum]
+  ot <- x$tip.label[otIdx]
 
-  return(tipO)
+  return(ot)
 }
 
 

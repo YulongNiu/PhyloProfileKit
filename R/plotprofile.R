@@ -14,6 +14,8 @@
 ##' plotprofile(PP(fatp$atpPhylo), method = NA)
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @rdname plotprofile-methods
+##' @importFrom magrittr %>%
+##' @importFrom ape as.phylo
 ##' @exportMethod plotprofile
 ##'
 setMethod(f = 'plotprofile',
@@ -24,9 +26,11 @@ setMethod(f = 'plotprofile',
             if (is.na(method)) {
               pObj <- ProfileCore(p, ...)
             } else {
-              hcPro <- hclust(dist(p, method = method))
-              hcSpe <- hclust(dist(t(p), method = method))
-              p <- p[hcPro$order, hcSpe$order]
+              hcPro <- p %>% dist(method = method) %>% hclust
+              hcSpe <- p %>% t %>% dist(method = method) %>% hclust
+              hcOrder <- hcPro %>% as.phylo %>% TipsOrderInPlot
+              p <- p[hcOrder, hcSpe$order]
+
               pObj <- ProfileCore(p, ...) %@<% pp_tree(hcPro)
             }
 
