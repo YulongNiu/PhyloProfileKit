@@ -111,7 +111,6 @@ ProfileCore <- function(p,
   return(pObj)
 }
 
-## gencol1 <- rep(0:1, c(6, 11))
-## gencol1 <- rep(c('Fo', 'F1'), c(6, 11))
-## pp_tile(gencol1) + scale_fill_manual(values = c('Fo' = '#F8766D', 'F1' = '#00BA38'))
-
+## plotprofile(PP(fatp$atpPhylo),
+##             method = 'euclidean',
+##             proGroup = )
