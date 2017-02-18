@@ -26,9 +26,11 @@ setMethod(f = 'plotprofile',
             if (is.na(method)) {
               pObj <- ProfileCore(p, ...)
             } else {
-              hcPro <- p %>% dist(method = method) %>% hclust
-              hcSpe <- p %>% t %>% dist(method = method) %>% hclust
-              hcOrder <- hcPro %>% as.phylo %>% TipsOrderInPlot
+              hcPro <- p %>% dist(method = method) %>% hclust(method = 'average')
+              hcSpe <- p %>% t %>% dist(method = method) %>% hclust(method = 'average')
+
+              ## the rownames(p) and hcPro$tip.label are the same
+              hcOrder <- hcPro %>% as.phylo %>% OrderedTip %>% rev
               p <- p[hcOrder, hcSpe$order]
 
               pObj <- ProfileCore(p, ...) %@<% pp_tree(hcPro)

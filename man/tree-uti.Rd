@@ -30,7 +30,7 @@ Phylo2MatX(x)
 
 \code{InitM()}: A numeric matrix indicating edge and edge length.
 
-\code{OrderedTip()}: A numeric vector indicating the orders of tips in the tree plot.
+\code{OrderedTip()}: A numeric vector indicating the ordered tips indices in the tree plot.
 }
 \description{
 Deal with \code{phylo} class objects for plot
@@ -44,7 +44,7 @@ Deal with \code{phylo} class objects for plot
 
 \code{InitM()}: edge and edge length.
 
-\code{OrderedTip()}: Ordered tips in the tree plot.
+\code{OrderedTip()}: Ordered tips indices in the tree plot.
 
 Roles of \code{phylo} class:
 
