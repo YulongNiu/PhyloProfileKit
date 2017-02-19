@@ -6,8 +6,8 @@
 ##' @param ... Parameters from pp_legend
 ##' @return ggplot2 object
 ##' @examples
-##' data(fatp)
-##' speLeg <- legend_spe(fatp$domain, legend.position = 'left')
+##' data(fatp1)
+##' speLeg <- legend_spe(fatp1$domain, legend.position = 'left')
 ##' \dontrun{
 ##' # plot legend
 ##' require(gridExtra)
@@ -53,13 +53,13 @@ legend_spe <- function(classCol, ...) {
 ##' @return A plot object.
 ##' @examples
 ##' data(fatp1)
-##' ATPphyloPlot <- PlotPhyloProfile(fatp$atpPhylo, speCol = fatp$specol, geneCol = fatp$genecol,
-##' classCol = fatp$domain, legend.position = 'left')
+##' ATPphyloPlot <- PlotPhyloProfile(fatp1$atpPhylo, speCol = fatp1$specol, geneCol = fatp1$genecol,
+##' classCol = fatp1$domain, legend.position = 'left')
 ##' \dontrun{
 ##' # an example of saving output figures
 ##' cairo_pdf('FATPprofilePlot.pdf')
-##' ATPphyloPlot <- PlotPhyloProfile(fatp$atpPhylo, speCol = fatp$specol, geneCol = fatp$genecol,
-##' classCol = fatp$domain, legend.position = 'left')
+##' ATPphyloPlot <- PlotPhyloProfile(fatp1$atpPhylo, speCol = fatp1$specol, geneCol = fatp1$genecol,
+##' classCol = fatp1$domain, legend.position = 'left')
 ##' dev.off()
 ##' }
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}

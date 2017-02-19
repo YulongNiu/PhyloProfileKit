@@ -21,8 +21,8 @@ Legend of species in phylogenetic profiling
 Legend annotating the species categories, like the class or phylum.
 }
 \examples{
-data(fatp)
-speLeg <- legend_spe(fatp$domain, legend.position = 'left')
+data(fatp1)
+speLeg <- legend_spe(fatp1$domain, legend.position = 'left')
 \dontrun{
 # plot legend
 require(gridExtra)

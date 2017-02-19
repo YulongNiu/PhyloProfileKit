@@ -39,7 +39,13 @@ Plot phylogenetic profile with additional data
 \examples{
 data(fatp)
 
-plotprofile(PP(fatp$atpPhylo), method = 'euclidean')
+p <- plotprofile(PP(fatp$atpPhylo),
+                 method = 'euclidean',
+                 proGroup = fatp$complex,
+                 proGroupCol = fatp$complexCol,
+                 speGroup = fatp$domain,
+                 speGroupCol = fatp$domainCol)
+
 }
 \author{
 Yulong Niu \email{niuylscu@gmail.com}

@@ -14,7 +14,13 @@ NULL
 ##' @examples
 ##' data(fatp)
 ##'
-##' plotprofile(PP(fatp$atpPhylo), method = 'euclidean')
+##' p <- plotprofile(PP(fatp$atpPhylo),
+##'                  method = 'euclidean',
+##'                  proGroup = fatp$complex,
+##'                  proGroupCol = fatp$complexCol,
+##'                  speGroup = fatp$domain,
+##'                  speGroupCol = fatp$domainCol)
+##' 
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @rdname plotprofile-methods
 ##' @importFrom magrittr %>%
@@ -120,11 +126,3 @@ ProfileCore <- function(p,
 
   return(pObj)
 }
-
-## load('/home/Yulong/RESEARCH/NewRpkg/PhyloProfile/data/fatp.RData')
-## p <- plotprofile(PP(fatp$atpPhylo),
-##                  method = 'euclidean',
-##                  proGroup = fatp$complex,
-##                  proGroupCol = fatp$complexCol,
-##                  speGroup = fatp$domain,
-##                  speGroupCol = fatp$domainCol)

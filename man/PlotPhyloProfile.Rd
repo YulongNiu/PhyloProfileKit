@@ -45,13 +45,13 @@ A combination plot of phylogenetic profiles with genes and species clusters.
 }
 \examples{
 data(fatp1)
-ATPphyloPlot <- PlotPhyloProfile(fatp$atpPhylo, speCol = fatp$specol, geneCol = fatp$genecol,
-classCol = fatp$domain, legend.position = 'left')
+ATPphyloPlot <- PlotPhyloProfile(fatp1$atpPhylo, speCol = fatp1$specol, geneCol = fatp1$genecol,
+classCol = fatp1$domain, legend.position = 'left')
 \dontrun{
 # an example of saving output figures
 cairo_pdf('FATPprofilePlot.pdf')
-ATPphyloPlot <- PlotPhyloProfile(fatp$atpPhylo, speCol = fatp$specol, geneCol = fatp$genecol,
-classCol = fatp$domain, legend.position = 'left')
+ATPphyloPlot <- PlotPhyloProfile(fatp1$atpPhylo, speCol = fatp1$specol, geneCol = fatp1$genecol,
+classCol = fatp1$domain, legend.position = 'left')
 dev.off()
 }
 }
