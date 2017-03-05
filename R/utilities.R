@@ -2,7 +2,7 @@
 ##'
 ##' \code{isBinMat_internal()}: Whether a matrix is binning.
 ##'
-##' \code{valiMat_internal()}: Validate a numeric matrix with row names and column names.
+##' \code{valiMatNames_internal()}: Validate a numeric matrix with row names and column names.
 ##' 
 ##' @title utilities
 ##' @param x A matrix.
@@ -10,7 +10,7 @@
 ##'
 ##' \code{isBinMat_internal()}: Logic.
 ##'
-##' \code{valiMat_internal()}: \code{TRUE} or a warning message.
+##' \code{valiMatNames_internal()}: \code{TRUE} or a warning message.
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @rdname utilities
 ##' @importFrom magrittr %>%
@@ -38,10 +38,10 @@ isBinMat_internal <- function(x) {
 ##' @rdname utilities
 ##' @keywords internal
 ##' 
-valiMat_internal <- function(x, warnName) {
+valiMatNames_internal <- function(x, warnName) {
 
-  warnNumMat <- 'The %name% should be a matrix or big.matrix.'
-  warnMatName <- 'The %name% needs rownames or colnames.'
+  warnNumMat <- '%name% should be a matrix or big.matrix.'
+  warnMatName <- '%name% needs rownames or colnames.'
 
   ## 1. validate numeric matrix
   if (!(is.matrix(x) ||
@@ -61,6 +61,19 @@ valiMat_internal <- function(x, warnName) {
     } else {
       return(TRUE)
     }
+  }
+}
+
+##' @param m A numeric matrix.
+##' @param t A phylo tree.
+##' @rdname utilities
+##' @keywords internal
+##' 
+validTreeMat_internal <- function(m, t) {
+  if (!all(rownames(m) == t$tip.label)) {
+    return('rownames of profile should be in same order with tree tips.')
+  } else {
+    return(TRUE)
   }
 }
 
