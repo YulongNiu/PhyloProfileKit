@@ -23,6 +23,7 @@ setOldClass('phylo')
 ##' This class represents the data structure of phylogenetic profile with phylogenetic tree.
 ##'
 ##' @slot .Data An integer matrix or a numeric matrix, of which the rows are genes/proteins and columns are species. It validates the rownames and colnames of the profile matrix.
+##' @slot tree A \code{phylo} object indicating the phylogenetic tree from the "ape" package.
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @exportClass PP
 ##' 
@@ -82,7 +83,7 @@ setClass(Class = 'PPResult',
 
 ##' This class represents the data structure of the phylogenetic profile with linkage indices and a phylogenetic tree.
 ##'
-##' @slot tree A numeric vector representing the profiling data.
+##' @slot tree A \code{phylo} object indicating the phylogenetic tree from the "ape" package.
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @seealso The raw definition of \code{\link[ape]{phylo}}.
 ##' @exportClass PPTreeIdx
