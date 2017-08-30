@@ -22,14 +22,13 @@ setOldClass('phylo')
 
 ##' This class represents the data structure of phylogenetic profile with phylogenetic tree.
 ##'
-##' @slot .Data An integer matrix or a numeric matrix, of which the rows are genes/proteins and columns are species. It validates the rownames and colnames of the profile matrix.
 ##' @slot tree A \code{phylo} object indicating the phylogenetic tree from the "ape" package.
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @exportClass PP
 ##' 
 setClass(Class = 'PPTree',
-         slots = c(tree = 'phylo')
-         contains = 'matrix',
+         slots = c(tree = 'phylo'),
+         contains = 'PP',
          validity = function(object) {
            d <- object@.Data
            t <- object@tree
@@ -37,11 +36,6 @@ setClass(Class = 'PPTree',
            validTreeMat_internal(d, t)
          })
 
-
-##~~~~~~~~~~~~~~~~~~~~~~~~~~~PPRaw union class~~~~~~~~~~~~~~~~~~~~
-setClassUnion(name = 'PPRaw',
-              member = c('PP', 'PPTree'))
-##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~PPMat union class~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 setClass('big.matrix',
@@ -67,6 +61,17 @@ setClass(Class = 'PPIdx',
          })
 
 
+##' This class represents the data structure of the phylogenetic profile with linkage indices and a phylogenetic tree.
+##'
+##' @slot tree A \code{phylo} object indicating the phylogenetic tree from the "ape" package.
+##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @seealso The raw definition of \code{\link[ape]{phylo}}.
+##' @exportClass PPTreeIdx
+##' 
+setClass(Class = 'PPTreeIdx',
+         slots = c(tree = 'phylo'),
+         contains = 'PPIdx')
+
 ##' This class represents the data structure of phylogenetic profiling results.
 ##'
 ##' @slot .Data A numeric vector representing the profiling data.
@@ -79,18 +84,6 @@ setClass(Class = 'PPIdx',
 setClass(Class = 'PPResult',
          slots = c(idx = 'PPMat', pnames = 'character', method = 'character'),
          contains = 'numeric')
-
-
-##' This class represents the data structure of the phylogenetic profile with linkage indices and a phylogenetic tree.
-##'
-##' @slot tree A \code{phylo} object indicating the phylogenetic tree from the "ape" package.
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @seealso The raw definition of \code{\link[ape]{phylo}}.
-##' @exportClass PPTreeIdx
-##' 
-setClass(Class = 'PPTreeIdx',
-         slots = c(tree = 'phylo'),
-         contains = 'PPIdx')
 
 
 ##' This class represents the data structure of matrix-like plot.
