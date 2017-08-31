@@ -70,7 +70,7 @@ valiMatNames_internal <- function(x, warnName) {
 ##' @keywords internal
 ##' 
 validTreeMat_internal <- function(m, t) {
-  if (!all(rownames(m) == t$tip.label)) {
+  if (!all(colnames(m) == t$tip.label)) {
     return('rownames of profile should be in same order with tree tips.')
   } else {
     return(TRUE)

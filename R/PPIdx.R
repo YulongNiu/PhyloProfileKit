@@ -45,8 +45,8 @@ setMethod(f = 'show',
 ##' @param ... Additional parameters if \code{x} is a numeric vector.
 ##' \itemize{
 ##'   \item \code{y}: Another numeric vector used to generate paired linkages with \code{x}. Every element of \code{x} should be in \code{y}.
-##'   \item \code{self}: Whether include self pairs.
-##'   \item \code{bidirect}: Whether to include two directions.
+##'   \item \code{self}: Whether include self pairs, and default set is \code{FALSE}.
+##'   \item \code{bidirect}: Whether to include two directions, and default set is \code{FALSE}.
 ##' }
 ##' @return A \code{PPIdx} object.
 ##' @examples
@@ -90,7 +90,7 @@ PPIdx <- function(p, x, ..., bigmat = FALSE) {
   }
   else if (is.numeric(x) &&
            is.null(dim(x))) {
-    ## x is a character vector
+    ## x is a numeric vector
     x %<>% combWhole_internal(...)
   }
   else {

@@ -22,9 +22,10 @@ setOldClass('phylo')
 
 ##' This class represents the data structure of phylogenetic profile with phylogenetic tree.
 ##'
-##' @slot tree A \code{phylo} object indicating the phylogenetic tree from the "ape" package.
+##' @slot tree A \code{phylo} object indicating the phylogenetic tree from the \code{ape} package.
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @exportClass PP
+##' @seealso The raw definition of \code{\link[ape]{phylo}}.
+##' @exportClass PPTree
 ##' 
 setClass(Class = 'PPTree',
          slots = c(tree = 'phylo'),
