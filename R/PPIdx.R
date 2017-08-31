@@ -34,20 +34,70 @@ setMethod(f = 'show',
             })
 
 
+##' Index linkages methods
+##'
+##' Index linkages from protein IDs or indices in batch.
+##'
+##' @title Index linkages
+##' @inheritParams Idx
+##' @return A \code{numeric matrix} object.
+##' @examples
+##' require('magrittr')
+##'
+##' ppBinning <- sample(0:1, 10 * 20, replace = TRUE) %>% matrix(ncol = 20) %>% PP
+##'
+##' ## pre-built linkages
+##' linkM <- sample(1:30, 20 * 2, replace = TRUE) %>% paste0('protein', .) %>% matrix(ncol = 2)
+##' Idx(ppBinning, linkM)
+##'
+##' ## top 3 proteins with whole profiles
+##' Idx(ppBinning, 1:3, 1:nrow(ppBinning))
+##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @rdname Idx-methods
+##' @importFrom magrittr %>% %<>%
+##' @exportMethod Idx
+##'
+setMethod(f = 'Idx',
+          signature = c(p = 'PP', x = 'matrix'),
+          definition = function(p, x, ...) {
+
+            ## whole proteins
+            wp <- rownames(p)
+
+            if (is.character(x)) {
+              ## x is a character matrix
+              ## check linkage proteins in wp, NA if not in wp
+              x %<>% c %>% match(wp) %>% matrix(ncol = 2, dimnames = dimnames(x))
+              hasLogic <- !(is.na(x[, 1]) | is.na(x[, 2]))
+              x <- x[hasLogic, , drop = FALSE]
+            } else {}
+
+            return(x)
+          })
+
+
+##' @inheritParams Idx
+##' @importFrom magrittr %<>%
+##' @rdname Idx-methods
+##' @exportMethod Idx
+##'
+setMethod(f = 'Idx',
+          signature = c(p = 'PP', x = 'numeric'),
+          definition = function(p, x, ...) {
+            if(is.null(dim(x))) {
+              ## x is a numeric vector
+              x %<>% combWhole_internal(...)
+            } else {}
+            return(x)
+          })
+
 ##' The constructor the \code{PPIdx} class
 ##'
-##' Construct a \code{PP} object.
+##' Construct a \code{PPIdx} object.
 ##'
 ##' @title Constructor of \code{PPIdx}
-##' @param p A \code{PP} object.
-##' @param x A character matrix with two columns or a numeric vector. Proteins not in \code{p} (profile) are removed. The numeric vector indicates the indices of proteins.
 ##' @param bigmat Whether store the indices as a big matrix. Set it as \code{TRUE} if the number of index is large.
-##' @param ... Additional parameters if \code{x} is a numeric vector.
-##' \itemize{
-##'   \item \code{y}: Another numeric vector used to generate paired linkages with \code{x}. Every element of \code{x} should be in \code{y}.
-##'   \item \code{self}: Whether include self pairs, and default set is \code{FALSE}.
-##'   \item \code{bidirect}: Whether to include two directions, and default set is \code{FALSE}.
-##' }
+##' @inheritParams Idx
 ##' @return A \code{PPIdx} object.
 ##' @examples
 ##' require('magrittr')
@@ -73,29 +123,12 @@ setMethod(f = 'show',
 ##' @importFrom magrittr %>% %<>%
 ##' @importFrom methods new
 ##' @importFrom bigmemory as.big.matrix
+##' @seealso PPTreeIdx
 ##' @export
 ##' 
 PPIdx <- function(p, x, ..., bigmat = FALSE) {
 
-  ## whole proteins
-  wp <- rownames(p)
-
-  if (is.matrix(x) &&
-      is.character(x)) {
-    ## x is a character matrix
-    ## check linkage proteins in wp, NA if not in wp
-    x %<>% c %>% match(wp) %>% matrix(ncol = 2, dimnames = dimnames(x))
-    hasLogic <- !(is.na(x[, 1]) | is.na(x[, 2]))
-    x <- x[hasLogic, , drop = FALSE]
-  }
-  else if (is.numeric(x) &&
-           is.null(dim(x))) {
-    ## x is a numeric vector
-    x %<>% combWhole_internal(...)
-  }
-  else {
-    return(x)
-  }
+  x <- Idx(p, x, ...)
 
   colSize <- ncol(x)
   rowSize <- nrow(x)

@@ -64,14 +64,18 @@ setClass(Class = 'PPIdx',
 
 ##' This class represents the data structure of the phylogenetic profile with linkage indices and a phylogenetic tree.
 ##'
-##' @slot tree A \code{phylo} object indicating the phylogenetic tree from the "ape" package.
+##' @slot idx An integer matrix with two columns. It validates the rownames and colnames of the profile.
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @seealso The raw definition of \code{\link[ape]{phylo}}.
 ##' @exportClass PPTreeIdx
 ##' 
 setClass(Class = 'PPTreeIdx',
-         slots = c(tree = 'phylo'),
-         contains = 'PPIdx')
+         slots = c(idx = 'PPMat'),
+         contains = 'PPTree',
+         validity = function(object) {
+           d <- object@idx
+           validMatNames_internal(d, 'indices')
+         })
 
 ##' This class represents the data structure of phylogenetic profiling results.
 ##'

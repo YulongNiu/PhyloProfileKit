@@ -38,30 +38,33 @@ setMethod(f = 'show',
 
 ##' The constructor the \code{PPTreeIdx} class
 ##'
-##' Construct a \code{PP} object. The species (columns) are in the same order of phylogenetic tree tips, and for the species not in the tree are deleted.
+##' Construct a \code{PPTreeIdx} object. The species (columns) are in the same order of phylogenetic tree tips, and for the species not in the tree are deleted.
 ##'
 ##' @title Constructor of \code{PPTreeIdx}
-##' @param pidx A \code{PPIdx} object.
-##' @param tree A \code{phylo} object.
+##' @param pt A \code{PPTree} object.
+##' @inheritParams Idx
 ##' @return A \code{PPTreeIdx} object.
 ##' @examples
 ##' require('magrittr')
 ##' require('ape')
 ##'
-##' ppLink <- sample(0:1, 10 * 20, replace = TRUE) %>% matrix(ncol = 20) %>% PP %>% PPIdx(1:6, 1:6)
+##' tree <- rtree(8, tip.label = paste0('spe', 8:1))
+##' ppTree <- sample(0:1, 10 * 20, replace = TRUE) %>% matrix(ncol = 20) %>% PPTree(tree)
 ##'
-##' ppTree <- rtree(8, tip.label = paste0('spe', 8:1))
-##' PPTreeIdx(ppLink, ppTree)
+##' ## with self linkages
+##' PPTreeIdx(ppTree, 1:3, 1:3, self = TRUE)
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @importFrom magrittr %>% %<>% extract
+##' @importFrom magrittr %>% %<>%
+##' @seealso PPIdx
 ##' @export
 ##'
-PPTreeIdx <- function(pidx, tree) {
+PPTreeIdx <- function(pt, x, ..., bigmat = FALSE) {
 
-  p <- PPData(pidx)
+  pidx <- PPIdx(pt, x, ..., bigmat)
 
-  ## compare species with tree tips
-  p %<>% colnames %>% match(tree$tip.label, .) %>% extract(p, , ., drop = FALSE)
+  p <- PPData(pt)
+  tree <- pt@tree
+  idx <- pidx@idx
 
-  return(new('PPTreeIdx', p, idx = pidx@idx, tree = tree))
+  return(new('PPTreeIdx', p, tree = tree, idx = idx))
 }
