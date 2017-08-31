@@ -3,9 +3,9 @@
 \docType{class}
 \name{PP-class}
 \alias{PP-class}
-\title{This class represents the data structure of phylogenetic profile.}
+\title{This class represents the raw data structure of phylogenetic profile.}
 \description{
-This class represents the data structure of phylogenetic profile.
+This class represents the raw data structure of phylogenetic profile.
 }
 \section{Slots}{
 

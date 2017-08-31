@@ -35,6 +35,17 @@ ExtractSeg <- function(d) {
 ##'
 ##' \code{InitM()}: edge and edge length.
 ##'
+##' \code{OrderedTip()}: Ordered tips indices in the tree plot.
+##'
+##' Roles of \code{phylo} class:
+##'
+##' \itemize{
+##'   \item \code{tree$edge}: a two-column matrix, 1st --> 2nd is from root to tips.
+##'   \item \code{edge.length}: same order with \code{tree$edge}.
+##'   \item \code{tip.label}: The order is from \code{1:Ntip(tree)}
+##'   \item In plot, the tips appear in the same order in \code{tree$edge}.
+##' }
+##'
 ##' @title tree utilities
 ##' @param x A \code{phylo} class
 ##' @return
@@ -45,7 +56,9 @@ ExtractSeg <- function(d) {
 ##'
 ##' \code{Phylo2MatY()}: A data.frame indicating y locations.
 ##'
-##' \code{InitM()}: A numeric matrix indicating edge and edge length
+##' \code{InitM()}: A numeric matrix indicating edge and edge length.
+##'
+##' \code{OrderedTip()}: A numeric vector indicating the ordered tips indices in the tree plot.
 ##'
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @rdname tree-uti
@@ -117,12 +130,27 @@ InitM <- function(x) {
 
   initX <- rep(0, nrow(edgeMat))
   tipIdx <- edgeMat[, 2] <= tipNum
-  initX[tipIdx] <- edgeMat[tipIdx, 2]
+  initX[tipIdx] <- 1:tipNum
 
 
   edgeMat %<>% cbind(initX)
 
   return(edgeMat)
+}
+
+
+##' @inheritParams Phylo2Mat
+##' @importFrom ape Ntip
+##' @rdname tree-uti
+##' @keywords internal
+##' 
+OrderedTip <- function(x) {
+  tipNum <- Ntip(x)
+
+  m <- InitM(x)[, 2]
+  otIdx <- m[m <= tipNum]
+
+  return(otIdx)
 }
 
 

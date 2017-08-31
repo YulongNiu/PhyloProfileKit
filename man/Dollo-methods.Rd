@@ -34,8 +34,8 @@ tree <- system.file('extdata', 'bioinfoTree.nex', package = "PhyloProfile") \%>\
 ppPath <- system.file('extdata', 'bioinfoProfile.csv', package = "PhyloProfile")
 
 sceP <- ppPath \%>\% read.csv(row.names = 1) \%>\% as.matrix \%>\% PP
-sceT <- PPIdx(sceP, 1:6, 1:6) \%>\% PPTreeIdx(tree)
-Dollo(sceT, n = 2)
+scePTI <- sceP \%>\% PPTree(tree) \%>\% PPTreeIdx(1:6, 1:6)
+Dollo(scePTI, n = 2)
 
 }
 \references{

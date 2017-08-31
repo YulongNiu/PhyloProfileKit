@@ -5,8 +5,8 @@
 ##' @title pp plot text
 ##' @param x A character vector
 ##' @param shift A numeric value indicating shit scale.
-##' @param legend Whether to contain legends.
 ##' @param ... Parameters passed to \code{geom_text()} in the ggplot2 package.
+##' @inheritParams pp_tile
 ##' @return A \code{gg} class object
 ##' @examples
 ##' require(ggplot2)
@@ -17,9 +17,10 @@
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom ggplot2 ggplot geom_text labs scale_x_continuous scale_y_continuous scale_y_reverse aes_string
 ##' @seealso \code{\link[ggplot2]{geom_text}}
+##' @seealso \code{\link[ggplot2]{theme}}
 ##' @export
 ##' 
-pp_text <- function(x, shift = 0.5, legend = FALSE, ...) {
+pp_text <- function(x, shift = 0.5, legend.position = 'none', ...) {
 
 
   xlen <- length(x)
@@ -31,11 +32,8 @@ pp_text <- function(x, shift = 0.5, legend = FALSE, ...) {
     geom_text(aes_string(label = 'label'), ...) +
     labs(x = NULL, y = NULL) +
     scale_x_continuous(expand = c(0, 0), breaks = NULL) +
-    scale_y_continuous(expand = c(0, 0), limits = c(0, xlen), breaks = NULL)
-
-  if (!legend) {
-    tObj <- tObj + theme_pp(legend.position='none')
-  } else {}
+    scale_y_continuous(expand = c(0, 0), limits = c(0, xlen), breaks = NULL) +
+    theme_pp(legend.position = legend.position)
 
   return(tObj)
 }

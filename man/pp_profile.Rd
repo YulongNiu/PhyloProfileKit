@@ -4,12 +4,12 @@
 \alias{pp_profile}
 \title{pp plot profiles}
 \usage{
-pp_profile(x, legend = FALSE, ...)
+pp_profile(x, legend.position = "none", ...)
 }
 \arguments{
 \item{x}{A numeric matrix.}
 
-\item{legend}{Whether to contain legends.}
+\item{legend.position}{Position of the legend and the default is "none" (no legend). See the \code{theme()} in the ggplot2 package.}
 
 \item{...}{Parameters passed to \code{geom_tile()} in the ggplot2 package.}
 }
@@ -36,6 +36,8 @@ pp_profile(ppC) + scale_fill_gradient2()
 }
 \seealso{
 \code{\link[ggplot2]{geom_tile}}
+
+\code{\link[ggplot2]{theme}}
 }
 \author{
 Yulong Niu \email{niuylscu@gmail.com}

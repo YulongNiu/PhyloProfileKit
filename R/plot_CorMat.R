@@ -8,12 +8,12 @@
 ##' @importFrom grDevices colorRampPalette
 ##' @return A plot object.
 ##' @examples
-##' data(fatp)
-##' ATPCorPlot <- PlotPhyloCor(fatp$atpPhylo, geneCol = fatp$genecol)
+##' data(fatp1)
+##' ATPCorPlot <- PlotPhyloCor(fatp1$atpPhylo, geneCol = fatp1$genecol)
 ##' \dontrun{
 ##' require(grDevices)
 ##' cairo_pdf('FATPCorplot.pdf')
-##' ATPCorPlot <- PlotPhyloCor(fatp$atpPhylo, geneCol = fatp$genecol)
+##' ATPCorPlot <- PlotPhyloCor(fatp1$atpPhylo, geneCol = fatp1$genecol)
 ##' dev.off()
 ##' }
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}

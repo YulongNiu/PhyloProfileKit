@@ -3,7 +3,7 @@
 ##' Plot phylogenetic trees and dendrograms
 ##'
 ##' @title pp plot trees and dendrograms
-##' @param x A \code{phylo} or a \code{hclust} data.
+##' @param x A \code{phylo} or a \code{hclust} class object.
 ##' @param shift A numeric value indicating shit scale.
 ##' @param ... Parameters passed to \code{geom_segment()} in the ggplot2 package.
 ##' @return A \code{gg} class object

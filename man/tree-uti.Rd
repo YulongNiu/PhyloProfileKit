@@ -4,6 +4,7 @@
 \alias{Phylo2Mat}
 \alias{Phylo2MatY}
 \alias{InitM}
+\alias{OrderedTip}
 \alias{Phylo2MatX}
 \title{tree utilities}
 \usage{
@@ -12,6 +13,8 @@ Phylo2Mat(x)
 Phylo2MatY(x)
 
 InitM(x)
+
+OrderedTip(x)
 
 Phylo2MatX(x)
 }
@@ -25,7 +28,9 @@ Phylo2MatX(x)
 
 \code{Phylo2MatY()}: A data.frame indicating y locations.
 
-\code{InitM()}: A numeric matrix indicating edge and edge length
+\code{InitM()}: A numeric matrix indicating edge and edge length.
+
+\code{OrderedTip()}: A numeric vector indicating the ordered tips indices in the tree plot.
 }
 \description{
 Deal with \code{phylo} class objects for plot
@@ -38,6 +43,17 @@ Deal with \code{phylo} class objects for plot
 \code{Phylo2MatY()}: y locations.
 
 \code{InitM()}: edge and edge length.
+
+\code{OrderedTip()}: Ordered tips indices in the tree plot.
+
+Roles of \code{phylo} class:
+
+\itemize{
+  \item \code{tree$edge}: a two-column matrix, 1st --> 2nd is from root to tips.
+  \item \code{edge.length}: same order with \code{tree$edge}.
+  \item \code{tip.label}: The order is from \code{1:Ntip(tree)}
+  \item In plot, the tips appear in the same order in \code{tree$edge}.
+}
 }
 \author{
 Yulong Niu \email{niuylscu@gmail.com}

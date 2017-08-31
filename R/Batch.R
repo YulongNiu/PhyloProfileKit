@@ -48,5 +48,3 @@ setMethod(f = 'Batch',
 
             return(batchVec)
           })
-
-

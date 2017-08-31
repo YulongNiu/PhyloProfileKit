@@ -4,12 +4,21 @@
 \alias{PPTreeIdx}
 \title{Constructor of \code{PPTreeIdx}}
 \usage{
-PPTreeIdx(pidx, tree)
+PPTreeIdx(pt, x, ..., bigmat = FALSE)
 }
 \arguments{
-\item{pidx}{A \code{PPIdx} object.}
+\item{pt}{A \code{PPTree} object.}
 
-\item{tree}{A \code{phylo} object.}
+\item{x}{A character matrix with two columns or a numeric vector. Proteins not in \code{p} (profile) are removed. The numeric vector indicates the indices of proteins.}
+
+\item{...}{Additional parameters if \code{x} is a numeric vector.
+\itemize{
+  \item \code{y}: Another numeric vector used to generate paired linkages with \code{x}. Every element of \code{x} should be in \code{y}.
+  \item \code{self}: Whether include self pairs, and default set is \code{FALSE}.
+  \item \code{bidirect}: Whether to include two directions, and default set is \code{FALSE}.
+}}
+
+\item{bigmat}{Whether store the indices as a big matrix. Set it as \code{TRUE} if the number of index is large.}
 }
 \value{
 A \code{PPTreeIdx} object.
@@ -18,16 +27,20 @@ A \code{PPTreeIdx} object.
 The constructor the \code{PPTreeIdx} class
 }
 \details{
-Construct a \code{PP} object. The species (columns) are in the same order of phylogenetic tree tips, and for the species not in the tree are deleted.
+Construct a \code{PPTreeIdx} object. The species (columns) are in the same order of phylogenetic tree tips, and for the species not in the tree are deleted.
 }
 \examples{
 require('magrittr')
 require('ape')
 
-ppLink <- sample(0:1, 10 * 20, replace = TRUE) \%>\% matrix(ncol = 20) \%>\% PP \%>\% PPIdx(1:6, 1:6)
+tree <- rtree(8, tip.label = paste0('spe', 8:1))
+ppTree <- sample(0:1, 10 * 20, replace = TRUE) \%>\% matrix(ncol = 20) \%>\% PPTree(tree)
 
-ppTree <- rtree(8, tip.label = paste0('spe', 8:1))
-PPTreeIdx(ppLink, ppTree)
+## with self linkages
+PPTreeIdx(ppTree, 1:3, 1:3, self = TRUE)
+}
+\seealso{
+PPIdx
 }
 \author{
 Yulong Niu \email{niuylscu@gmail.com}

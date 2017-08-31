@@ -8,7 +8,7 @@ using namespace Rcpp;
 
 // CollapseTree
 arma::umat CollapseTree(arma::umat edgeMat, arma::uword tipNum, arma::uvec f, arma::uvec t);
-RcppExport SEXP PhyloProfile_CollapseTree(SEXP edgeMatSEXP, SEXP tipNumSEXP, SEXP fSEXP, SEXP tSEXP) {
+RcppExport SEXP _PhyloProfile_CollapseTree(SEXP edgeMatSEXP, SEXP tipNumSEXP, SEXP fSEXP, SEXP tSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -22,7 +22,7 @@ END_RCPP
 }
 // isTwoRowsEqual
 bool isTwoRowsEqual(arma::umat m);
-RcppExport SEXP PhyloProfile_isTwoRowsEqual(SEXP mSEXP) {
+RcppExport SEXP _PhyloProfile_isTwoRowsEqual(SEXP mSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -33,7 +33,7 @@ END_RCPP
 }
 // InferGainNodes
 arma::uvec InferGainNodes(Rcpp::List gainList);
-RcppExport SEXP PhyloProfile_InferGainNodes(SEXP gainListSEXP) {
+RcppExport SEXP _PhyloProfile_InferGainNodes(SEXP gainListSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -44,7 +44,7 @@ END_RCPP
 }
 // InferEdge
 arma::imat InferEdge(arma::umat edgeMat, Rcpp::List tipPath, Rcpp::NumericVector pr);
-RcppExport SEXP PhyloProfile_InferEdge(SEXP edgeMatSEXP, SEXP tipPathSEXP, SEXP prSEXP) {
+RcppExport SEXP _PhyloProfile_InferEdge(SEXP edgeMatSEXP, SEXP tipPathSEXP, SEXP prSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -57,7 +57,7 @@ END_RCPP
 }
 // DolloDist
 arma::uword DolloDist(arma::umat edgeMat, Rcpp::List tipPath, Rcpp::NumericVector f, Rcpp::NumericVector t);
-RcppExport SEXP PhyloProfile_DolloDist(SEXP edgeMatSEXP, SEXP tipPathSEXP, SEXP fSEXP, SEXP tSEXP) {
+RcppExport SEXP _PhyloProfile_DolloDist(SEXP edgeMatSEXP, SEXP tipPathSEXP, SEXP fSEXP, SEXP tSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -71,7 +71,7 @@ END_RCPP
 }
 // MergeList
 arma::uvec MergeList(Rcpp::List x);
-RcppExport SEXP PhyloProfile_MergeList(SEXP xSEXP) {
+RcppExport SEXP _PhyloProfile_MergeList(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -82,7 +82,7 @@ END_RCPP
 }
 // SimMIBin
 double SimMIBin(arma::vec f, arma::vec t);
-RcppExport SEXP PhyloProfile_SimMIBin(SEXP fSEXP, SEXP tSEXP) {
+RcppExport SEXP _PhyloProfile_SimMIBin(SEXP fSEXP, SEXP tSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -94,7 +94,7 @@ END_RCPP
 }
 // eachMI
 double eachMI(double p1, double p2, double p3, double n);
-RcppExport SEXP PhyloProfile_eachMI(SEXP p1SEXP, SEXP p2SEXP, SEXP p3SEXP, SEXP nSEXP) {
+RcppExport SEXP _PhyloProfile_eachMI(SEXP p1SEXP, SEXP p2SEXP, SEXP p3SEXP, SEXP nSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -108,7 +108,7 @@ END_RCPP
 }
 // SimMIConti
 double SimMIConti(arma::vec f, arma::vec t, arma::uword bin);
-RcppExport SEXP PhyloProfile_SimMIConti(SEXP fSEXP, SEXP tSEXP, SEXP binSEXP) {
+RcppExport SEXP _PhyloProfile_SimMIConti(SEXP fSEXP, SEXP tSEXP, SEXP binSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -121,7 +121,7 @@ END_RCPP
 }
 // Info
 double Info(arma::uvec v, double n);
-RcppExport SEXP PhyloProfile_Info(SEXP vSEXP, SEXP nSEXP) {
+RcppExport SEXP _PhyloProfile_Info(SEXP vSEXP, SEXP nSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -133,7 +133,7 @@ END_RCPP
 }
 // HistTwo
 arma::uvec HistTwo(arma::vec x, arma::vec y, arma::uword bin);
-RcppExport SEXP PhyloProfile_HistTwo(SEXP xSEXP, SEXP ySEXP, SEXP binSEXP) {
+RcppExport SEXP _PhyloProfile_HistTwo(SEXP xSEXP, SEXP ySEXP, SEXP binSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -146,7 +146,7 @@ END_RCPP
 }
 // FindInter
 arma::uvec FindInter(arma::vec x, arma::vec interval);
-RcppExport SEXP PhyloProfile_FindInter(SEXP xSEXP, SEXP intervalSEXP) {
+RcppExport SEXP _PhyloProfile_FindInter(SEXP xSEXP, SEXP intervalSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -158,7 +158,7 @@ END_RCPP
 }
 // FindInterSingle
 arma::uword FindInterSingle(double value, arma::vec interval);
-RcppExport SEXP PhyloProfile_FindInterSingle(SEXP valueSEXP, SEXP intervalSEXP) {
+RcppExport SEXP _PhyloProfile_FindInterSingle(SEXP valueSEXP, SEXP intervalSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -170,7 +170,7 @@ END_RCPP
 }
 // gInter
 arma::vec gInter(arma::vec x, arma::uword bin);
-RcppExport SEXP PhyloProfile_gInter(SEXP xSEXP, SEXP binSEXP) {
+RcppExport SEXP _PhyloProfile_gInter(SEXP xSEXP, SEXP binSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -182,7 +182,7 @@ END_RCPP
 }
 // CountRepeat
 arma::uvec CountRepeat(arma::uvec x);
-RcppExport SEXP PhyloProfile_CountRepeat(SEXP xSEXP) {
+RcppExport SEXP _PhyloProfile_CountRepeat(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -193,7 +193,7 @@ END_RCPP
 }
 // NPPNorm
 Rcpp::NumericMatrix NPPNorm(Rcpp::NumericMatrix rawBitM, double bitCutoff, double bitReset, double minConserve);
-RcppExport SEXP PhyloProfile_NPPNorm(SEXP rawBitMSEXP, SEXP bitCutoffSEXP, SEXP bitResetSEXP, SEXP minConserveSEXP) {
+RcppExport SEXP _PhyloProfile_NPPNorm(SEXP rawBitMSEXP, SEXP bitCutoffSEXP, SEXP bitResetSEXP, SEXP minConserveSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -207,7 +207,7 @@ END_RCPP
 }
 // SVDNorm
 Rcpp::NumericMatrix SVDNorm(Rcpp::NumericMatrix rawBitM, double bitCutoff, double bitReset, double minConserve, double trimming);
-RcppExport SEXP PhyloProfile_SVDNorm(SEXP rawBitMSEXP, SEXP bitCutoffSEXP, SEXP bitResetSEXP, SEXP minConserveSEXP, SEXP trimmingSEXP) {
+RcppExport SEXP _PhyloProfile_SVDNorm(SEXP rawBitMSEXP, SEXP bitCutoffSEXP, SEXP bitResetSEXP, SEXP minConserveSEXP, SEXP trimmingSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -222,7 +222,7 @@ END_RCPP
 }
 // SVDPhy
 Rcpp::NumericMatrix SVDPhy(Rcpp::NumericMatrix bitM, double bitReset, double minConserve, double trimming);
-RcppExport SEXP PhyloProfile_SVDPhy(SEXP bitMSEXP, SEXP bitResetSEXP, SEXP minConserveSEXP, SEXP trimmingSEXP) {
+RcppExport SEXP _PhyloProfile_SVDPhy(SEXP bitMSEXP, SEXP bitResetSEXP, SEXP minConserveSEXP, SEXP trimmingSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -236,7 +236,7 @@ END_RCPP
 }
 // SimCor
 double SimCor(arma::vec f, arma::vec t);
-RcppExport SEXP PhyloProfile_SimCor(SEXP fSEXP, SEXP tSEXP) {
+RcppExport SEXP _PhyloProfile_SimCor(SEXP fSEXP, SEXP tSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -248,7 +248,7 @@ END_RCPP
 }
 // SimJaccard
 double SimJaccard(arma::vec f, arma::vec t);
-RcppExport SEXP PhyloProfile_SimJaccard(SEXP fSEXP, SEXP tSEXP) {
+RcppExport SEXP _PhyloProfile_SimJaccard(SEXP fSEXP, SEXP tSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -260,7 +260,7 @@ END_RCPP
 }
 // DistHamming
 double DistHamming(arma::vec f, arma::vec t);
-RcppExport SEXP PhyloProfile_DistHamming(SEXP fSEXP, SEXP tSEXP) {
+RcppExport SEXP _PhyloProfile_DistHamming(SEXP fSEXP, SEXP tSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -272,7 +272,7 @@ END_RCPP
 }
 // DistEuclidean
 double DistEuclidean(arma::vec f, arma::vec t);
-RcppExport SEXP PhyloProfile_DistEuclidean(SEXP fSEXP, SEXP tSEXP) {
+RcppExport SEXP _PhyloProfile_DistEuclidean(SEXP fSEXP, SEXP tSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -281,4 +281,35 @@ BEGIN_RCPP
     rcpp_result_gen = Rcpp::wrap(DistEuclidean(f, t));
     return rcpp_result_gen;
 END_RCPP
+}
+
+static const R_CallMethodDef CallEntries[] = {
+    {"_PhyloProfile_CollapseTree", (DL_FUNC) &_PhyloProfile_CollapseTree, 4},
+    {"_PhyloProfile_isTwoRowsEqual", (DL_FUNC) &_PhyloProfile_isTwoRowsEqual, 1},
+    {"_PhyloProfile_InferGainNodes", (DL_FUNC) &_PhyloProfile_InferGainNodes, 1},
+    {"_PhyloProfile_InferEdge", (DL_FUNC) &_PhyloProfile_InferEdge, 3},
+    {"_PhyloProfile_DolloDist", (DL_FUNC) &_PhyloProfile_DolloDist, 4},
+    {"_PhyloProfile_MergeList", (DL_FUNC) &_PhyloProfile_MergeList, 1},
+    {"_PhyloProfile_SimMIBin", (DL_FUNC) &_PhyloProfile_SimMIBin, 2},
+    {"_PhyloProfile_eachMI", (DL_FUNC) &_PhyloProfile_eachMI, 4},
+    {"_PhyloProfile_SimMIConti", (DL_FUNC) &_PhyloProfile_SimMIConti, 3},
+    {"_PhyloProfile_Info", (DL_FUNC) &_PhyloProfile_Info, 2},
+    {"_PhyloProfile_HistTwo", (DL_FUNC) &_PhyloProfile_HistTwo, 3},
+    {"_PhyloProfile_FindInter", (DL_FUNC) &_PhyloProfile_FindInter, 2},
+    {"_PhyloProfile_FindInterSingle", (DL_FUNC) &_PhyloProfile_FindInterSingle, 2},
+    {"_PhyloProfile_gInter", (DL_FUNC) &_PhyloProfile_gInter, 2},
+    {"_PhyloProfile_CountRepeat", (DL_FUNC) &_PhyloProfile_CountRepeat, 1},
+    {"_PhyloProfile_NPPNorm", (DL_FUNC) &_PhyloProfile_NPPNorm, 4},
+    {"_PhyloProfile_SVDNorm", (DL_FUNC) &_PhyloProfile_SVDNorm, 5},
+    {"_PhyloProfile_SVDPhy", (DL_FUNC) &_PhyloProfile_SVDPhy, 4},
+    {"_PhyloProfile_SimCor", (DL_FUNC) &_PhyloProfile_SimCor, 2},
+    {"_PhyloProfile_SimJaccard", (DL_FUNC) &_PhyloProfile_SimJaccard, 2},
+    {"_PhyloProfile_DistHamming", (DL_FUNC) &_PhyloProfile_DistHamming, 2},
+    {"_PhyloProfile_DistEuclidean", (DL_FUNC) &_PhyloProfile_DistEuclidean, 2},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_PhyloProfile(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
 }
