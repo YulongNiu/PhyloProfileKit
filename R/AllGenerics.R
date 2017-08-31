@@ -16,6 +16,19 @@ setGeneric(name = 'PPData<-',
            def = function(x, ..., value){standardGeneric('PPData<-')})
 
 
+##' @param p A \code{PP} object.
+##' @param x A character matrix with two columns or a numeric vector. Proteins not in \code{p} (profile) are removed. The numeric vector indicates the indices of proteins.
+##' @param ... Additional parameters if \code{x} is a numeric vector.
+##' \itemize{
+##'   \item \code{y}: Another numeric vector used to generate paired linkages with \code{x}. Every element of \code{x} should be in \code{y}.
+##'   \item \code{self}: Whether include self pairs, and default set is \code{FALSE}.
+##'   \item \code{bidirect}: Whether to include two directions, and default set is \code{FALSE}.
+##' }
+##' @rdname Idx-methods
+##' @export
+##'
+setGeneric(name = 'Idx',
+           def = function(p, x, ...){standardGeneric('Idx')})
 
 ##' @param x A \code{PP} object.
 ##' @param method A character string, "NPP" or "SVD". Method used to normalize raw bit score phylogenetic profile.

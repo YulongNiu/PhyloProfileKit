@@ -1,4 +1,4 @@
-##' @include PPIdx.R
+##' @include PP.R
 NULL
 
 ##' @inheritParams show
@@ -9,16 +9,15 @@ NULL
 ##' @exportMethod show
 ##
 setMethod(f = 'show',
-          signature = 'PPTreeIdx',
+          signature = 'PPTree',
           definition = function(object){
 
             p <- PPData(object)
-            idx <- object@idx
             tree <- object@tree
 
             ##~~~~~~~~~~~~~head~~~~~~~~~~~~
             cat('---\n')
-            cat('description: "phylogenetic profile with tree and linkage indices"\n')
+            cat('description: "phylogenetic profile with tree"\n')
             cat('class: ', class(object), '\n')
             if (isBinMat_internal(p)) {
               cat('profile: "binning"', '\n')
@@ -27,7 +26,6 @@ setMethod(f = 'show',
             }
             cat('#species: ', ncol(p), '\n')
             cat('#proteins: ', nrow(p), '\n')
-            cat('#linkages: ', nrow(idx), '\n')
             cat('#tips: ', Ntip(tree), '\n')
             cat('---\n')
             ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -36,37 +34,32 @@ setMethod(f = 'show',
 
             })
 
-##' The constructor the \code{PPTreeIdx} class
+##' The constructor the \code{PPTree} class
 ##'
-##' Construct a \code{PPTreeIdx} object. The species (columns) are in the same order of phylogenetic tree tips, and for the species not in the tree are deleted.
+##' Construct a \code{PPTree} object from a numeric matrix.
 ##'
-##' @title Constructor of \code{PPTreeIdx}
-##' @param pt A \code{PPTree} object.
-##' @inheritParams PPIdx
-##' @return A \code{PPTreeIdx} object.
+##' @title Constructor of \code{PPTree}
+##' @param tree A \code{phylo} object.
+##' @inheritParams PP
+##' @return A \code{PPTree} object.
 ##' @examples
 ##' require('magrittr')
 ##' require('ape')
 ##'
+##' ppMat <- sample(0:1, 10 * 20, replace = TRUE) %>% matrix(ncol = 20)
 ##' tree <- rtree(8, tip.label = paste0('spe', 8:1))
-##' ppTree <- sample(0:1, 10 * 20, replace = TRUE) %>% matrix(ncol = 20) %>% PPTree(tree)
-##'
-##' ## with self linkages
-##' PPTreeIdx(ppTree, 1:3, 1:3, self = TRUE)
+##' PPTree(ppMat, tree)
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @importFrom magrittr %>% %<>%
-##' @seealso PPIdx
+##' @importFrom magrittr %>% %<>% extract
 ##' @export
-##'
-PPTreeIdx <- function(pt, x, ..., bigmat = FALSE) {
+##' 
+PPTree <- function(x, tree) {
 
-  pidx <- PPIdx(pt, x, ..., bigmat)
+  ## check pp and names
+  p <- x %>% PP %>% PPData
 
-  p <- PPData(pt)
-  tree <- pt@tree
-  idx <- pidx@idx
+  ## remove species not in the tree
+  p %<>% colnames %>% match(tree$tip.label, .) %>% extract(p, , ., drop = FALSE)
 
-  return(new('PPTreeIdx', p, tree = tree, idx = idx))
+  return(new('PPTree', p, tree = tree))
 }
-
-

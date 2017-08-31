@@ -2,24 +2,31 @@
 % Please edit documentation in R/utilities.R
 \name{isBinMat_internal}
 \alias{isBinMat_internal}
-\alias{valiMat_internal}
+\alias{validMatNames_internal}
+\alias{validTreeMat_internal}
 \title{utilities}
 \usage{
 isBinMat_internal(x)
 
-valiMat_internal(x, warnName)
+validMatNames_internal(x, warnName)
+
+validTreeMat_internal(m, t)
 }
 \arguments{
 \item{x}{A matrix.}
 
 \item{warnName}{A character string indicating the class names.}
 
+\item{m}{A numeric matrix.}
+
+\item{t}{A phylo tree.}
+
 \item{x}{A numeric matrix.}
 }
 \value{
 \code{isBinMat_internal()}: Logic.
 
-\code{valiMat_internal()}: \code{TRUE} or a warning message.
+\code{valiMatNames_internal()}: \code{TRUE} or a warning message.
 }
 \description{
 Additional utilities
@@ -27,7 +34,7 @@ Additional utilities
 \details{
 \code{isBinMat_internal()}: Whether a matrix is binning.
 
-\code{valiMat_internal()}: Validate a numeric matrix with row names and column names.
+\code{valiMatNames_internal()}: Validate a numeric matrix with row names and column names.
 }
 \author{
 Yulong Niu \email{niuylscu@gmail.com}

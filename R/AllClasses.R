@@ -1,7 +1,7 @@
 ##' @include utilities.R
 NULL
 
-##' This class represents the data structure of phylogenetic profile.
+##' This class represents the raw data structure of phylogenetic profile.
 ##'
 ##' @slot .Data An integer matrix or a numeric matrix, of which the rows are genes/proteins and columns are species. It validates the rownames and colnames of the profile matrix.
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
@@ -11,15 +11,41 @@ setClass(Class = 'PP',
          contains = 'matrix',
          validity = function(object) {
            d <- object@.Data
-           valiMat_internal(d, 'profile')
+           validMatNames_internal(d, 'profile')
+         })
+
+##~~~~~~~~~~~~~redefine phylo class from the "ape" package~~~~~
+structure(list(), class = 'phylo')
+
+setOldClass('phylo')
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+##' This class represents the data structure of phylogenetic profile with phylogenetic tree.
+##'
+##' @slot tree A \code{phylo} object indicating the phylogenetic tree from the \code{ape} package.
+##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @seealso The raw definition of \code{\link[ape]{phylo}}.
+##' @exportClass PPTree
+##' 
+setClass(Class = 'PPTree',
+         slots = c(tree = 'phylo'),
+         contains = 'PP',
+         validity = function(object) {
+           d <- object@.Data
+           t <- object@tree
+           validMatNames_internal(d, 'profile')
+           validTreeMat_internal(d, t)
          })
 
 
+##~~~~~~~~~~~~~~~~~~~~~~~~PPMat union class~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 setClass('big.matrix',
          slot = c(address = 'externalptr'))
 
 setClassUnion(name = 'PPMat',
               member = c('matrix', 'big.matrix'))
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 ##' This class represents the data structure of phylogenetic profile with linkage indices.
 ##'
@@ -32,9 +58,24 @@ setClass(Class = 'PPIdx',
          contains = 'PP',
          validity = function(object) {
            d <- object@idx
-           valiMat_internal(d, 'indices')
+           validMatNames_internal(d, 'indices')
          })
 
+
+##' This class represents the data structure of the phylogenetic profile with linkage indices and a phylogenetic tree.
+##'
+##' @slot idx An integer matrix with two columns. It validates the rownames and colnames of the profile.
+##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @seealso The raw definition of \code{\link[ape]{phylo}}.
+##' @exportClass PPTreeIdx
+##' 
+setClass(Class = 'PPTreeIdx',
+         slots = c(idx = 'PPMat'),
+         contains = 'PPTree',
+         validity = function(object) {
+           d <- object@idx
+           validMatNames_internal(d, 'indices')
+         })
 
 ##' This class represents the data structure of phylogenetic profiling results.
 ##'
@@ -48,23 +89,6 @@ setClass(Class = 'PPIdx',
 setClass(Class = 'PPResult',
          slots = c(idx = 'PPMat', pnames = 'character', method = 'character'),
          contains = 'numeric')
-
-
-structure(list(), class = 'phylo')
-
-setOldClass('phylo')
-
-
-##' This class represents the data structure of the phylogenetic profile with linkage indices and a phylogenetic tree.
-##'
-##' @slot tree A numeric vector representing the profiling data.
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @seealso The raw definition of \code{\link[ape]{phylo}}.
-##' @exportClass PPTreeIdx
-##' 
-setClass(Class = 'PPTreeIdx',
-         slots = c(tree = 'phylo'),
-         contains = 'PPIdx')
 
 
 ##' This class represents the data structure of matrix-like plot.

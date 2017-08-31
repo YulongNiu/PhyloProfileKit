@@ -14,7 +14,7 @@
 #' @author Yulong Niu \email{niuylscu@@gmail.com}
 #' @keywords internal
 CollapseTree <- function(edgeMat, tipNum, f, t) {
-    .Call('PhyloProfile_CollapseTree', PACKAGE = 'PhyloProfile', edgeMat, tipNum, f, t)
+    .Call('_PhyloProfile_CollapseTree', PACKAGE = 'PhyloProfile', edgeMat, tipNum, f, t)
 }
 
 #' Test two rows are equal
@@ -27,7 +27,7 @@ CollapseTree <- function(edgeMat, tipNum, f, t) {
 #' @author Yulong Niu \email{niuylscu@@gmail.com}
 #' @keywords internal
 isTwoRowsEqual <- function(m) {
-    .Call('PhyloProfile_isTwoRowsEqual', PACKAGE = 'PhyloProfile', m)
+    .Call('_PhyloProfile_isTwoRowsEqual', PACKAGE = 'PhyloProfile', m)
 }
 
 #' Use Dollo's parsimony distance to evaluate similarity patterns.
@@ -55,7 +55,7 @@ isTwoRowsEqual <- function(m) {
 #' @rdname dollo
 #' @keywords internal
 InferGainNodes <- function(gainList) {
-    .Call('PhyloProfile_InferGainNodes', PACKAGE = 'PhyloProfile', gainList)
+    .Call('_PhyloProfile_InferGainNodes', PACKAGE = 'PhyloProfile', gainList)
 }
 
 #' @param edgeMat A edge mat could be generated from the "ape" package.The first row should be (root --> nodes).
@@ -64,7 +64,7 @@ InferGainNodes <- function(gainList) {
 #' @rdname dollo
 #' @keywords internal
 InferEdge <- function(edgeMat, tipPath, pr) {
-    .Call('PhyloProfile_InferEdge', PACKAGE = 'PhyloProfile', edgeMat, tipPath, pr)
+    .Call('_PhyloProfile_InferEdge', PACKAGE = 'PhyloProfile', edgeMat, tipPath, pr)
 }
 
 #' @inheritParams SimCor
@@ -74,7 +74,7 @@ InferEdge <- function(edgeMat, tipPath, pr) {
 #' @references \url{https://www.ncbi.nlm.nih.gov/pubmed/?term=17535793}
 #' @keywords internal
 DolloDist <- function(edgeMat, tipPath, f, t) {
-    .Call('PhyloProfile_DolloDist', PACKAGE = 'PhyloProfile', edgeMat, tipPath, f, t)
+    .Call('_PhyloProfile_DolloDist', PACKAGE = 'PhyloProfile', edgeMat, tipPath, f, t)
 }
 
 #' @param x A list only contains unsigned interger vectors.
@@ -82,14 +82,14 @@ DolloDist <- function(edgeMat, tipPath, f, t) {
 #' @rdname dollo
 #' @keywords internal
 MergeList <- function(x) {
-    .Call('PhyloProfile_MergeList', PACKAGE = 'PhyloProfile', x)
+    .Call('_PhyloProfile_MergeList', PACKAGE = 'PhyloProfile', x)
 }
 
 #' @inheritParams SimCor
 #' @rdname simdist
 #' @keywords internal
 SimMIBin <- function(f, t) {
-    .Call('PhyloProfile_SimMIBin', PACKAGE = 'PhyloProfile', f, t)
+    .Call('_PhyloProfile_SimMIBin', PACKAGE = 'PhyloProfile', f, t)
 }
 
 #' Utilities for MI
@@ -108,7 +108,7 @@ SimMIBin <- function(f, t) {
 #' @rdname utilities-MI
 #' @keywords internal
 eachMI <- function(p1, p2, p3, n) {
-    .Call('PhyloProfile_eachMI', PACKAGE = 'PhyloProfile', p1, p2, p3, n)
+    .Call('_PhyloProfile_eachMI', PACKAGE = 'PhyloProfile', p1, p2, p3, n)
 }
 
 #' @inheritParams SimCor
@@ -116,7 +116,7 @@ eachMI <- function(p1, p2, p3, n) {
 #' @rdname simdist
 #' @keywords internal
 SimMIConti <- function(f, t, bin) {
-    .Call('PhyloProfile_SimMIConti', PACKAGE = 'PhyloProfile', f, t, bin)
+    .Call('_PhyloProfile_SimMIConti', PACKAGE = 'PhyloProfile', f, t, bin)
 }
 
 #' @param v Histogram of counts.
@@ -124,7 +124,7 @@ SimMIConti <- function(f, t, bin) {
 #' @rdname utilities-MI
 #' @keywords internal
 Info <- function(v, n) {
-    .Call('PhyloProfile_Info', PACKAGE = 'PhyloProfile', v, n)
+    .Call('_PhyloProfile_Info', PACKAGE = 'PhyloProfile', v, n)
 }
 
 #' @inheritParams SimMIConti
@@ -132,7 +132,7 @@ Info <- function(v, n) {
 #' @rdname utilities-MI
 #' @keywords internal
 HistTwo <- function(x, y, bin) {
-    .Call('PhyloProfile_HistTwo', PACKAGE = 'PhyloProfile', x, y, bin)
+    .Call('_PhyloProfile_HistTwo', PACKAGE = 'PhyloProfile', x, y, bin)
 }
 
 #' @inheritParams HistTwo
@@ -140,7 +140,7 @@ HistTwo <- function(x, y, bin) {
 #' @rdname utilities-MI
 #' @keywords internal
 FindInter <- function(x, interval) {
-    .Call('PhyloProfile_FindInter', PACKAGE = 'PhyloProfile', x, interval)
+    .Call('_PhyloProfile_FindInter', PACKAGE = 'PhyloProfile', x, interval)
 }
 
 #' @inheritParams FindInter
@@ -148,21 +148,21 @@ FindInter <- function(x, interval) {
 #' @rdname utilities-MI
 #' @keywords internal
 FindInterSingle <- function(value, interval) {
-    .Call('PhyloProfile_FindInterSingle', PACKAGE = 'PhyloProfile', value, interval)
+    .Call('_PhyloProfile_FindInterSingle', PACKAGE = 'PhyloProfile', value, interval)
 }
 
 #' @inheritParams HistTwo
 #' @rdname utilities-MI
 #' @keywords internal
 gInter <- function(x, bin) {
-    .Call('PhyloProfile_gInter', PACKAGE = 'PhyloProfile', x, bin)
+    .Call('_PhyloProfile_gInter', PACKAGE = 'PhyloProfile', x, bin)
 }
 
 #' @inheritParams HistTwo
 #' @rdname utilities-MI
 #' @keywords internal
 CountRepeat <- function(x) {
-    .Call('PhyloProfile_CountRepeat', PACKAGE = 'PhyloProfile', x)
+    .Call('_PhyloProfile_CountRepeat', PACKAGE = 'PhyloProfile', x)
 }
 
 #' NPP normalization
@@ -187,7 +187,7 @@ CountRepeat <- function(x) {
 #' @references \href{http://www.nature.com/nature/journal/v493/n7434/extref/nature11779-s1.pdf}{NPP description}
 #' @keywords internal
 NPPNorm <- function(rawBitM, bitCutoff, bitReset, minConserve) {
-    .Call('PhyloProfile_NPPNorm', PACKAGE = 'PhyloProfile', rawBitM, bitCutoff, bitReset, minConserve)
+    .Call('_PhyloProfile_NPPNorm', PACKAGE = 'PhyloProfile', rawBitM, bitCutoff, bitReset, minConserve)
 }
 
 #' SVD normalization
@@ -217,7 +217,7 @@ NPPNorm <- function(rawBitM, bitCutoff, bitReset, minConserve) {
 #' @rdname normSVD
 #' @keywords internal
 SVDNorm <- function(rawBitM, bitCutoff, bitReset, minConserve, trimming) {
-    .Call('PhyloProfile_SVDNorm', PACKAGE = 'PhyloProfile', rawBitM, bitCutoff, bitReset, minConserve, trimming)
+    .Call('_PhyloProfile_SVDNorm', PACKAGE = 'PhyloProfile', rawBitM, bitCutoff, bitReset, minConserve, trimming)
 }
 
 #' @param bitM Bit score matrix, for example the BLASTP or STRING bit scores. It is a named numeric matrix, columns are species and rows are genes.
@@ -227,7 +227,7 @@ SVDNorm <- function(rawBitM, bitCutoff, bitReset, minConserve, trimming) {
 #' @rdname normSVD
 #' @keywords internal
 SVDPhy <- function(bitM, bitReset, minConserve, trimming) {
-    .Call('PhyloProfile_SVDPhy', PACKAGE = 'PhyloProfile', bitM, bitReset, minConserve, trimming)
+    .Call('_PhyloProfile_SVDPhy', PACKAGE = 'PhyloProfile', bitM, bitReset, minConserve, trimming)
 }
 
 #' Similarity or distance of paired phylogenetic profile
@@ -252,27 +252,27 @@ SVDPhy <- function(bitM, bitReset, minConserve, trimming) {
 #' @rdname simdist
 #' @keywords internal
 SimCor <- function(f, t) {
-    .Call('PhyloProfile_SimCor', PACKAGE = 'PhyloProfile', f, t)
+    .Call('_PhyloProfile_SimCor', PACKAGE = 'PhyloProfile', f, t)
 }
 
 #' @inheritParams SimCor
 #' @rdname simdist
 #' @keywords internal
 SimJaccard <- function(f, t) {
-    .Call('PhyloProfile_SimJaccard', PACKAGE = 'PhyloProfile', f, t)
+    .Call('_PhyloProfile_SimJaccard', PACKAGE = 'PhyloProfile', f, t)
 }
 
 #' @inheritParams SimCor
 #' @rdname simdist
 #' @keywords internal
 DistHamming <- function(f, t) {
-    .Call('PhyloProfile_DistHamming', PACKAGE = 'PhyloProfile', f, t)
+    .Call('_PhyloProfile_DistHamming', PACKAGE = 'PhyloProfile', f, t)
 }
 
 #' @inheritParams SimCor
 #' @rdname simdist
 #' @keywords internal
 DistEuclidean <- function(f, t) {
-    .Call('PhyloProfile_DistEuclidean', PACKAGE = 'PhyloProfile', f, t)
+    .Call('_PhyloProfile_DistEuclidean', PACKAGE = 'PhyloProfile', f, t)
 }
 
