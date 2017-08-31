@@ -11,7 +11,7 @@ setClass(Class = 'PP',
          contains = 'matrix',
          validity = function(object) {
            d <- object@.Data
-           valiMatNames_internal(d, 'profile')
+           validMatNames_internal(d, 'profile')
          })
 
 ##~~~~~~~~~~~~~redefine phylo class from the "ape" package~~~~~
@@ -33,7 +33,7 @@ setClass(Class = 'PPTree',
          validity = function(object) {
            d <- object@.Data
            t <- object@tree
-           valiMatNames_internal(d, 'profile')
+           validMatNames_internal(d, 'profile')
            validTreeMat_internal(d, t)
          })
 
@@ -58,7 +58,7 @@ setClass(Class = 'PPIdx',
          contains = 'PP',
          validity = function(object) {
            d <- object@idx
-           valiMat_internal(d, 'indices')
+           validMatNames_internal(d, 'indices')
          })
 
 

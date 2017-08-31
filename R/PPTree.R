@@ -48,7 +48,7 @@ setMethod(f = 'show',
 ##'
 ##' ppMat <- sample(0:1, 10 * 20, replace = TRUE) %>% matrix(ncol = 20)
 ##' ppTree <- rtree(8, tip.label = paste0('spe', 8:1))
-##' PPTree(pp, ppTree)
+##' PPTree(ppMat, ppTree)
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom magrittr %>% %<>%
 ##' @export

@@ -38,7 +38,7 @@ isBinMat_internal <- function(x) {
 ##' @rdname utilities
 ##' @keywords internal
 ##' 
-valiMatNames_internal <- function(x, warnName) {
+validMatNames_internal <- function(x, warnName) {
 
   warnNumMat <- '%name% should be a matrix or big.matrix.'
   warnMatName <- '%name% needs rownames or colnames.'

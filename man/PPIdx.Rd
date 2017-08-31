@@ -14,8 +14,8 @@ PPIdx(p, x, ..., bigmat = FALSE)
 \item{...}{Additional parameters if \code{x} is a numeric vector.
 \itemize{
   \item \code{y}: Another numeric vector used to generate paired linkages with \code{x}. Every element of \code{x} should be in \code{y}.
-  \item \code{self}: Whether include self pairs.
-  \item \code{bidirect}: Whether to include two directions.
+  \item \code{self}: Whether include self pairs, and default set is \code{FALSE}.
+  \item \code{bidirect}: Whether to include two directions, and default set is \code{FALSE}.
 }}
 
 \item{bigmat}{Whether store the indices as a big matrix. Set it as \code{TRUE} if the number of index is large.}
