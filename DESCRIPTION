@@ -80,3 +80,4 @@ Collate:
     'pp_theme.R'
     'pp_tile.R'
     'pp_tree.R'
+    'setAs.R'

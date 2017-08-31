@@ -23,6 +23,7 @@ setGeneric(name = 'PPData<-',
 ##'   \item \code{y}: Another numeric vector used to generate paired linkages with \code{x}. Every element of \code{x} should be in \code{y}.
 ##'   \item \code{self}: Whether include self pairs, and default set is \code{FALSE}.
 ##'   \item \code{bidirect}: Whether to include two directions, and default set is \code{FALSE}.
+##' }
 ##' @rdname Idx-methods
 ##' @export
 ##'

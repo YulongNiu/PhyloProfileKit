@@ -42,7 +42,7 @@ setMethod(f = 'show',
 ##'
 ##' @title Constructor of \code{PPTreeIdx}
 ##' @param pt A \code{PPTree} object.
-##' @inheritParams Idx
+##' @inheritParams PPIdx
 ##' @return A \code{PPTreeIdx} object.
 ##' @examples
 ##' require('magrittr')
@@ -68,3 +68,5 @@ PPTreeIdx <- function(pt, x, ..., bigmat = FALSE) {
 
   return(new('PPTreeIdx', p, tree = tree, idx = idx))
 }
+
+

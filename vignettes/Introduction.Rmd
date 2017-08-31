@@ -208,7 +208,7 @@ The phylogenetic profiling can be enhanced by combining other types of biologica
 
 ``` {r}
 sceTree <- system.file('extdata', 'bioinfoTree.nex', package = "PhyloProfile") %>% read.nexus
-sceTreeL <- PPTreeIdx(sceL, sceTree)
+sceTreeL <- sceP %>% PPTree(sceTree) %>% PPTreeIdx(linkM)
 sceTreeL
 ```
 

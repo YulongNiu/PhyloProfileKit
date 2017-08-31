@@ -50,7 +50,7 @@ setMethod(f = 'show',
 ##' tree <- rtree(8, tip.label = paste0('spe', 8:1))
 ##' PPTree(ppMat, tree)
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
-##' @importFrom magrittr %>% %<>%
+##' @importFrom magrittr %>% %<>% extract
 ##' @export
 ##' 
 PPTree <- function(x, tree) {

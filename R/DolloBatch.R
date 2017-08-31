@@ -16,8 +16,8 @@ NULL
 ##' ppPath <- system.file('extdata', 'bioinfoProfile.csv', package = "PhyloProfile")
 ##'
 ##' sceP <- ppPath %>% read.csv(row.names = 1) %>% as.matrix %>% PP
-##' sceT <- PPIdx(sceP, 1:6, 1:6) %>% PPTreeIdx(tree)
-##' Dollo(sceT, n = 2)
+##' scePTI <- sceP %>% PPTree(tree) %>% PPTreeIdx(1:6, 1:6)
+##' Dollo(scePTI, n = 2)
 ##'
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom ape nodepath
@@ -39,6 +39,7 @@ setMethod(f = 'Dollo',
             tree <- x@tree
             em <- tree$edge
             tp <- nodepath(tree)
+            x <- as(x, 'PPIdx')
 
             bv <- Batch(x = x,
                         FUN = dollo_internal,
