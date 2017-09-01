@@ -70,3 +70,26 @@ PPTreeIdx <- function(pt, x, ..., bigmat = FALSE) {
 }
 
 
+##' @inheritParams IdxData
+##' @rdname IdxData-methods
+##' @exportMethod IdxData
+##'
+setMethod(f = 'IdxData',
+          signature = c(x = 'PPTreeIdx'),
+          definition = function(x, ...) {
+            return(x@idx)
+          })
+
+
+##' @inheritParams IdxData
+##' @importFrom methods validObject
+##' @importFrom magrittr %>% %T>%
+##' @rdname IdxData-methods
+##' @exportMethod IdxData<-
+##'
+setMethod(f = 'IdxData<-',
+          signature = c(x = 'PPTreeIdx', value = 'matrix'),
+          definition = function(x, ..., value) {
+            x@idx <- value
+            x %T>% validObject %>% return
+          })

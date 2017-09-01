@@ -213,8 +213,8 @@ setMethod(f = 'IdxData',
 ##' @exportMethod IdxData<-
 ##'
 setMethod(f = 'IdxData<-',
-          signature = c(x = 'PPIdx'),
-          definition = function(x = 'PPIdx', ..., value = 'matrix') {
+          signature = c(x = 'PPIdx', value = 'matrix'),
+          definition = function(x, ..., value) {
             x@idx <- value
             x %T>% validObject %>% return
           })
