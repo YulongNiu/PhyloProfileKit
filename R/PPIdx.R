@@ -70,6 +70,9 @@ setMethod(f = 'Idx',
               x %<>% c %>% match(wp) %>% matrix(ncol = 2, dimnames = dimnames(x))
               hasLogic <- !(is.na(x[, 1]) | is.na(x[, 2]))
               x <- x[hasLogic, , drop = FALSE]
+            }
+            else if (is.numeric(x)) {
+              x <- x
             } else {}
 
             return(x)
@@ -125,7 +128,7 @@ setMethod(f = 'Idx',
 ##' @importFrom bigmemory as.big.matrix
 ##' @seealso PPTreeIdx
 ##' @export
-##' 
+##'
 PPIdx <- function(p, x, ..., bigmat = FALSE) {
 
   x <- Idx(p, x, ...)
@@ -141,7 +144,7 @@ PPIdx <- function(p, x, ..., bigmat = FALSE) {
 
   ## check colnames
   if (is.null(colnames(x))) {
-    colnames(x) <- c('From', 'To')
+    colnames(x) <- c('from', 'to')
   } else {}
 
   ## check rownames
@@ -156,4 +159,63 @@ PPIdx <- function(p, x, ..., bigmat = FALSE) {
 
   return(new('PPIdx', p, idx = x))
 }
+
+
+##' Select and replace the indices of a \code{PPIdx}/\code{PPTreeIdx} object
+##'
+##' \code{IdxData(x)}: Extract the indices from a \code{PPIdx}/\code{PPTreeIdx} object.
+##'
+##' \code{IdxData(x) <- value}: Replace the indices of a \code{PPIdx}/\code{PPTreeIdx} object.
+##'
+##' @title Select and replace \code{PPIdx}/\code{PPTreeIdx} data
+##' @inheritParams IdxData
+##' @return
+##'
+##' \code{PPData(x)}: A numeric matrix.
+##'
+##' \code{PPData(x) <- value}: An update \code{PPIdx}/\code{PPTreeIdx} object.
+##'
+##' @examples
+##' require('magrittr')
+##' ppContinuous <- matrix(rnorm(10 * 20),
+##'                        ncol = 20,
+##'                        dimnames = list(paste0('protein', 1:10),
+##'                                        paste0('spe', 1:20))) %>% PP
+##' ppi <- PPIdx(ppContinuous, 1:3, 1:3)
+##'
+##' ## extract indices
+##' IdxData(ppi)
+##'
+##' ## replace indices
+##' imat <- matrix(sample(1:10, 2 * 3, replace = FALSE),
+##'                ncol = 2,
+##'                dimnames = list(paste0('link', 1:3),
+##'                                c('from', 'to')))
+##' IdxData(ppi)  <- imat
+##' ## type is changed to "binning"
+##' ppContinuous
+##'
+##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @rdname IdxData-methods
+##' @exportMethod IdxData
+##'
+setMethod(f = 'IdxData',
+          signature = c(x = 'PPIdx'),
+          definition = function(x, ...) {
+            return(x@idx)
+          })
+
+
+##' @inheritParams IdxData
+##' @importFrom methods validObject
+##' @importFrom magrittr %>% %T>%
+##' @rdname IdxData-methods
+##' @exportMethod IdxData<-
+##'
+setMethod(f = 'IdxData<-',
+          signature = c(x = 'PPIdx'),
+          definition = function(x = 'PPIdx', ..., value = 'matrix') {
+            x@idx <- value
+            x %T>% validObject %>% return
+          })
 

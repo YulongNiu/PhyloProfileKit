@@ -2,7 +2,7 @@
 ##' @param ... Additional parameters.
 ##' @rdname PPData-methods
 ##' @export
-##' 
+##'
 setGeneric(name = 'PPData',
            def = function(x, ...){standardGeneric('PPData')})
 
@@ -17,10 +17,15 @@ setGeneric(name = 'PPData<-',
 
 
 ##' @param p A \code{PP} object.
-##' @param x A character matrix with two columns or a numeric vector. Proteins not in \code{p} (profile) are removed. The numeric vector indicates the indices of proteins.
+##' @param x A matrix with two columns or a numeric vector. Proteins not in \code{p} (profile) are removed. The numeric vector indicates the indices of proteins.
+##' \itemize{
+##'   \item a character matrix: Each row containing the protein names is a linkage.
+##'   \item a numeric matrix: Each row containing the protein indices is a linkage.
+##'   \item a numeric vector: Each element is the index of a interested protein.
+##' }
 ##' @param ... Additional parameters if \code{x} is a numeric vector.
 ##' \itemize{
-##'   \item \code{y}: Another numeric vector used to generate paired linkages with \code{x}. Every element of \code{x} should be in \code{y}.
+##'   \item \code{y}: Another numeric vector used to generate paired linkages with \code{x}. Each element of \code{x} should be in \code{y}.
 ##'   \item \code{self}: Whether include self pairs, and default set is \code{FALSE}.
 ##'   \item \code{bidirect}: Whether to include two directions, and default set is \code{FALSE}.
 ##' }
@@ -29,6 +34,25 @@ setGeneric(name = 'PPData<-',
 ##'
 setGeneric(name = 'Idx',
            def = function(p, x, ...){standardGeneric('Idx')})
+
+
+##' @param x A \code{PPIdx}/\code{PPTreeIdx} object.
+##' @param ... Additional parameters.
+##' @rdname IdxData-methods
+##' @export
+##'
+setGeneric(name = 'IdxData',
+           def = function(x, ...){standardGeneric('IdxData')})
+
+
+##' @param value A numeric matrix.
+##' @inheritParams IdxData
+##' @rdname IdxData-methods
+##' @export
+##'
+setGeneric(name = 'IdxData<-',
+           def = function(x, ..., value){standardGeneric('IdxData<-')})
+
 
 ##' @param x A \code{PP} object.
 ##' @param method A character string, "NPP" or "SVD". Method used to normalize raw bit score phylogenetic profile.

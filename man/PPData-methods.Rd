@@ -5,7 +5,7 @@
 \alias{PPData}
 \alias{PPData<-}
 \alias{PPData,PP-method}
-\alias{PPData<-,PP-method}
+\alias{PPData<-,PP,matrix-method}
 \title{Select and replace \code{PP} data}
 \usage{
 PPData(x, ...)
@@ -14,7 +14,7 @@ PPData(x, ...) <- value
 
 \S4method{PPData}{PP}(x, ...)
 
-\S4method{PPData}{PP}(x, ...) <- value
+\S4method{PPData}{PP,matrix}(x, ...) <- value
 }
 \arguments{
 \item{x}{A \code{PP} object.}
@@ -24,11 +24,9 @@ PPData(x, ...) <- value
 \item{value}{A numeric matrix.}
 }
 \value{
-A numeric matrix.
-
 \code{PPData(x)}: A numeric matrix.
 
-\code{PPData(x) <- value}: An update PP object.
+\code{PPData(x) <- value}: An update \code{PP} object.
 }
 \description{
 Select and replace the data matrix of a \code{PP} object
@@ -49,11 +47,11 @@ ppContinuous <- matrix(rnorm(10 * 20),
 PPData(ppContinuous)
 
 ## replace whole data matrix
-rmat <- matrix(sample(0:1, 20 * 30, replace = TRUE),
+pmat <- matrix(sample(0:1, 20 * 30, replace = TRUE),
                ncol = 30,
                dimnames = list(paste0('pro', 1:20),
                                paste0('spe', 1:30)))
-PPData(ppContinuous)  <- rmat
+PPData(ppContinuous)  <- pmat
 ## type is changed to "binning"
 ppContinuous
 
