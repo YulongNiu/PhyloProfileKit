@@ -1,3 +1,6 @@
+##' @include PPTreeIdx.R
+NULL
+
 ## transfer 'PPTreeIdx' to 'PPIdx'
 setAs(from = 'PPTreeIdx',
       to = 'PPIdx',
