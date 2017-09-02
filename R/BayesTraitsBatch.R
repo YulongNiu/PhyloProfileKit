@@ -57,8 +57,6 @@ setMethod(f = 'BayesTraits',
               return(logLR)
             }
 
-            x <- as(x, 'PPIdx')
-
             ## write tree
             treeFile <- 'tree.nex'
             write.nexus(x@tree, file = treeFile)

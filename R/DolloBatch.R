@@ -39,7 +39,6 @@ setMethod(f = 'Dollo',
             tree <- x@tree
             em <- tree$edge
             tp <- nodepath(tree)
-            x <- as(x, 'PPIdx')
 
             bv <- Batch(x = x,
                         FUN = dollo_internal,
