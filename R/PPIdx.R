@@ -85,6 +85,18 @@ setMethod(f = 'Idx',
 ##' @exportMethod Idx
 ##'
 setMethod(f = 'Idx',
+          signature = c(p = 'PP', x = 'big.matrix'),
+          definition = function(p, x, ...) {
+            return(x)
+          })
+
+
+##' @inheritParams Idx
+##' @importFrom magrittr %<>%
+##' @rdname Idx-methods
+##' @exportMethod Idx
+##'
+setMethod(f = 'Idx',
           signature = c(p = 'PP', x = 'numeric'),
           definition = function(p, x, ...) {
             if(is.null(dim(x))) {
@@ -99,7 +111,6 @@ setMethod(f = 'Idx',
 ##' Construct a \code{PPIdx} object.
 ##'
 ##' @title Constructor of \code{PPIdx}
-##' @param bigmat Whether store the indices as a big matrix. Set it as \code{TRUE} if the number of index is large.
 ##' @inheritParams Idx
 ##' @return A \code{PPIdx} object.
 ##' @examples
@@ -120,8 +131,6 @@ setMethod(f = 'Idx',
 ##' ## with bidirectional linkages
 ##' PPIdx(ppBinning, 1:3, 1:3, self = TRUE, bidirect = TRUE)
 ##'
-##' ## bigmatrix
-##' PPIdx(ppBinning, 1:10, 1:nrow(ppBinning), bigmat = TRUE)
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom magrittr %>% %<>%
 ##' @importFrom methods new
@@ -129,7 +138,7 @@ setMethod(f = 'Idx',
 ##' @seealso PPTreeIdx
 ##' @export
 ##'
-PPIdx <- function(p, x, ..., bigmat = FALSE) {
+PPIdx <- function(p, x, ...) {
 
   x <- Idx(p, x, ...)
 
@@ -151,11 +160,6 @@ PPIdx <- function(p, x, ..., bigmat = FALSE) {
   if (is.null(rownames(x))) {
     rownames(x) <- paste0('link', seq_len(rowSize))
   } else{}
-
-  ## if big matrix
-  if (bigmat) {
-    x <- as.big.matrix(x)
-  } else {}
 
   return(new('PPIdx', p, idx = x))
 }
