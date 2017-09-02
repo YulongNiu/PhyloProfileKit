@@ -49,33 +49,25 @@ setClassUnion(name = 'PPMat',
 
 ##' This class represents the data structure of phylogenetic profile with linkage indices.
 ##'
-##' @slot idx An integer matrix with two columns. It validates the rownames and colnames of the profile.
+##' @slot idx An integer matrix with two columns.
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @exportClass PPIdx
 ##' 
 setClass(Class = 'PPIdx',
          slots = c(idx = 'PPMat'),
-         contains = 'PP',
-         validity = function(object) {
-           d <- object@idx
-           validMatNames_internal(d, 'indices')
-         })
+         contains = 'PP')
 
 
 ##' This class represents the data structure of the phylogenetic profile with linkage indices and a phylogenetic tree.
 ##'
-##' @slot idx An integer matrix with two columns. It validates the rownames and colnames of the profile.
+##' @slot idx An integer matrix with two columns.
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @seealso The raw definition of \code{\link[ape]{phylo}}.
 ##' @exportClass PPTreeIdx
 ##' 
 setClass(Class = 'PPTreeIdx',
          slots = c(idx = 'PPMat'),
-         contains = 'PPTree',
-         validity = function(object) {
-           d <- object@idx
-           validMatNames_internal(d, 'indices')
-         })
+         contains = 'PPTree')
 
 ##' This class represents the data structure of phylogenetic profiling results.
 ##'

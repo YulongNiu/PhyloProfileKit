@@ -10,7 +10,7 @@ This class represents the data structure of the phylogenetic profile with linkag
 \section{Slots}{
 
 \describe{
-\item{\code{idx}}{An integer matrix with two columns. It validates the rownames and colnames of the profile.}
+\item{\code{idx}}{An integer matrix with two columns.}
 }}
 
 \seealso{

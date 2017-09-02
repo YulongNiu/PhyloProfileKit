@@ -151,16 +151,6 @@ PPIdx <- function(p, x, ...) {
     return(new('PPIdx', p, idx = x))
   } else {}
 
-  ## check colnames
-  if (is.null(colnames(x))) {
-    colnames(x) <- c('from', 'to')
-  } else {}
-
-  ## check rownames
-  if (is.null(rownames(x))) {
-    rownames(x) <- paste0('link', seq_len(rowSize))
-  } else{}
-
   return(new('PPIdx', p, idx = x))
 }
 
