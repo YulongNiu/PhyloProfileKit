@@ -4,21 +4,24 @@
 \alias{PPTreeIdx}
 \title{Constructor of \code{PPTreeIdx}}
 \usage{
-PPTreeIdx(pt, x, ..., bigmat = FALSE)
+PPTreeIdx(pt, x, ...)
 }
 \arguments{
 \item{pt}{A \code{PPTree} object.}
 
-\item{x}{A character matrix with two columns or a numeric vector. Proteins not in \code{p} (profile) are removed. The numeric vector indicates the indices of proteins.}
+\item{x}{A matrix with two columns or a numeric vector. Proteins not in \code{p} (profile) are removed. The numeric vector indicates the indices of proteins.
+\itemize{
+  \item a character matrix: Each row containing the protein names is a linkage.
+  \item a numeric matrix or big.matrix: Each row containing the protein indices is a linkage.
+  \item a numeric vector: Each element is the index of a interested protein.
+}}
 
 \item{...}{Additional parameters if \code{x} is a numeric vector.
 \itemize{
-  \item \code{y}: Another numeric vector used to generate paired linkages with \code{x}. Every element of \code{x} should be in \code{y}.
+  \item \code{y}: Another numeric vector used to generate paired linkages with \code{x}. Each element of \code{x} should be in \code{y}.
   \item \code{self}: Whether include self pairs, and default set is \code{FALSE}.
   \item \code{bidirect}: Whether to include two directions, and default set is \code{FALSE}.
 }}
-
-\item{bigmat}{Whether store the indices as a big matrix. Set it as \code{TRUE} if the number of index is large.}
 }
 \value{
 A \code{PPTreeIdx} object.

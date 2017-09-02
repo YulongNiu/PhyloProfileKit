@@ -70,8 +70,23 @@ setMethod(f = 'Idx',
               x %<>% c %>% match(wp) %>% matrix(ncol = 2, dimnames = dimnames(x))
               hasLogic <- !(is.na(x[, 1]) | is.na(x[, 2]))
               x <- x[hasLogic, , drop = FALSE]
+            }
+            else if (is.numeric(x)) {
+              x <- x
             } else {}
 
+            return(x)
+          })
+
+
+##' @inheritParams Idx
+##' @importFrom magrittr %<>%
+##' @rdname Idx-methods
+##' @exportMethod Idx
+##'
+setMethod(f = 'Idx',
+          signature = c(p = 'PP', x = 'big.matrix'),
+          definition = function(p, x, ...) {
             return(x)
           })
 
@@ -96,7 +111,6 @@ setMethod(f = 'Idx',
 ##' Construct a \code{PPIdx} object.
 ##'
 ##' @title Constructor of \code{PPIdx}
-##' @param bigmat Whether store the indices as a big matrix. Set it as \code{TRUE} if the number of index is large.
 ##' @inheritParams Idx
 ##' @return A \code{PPIdx} object.
 ##' @examples
@@ -117,16 +131,14 @@ setMethod(f = 'Idx',
 ##' ## with bidirectional linkages
 ##' PPIdx(ppBinning, 1:3, 1:3, self = TRUE, bidirect = TRUE)
 ##'
-##' ## bigmatrix
-##' PPIdx(ppBinning, 1:10, 1:nrow(ppBinning), bigmat = TRUE)
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom magrittr %>% %<>%
 ##' @importFrom methods new
 ##' @importFrom bigmemory as.big.matrix
 ##' @seealso PPTreeIdx
 ##' @export
-##' 
-PPIdx <- function(p, x, ..., bigmat = FALSE) {
+##'
+PPIdx <- function(p, x, ...) {
 
   x <- Idx(p, x, ...)
 
@@ -139,21 +151,65 @@ PPIdx <- function(p, x, ..., bigmat = FALSE) {
     return(new('PPIdx', p, idx = x))
   } else {}
 
-  ## check colnames
-  if (is.null(colnames(x))) {
-    colnames(x) <- c('From', 'To')
-  } else {}
-
-  ## check rownames
-  if (is.null(rownames(x))) {
-    rownames(x) <- paste0('link', seq_len(rowSize))
-  } else{}
-
-  ## if big matrix
-  if (bigmat) {
-    x <- as.big.matrix(x)
-  } else {}
-
   return(new('PPIdx', p, idx = x))
 }
+
+
+##' Select and replace the indices of a \code{PPIdx}/\code{PPTreeIdx} object
+##'
+##' \code{IdxData(x)}: Extract the indices from a \code{PPIdx}/\code{PPTreeIdx} object.
+##'
+##' \code{IdxData(x) <- value}: Replace the indices of a \code{PPIdx}/\code{PPTreeIdx} object.
+##'
+##' @title Select and replace \code{PPIdx}/\code{PPTreeIdx} data
+##' @inheritParams IdxData
+##' @return
+##'
+##' \code{PPData(x)}: A numeric matrix.
+##'
+##' \code{PPData(x) <- value}: An update \code{PPIdx}/\code{PPTreeIdx} object.
+##'
+##' @examples
+##' require('magrittr')
+##' ppContinuous <- matrix(rnorm(10 * 20),
+##'                        ncol = 20,
+##'                        dimnames = list(paste0('protein', 1:10),
+##'                                        paste0('spe', 1:20))) %>% PP
+##' ppi <- PPIdx(ppContinuous, 1:3, 1:3)
+##'
+##' ## extract indices
+##' IdxData(ppi)
+##'
+##' ## replace indices
+##' imat <- matrix(sample(1:10, 2 * 3, replace = FALSE),
+##'                ncol = 2,
+##'                dimnames = list(paste0('link', 1:3),
+##'                                c('from', 'to')))
+##' IdxData(ppi)  <- imat
+##' ## type is changed to "binning"
+##' ppContinuous
+##'
+##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @rdname IdxData-methods
+##' @exportMethod IdxData
+##'
+setMethod(f = 'IdxData',
+          signature = c(x = 'PPIdx'),
+          definition = function(x, ...) {
+            return(x@idx)
+          })
+
+
+##' @inheritParams IdxData
+##' @importFrom methods validObject
+##' @importFrom magrittr %>% %T>%
+##' @rdname IdxData-methods
+##' @exportMethod IdxData<-
+##'
+setMethod(f = 'IdxData<-',
+          signature = c(x = 'PPIdx', value = 'matrix'),
+          definition = function(x, ..., value) {
+            x@idx <- value
+            x %T>% validObject %>% return
+          })
 

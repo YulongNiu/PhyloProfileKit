@@ -58,15 +58,10 @@ setMethod(f = 'show',
 ##' @seealso PPIdx
 ##' @export
 ##'
-PPTreeIdx <- function(pt, x, ..., bigmat = FALSE) {
+PPTreeIdx <- function(pt, x, ...) {
 
-  pidx <- PPIdx(pt, x, ..., bigmat)
+  pidx <- PPIdx(pt, x, ...)
 
-  p <- PPData(pt)
-  tree <- pt@tree
-  idx <- pidx@idx
-
-  return(new('PPTreeIdx', p, tree = tree, idx = idx))
+  return(new('PPTreeIdx', pt, pidx))
 }
-
 

@@ -101,11 +101,11 @@ PP <- function(x) {
 ##'
 ##' @title Select and replace \code{PP} data
 ##' @inheritParams PPData
-##' @return A numeric matrix.
+##' @return
 ##'
 ##' \code{PPData(x)}: A numeric matrix.
 ##'
-##' \code{PPData(x) <- value}: An update PP object.
+##' \code{PPData(x) <- value}: An update \code{PP} object.
 ##'
 ##' @examples
 ##' require('magrittr')
@@ -118,11 +118,11 @@ PP <- function(x) {
 ##' PPData(ppContinuous)
 ##'
 ##' ## replace whole data matrix
-##' rmat <- matrix(sample(0:1, 20 * 30, replace = TRUE),
+##' pmat <- matrix(sample(0:1, 20 * 30, replace = TRUE),
 ##'                ncol = 30,
 ##'                dimnames = list(paste0('pro', 1:20),
 ##'                                paste0('spe', 1:30)))
-##' PPData(ppContinuous)  <- rmat
+##' PPData(ppContinuous)  <- pmat
 ##' ## type is changed to "binning"
 ##' ppContinuous
 ##'
@@ -144,7 +144,7 @@ setMethod(f = 'PPData',
 ##' @exportMethod PPData<-
 ##'
 setMethod(f = 'PPData<-',
-          signature = c(x = 'PP'),
+          signature = c(x = 'PP', value = 'matrix'),
           definition = function(x, ..., value) {
             x@.Data <- value
             x %T>% validObject %>% return
