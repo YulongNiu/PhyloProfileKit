@@ -78,7 +78,6 @@ setMethod(f = 'SimDist',
             em <- tree$edge
             tn <- Ntip(tree)
             M <- ChooseSimDistFun(x, method)
-            x <- as(x, 'PPIdx')
 
             bv <- Batch(x = x,
                         FUN = ct_internal,

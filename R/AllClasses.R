@@ -66,8 +66,7 @@ setClass(Class = 'PPIdx',
 ##' @exportClass PPTreeIdx
 ##' 
 setClass(Class = 'PPTreeIdx',
-         slots = c(idx = 'PPMat'),
-         contains = 'PPTree')
+         contains = c('PPTree', 'PPIdx'))
 
 ##' This class represents the data structure of phylogenetic profiling results.
 ##'
