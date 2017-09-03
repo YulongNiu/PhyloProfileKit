@@ -5,7 +5,7 @@
 \alias{Idx}
 \alias{Idx,PP,matrix-method}
 \alias{Idx,PP,big.matrix-method}
-\alias{Idx,PP,numeric-method}
+\alias{Idx,PP,vector-method}
 \title{Index linkages}
 \usage{
 Idx(p, x, ...)
@@ -14,16 +14,16 @@ Idx(p, x, ...)
 
 \S4method{Idx}{PP,big.matrix}(p, x, ...)
 
-\S4method{Idx}{PP,numeric}(p, x, ...)
+\S4method{Idx}{PP,vector}(p, x, ...)
 }
 \arguments{
 \item{p}{A \code{PP} object.}
 
 \item{x}{A matrix with two columns or a numeric vector. Proteins not in \code{p} (profile) are removed. The numeric vector indicates the indices of proteins.
 \itemize{
-  \item a character matrix: Each row containing the protein names is a linkage.
-  \item a numeric matrix or big.matrix: Each row containing the protein indices is a linkage.
-  \item a numeric vector: Each element is the index of a interested protein.
+  \item a \code{character matrix}: Each row containing the protein names is a linkage.
+  \item a \code{numeric matrix} or \code{big.matrix}: Each row containing the protein indices is a linkage.
+  \item a \code{numeric vector}: Each element is the index of a interested protein.
 }}
 
 \item{...}{Additional parameters if \code{x} is a numeric vector.

@@ -78,3 +78,19 @@
 ##   'dollo' = for(i in 1:testNum){DolloDist(testTree$edge, pathList, gainMat1[, i], gainMat2[, i])},
 ##   'collapse' = for(i in 1:testNum){CollapseTree(testTree$edge, Ntip(testTree), gainMat1[, i], gainMat2[, i])}
 ## )
+
+
+## library('parallel')
+## library('doParallel')
+## library('magrittr')
+## source('AllClasses.R')
+## source('AllGenerics.R')
+## source('utilities.R')
+## source('PP.R')
+## source('PPIdx.R')
+## source('Batch.R')
+## source('SimDist')
+## ppBinIdx <- sample(0:1, 10 * 20, replace = TRUE) %>% matrix(ncol = 20) %>% PP %>% PPIdx(1:3, 1:3)
+## testfun <- function(eachArg, ...) {sum(eachArg$f * eachArg$t)}
+## Batch(ppBinIdx, testfun, n = 2)
+
