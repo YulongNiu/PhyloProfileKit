@@ -31,7 +31,6 @@ setMethod(f = 'Batch',
 
             p <- PPData(x)
             ft <- x@idx
-            ppiNames <- rownames(ft)
             ppiNum <- nrow(ft)
 
             batchVec <- foreach(i = 1:ppiNum, .combine = c) %dopar% {
@@ -47,4 +46,55 @@ setMethod(f = 'Batch',
             stopImplicitCluster()
 
             return(batchVec)
+          })
+
+
+
+##' Parallel core for \code{numeric matrix} and \code{big.matrix}.
+##'
+##' Parallel core for the index data.
+##'
+##' @title Parallel core
+##' @inheritParams BatchCore
+##' @return A \code{numeric matrix} object.
+##' @examples
+##' require('magrittr')
+##'
+##' ## Person correlation coefficient
+##' ppBinIdx <- sample(0:1, 10 * 20, replace = TRUE) %>% matrix(ncol = 20) %>% PP %>% PPIdx(1:3, 1:3)
+##' testfun <- function(eachArg, ...) {sum(eachArg$f * eachArg$t)}
+##' Batch(ppBinIdx, testfun, n = 2)
+##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @importFrom doParallel registerDoParallel stopImplicitCluster
+##' @importFrom foreach foreach %dopar%
+##' @rdname BatchCore-methods
+##' @keywords internal
+##'
+setMethod(f = 'BatchCore',
+          signature = c(p = 'matrix'),
+          definition = function(p, idx, FUN, ..., n = 1) {
+
+            ## register multiple core
+            registerDoParallel(cores = n)
+
+            ppiNum <- nrow(idx)
+
+            batchVec <- foreach(i = 1:ppiNum, .combine = c) %dopar% {
+              ## print(paste0('It is running ', i, ' in a total of ', ppiNum, '.'))
+              f <- p[idx[i, 1], ]
+              t <- p[idx[i, 2], ]
+              eachVal <- FUN(eachArg = list(f = f, t = t, uniID = i), ...)
+
+              return(eachVal)
+            }
+
+            ## stop multiple cores
+            stopImplicitCluster()
+          })
+
+
+
+setMethod(f = 'BatchCore',
+          signature = c(p = 'big.matrix'),
+          definition = function(p, idx, FUN, ..., n = 1) {
           })

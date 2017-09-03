@@ -97,7 +97,7 @@ setMethod(f = 'Idx',
 ##' @exportMethod Idx
 ##'
 setMethod(f = 'Idx',
-          signature = c(p = 'PP', x = 'numeric'),
+          signature = c(p = 'PP', x = 'vector'),
           definition = function(p, x, ...) {
             if(is.null(dim(x))) {
               ## x is a numeric vector
