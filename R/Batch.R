@@ -67,6 +67,8 @@ setMethod(f = 'BatchCore',
               t <- p[idx[i, 2], ]
               eachVal <- FUN(eachArg = list(f = f, t = t, uniID = i), ...)
 
+              gc()
+
               return(eachVal)
             }
 
@@ -116,6 +118,9 @@ setMethod(f = 'BatchCore',
               f <- p[idxBig[i, 1], ]
               t <- p[idxBig[i, 2], ]
               eachVal <- FUN(eachArg = list(f = f, t = t, uniID = i), ...)
+
+              gc()
+
               return(eachVal)
             }
 
