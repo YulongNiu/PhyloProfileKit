@@ -40,6 +40,7 @@ setMethod(f = 'Batch',
                 f <- p[idx[i, 1], ]
                 t <- p[idx[i, 2], ]
                 batchVec[i] <- FUN(eachArg = list(f = f, t = t, uniID = i), ...)
+                gc()
               }
 
             } else {
