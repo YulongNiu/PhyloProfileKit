@@ -14,6 +14,7 @@ NULL
 ##' ## Person correlation coefficient
 ##' ppBinIdx <- sample(0:1, 10 * 20, replace = TRUE) %>% matrix(ncol = 20) %>% PP %>% PPIdx(1:3, 1:3)
 ##' testfun <- function(eachArg, ...) {sum(eachArg$f * eachArg$t)}
+##' Batch(ppBinIdx, testfun, n = 1)
 ##' Batch(ppBinIdx, testfun, n = 2)
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @rdname Batch-methods
@@ -28,11 +29,27 @@ setMethod(f = 'Batch',
             p <- PPData(x)
             idx <- x@idx
 
-            batchVec <- BatchCore(p = p,
-                                  idx = idx,
-                                  FUN = FUN,
-                                  ...,
-                                  n = n)
+            if (n == 1) {
+
+              ## init vector
+              ppiNum <- nrow(idx)
+              batchVec <- numeric(ppiNum)
+
+              for (i in 1:ppiNum) {
+                ## print(paste0('It is running ', i, ' in a total of ', ppiNum, '.'))
+                f <- p[idx[i, 1], ]
+                t <- p[idx[i, 2], ]
+                batchVec[i] <- FUN(eachArg = list(f = f, t = t, uniID = i), ...)
+              }
+
+            } else {
+
+              batchVec <- BatchCore(p = p,
+                                    idx = idx,
+                                    FUN = FUN,
+                                    ...,
+                                    n = n)
+            }
 
             return(batchVec)
           })
