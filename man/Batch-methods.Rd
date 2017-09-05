@@ -34,7 +34,7 @@ require('magrittr')
 ## Person correlation coefficient
 ppBinIdx <- sample(0:1, 10 * 20, replace = TRUE) \%>\% matrix(ncol = 20) \%>\% PP \%>\% PPIdx(1:3, 1:3)
 testfun <- function(eachArg, ...) {sum(eachArg$f * eachArg$t)}
-Batch(ppBinIdx, testfun, n = 1)
+Batch(ppBinIdx, testfun)
 Batch(ppBinIdx, testfun, n = 2)
 }
 \seealso{

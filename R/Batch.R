@@ -14,7 +14,7 @@ NULL
 ##' ## Person correlation coefficient
 ##' ppBinIdx <- sample(0:1, 10 * 20, replace = TRUE) %>% matrix(ncol = 20) %>% PP %>% PPIdx(1:3, 1:3)
 ##' testfun <- function(eachArg, ...) {sum(eachArg$f * eachArg$t)}
-##' Batch(ppBinIdx, testfun, n = 1)
+##' Batch(ppBinIdx, testfun)
 ##' Batch(ppBinIdx, testfun, n = 2)
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @rdname Batch-methods
@@ -25,35 +25,16 @@ setMethod(f = 'Batch',
           signature = c(x = 'PPIdx'),
           definition = function(x, FUN, ..., n = 1) {
 
-
             p <- PPData(x)
             idx <- IdxData(x)
 
-            if (n == 1) {
-
-              ## init vector
-              ppiNum <- nrow(idx)
-              batchVec <- numeric(ppiNum)
-
-              for (i in 1:ppiNum) {
-                f <- p[idx[i, 1], ]
-                t <- p[idx[i, 2], ]
-                batchVec[i] <- FUN(eachArg = list(f = f, t = t, uniID = i), ...)
-                gc()
-              }
-
-            } else {
-
-              batchVec <- BatchCore(p = p,
-                                    idx = idx,
-                                    FUN = FUN,
-                                    ...,
-                                    n = n)
-            }
-
+            batchVec <- BatchCore(p = p,
+                                  idx = idx,
+                                  FUN = FUN,
+                                  ...,
+                                  n = n)
             return(batchVec)
           })
-
 
 
 ##' Parallel core for \code{numeric matrix} and \code{big.matrix}.
@@ -83,9 +64,6 @@ setMethod(f = 'BatchCore',
               f <- p[i[1], ]
               t <- p[i[2], ]
               eachVal <- FUN(eachArg = list(f = f, t = t, uniID = i), ...)
-
-              gc()
-
               return(eachVal)
             }
 
@@ -118,8 +96,6 @@ setMethod(f = 'BatchCore',
               f <- p[idx[i, 1], ]
               t <- p[idx[i, 2], ]
               eachVal <- FUN(eachArg = list(f = f, t = t, uniID = i), ...)
-              gc()
-
               return(eachVal)
             }
 
