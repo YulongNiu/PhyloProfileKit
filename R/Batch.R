@@ -36,7 +36,6 @@ setMethod(f = 'Batch',
               batchVec <- numeric(ppiNum)
 
               for (i in 1:ppiNum) {
-                ## print(paste0('It is running ', i, ' in a total of ', ppiNum, '.'))
                 f <- p[idx[i, 1], ]
                 t <- p[idx[i, 2], ]
                 batchVec[i] <- FUN(eachArg = list(f = f, t = t, uniID = i), ...)
@@ -100,9 +99,10 @@ setMethod(f = 'BatchCore',
 
 
 ##' @inheritParams BatchCore
-##' @importFrom bigmemory describe attach.big.matrix
-##' @importFrom parallel makeCluster clusterCall parSapply stopCluster
-##' @importFrom doParallel registerDoParallel
+##' @importFrom doParallel registerDoParallel stopImplicitCluster
+##' @importFrom foreach foreach %dopar%
+##' @importFrom iterators icount
+##' @importFrom magrittr %>%
 ##' @rdname BatchCore-methods
 ##' @keywords internal
 setMethod(f = 'BatchCore',
@@ -110,47 +110,24 @@ setMethod(f = 'BatchCore',
           definition = function(p, idx, FUN, ..., n = 1) {
 
             ## register multiple core
-            cl <- makeCluster(n)
-            registerDoParallel(cl)
+            registerDoParallel(cores = n)
 
-            ## describe files
-            idxBigDesc <- describe(idx)
+            itx <- idx %>% nrow %>% icount
 
-            ## share package
-            worker.init <- function (packages) {
-              for (pack in packages) {
-                library(pack, character.only=TRUE)
-              }
-              return(NULL)
-            }
-            clusterCall(cl, worker.init, 'bigmemory')
-
-            ppiNum <- nrow(idx)
-
-            ## get each value
-            EachCall <- function(i,
-                                 descFile,
-                                 FUN,
-                                 ...) {
-              idxBig <- attach.big.matrix(descFile)
-
-              f <- p[idxBig[i, 1], ]
-              t <- p[idxBig[i, 2], ]
+            batchVec <- foreach(i = itx, .combine = c) %dopar% {
+              f <- p[idx[i, 1], ]
+              t <- p[idx[i, 2], ]
               eachVal <- FUN(eachArg = list(f = f, t = t, uniID = i), ...)
               gc()
+
               return(eachVal)
             }
 
-            batchVec <- parSapply(cl,
-                                  1:ppiNum,
-                                  EachCall,
-                                  idxBigDesc,
-                                  FUN,
-                                  ...)
-
-            stopCluster(cl)
+            ## stop multiple cores
+            stopImplicitCluster()
 
             print('It is using big.matrix.\n')
 
             return(batchVec)
+
           })
