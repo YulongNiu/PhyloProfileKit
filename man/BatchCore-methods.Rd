@@ -3,15 +3,15 @@
 \docType{methods}
 \name{BatchCore}
 \alias{BatchCore}
-\alias{BatchCore,matrix-method}
-\alias{BatchCore,big.matrix-method}
+\alias{BatchCore,ANY,matrix-method}
+\alias{BatchCore,ANY,big.matrix-method}
 \title{Parallel core}
 \usage{
 BatchCore(p, idx, FUN, ..., n)
 
-\S4method{BatchCore}{matrix}(p, idx, FUN, ..., n = 1)
+\S4method{BatchCore}{ANY,matrix}(p, idx, FUN, ..., n = 1)
 
-\S4method{BatchCore}{big.matrix}(p, idx, FUN, ..., n = 1)
+\S4method{BatchCore}{ANY,big.matrix}(p, idx, FUN, ..., n = 1)
 }
 \arguments{
 \item{p}{A \code{numeric matrix} or a \code{big.matrix} object.}

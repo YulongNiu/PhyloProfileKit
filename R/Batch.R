@@ -71,7 +71,7 @@ setMethod(f = 'Batch',
 ##' @keywords internal
 ##'
 setMethod(f = 'BatchCore',
-          signature = c(p = 'matrix'),
+          signature = c(idx = 'matrix'),
           definition = function(p, idx, FUN, ..., n = 1) {
 
             ## register multiple core
@@ -93,6 +93,8 @@ setMethod(f = 'BatchCore',
             ## stop multiple cores
             stopImplicitCluster()
 
+            print('It is using numeric matrix.\n')
+
             return(batchVec)
           })
 
@@ -104,7 +106,7 @@ setMethod(f = 'BatchCore',
 ##' @rdname BatchCore-methods
 ##' @keywords internal
 setMethod(f = 'BatchCore',
-          signature = c(p = 'big.matrix'),
+          signature = c(idx = 'big.matrix'),
           definition = function(p, idx, FUN, ..., n = 1) {
 
             ## register multiple core
@@ -112,12 +114,12 @@ setMethod(f = 'BatchCore',
             registerDoParallel(cl)
 
             ## describe files
-            idxBigDesc <- describe(p)
+            idxBigDesc <- describe(idx)
 
             ## share package
             worker.init <- function (packages) {
-              for (p in packages) {
-                library(p, character.only=TRUE)
+              for (pack in packages) {
+                library(pack, character.only=TRUE)
               }
               return(NULL)
             }
@@ -150,6 +152,8 @@ setMethod(f = 'BatchCore',
                                   ...)
 
             stopCluster(cl)
+
+            print('It is using big.matrix.\n')
 
             return(batchVec)
           })
