@@ -27,7 +27,7 @@ setMethod(f = 'Batch',
 
 
             p <- PPData(x)
-            idx <- x@idx
+            idx <- IdxData(x)
 
             if (n == 1) {
 
@@ -67,6 +67,7 @@ setMethod(f = 'Batch',
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom doParallel registerDoParallel stopImplicitCluster
 ##' @importFrom foreach foreach %dopar%
+##' @importFrom iterators iter
 ##' @rdname BatchCore-methods
 ##' @keywords internal
 ##'
@@ -77,12 +78,11 @@ setMethod(f = 'BatchCore',
             ## register multiple core
             registerDoParallel(cores = n)
 
-            ppiNum <- nrow(idx)
+            itx <- iter(idx, by = 'row')
 
-            batchVec <- foreach(i = 1:ppiNum, .combine = c) %dopar% {
-              ## print(paste0('It is running ', i, ' in a total of ', ppiNum, '.'))
-              f <- p[idx[i, 1], ]
-              t <- p[idx[i, 2], ]
+            batchVec <- foreach(i = itx, .combine = c) %dopar% {
+              f <- p[i[1], ]
+              t <- p[i[2], ]
               eachVal <- FUN(eachArg = list(f = f, t = t, uniID = i), ...)
 
               gc()
@@ -132,15 +132,12 @@ setMethod(f = 'BatchCore',
                                  descFile,
                                  FUN,
                                  ...) {
-              ## print(paste0('It is running ', i, ' in a total of ', ppiNum, '.'))
               idxBig <- attach.big.matrix(descFile)
 
               f <- p[idxBig[i, 1], ]
               t <- p[idxBig[i, 2], ]
               eachVal <- FUN(eachArg = list(f = f, t = t, uniID = i), ...)
-
               gc()
-
               return(eachVal)
             }
 

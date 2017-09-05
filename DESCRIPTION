@@ -27,6 +27,7 @@ Imports:
     parallel,
     doParallel,
     foreach,
+    iterators,
     Rcpp,
     ape,
     methods,
