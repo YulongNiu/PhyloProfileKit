@@ -70,8 +70,6 @@ setMethod(f = 'BatchCore',
             ## stop multiple cores
             stopImplicitCluster()
 
-            print('It is using numeric matrix.\n')
-
             return(batchVec)
           })
 
@@ -81,6 +79,7 @@ setMethod(f = 'BatchCore',
 ##' @importFrom foreach foreach %dopar%
 ##' @importFrom iterators icount
 ##' @importFrom magrittr %>%
+##' @importFrom bigmemory as.big.matrix
 ##' @rdname BatchCore-methods
 ##' @keywords internal
 setMethod(f = 'BatchCore',
@@ -90,8 +89,10 @@ setMethod(f = 'BatchCore',
             ## register multiple core
             registerDoParallel(cores = n)
 
-            itx <- idx %>% nrow %>% icount
+            ## transfer p to big.matrix
+            p <- as.big.matrix(p)
 
+            itx <- idx %>% nrow %>% icount
             batchVec <- foreach(i = itx, .combine = c) %dopar% {
               f <- p[idx[i, 1], ]
               t <- p[idx[i, 2], ]
@@ -101,8 +102,6 @@ setMethod(f = 'BatchCore',
 
             ## stop multiple cores
             stopImplicitCluster()
-
-            print('It is using big.matrix.\n')
 
             return(batchVec)
 
