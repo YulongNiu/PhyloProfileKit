@@ -37,7 +37,7 @@ NULL
 ##'
 setMethod(f = 'BayesTraits',
           signature = c(x = 'PPTreeIdx'),
-          definition = function(x, ..., n = 1) {
+          definition = function(x, ..., n) {
 
             bt_internal <- function(eachArg, treeFilePath, ...) {
               genepair <- cbind(eachArg$f, eachArg$t)

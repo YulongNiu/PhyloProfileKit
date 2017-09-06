@@ -89,8 +89,26 @@
 ## source('PP.R')
 ## source('PPIdx.R')
 ## source('Batch.R')
-## source('SimDist')
+## source('SimDistBatch.R')
 ## ppBinIdx <- sample(0:1, 10 * 20, replace = TRUE) %>% matrix(ncol = 20) %>% PP %>% PPIdx(1:3, 1:3)
 ## testfun <- function(eachArg, ...) {sum(eachArg$f * eachArg$t)}
-## Batch(ppBinIdx, testfun, n = 2)
+## Batch(ppBinIdx, testfun, n = 1)
 
+
+## setClass(Class = 'Car',
+##          slots = c(color = 'character'),
+##          contains = 'numeric')
+
+## setGeneric(name = 'AddOne',
+##            def = function(x, n = 1){standardGeneric('AddOne')})
+
+## setMethod(f = 'AddOne',
+##           signature = c(x = 'Car'),
+##           definition = function(x, n = 1) {
+##             x@.Data <- x@.Data + n
+##             return(x)
+##           })
+
+
+## tmp1 <- new('Car', 3, color = 'blue')
+## AddOne(tmp1)

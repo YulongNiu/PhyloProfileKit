@@ -6,7 +6,7 @@
 \alias{Batch,PPIdx-method}
 \title{Parallel framework}
 \usage{
-Batch(x, FUN, ..., n)
+Batch(x, FUN, ..., n = 1)
 
 \S4method{Batch}{PPIdx}(x, FUN, ..., n = 1)
 }

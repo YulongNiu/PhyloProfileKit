@@ -23,16 +23,26 @@ NULL
 ##'
 setMethod(f = 'Batch',
           signature = c(x = 'PPIdx'),
-          definition = function(x, FUN, ..., n = 1) {
+          definition = function(x, FUN, ..., n) {
 
             p <- PPData(x)
             idx <- IdxData(x)
 
-            batchVec <- BatchCore(p = p,
-                                  idx = idx,
-                                  FUN = FUN,
-                                  ...,
-                                  n = n)
+            if (n == 1) {
+              ppiNum <- nrow(idx)
+              batchVec <- numeric(ppiNum)
+              for (i in 1:ppiNum) {
+                f <- p[idx[i, 1], ]
+                t <- p[idx[i, 2], ]
+                batchVec[i] <- FUN(eachArg = list(f = f, t = t, uniID = i), ...)
+              }
+            } else {
+              batchVec <- BatchCore(p = p,
+                                    idx = idx,
+                                    FUN = FUN,
+                                    ...,
+                                    n = n)
+            }
             return(batchVec)
           })
 

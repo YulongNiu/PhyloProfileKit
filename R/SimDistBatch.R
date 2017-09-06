@@ -29,7 +29,7 @@ NULL
 ##'
 setMethod(f = 'SimDist',
           signature = c(x = 'PPIdx'),
-          definition = function(x, method, ..., n = 1) {
+          definition = function(x, method, ..., n) {
 
             sd_internal <- function(eachArg, M, ...) {
               return(M(eachArg$f, eachArg$t, ...))
@@ -60,7 +60,7 @@ setMethod(f = 'SimDist',
 ##' 
 setMethod(f = 'SimDist',
           signature = c(x = 'PPTreeIdx'),
-          definition = function(x, method, ..., n = 1) {
+          definition = function(x, method, ..., n) {
 
             ct_internal <- function(eachArg, edgeMat, tipNum, M, ...) {
 

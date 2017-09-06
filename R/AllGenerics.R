@@ -82,7 +82,7 @@ setGeneric(name = 'Norm',
 ##' @export
 ##' 
 setGeneric(name = 'Batch',
-           def = function(x, FUN, ..., n){standardGeneric('Batch')})
+           def = function(x, FUN, ..., n = 1){standardGeneric('Batch')})
 
 
 ##' @param p A \code{numeric matrix} or a \code{big.matrix} object.
@@ -114,7 +114,7 @@ setGeneric(name = 'BatchCore',
 ##' @export
 ##' 
 setGeneric(name = 'SimDist',
-           def = function(x, method, ..., n){standardGeneric('SimDist')})
+           def = function(x, method, ..., n = 1){standardGeneric('SimDist')})
 
 
 ##' @param x A \code{PP} object.
@@ -134,7 +134,7 @@ setGeneric(name = 'ChooseSimDistFun',
 ##' @export
 ##' 
 setGeneric(name = 'Dollo',
-           def = function(x, ..., n){standardGeneric('Dollo')})
+           def = function(x, ..., n = 1){standardGeneric('Dollo')})
 
 
 ##' @param ... Additional parameters
@@ -152,7 +152,7 @@ setGeneric(name = 'Dollo',
 ##' @export
 ##' 
 setGeneric(name = 'BayesTraits',
-           def = function(x, ..., n) {standardGeneric('BayesTraits')})
+           def = function(x, ..., n = 1) {standardGeneric('BayesTraits')})
 
 
 ##' @param x \code{PP}/\code{PPTreeIdx} object.

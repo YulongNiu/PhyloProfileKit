@@ -27,7 +27,7 @@ NULL
 ##'
 setMethod(f = 'Dollo',
           signature = c(x = 'PPTreeIdx'),
-          definition = function(x, ..., n = 1) {
+          definition = function(x, ..., n) {
 
             dollo_internal <- function(eachArg, edgeMat, tipPath, ...) {
               return(DolloDist(edgeMat = edgeMat,
