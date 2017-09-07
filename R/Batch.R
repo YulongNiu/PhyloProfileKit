@@ -32,6 +32,11 @@ setMethod(f = 'Batch',
               ppiNum <- nrow(idx)
               batchVec <- numeric(ppiNum)
               for (i in 1:ppiNum) {
+
+                if (i %% 1000 == 0) {
+                  print(paste0('It is running ', i))
+                } else {}
+
                 f <- p[idx[i, 1], ]
                 t <- p[idx[i, 2], ]
                 batchVec[i] <- FUN(eachArg = list(f = f, t = t, uniID = i), ...)
