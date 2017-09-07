@@ -6,7 +6,7 @@
 \alias{BayesTraits,PPTreeIdx-method}
 \title{Batch process of BayesTraits}
 \usage{
-BayesTraits(x, ..., n)
+BayesTraits(x, ..., n = 1)
 
 \S4method{BayesTraits}{PPTreeIdx}(x, ..., n = 1)
 }

@@ -7,7 +7,7 @@
 \alias{SimDist,PPTreeIdx-method}
 \title{Batch process of similarity and distance}
 \usage{
-SimDist(x, method, ..., n)
+SimDist(x, method, ..., n = 1)
 
 \S4method{SimDist}{PPIdx}(x, method, ..., n = 1)
 

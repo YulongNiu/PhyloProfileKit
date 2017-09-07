@@ -19,9 +19,9 @@ setGeneric(name = 'PPData<-',
 ##' @param p A \code{PP} object.
 ##' @param x A matrix with two columns or a numeric vector. Proteins not in \code{p} (profile) are removed. The numeric vector indicates the indices of proteins.
 ##' \itemize{
-##'   \item a character matrix: Each row containing the protein names is a linkage.
-##'   \item a numeric matrix or big.matrix: Each row containing the protein indices is a linkage.
-##'   \item a numeric vector: Each element is the index of a interested protein.
+##'   \item a \code{character matrix}: Each row containing the protein names is a linkage.
+##'   \item a \code{numeric matrix} or \code{big.matrix}: Each row containing the protein indices is a linkage.
+##'   \item a \code{numeric vector}: Each element is the index of a interested protein.
 ##' }
 ##' @param ... Additional parameters if \code{x} is a numeric vector.
 ##' \itemize{
@@ -82,7 +82,16 @@ setGeneric(name = 'Norm',
 ##' @export
 ##' 
 setGeneric(name = 'Batch',
-           def = function(x, FUN, ..., n){standardGeneric('Batch')})
+           def = function(x, FUN, ..., n = 1){standardGeneric('Batch')})
+
+
+##' @param p A \code{numeric matrix} or a \code{big.matrix} object.
+##' @param idx A \code{numeric matrix} object.
+##' @inheritParams Batch
+##' @rdname BatchCore-methods
+##' @keywords internal
+setGeneric(name = 'BatchCore',
+           def = function(p, idx, FUN, ..., n){standardGeneric('BatchCore')})
 
 
 ##' @param x A \code{PPIdx}/\code{PPTreeIdx} object.
@@ -105,7 +114,7 @@ setGeneric(name = 'Batch',
 ##' @export
 ##' 
 setGeneric(name = 'SimDist',
-           def = function(x, method, ..., n){standardGeneric('SimDist')})
+           def = function(x, method, ..., n = 1){standardGeneric('SimDist')})
 
 
 ##' @param x A \code{PP} object.
@@ -125,7 +134,7 @@ setGeneric(name = 'ChooseSimDistFun',
 ##' @export
 ##' 
 setGeneric(name = 'Dollo',
-           def = function(x, ..., n){standardGeneric('Dollo')})
+           def = function(x, ..., n = 1){standardGeneric('Dollo')})
 
 
 ##' @param ... Additional parameters
@@ -143,7 +152,7 @@ setGeneric(name = 'Dollo',
 ##' @export
 ##' 
 setGeneric(name = 'BayesTraits',
-           def = function(x, ..., n) {standardGeneric('BayesTraits')})
+           def = function(x, ..., n = 1) {standardGeneric('BayesTraits')})
 
 
 ##' @param x \code{PP}/\code{PPTreeIdx} object.

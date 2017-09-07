@@ -6,7 +6,7 @@
 \alias{Batch,PPIdx-method}
 \title{Parallel framework}
 \usage{
-Batch(x, FUN, ..., n)
+Batch(x, FUN, ..., n = 1)
 
 \S4method{Batch}{PPIdx}(x, FUN, ..., n = 1)
 }
@@ -34,6 +34,7 @@ require('magrittr')
 ## Person correlation coefficient
 ppBinIdx <- sample(0:1, 10 * 20, replace = TRUE) \%>\% matrix(ncol = 20) \%>\% PP \%>\% PPIdx(1:3, 1:3)
 testfun <- function(eachArg, ...) {sum(eachArg$f * eachArg$t)}
+Batch(ppBinIdx, testfun)
 Batch(ppBinIdx, testfun, n = 2)
 }
 \seealso{

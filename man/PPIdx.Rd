@@ -11,9 +11,9 @@ PPIdx(p, x, ...)
 
 \item{x}{A matrix with two columns or a numeric vector. Proteins not in \code{p} (profile) are removed. The numeric vector indicates the indices of proteins.
 \itemize{
-  \item a character matrix: Each row containing the protein names is a linkage.
-  \item a numeric matrix or big.matrix: Each row containing the protein indices is a linkage.
-  \item a numeric vector: Each element is the index of a interested protein.
+  \item a \code{character matrix}: Each row containing the protein names is a linkage.
+  \item a \code{numeric matrix} or \code{big.matrix}: Each row containing the protein indices is a linkage.
+  \item a \code{numeric vector}: Each element is the index of a interested protein.
 }}
 
 \item{...}{Additional parameters if \code{x} is a numeric vector.

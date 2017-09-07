@@ -6,7 +6,7 @@
 \alias{Dollo,PPTreeIdx-method}
 \title{Batch process of Dollo's parsimony distance}
 \usage{
-Dollo(x, ..., n)
+Dollo(x, ..., n = 1)
 
 \S4method{Dollo}{PPTreeIdx}(x, ..., n = 1)
 }
