@@ -21,7 +21,7 @@
 \S4method{show}{PPTreeIdx}(object)
 }
 \arguments{
-\item{object}{A \code{PP}/\code{PPIdx}/\code{PPResult}/\code{PPTreeIdx} object.}
+\item{object}{A \code{PP}/\code{PPIdx}/\code{PPTree}/\code{PPTreeIdx}/code{PPResult} object.}
 }
 \value{
 Show messages.

@@ -5,7 +5,7 @@ NULL
 ##' Show method for \code{PP} and \code{PPIdx} objects
 ##'
 ##' @title Show methods
-##' @param object A \code{PP}/\code{PPIdx}/\code{PPResult}/\code{PPTreeIdx} object.
+##' @param object A \code{PP}/\code{PPIdx}/\code{PPTree}/\code{PPTreeIdx}/code{PPResult} object.
 ##' @return Show messages.
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom utils str
