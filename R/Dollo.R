@@ -80,6 +80,7 @@
 ## )
 
 
+## library('PhyloProfile')
 ## library('parallel')
 ## library('doParallel')
 ## library('magrittr')
@@ -95,4 +96,4 @@
 ## Batch(ppBinIdx, testfun, n = 1)
 
 ## tmp1 <- SimDist(ppBinIdx, method = 'SimCor')
-
+## tmp1[tmp1 > 0]

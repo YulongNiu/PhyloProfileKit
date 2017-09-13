@@ -92,3 +92,18 @@ setMethod('Compare',
             callGeneric(e1@.Data, e2) %>% return
           })
 
+
+
+##' @importFrom methods validObject
+##' @importFrom magrittr %>% %T>%
+##' @rdname select-methods
+##' @exportMethod [
+##' 
+setMethod(f = '[',
+          signature = c(x = 'PPResult', j = 'missing'),
+          definition = function(x, i, j, ..., drop = FALSE) {
+            x@.Data <- x@.Data[i]
+            x@idx <- x@idx[i, , drop = FALSE]
+            x %T>% validObject %>% return
+          })
+
