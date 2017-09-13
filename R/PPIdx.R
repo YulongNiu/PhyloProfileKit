@@ -213,3 +213,16 @@ setMethod(f = 'IdxData<-',
             x %T>% validObject %>% return
           })
 
+
+##' @inheritParams IdxData
+##' @importFrom methods validObject
+##' @importFrom magrittr %>% %T>%
+##' @rdname IdxData-methods
+##' @exportMethod IdxData<-
+##'
+setMethod(f = 'IdxData<-',
+          signature = c(x = 'PPIdx', value = 'big.matrix'),
+          definition = function(x, ..., value) {
+            x@idx <- value
+            x %T>% validObject %>% return
+          })
