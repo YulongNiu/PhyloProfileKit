@@ -72,3 +72,38 @@ tail.PPResult <- function(x, n = 6L, ...) {
                method = x@method)
   tailx %>% as.data.frame %>% return
 }
+
+
+##' Compare \code{PPResult} objects with a numeric value.
+##'
+##' @title Compare methods
+##' @param e1 A \code{PPResult} object.
+##' @param e2 A numeric value.
+##' @return A \code{logic vector}
+##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @importFrom magrittr %>%
+##' @importFrom methods Compare callGeneric
+##' @rdname Compare-methods
+##' @exportMethod Compare
+##
+setMethod('Compare',
+          signature = c(e1 = 'PPResult', e2 = 'numeric'),
+          function(e1, e2) {
+            callGeneric(e1@.Data, e2) %>% return
+          })
+
+
+
+##' @importFrom methods validObject
+##' @importFrom magrittr %>% %T>%
+##' @rdname select-methods
+##' @exportMethod [
+##' 
+setMethod(f = '[',
+          signature = c(x = 'PPResult', j = 'missing'),
+          definition = function(x, i, j, ..., drop = FALSE) {
+            x@.Data <- x@.Data[i]
+            x@idx <- x@idx[i, , drop = FALSE]
+            x %T>% validObject %>% return
+          })
+

@@ -6,6 +6,7 @@
 \alias{IdxData<-}
 \alias{IdxData,PPIdx-method}
 \alias{IdxData<-,PPIdx,matrix-method}
+\alias{IdxData<-,PPIdx,big.matrix-method}
 \title{Select and replace \code{PPIdx}/\code{PPTreeIdx} data}
 \usage{
 IdxData(x, ...)
@@ -15,6 +16,8 @@ IdxData(x, ...) <- value
 \S4method{IdxData}{PPIdx}(x, ...)
 
 \S4method{IdxData}{PPIdx,matrix}(x, ...) <- value
+
+\S4method{IdxData}{PPIdx,big.matrix}(x, ...) <- value
 }
 \arguments{
 \item{x}{A \code{PPIdx}/\code{PPTreeIdx} object.}

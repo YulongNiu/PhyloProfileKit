@@ -5,7 +5,7 @@ NULL
 ##' Show method for \code{PP} and \code{PPIdx} objects
 ##'
 ##' @title Show methods
-##' @param object A \code{PP}/\code{PPIdx}/\code{PPResult}/\code{PPTreeIdx} object.
+##' @param object A \code{PP}/\code{PPIdx}/\code{PPTree}/\code{PPTreeIdx}/code{PPResult} object.
 ##' @return Show messages.
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom utils str
@@ -152,17 +152,17 @@ setMethod(f = 'PPData<-',
 
 
 
-##' Select or replace parts of a \code{PP} object
+##' Select or replace parts of a \code{PP}/\code{PPResult} object
 ##'
-##' \code{x[i, j, ..., drop]}: Select parts of a \code{PP} object.
+##' \code{x[i, j, ..., drop]}: Select parts of a \code{PP}/\code{PPResult} object.
 ##'
 ##' \code{x[i, j, ..., drop] <- value}: Replace parts of a \code{PP} object.
 ##'
-##' @title Select or replace PP objects
-##' @param x A \code{PP} object.
+##' @title Select or replace \code{PP}/\code{PPResult} objects
+##' @param x A \code{PP}/\code{PPResult} object.
 ##' @param i,j,... Indices.
 ##' @param drop Whether the result is coerced to the lowest possible dimension. Desalt set is \code{FALSE}.
-##' @return A \code{PP} object.
+##' @return A \code{PP}/\code{PPResult} object.
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom methods callNextMethod
 ##' @rdname select-methods
@@ -182,7 +182,7 @@ setMethod(f = '[',
 ##' @exportMethod [<-
 ##'
 setMethod(f = '[<-',
-          signature = c(x = 'PP'),
+          signature = c(x = 'PP', value = 'numeric'),
           definition = function(x, i, j, ..., value) {
             PPData(x) <- callNextMethod()
             return(x)
