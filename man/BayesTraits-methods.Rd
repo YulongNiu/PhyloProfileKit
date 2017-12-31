@@ -33,7 +33,7 @@ A \code{PPResult} object.
 BayesTraits
 }
 \details{
-A wrapper of the BayesTraits test of paired profiles. Please download and install \href{http://www.evolution.reading.ac.uk/BayesTraits.html}{BayesTraits}.
+A wrapper of the BayesTraits test of paired profiles. Please download and install \href{http://www.evolution.reading.ac.uk/BayesTraits.html}{BayesTraits (version 3.0.1)} before.
 }
 \examples{
 require('magrittr')

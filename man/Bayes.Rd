@@ -5,8 +5,8 @@
 \alias{BayesTraitsTest}
 \title{Use BayesTraits to test the functional linkages.}
 \usage{
-BayesTraitsMode(BayesTraitsPath, treeFilePath, binFilePath, method = "ML",
-  priorAll = "exp 10", iterNum = 1010000, mode = "Indep", uniID = "1")
+BayesTraitsMode(BayesTraitsPath, treeFilePath, binFilePath, method = "MCMC",
+  priorAll = "exp 10", Stones = "100 1000", mode = "Indep", uniID = "1")
 
 BayesTraitsTest(...)
 }
@@ -17,20 +17,20 @@ BayesTraitsTest(...)
 
 \item{binFilePath}{Full path of phylogenetic profiles, and only contains two genes. The speperate character by tab. If the paired genes are all "1" or all "0", then 0 will be returned.}
 
-\item{method}{Either 'MCMC' or 'ML' (Maximum Likelihood) method.}
+\item{method}{Either "MCMC" (Markov chain Monte Carlo) or "ML" (maximum likelihood) method.}
 
 \item{priorAll}{Prior distribution.}
 
-\item{iterNum}{Iteration number only for 'MCMC' method, the default value is 1010000.}
+\item{Stones}{Stone sampler only for "MCMC" method, the default value is "100 1000" meaning 100 stones and 1000 iterations per stone to estimate the marginal likelihood.}
 
-\item{mode}{Either 'Indep' for independent and 'Dep' for dependent.}
+\item{mode}{Either "Indep" for independent and "Dep" for dependent.}
 
 \item{uniID}{Unique ID for output file, and it is designed for parallel programming.}
 
 \item{...}{Inherit parameters from the "BayesTraitsMode()" in this package.}
 }
 \value{
-\code{BayesTraitsMode()}: Harmonic mean.
+\code{BayesTraitsMode()}: Log marginal likelihood for the method \code{MCMC} and log likelihood for the method \code{ML}.
 
 \code{BayesTraitsTest()}: A list.
 }

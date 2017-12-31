@@ -4,7 +4,7 @@ NULL
 
 ##' BayesTraits
 ##'
-##' A wrapper of the BayesTraits test of paired profiles. Please download and install \href{http://www.evolution.reading.ac.uk/BayesTraits.html}{BayesTraits}.
+##' A wrapper of the BayesTraits test of paired profiles. Please download and install \href{http://www.evolution.reading.ac.uk/BayesTraits.html}{BayesTraits (version 3.0.1)} before.
 ##'
 ##' @inheritParams BayesTraits
 ##' @title Batch process of BayesTraits
@@ -43,7 +43,7 @@ setMethod(f = 'BayesTraits',
               genepair <- cbind(eachArg$f, eachArg$t)
 
               ## write local file
-              filename <- paste('genepair', eachArg$uniID, '.txt', sep = '')
+              filename <- paste('genepair_', eachArg$uniID, '.txt', sep = '')
               write.table(genepair, col.names = FALSE, quote = FALSE, sep = '\t', file = filename)
 
               logLR <- BayesTraitsTest(treeFilePath = treeFilePath,
@@ -92,24 +92,25 @@ setMethod(f = 'BayesTraits',
 ##' @param binFilePath Full path of phylogenetic profiles, and only contains two genes. The speperate character by tab. If the paired genes are all "1" or all "0", then 0 will be returned.
 ##' @param uniID Unique ID for output file, and it is designed for parallel programming.
 ##' @param priorAll Prior distribution.
-##' @param iterNum Iteration number only for 'MCMC' method, the default value is 1010000.
-##' @param method Either 'MCMC' (Markov chain Monte Carlo) or 'ML' (maximum likelihood) method.
-##' @param mode Either 'Indep' for independent and 'Dep' for dependent.
+##' @param Stones Stone sampler only for "MCMC" method, the default value is "100 1000" meaning 100 stones and 1000 iterations per stone to estimate the marginal likelihood.
+##' @param method Either "MCMC" (Markov chain Monte Carlo) or "ML" (maximum likelihood) method.
+##' @param mode Either "Indep" for independent and "Dep" for dependent.
 ##' @return
-##' \code{BayesTraitsMode()}: Harmonic mean.
+##' \code{BayesTraitsMode()}: Log marginal likelihood for the method \code{MCMC} and log likelihood for the method \code{ML}.
 ##'
 ##' \code{BayesTraitsTest()}: A list.
 ##' @author Yulong Niu \email{niuylscu@@gmail.com}
 ##' @importFrom utils read.table write.table
+##' @importFrom magrittr %>%
 ##' @rdname Bayes
 ##' @keywords internal
 ##'
 BayesTraitsMode <- function(BayesTraitsPath,
                             treeFilePath,
                             binFilePath,
-                            method = 'ML',
+                            method = 'MCMC',
                             priorAll = 'exp 10',
-                            iterNum = 1010000,
+                            Stones = '100 1000',
                             mode = 'Indep',
                             uniID = '1') {
 
@@ -133,32 +134,32 @@ BayesTraitsMode <- function(BayesTraitsPath,
     ## simulation type is 'MCMC'
     simuType <- '2'
     priorType <- paste('PriorAll', priorAll)
-    iterNum <- paste('Iterations', iterNum)
-    orderMat <- matrix(c(modeType, simuType, priorType, iterNum, 'Run'), ncol = 1)
+    Stones <- paste('Stones', Stones)
+    orderMat <- matrix(c(modeType, simuType, priorType, Stones, 'Run'), ncol = 1)
   }
   else if (method == 'ML') {
     simuType <- '1'
     orderMat <- matrix(c(modeType, simuType, 'Run'), ncol = 1)
   }
-  orderFileName <- paste('orderFile_', uniID, '.txt', sep = '')
+  orderFileName <- paste0('orderFile_', uniID, '.txt')
   write.table(orderMat, row.names = FALSE, col.names = FALSE, quote = FALSE, file = orderFileName)
 
   ## run BayesTraits
-  runFileName <- paste('run_', uniID, '.txt', sep = '')
+  runFileName <- paste0('run_', uniID, '.txt')
   system(paste(BayesTraitsPath, treeFilePath, binFilePath, '<', orderFileName, '>', runFileName))
 
-  ## get harmonic mean
-  resStr <- readLines(runFileName)
-  dataVec <- unlist(strsplit(resStr[length(resStr) - 1], split = '\t', fixed = TRUE))
+  ## get log likelihood or log Bayes factor
   if (method == 'MCMC') {
-    harMean <- as.numeric(dataVec[3])
+    resFile <- binFilePath %>% paste0('.Stones.txt')
   }
   else if (method == 'ML') {
-    harMean <- as.numeric(dataVec[2])
+    resFile <- binFilePath %>% paste0('.Log.txt')
   }
+  dataVec <- resFile %>% readLines %>% `[`({length(.)}) %>% strsplit(split = '\t', fixed = TRUE) %>% unlist
+  harMean <- dataVec %>% `[`(2) %>% as.numeric
 
   ## rm file
-  interFileName <- dir(pattern = paste(binFilePath, '.log*', sep = ''))
+  interFileName <- dir(path = dirname(BayesTraitsPath), pattern = paste0(basename(binFilePath), '.*.txt'), full.names = TRUE)
   moveFileName <- c(orderFileName, runFileName, interFileName)
   file.remove(moveFileName)
 
