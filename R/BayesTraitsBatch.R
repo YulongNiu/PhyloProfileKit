@@ -93,7 +93,7 @@ setMethod(f = 'BayesTraits',
 ##' @param uniID Unique ID for output file, and it is designed for parallel programming.
 ##' @param priorAll Prior distribution.
 ##' @param iterNum Iteration number only for 'MCMC' method, the default value is 1010000.
-##' @param method Either 'MCMC' or 'ML' (Maximum Likelihood) method.
+##' @param method Either 'MCMC' (Markov chain Monte Carlo) or 'ML' (maximum likelihood) method.
 ##' @param mode Either 'Indep' for independent and 'Dep' for dependent.
 ##' @return
 ##' \code{BayesTraitsMode()}: Harmonic mean.
