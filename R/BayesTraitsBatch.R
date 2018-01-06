@@ -159,7 +159,7 @@ BayesTraitsMode <- function(BayesTraitsPath,
   harMean <- dataVec %>% `[`(2) %>% as.numeric
 
   ## rm file
-  interFileName <- dir(path = dirname(BayesTraitsPath), pattern = paste0(basename(binFilePath), '.*.txt'), full.names = TRUE)
+  interFileName <- dir(path = dirname(binFilePath), pattern = paste0(basename(binFilePath), '.*.txt'), full.names = TRUE)
   moveFileName <- c(orderFileName, runFileName, interFileName)
   file.remove(moveFileName)
 
