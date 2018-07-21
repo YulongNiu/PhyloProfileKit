@@ -5,7 +5,7 @@
 ##' @title Blank theme
 ##' @param ...  Parameters passed to \code{theme()} in the ggplot2 package.
 ##' @return ggplot2 object
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @importFrom ggplot2 element_blank theme_bw %+replace% theme
 ##' @importFrom grid unit
 ##' @seealso \code{\link[ggplot2]{theme}}

@@ -1,4 +1,4 @@
-#' @useDynLib PhyloProfile
+#' @useDynLib PhyloProfileKit
 #' @importFrom Rcpp sourceCpp
 NULL
 #> NULL 

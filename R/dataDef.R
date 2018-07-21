@@ -10,7 +10,7 @@
 ##' @name fatp1
 ##' @format A list
 ##' @references Unpublished data from Yulong Niu
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##'
 NULL
 
@@ -30,6 +30,6 @@ NULL
 ##' @name fatp
 ##' @format A list
 ##' @references Unpublished data from Yulong Niu
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##'
 NULL

@@ -17,5 +17,5 @@ This class represents the data structure of phylogenetic profile with phylogenet
 The raw definition of \code{\link[ape]{phylo}}.
 }
 \author{
-Yulong Niu \email{niuylscu@gmail.com}
+Yulong Niu \email{yulong.niu@hotmail.com}
 }

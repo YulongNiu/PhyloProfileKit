@@ -16,7 +16,7 @@ NULL
 ##' testfun <- function(eachArg, ...) {sum(eachArg$f * eachArg$t)}
 ##' Batch(ppBinIdx, testfun)
 ##' Batch(ppBinIdx, testfun, n = 2)
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @rdname Batch-methods
 ##' @seealso Batch process of similarity/distance \code{\link{SimDist}}.
 ##' @exportMethod Batch
@@ -59,7 +59,7 @@ setMethod(f = 'Batch',
 ##' @title Parallel core
 ##' @inheritParams BatchCore
 ##' @return A \code{numeric matrix} object.
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @importFrom doParallel registerDoParallel stopImplicitCluster
 ##' @importFrom foreach foreach %dopar%
 ##' @importFrom iterators iter

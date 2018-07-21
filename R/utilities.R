@@ -11,7 +11,7 @@
 ##' \code{isBinMat_internal()}: Logic.
 ##'
 ##' \code{valiMatNames_internal()}: \code{TRUE} or a warning message.
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @rdname utilities
 ##' @importFrom magrittr %>%
 ##' @keywords internal
@@ -91,7 +91,7 @@ validTreeMat_internal <- function(m, t) {
 ##'
 ##' \code{comb2_internal()}/\code{combWhole_internal()}/\code{combSelf_internal()}: Matrix with 2 columns
 ##'
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @rdname comb
 ##' @keywords internal
 ##' 

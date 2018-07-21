@@ -25,7 +25,7 @@ setMethod(f = 'show',
 
 
 ##' @method as.data.frame PPResult
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @export
 ##'
 as.data.frame.PPResult <- function(x, ...) {
@@ -43,7 +43,7 @@ as.data.frame.PPResult <- function(x, ...) {
 ##' @method head PPResult
 ##' @importFrom magrittr %>%
 ##' @importFrom bigmemory head
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @export
 ##'
 head.PPResult <- function(x, n = 6L, ...) {
@@ -60,7 +60,7 @@ head.PPResult <- function(x, n = 6L, ...) {
 ##' @method tail PPResult
 ##' @importFrom magrittr %>%
 ##' @importFrom bigmemory tail
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @export
 ##'
 tail.PPResult <- function(x, n = 6L, ...) {
@@ -80,7 +80,7 @@ tail.PPResult <- function(x, n = 6L, ...) {
 ##' @param e1 A \code{PPResult} object.
 ##' @param e2 A numeric value.
 ##' @return A \code{logic vector}
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @importFrom magrittr %>%
 ##' @importFrom methods Compare callGeneric
 ##' @rdname Compare-methods

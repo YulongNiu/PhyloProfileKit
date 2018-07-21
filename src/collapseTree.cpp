@@ -16,7 +16,7 @@ using namespace arma;
 //' @inheritParams SimCor
 //' @inheritParams InferEdge
 //' @references \href{http://rsif.royalsocietypublishing.org/content/5/19/151}{collapse tree description}
-//' @author Yulong Niu \email{niuylscu@@gmail.com}
+//' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 //' @keywords internal
 // [[Rcpp::export]]
 arma::umat CollapseTree(arma::umat edgeMat,
@@ -90,7 +90,7 @@ arma::umat CollapseTree(arma::umat edgeMat,
 //' @title Compare two rows Test
 //' @return logic value.
 //' @param m A numeric matrix with two rows.
-//' @author Yulong Niu \email{niuylscu@@gmail.com}
+//' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 //' @keywords internal
 // [[Rcpp::export]]
 bool isTwoRowsEqual(arma::umat m) {

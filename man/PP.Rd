@@ -31,5 +31,5 @@ ppContinuous <- matrix(rnorm(10 * 20),
                                        paste0('spe', 1:20))) \%>\% PP
 }
 \author{
-Yulong Niu \email{niuylscu@gmail.com}
+Yulong Niu \email{yulong.niu@hotmail.com}
 }

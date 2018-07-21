@@ -53,7 +53,7 @@ setMethod(f = 'show',
 ##'
 ##' ## with self linkages
 ##' PPTreeIdx(ppTree, 1:3, 1:3, self = TRUE)
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @importFrom magrittr %>% %<>%
 ##' @seealso PPIdx
 ##' @export

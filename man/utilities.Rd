@@ -37,6 +37,6 @@ Additional utilities
 \code{valiMatNames_internal()}: Validate a numeric matrix with row names and column names.
 }
 \author{
-Yulong Niu \email{niuylscu@gmail.com}
+Yulong Niu \email{yulong.niu@hotmail.com}
 }
 \keyword{internal}

@@ -55,7 +55,7 @@ data(fatp)
 corMat <- GetPhyloCorMat(fatp$atpPhylo)
 }
 \author{
-Yulong Niu \email{niuylscu@gmail.com}
+Yulong Niu \email{yulong.niu@hotmail.com}
 
-Yulong Niu \email{niuylscu@gmail.com}
+Yulong Niu \email{yulong.niu@hotmail.com}
 }

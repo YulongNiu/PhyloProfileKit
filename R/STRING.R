@@ -21,7 +21,7 @@ NULL
 ##' ## all human proteins
 ##' PPRCSTRING(9606, idx = "all", n = 4)
 ##' }
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @import STRINGdb
 ##' @importFrom doParallel registerDoParallel stopImplicitCluster
 ##' @importFrom foreach foreach %dopar%

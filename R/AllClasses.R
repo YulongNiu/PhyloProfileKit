@@ -4,7 +4,7 @@ NULL
 ##' This class represents the raw data structure of phylogenetic profile.
 ##'
 ##' @slot .Data An integer matrix or a numeric matrix, of which the rows are genes/proteins and columns are species. It validates the rownames and colnames of the profile matrix.
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @exportClass PP
 ##' 
 setClass(Class = 'PP',
@@ -23,7 +23,7 @@ setOldClass('phylo')
 ##' This class represents the data structure of phylogenetic profile with phylogenetic tree.
 ##'
 ##' @slot tree A \code{phylo} object indicating the phylogenetic tree from the \code{ape} package.
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @seealso The raw definition of \code{\link[ape]{phylo}}.
 ##' @exportClass PPTree
 ##' 
@@ -50,7 +50,7 @@ setClassUnion(name = 'PPMat',
 ##' This class represents the data structure of phylogenetic profile with linkage indices.
 ##'
 ##' @slot idx An integer matrix with two columns.
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @exportClass PPIdx
 ##' 
 setClass(Class = 'PPIdx',
@@ -61,7 +61,7 @@ setClass(Class = 'PPIdx',
 ##' This class represents the data structure of the phylogenetic profile with linkage indices and a phylogenetic tree.
 ##'
 ##' @slot idx An integer matrix with two columns.
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @seealso The raw definition of \code{\link[ape]{phylo}}.
 ##' @exportClass PPTreeIdx
 ##' 
@@ -74,7 +74,7 @@ setClass(Class = 'PPTreeIdx',
 ##' @slot idx An integer matrix with two columns. It validates the rownames and colnames of the profile.
 ##' @slot pnames A character vector storing rownames (protein names) of the profile.
 ##' @slot method A character string indicating the profiling method.
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @exportClass PPResult
 ##' 
 setClass(Class = 'PPResult',
@@ -89,7 +89,7 @@ setClass(Class = 'PPResult',
 ##' @slot right right plot.
 ##' @slot top top plot.
 ##' @slot bottom bottom plot.
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @exportClass gmat
 ##' 
 setClass(Class = 'gmat',

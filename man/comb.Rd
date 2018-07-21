@@ -35,6 +35,6 @@ Combination functions
 \code{combSelf_internal()}: Self pairs.
 }
 \author{
-Yulong Niu \email{niuylscu@gmail.com}
+Yulong Niu \email{yulong.niu@hotmail.com}
 }
 \keyword{internal}

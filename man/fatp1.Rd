@@ -17,5 +17,5 @@ A list containing three objects:
 Unpublished data from Yulong Niu
 }
 \author{
-Yulong Niu \email{niuylscu@gmail.com}
+Yulong Niu \email{yulong.niu@hotmail.com}
 }

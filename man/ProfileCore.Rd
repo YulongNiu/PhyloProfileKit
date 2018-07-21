@@ -34,6 +34,6 @@ The core plot of phylogenetic profile
 Plot of phylogenetic profile with protein names, a protein colour bar (optional), and a species colour bar (optional).
 }
 \author{
-Yulong Niu \email{niuylscu@gmail.com}
+Yulong Niu \email{yulong.niu@hotmail.com}
 }
 \keyword{internal}

@@ -26,7 +26,7 @@ using namespace arma;
 //'
 //' SVDPhy(): A L^2 normalized unitary matrix.
 //'
-//' @author Yulong Niu \email{niuylscu@@gmail.com}
+//' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 //' @inheritParams SVDPhy
 //' @references \href{https://bitbucket.org/andrea/svd-phy}{SVD-Phy package}
 //' @references \href{http://bioinformatics.oxfordjournals.org/content/suppl/2015/11/25/btv696.DC1/SVD-Phy-supplementary-material.docx}{SVD description}

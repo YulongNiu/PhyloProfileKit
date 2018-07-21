@@ -22,5 +22,5 @@ A totally blank gpplot2 theme expect for the legend
 \code{\link[ggplot2]{theme}}
 }
 \author{
-Yulong Niu \email{niuylscu@gmail.com}
+Yulong Niu \email{yulong.niu@hotmail.com}
 }

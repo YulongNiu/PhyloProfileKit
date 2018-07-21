@@ -3,7 +3,7 @@
 ##' @title Extract segments
 ##' @param d Data structure from tree from the ggtree package.
 ##' @return A data frame.
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @keywords internal
 ##' 
 ExtractSeg <- function(d) {
@@ -60,7 +60,7 @@ ExtractSeg <- function(d) {
 ##'
 ##' \code{OrderedTip()}: A numeric vector indicating the ordered tips indices in the tree plot.
 ##'
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @rdname tree-uti
 ##' @keywords internal
 ##' 

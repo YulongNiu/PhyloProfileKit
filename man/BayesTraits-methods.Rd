@@ -39,8 +39,8 @@ A wrapper of the BayesTraits test of paired profiles. Please download and instal
 require('magrittr')
 require('ape')
 
-tree <- system.file('extdata', 'bioinfoTree.nex', package = "PhyloProfile") \%>\% read.nexus
-ppPath <- system.file('extdata', 'bioinfoProfile.csv', package = "PhyloProfile")
+tree <- system.file('extdata', 'bioinfoTree.nex', package = "PhyloProfileKit") \%>\% read.nexus
+ppPath <- system.file('extdata', 'bioinfoProfile.csv', package = "PhyloProfileKit")
 
 sceP <- ppPath \%>\% read.csv(row.names = 1) \%>\% as.matrix \%>\% PP
 scePTI <- sceP \%>\% PPTree(tree) \%>\% PPTreeIdx(1:6, 1:6)
@@ -62,5 +62,5 @@ BayesTraits(scePTI, BayesTraitsPath = BTPath, n = 2)
 \url{https://www.ncbi.nlm.nih.gov/pubmed/?term=16103904}
 }
 \author{
-Yulong Niu \email{niuylscu@gmail.com}
+Yulong Niu \email{yulong.niu@hotmail.com}
 }

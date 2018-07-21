@@ -1,6 +1,6 @@
 library(testthat)
-library(PhyloProfile)
+library(PhyloProfileKit)
 
-test_check("PhyloProfile")
+test_check("PhyloProfileKit")
 
 

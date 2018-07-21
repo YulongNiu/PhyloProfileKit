@@ -17,7 +17,7 @@
 ##' ## a continuous profile
 ##' ppC <- rnorm(5 * 20) %>% matrix(nrow = 5)
 ##' pp_profile(ppC) + scale_fill_gradient2()
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @importFrom ggplot2 ggplot geom_tile labs scale_x_continuous scale_y_continuous scale_y_reverse aes_string
 ##' @seealso \code{\link[ggplot2]{geom_tile}}
 ##' @seealso \code{\link[ggplot2]{theme}}

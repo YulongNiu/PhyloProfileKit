@@ -8,7 +8,7 @@ NULL
 ##' @param y Not set ("missing").
 ##' @param ... Parameters passed to \code{grid.arrange()} in the gridExtra package.
 ##' @return A \code{gtable} object.
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @importFrom graphics plot
 ##' @importFrom gridExtra grid.arrange
 ##' @rdname plot-methods
@@ -35,7 +35,7 @@ setMethod(f = 'plot',
 ##' @title Construct the layout matrix
 ##' @param x A \code{gmat} object.
 ##' @return A numeric matrix
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @rdname lay
 ##' @keywords internal
 ##' 

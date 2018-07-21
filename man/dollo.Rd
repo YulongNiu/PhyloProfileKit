@@ -59,6 +59,6 @@ Algorithm:
 \url{https://www.ncbi.nlm.nih.gov/pubmed/?term=17535793}
 }
 \author{
-Yulong Niu \email{niuylscu@gmail.com}
+Yulong Niu \email{yulong.niu@hotmail.com}
 }
 \keyword{internal}

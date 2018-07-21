@@ -22,5 +22,5 @@ require('magrittr')
 qplot(1,1) \%>\% ascore
 }
 \author{
-Yulong Niu \email{niuylscu@gmail.com}
+Yulong Niu \email{yulong.niu@hotmail.com}
 }

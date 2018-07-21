@@ -26,7 +26,7 @@ Plot phylogenetic trees and dendrograms
 require('ggplot2')
 require('ape')
 
-treePath <- system.file('extdata', 'bioinfoTree.nex', package = "PhyloProfile")
+treePath <- system.file('extdata', 'bioinfoTree.nex', package = "PhyloProfileKit")
 sceTree <- read.nexus(treePath)
 
 pp_tree(sceTree)
@@ -37,5 +37,5 @@ pp_tree(sceTree) \%@+\% pp_text(sceTree$tip.label)
 \code{\link[ggplot2]{geom_segment}}
 }
 \author{
-Yulong Niu \email{niuylscu@gmail.com}
+Yulong Niu \email{yulong.niu@hotmail.com}
 }

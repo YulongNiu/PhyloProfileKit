@@ -5,7 +5,7 @@
 ##' @title pp plot empty
 ##' @param ... Parameters passed to \code{geom_point()} in the ggplot2 package.
 ##' @return A \code{gg} class object
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @importFrom ggplot2 ggplot geom_point labs aes_string scale_y_continuous scale_x_continuous
 ##' @examples
 ##' require(ggplot2)

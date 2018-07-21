@@ -41,5 +41,5 @@ Batch(ppBinIdx, testfun, n = 2)
 Batch process of similarity/distance \code{\link{SimDist}}.
 }
 \author{
-Yulong Niu \email{niuylscu@gmail.com}
+Yulong Niu \email{yulong.niu@hotmail.com}
 }

@@ -56,6 +56,6 @@ Roles of \code{phylo} class:
 }
 }
 \author{
-Yulong Niu \email{niuylscu@gmail.com}
+Yulong Niu \email{yulong.niu@hotmail.com}
 }
 \keyword{internal}

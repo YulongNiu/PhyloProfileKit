@@ -14,5 +14,5 @@ This class represents the data structure of phylogenetic profile with linkage in
 }}
 
 \author{
-Yulong Niu \email{niuylscu@gmail.com}
+Yulong Niu \email{yulong.niu@hotmail.com}
 }

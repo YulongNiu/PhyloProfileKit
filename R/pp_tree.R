@@ -11,13 +11,13 @@
 ##' require('ggplot2')
 ##' require('ape')
 ##'
-##' treePath <- system.file('extdata', 'bioinfoTree.nex', package = "PhyloProfile")
+##' treePath <- system.file('extdata', 'bioinfoTree.nex', package = "PhyloProfileKit")
 ##' sceTree <- read.nexus(treePath)
 ##'
 ##' pp_tree(sceTree)
 ##' pp_tree(sceTree) + coord_flip() + scale_x_reverse()
 ##' pp_tree(sceTree) %@+% pp_text(sceTree$tip.label)
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @importFrom ggplot2 ggplot geom_tile labs scale_x_continuous scale_y_continuous scale_y_reverse aes_string
 ##' @importFrom ape as.phylo Ntip
 ##' @seealso \code{\link[ggplot2]{geom_segment}}

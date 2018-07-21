@@ -28,6 +28,6 @@ The branches with same profile pattern are merged.
 \href{http://rsif.royalsocietypublishing.org/content/5/19/151}{collapse tree description}
 }
 \author{
-Yulong Niu \email{niuylscu@gmail.com}
+Yulong Niu \email{yulong.niu@hotmail.com}
 }
 \keyword{internal}

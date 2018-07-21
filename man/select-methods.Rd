@@ -34,5 +34,5 @@ Select or replace parts of a \code{PP}/\code{PPResult} object
 \code{x[i, j, ..., drop] <- value}: Replace parts of a \code{PP} object.
 }
 \author{
-Yulong Niu \email{niuylscu@gmail.com}
+Yulong Niu \email{yulong.niu@hotmail.com}
 }

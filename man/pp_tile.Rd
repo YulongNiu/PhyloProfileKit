@@ -35,5 +35,5 @@ pp_tile(rep(letters[1:3], 4)) + coord_flip()
 \code{\link[ggplot2]{theme}}
 }
 \author{
-Yulong Niu \email{niuylscu@gmail.com}
+Yulong Niu \email{yulong.niu@hotmail.com}
 }

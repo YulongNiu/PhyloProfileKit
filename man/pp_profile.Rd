@@ -40,5 +40,5 @@ pp_profile(ppC) + scale_fill_gradient2()
 \code{\link[ggplot2]{theme}}
 }
 \author{
-Yulong Niu \email{niuylscu@gmail.com}
+Yulong Niu \email{yulong.niu@hotmail.com}
 }
