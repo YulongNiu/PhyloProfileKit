@@ -3,7 +3,7 @@ NULL
 
 ##' This class represents the raw data structure of phylogenetic profile.
 ##'
-##' @slot .Data An integer matrix or a numeric matrix, of which the rows are genes/proteins and columns are species. It validates the rownames and colnames of the profile matrix.
+##' @slot .Data An \code{integer matrix} or a \code{double matrix}, of which the rows are genes/proteins and columns are species. It validates the rownames and colnames of the profile matrix.
 ##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @exportClass PP
 ##' 
@@ -11,7 +11,7 @@ setClass(Class = 'PP',
          contains = 'matrix',
          validity = function(object) {
            d <- object@.Data
-           validMatNames_internal(d, 'profile')
+           validMatNames_(d, 'profile')
          })
 
 ##~~~~~~~~~~~~~redefine phylo class from the "ape" package~~~~~
@@ -33,8 +33,8 @@ setClass(Class = 'PPTree',
          validity = function(object) {
            d <- object@.Data
            t <- object@tree
-           validMatNames_internal(d, 'profile')
-           validTreeMat_internal(d, t)
+           validMatNames_(d, 'profile')
+           validTreeMat_(d, t)
          })
 
 
@@ -49,7 +49,7 @@ setClassUnion(name = 'PPMat',
 
 ##' This class represents the data structure of phylogenetic profile with linkage indices.
 ##'
-##' @slot idx An integer matrix with two columns.
+##' @slot idx An \code{integer matrix} with two columns.
 ##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @exportClass PPIdx
 ##' 
