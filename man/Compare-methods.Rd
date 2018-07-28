@@ -19,5 +19,5 @@ A \code{logic vector}
 Compare \code{PPResult} objects with a numeric value.
 }
 \author{
-Yulong Niu \email{niuylscu@gmail.com}
+Yulong Niu \email{yulong.niu@hotmail.com}
 }

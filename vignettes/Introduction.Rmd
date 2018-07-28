@@ -1,5 +1,5 @@
 ---
-title: "PhyloProfile: a R package for phylogenetic profiling"
+title: "PhyloProfileKit: a tookit for phylogenetic profiling"
 author: "\\
 Yulong Niu \\
 
@@ -13,7 +13,7 @@ output:
   BiocStyle::pdf_document:
     toc: true
 vignette: >
-  %\VignetteIndexEntry{PhyloProfile: a R package for phylogenetic profiling}
+  %\VignetteIndexEntry{PhyloProfileKit: a R package for phylogenetic profiling}
   %\VignetteEngine{knitr::rmarkdown}
   %\usepackage[utf8]{inputenc}
 ---
@@ -26,7 +26,7 @@ knitr::opts_chunk$set(tidy = FALSE,
 ```
 
 ``` {r macro, echo=FALSE, results='hide', message=FALSE}
-phyloprofile <- function() {"*[PhyloProfile](https://github.com/YulongNiu/PhyloProfile)*"}
+phyloprofile <- function() {"*[PhyloProfileKit](https://github.com/YulongNiu/PhyloProfileKit)*"}
 Robject <- function(x){sub('%obj%', x, '<span style="background-color:#F0F0F0;color:#404040;font-family:\'Lucida Console\', monospace">%obj%</span>')}
 Rclass <- function(x){sub('%obj%', x, '<span style="font-family:\'Times New Roman\', Times, serif;font-style: italic">%obj%</span>')}
 ```
@@ -83,9 +83,9 @@ codes.
 ```{r}
 library('magrittr')
 library('ape')
-library('PhyloProfile')
+library('PhyloProfileKit')
 
-pPath <- system.file('extdata', 'bioinfoProfile.csv', package = 'PhyloProfile')
+pPath <- system.file('extdata', 'bioinfoProfile.csv', package = 'PhyloProfileKit')
 sceMat <- pPath %>% read.csv(row.names = 1) %>% as.matrix
 sceP <- PP(sceMat)
 
@@ -207,7 +207,7 @@ PPIdx(sceP, 1:nrow(sceP), 1:nrow(sceP), bigmat = TRUE)
 The phylogenetic profiling can be enhanced by combining other types of biological data, and the phylogenetic tree is widely used to trace the evolutionary processes (reviewed by Kensche *et.al.* [@kensche2008practical]). In `r phyloprofile()`, `PPTreeIdx()` is used to combine the a profile, a [rooted tree](https://www.ncbi.nlm.nih.gov/Class/NAWBIS/Modules/Phylogenetics/phylo9.html), and linkage indices into a new class `r Rclass('PPTreeIdx')` object. `r Robject('sceTree')` is the phylogenetic tree, which is a `r Rclass('phylo')` class object from the `r CRANpkg('ape')` package. Note that when combined with a tree, the organism of the profile missing in the tree are removed.
 
 ``` {r}
-sceTree <- system.file('extdata', 'bioinfoTree.nex', package = "PhyloProfile") %>% read.nexus
+sceTree <- system.file('extdata', 'bioinfoTree.nex', package = "PhyloProfileKit") %>% read.nexus
 sceTreeL <- sceP %>% PPTree(sceTree) %>% PPTreeIdx(linkM)
 sceTreeL
 ```
@@ -279,7 +279,7 @@ head(sceLMI)
 Protein ID (row names) of profiles retrieved from the STRING database are stored in a special format `r Robject('specieID.EnsemblID')`. The following scripts use the `r Biocpkg('biomaRt')` package to convert STRING IDs to other formats such as Entrez ID.
 
 ```{r eval=FALSE}
-library('PhyloProfile')
+library('PhyloProfileKit')
 library('magrittr')
 library('biomaRt')
 
@@ -303,7 +303,7 @@ Anno <- getBM(attributes = c('ensembl_peptide_id', 'entrezgene'),
               mart = ensembl)
 ```
 
-## Objects and methods in *PhyloProfile*
+## Objects and methods in *PhyloProfileKit*
 
 ## Define new plot elements ##
 
@@ -333,7 +333,7 @@ p <- pp_label(rep(letters[1:3], 3), fill = rep(c('red', 'yellow', 'blue'), 3), c
 
 # Homepage
 
-Please visit [PhyloProfile homepage](https://github.com/YulongNiu/PhyloProfile) for more information.
+Please visit [PhyloProfileKit homepage](https://github.com/YulongNiu/PhyloProfileKit) for more information.
 
 
 # Session Information

@@ -23,7 +23,7 @@ using namespace arma;
 //'
 //' NPPNorm(): NPP normalized bit score matrix.
 //'
-//' @author Yulong Niu \email{niuylscu@@gmail.com}
+//' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 //' @inheritParams SVDNorm
 //' @references \href{http://www.nature.com/nature/journal/v493/n7434/extref/nature11779-s1.pdf}{NPP description}
 //' @keywords internal

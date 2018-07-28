@@ -1,17 +1,22 @@
 ##' Additional utilities
 ##'
-##' \code{isBinMat_internal()}: Whether a matrix is binning.
+##' \code{isBinMat_internal()}: Whether a \code{numeric matrix} is binning.
 ##'
-##' \code{valiMatNames_internal()}: Validate a numeric matrix with row names and column names.
-##' 
+##' \code{valiMatNames_()}: Validate a \code{numeric matrix} with row names and column names.
+##'
+##' \code{valiTreeMat_()}: Validate a \code{numeric matrix} with trees.
+##'
 ##' @title utilities
 ##' @param x A matrix.
 ##' @return
 ##'
 ##' \code{isBinMat_internal()}: Logic.
 ##'
-##' \code{valiMatNames_internal()}: \code{TRUE} or a warning message.
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' \code{valiMatNames_()}: \code{TRUE} or a warning message.
+##'
+##' \code{valiTreeMat_()}: \code{TRUE} or a warning message.
+##' 
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @rdname utilities
 ##' @importFrom magrittr %>%
 ##' @keywords internal
@@ -38,7 +43,7 @@ isBinMat_internal <- function(x) {
 ##' @rdname utilities
 ##' @keywords internal
 ##' 
-validMatNames_internal <- function(x, warnName) {
+validMatNames_ <- function(x, warnName) {
 
   warnNumMat <- '%name% should be a matrix or big.matrix.'
   warnMatName <- '%name% needs rownames or colnames.'
@@ -69,7 +74,7 @@ validMatNames_internal <- function(x, warnName) {
 ##' @rdname utilities
 ##' @keywords internal
 ##' 
-validTreeMat_internal <- function(m, t) {
+validTreeMat_ <- function(m, t) {
   if (!all(colnames(m) == t$tip.label)) {
     return('rownames of profile should be in same order with tree tips.')
   } else {
@@ -91,7 +96,7 @@ validTreeMat_internal <- function(m, t) {
 ##'
 ##' \code{comb2_internal()}/\code{combWhole_internal()}/\code{combSelf_internal()}: Matrix with 2 columns
 ##'
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @rdname comb
 ##' @keywords internal
 ##' 

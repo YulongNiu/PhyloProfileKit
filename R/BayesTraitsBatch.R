@@ -13,21 +13,21 @@ NULL
 ##' require('magrittr')
 ##' require('ape')
 ##'
-##' tree <- system.file('extdata', 'bioinfoTree.nex', package = "PhyloProfile") %>% read.nexus
-##' ppPath <- system.file('extdata', 'bioinfoProfile.csv', package = "PhyloProfile")
+##' tree <- system.file('extdata', 'bioinfoTree.nex', package = "PhyloProfileKit") %>% read.nexus
+##' ppPath <- system.file('extdata', 'bioinfoProfile.csv', package = "PhyloProfileKit")
 ##'
 ##' sceP <- ppPath %>% read.csv(row.names = 1) %>% as.matrix %>% PP
 ##' scePTI <- sceP %>% PPTree(tree) %>% PPTreeIdx(1:6, 1:6)
 ##'
 ##' \dontrun{
 ##' ## replace "BTPath" with the full path of BayesTraits in your system, for example in Linux/OS
-##' ## BTPath <- '/path/to/BayesTraitsV2/BayesTraitsV2'
+##' ## BTPath <- '/path/to/BayesTraitsV3/BayesTraitsV3'
 ##' ## or in Windows
-##' ## BTPath <- '/path/to/BayesTraitsV2/BayesTraitsV2.exe'
+##' ## BTPath <- '/path/to/BayesTraitsV3/BayesTraitsV3.exe'
 ##' BayesTraits(scePTI, BayesTraitsPath = BTPath, n = 2)
 ##' }
 ##'
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @importFrom ape write.nexus
 ##' @rdname BayesTraits-methods
 ##' @references \href{http://www.evolution.reading.ac.uk/BayesTraits.html}{BayesTraits program}
@@ -99,7 +99,7 @@ setMethod(f = 'BayesTraits',
 ##' \code{BayesTraitsMode()}: Log marginal likelihood for the method \code{MCMC} and log likelihood for the method \code{ML}.
 ##'
 ##' \code{BayesTraitsTest()}: A list.
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @importFrom utils read.table write.table
 ##' @importFrom magrittr %>%
 ##' @rdname Bayes

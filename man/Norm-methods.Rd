@@ -58,5 +58,5 @@ Norm(ppRawBit, method = 'NPP', bitCutoff = 60, bitReset = 1, minConserve = 12)
 \href{http://www.nature.com/nature/journal/v493/n7434/extref/nature11779-s1.pdf}{NPP description}
 }
 \author{
-Yulong Niu \email{niuylscu@gmail.com}
+Yulong Niu \email{yulong.niu@hotmail.com}
 }

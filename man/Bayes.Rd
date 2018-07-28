@@ -43,6 +43,6 @@ BayesTraits Mode
 \code{BayesTraitsTest()}: Test the a pair of functional linkage.
 }
 \author{
-Yulong Niu \email{niuylscu@gmail.com}
+Yulong Niu \email{yulong.niu@hotmail.com}
 }
 \keyword{internal}

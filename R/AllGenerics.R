@@ -90,6 +90,7 @@ setGeneric(name = 'Batch',
 ##' @inheritParams Batch
 ##' @rdname BatchCore-methods
 ##' @keywords internal
+##' 
 setGeneric(name = 'BatchCore',
            def = function(p, idx, FUN, ..., n){standardGeneric('BatchCore')})
 

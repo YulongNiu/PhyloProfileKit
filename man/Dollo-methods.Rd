@@ -30,8 +30,8 @@ Dollo's parsimony distance of paired profiles.
 require('magrittr')
 require('ape')
 
-tree <- system.file('extdata', 'bioinfoTree.nex', package = "PhyloProfile") \%>\% read.nexus
-ppPath <- system.file('extdata', 'bioinfoProfile.csv', package = "PhyloProfile")
+tree <- system.file('extdata', 'bioinfoTree.nex', package = "PhyloProfileKit") \%>\% read.nexus
+ppPath <- system.file('extdata', 'bioinfoProfile.csv', package = "PhyloProfileKit")
 
 sceP <- ppPath \%>\% read.csv(row.names = 1) \%>\% as.matrix \%>\% PP
 scePTI <- sceP \%>\% PPTree(tree) \%>\% PPTreeIdx(1:6, 1:6)
@@ -42,5 +42,5 @@ Dollo(scePTI, n = 2)
 \href{https://www.ncbi.nlm.nih.gov/pubmed/?term=17535793}{Dollo's parsimony description}
 }
 \author{
-Yulong Niu \email{niuylscu@gmail.com}
+Yulong Niu \email{yulong.niu@hotmail.com}
 }

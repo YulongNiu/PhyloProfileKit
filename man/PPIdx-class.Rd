@@ -10,9 +10,9 @@ This class represents the data structure of phylogenetic profile with linkage in
 \section{Slots}{
 
 \describe{
-\item{\code{idx}}{An integer matrix with two columns.}
+\item{\code{idx}}{An \code{integer matrix} with two columns.}
 }}
 
 \author{
-Yulong Niu \email{niuylscu@gmail.com}
+Yulong Niu \email{yulong.niu@hotmail.com}
 }

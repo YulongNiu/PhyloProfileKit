@@ -30,5 +30,5 @@ Show messages.
 Show method for \code{PP} and \code{PPIdx} objects
 }
 \author{
-Yulong Niu \email{niuylscu@gmail.com}
+Yulong Niu \email{yulong.niu@hotmail.com}
 }

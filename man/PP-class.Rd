@@ -10,9 +10,9 @@ This class represents the raw data structure of phylogenetic profile.
 \section{Slots}{
 
 \describe{
-\item{\code{.Data}}{An integer matrix or a numeric matrix, of which the rows are genes/proteins and columns are species. It validates the rownames and colnames of the profile matrix.}
+\item{\code{.Data}}{An \code{integer matrix} or a \code{double matrix}, of which the rows are genes/proteins and columns are species. It validates the rownames and colnames of the profile matrix.}
 }}
 
 \author{
-Yulong Niu \email{niuylscu@gmail.com}
+Yulong Niu \email{yulong.niu@hotmail.com}
 }

@@ -26,7 +26,7 @@ using namespace arma;
 //' \code{DolloDist()}: An integer.
 //'
 //' \code{InferEdge()}: A numeric edge present and absent matrix.
-//' @author Yulong Niu \email{niuylscu@@gmail.com}
+//' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 //' @rdname dollo
 //' @keywords internal
 // [[Rcpp::export]]

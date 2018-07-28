@@ -7,7 +7,7 @@ NULL
 ##' @title Show methods
 ##' @param object A \code{PP}/\code{PPIdx}/\code{PPTree}/\code{PPTreeIdx}/code{PPResult} object.
 ##' @return Show messages.
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @importFrom utils str
 ##' @importFrom methods show
 ##' @rdname show-methods
@@ -56,7 +56,7 @@ setMethod(f = 'show',
 ##'                        ncol = 20,
 ##'                        dimnames = list(paste0('protein', 1:10),
 ##'                                        paste0('spe', 1:20))) %>% PP
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @importFrom methods as
 ##' @export
 ##'
@@ -126,7 +126,7 @@ PP <- function(x) {
 ##' ## type is changed to "binning"
 ##' ppContinuous
 ##'
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @rdname PPData-methods
 ##' @exportMethod PPData
 ##'
@@ -163,7 +163,7 @@ setMethod(f = 'PPData<-',
 ##' @param i,j,... Indices.
 ##' @param drop Whether the result is coerced to the lowest possible dimension. Desalt set is \code{FALSE}.
 ##' @return A \code{PP}/\code{PPResult} object.
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @importFrom methods callNextMethod
 ##' @rdname select-methods
 ##' @exportMethod [
@@ -221,7 +221,7 @@ setMethod(f = '[<-',
 ##' cbind(ppC, PP(ppM1))
 ##' rbind(ppC, ppM2)
 ##' rbind(ppC, PP(ppM2))
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @importFrom methods rbind2 is
 ##' @rdname bind-methods
 ##' @exportMethod rbind2

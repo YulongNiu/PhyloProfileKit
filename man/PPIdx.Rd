@@ -55,5 +55,5 @@ PPIdx(ppBinning, 1:3, 1:3, self = TRUE, bidirect = TRUE)
 PPTreeIdx
 }
 \author{
-Yulong Niu \email{niuylscu@gmail.com}
+Yulong Niu \email{yulong.niu@hotmail.com}
 }

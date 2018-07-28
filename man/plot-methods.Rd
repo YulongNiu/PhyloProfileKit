@@ -21,5 +21,5 @@ A \code{gtable} object.
 Plot method for \code{gmat} objects
 }
 \author{
-Yulong Niu \email{niuylscu@gmail.com}
+Yulong Niu \email{yulong.niu@hotmail.com}
 }

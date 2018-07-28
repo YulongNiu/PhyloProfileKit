@@ -48,6 +48,6 @@ Similarity or distance of paired phylogenetic profile
 \code{DistEuclidean()}: Euclidean distance.
 }
 \author{
-Yulong Niu \email{niuylscu@gmail.com}
+Yulong Niu \email{yulong.niu@hotmail.com}
 }
 \keyword{internal}

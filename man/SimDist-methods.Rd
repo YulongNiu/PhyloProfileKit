@@ -47,8 +47,8 @@ Similarity and distance of paired profiles. If the input is a \code{PPTreeIdx} o
 require('magrittr')
 require('ape')
 
-tree <- system.file('extdata', 'bioinfoTree.nex', package = "PhyloProfile") \%>\% read.nexus
-ppPath <- system.file('extdata', 'bioinfoProfile.csv', package = "PhyloProfile")
+tree <- system.file('extdata', 'bioinfoTree.nex', package = "PhyloProfileKit") \%>\% read.nexus
+ppPath <- system.file('extdata', 'bioinfoProfile.csv', package = "PhyloProfileKit")
 
 sceP <- ppPath \%>\% read.csv(row.names = 1) \%>\% as.matrix \%>\% PP
 scePI <- PPIdx(sceP, 1:6, 1:6)
@@ -60,5 +60,5 @@ SimDist(scePTI, 'SimMI', n = 2)
 
 }
 \author{
-Yulong Niu \email{niuylscu@gmail.com}
+Yulong Niu \email{yulong.niu@hotmail.com}
 }

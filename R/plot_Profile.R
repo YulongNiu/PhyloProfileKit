@@ -13,7 +13,7 @@
 ##' require(gridExtra)
 ##' grid.arrange(speLeg, ncol = 1)
 ##' }
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @importFrom ggplot2 ggplot aes_string geom_tile scale_fill_manual
 ##' @export
 ##' 
@@ -62,7 +62,7 @@ legend_spe <- function(classCol, ...) {
 ##' classCol = fatp1$domain, legend.position = 'left')
 ##' dev.off()
 ##' }
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @importFrom ggplot2 ggplot geom_text geom_tile geom_segment geom_point scale_fill_manual labs scale_x_continuous scale_y_continuous scale_y_reverse aes_string coord_flip
 ##' @importFrom ggdendro dendro_data segment
 ##' @importFrom gridExtra grid.arrange

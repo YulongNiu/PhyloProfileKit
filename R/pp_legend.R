@@ -12,7 +12,7 @@
 ##' p <- ggplot(mtcars, aes(mpg, wt)) +
 ##'   geom_point(aes(colour = factor(cyl)))
 ##' plot(pp_legend(p, legend.position = 'left'))
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @importFrom ggplot2 ggplotGrob theme
 ##' @importFrom grid unit
 ##' @references \url{https://github.com/hadley/ggplot2/wiki/Share-a-legend-between-two-ggplot2-graphs}

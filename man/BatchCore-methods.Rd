@@ -34,6 +34,6 @@ Parallel core for \code{numeric matrix} and \code{big.matrix}.
 Parallel core for the index data.
 }
 \author{
-Yulong Niu \email{niuylscu@gmail.com}
+Yulong Niu \email{yulong.niu@hotmail.com}
 }
 \keyword{internal}

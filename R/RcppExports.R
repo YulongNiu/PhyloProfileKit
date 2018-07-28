@@ -11,10 +11,10 @@
 #' @inheritParams SimCor
 #' @inheritParams InferEdge
 #' @references \href{http://rsif.royalsocietypublishing.org/content/5/19/151}{collapse tree description}
-#' @author Yulong Niu \email{niuylscu@@gmail.com}
+#' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 #' @keywords internal
 CollapseTree <- function(edgeMat, tipNum, f, t) {
-    .Call('_PhyloProfile_CollapseTree', PACKAGE = 'PhyloProfile', edgeMat, tipNum, f, t)
+    .Call('_PhyloProfileKit_CollapseTree', PACKAGE = 'PhyloProfileKit', edgeMat, tipNum, f, t)
 }
 
 #' Test two rows are equal
@@ -24,10 +24,10 @@ CollapseTree <- function(edgeMat, tipNum, f, t) {
 #' @title Compare two rows Test
 #' @return logic value.
 #' @param m A numeric matrix with two rows.
-#' @author Yulong Niu \email{niuylscu@@gmail.com}
+#' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 #' @keywords internal
 isTwoRowsEqual <- function(m) {
-    .Call('_PhyloProfile_isTwoRowsEqual', PACKAGE = 'PhyloProfile', m)
+    .Call('_PhyloProfileKit_isTwoRowsEqual', PACKAGE = 'PhyloProfileKit', m)
 }
 
 #' Use Dollo's parsimony distance to evaluate similarity patterns.
@@ -51,11 +51,11 @@ isTwoRowsEqual <- function(m) {
 #' \code{DolloDist()}: An integer.
 #'
 #' \code{InferEdge()}: A numeric edge present and absent matrix.
-#' @author Yulong Niu \email{niuylscu@@gmail.com}
+#' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 #' @rdname dollo
 #' @keywords internal
 InferGainNodes <- function(gainList) {
-    .Call('_PhyloProfile_InferGainNodes', PACKAGE = 'PhyloProfile', gainList)
+    .Call('_PhyloProfileKit_InferGainNodes', PACKAGE = 'PhyloProfileKit', gainList)
 }
 
 #' @param edgeMat A edge mat could be generated from the "ape" package.The first row should be (root --> nodes).
@@ -64,7 +64,7 @@ InferGainNodes <- function(gainList) {
 #' @rdname dollo
 #' @keywords internal
 InferEdge <- function(edgeMat, tipPath, pr) {
-    .Call('_PhyloProfile_InferEdge', PACKAGE = 'PhyloProfile', edgeMat, tipPath, pr)
+    .Call('_PhyloProfileKit_InferEdge', PACKAGE = 'PhyloProfileKit', edgeMat, tipPath, pr)
 }
 
 #' @inheritParams SimCor
@@ -74,7 +74,7 @@ InferEdge <- function(edgeMat, tipPath, pr) {
 #' @references \url{https://www.ncbi.nlm.nih.gov/pubmed/?term=17535793}
 #' @keywords internal
 DolloDist <- function(edgeMat, tipPath, f, t) {
-    .Call('_PhyloProfile_DolloDist', PACKAGE = 'PhyloProfile', edgeMat, tipPath, f, t)
+    .Call('_PhyloProfileKit_DolloDist', PACKAGE = 'PhyloProfileKit', edgeMat, tipPath, f, t)
 }
 
 #' @param x A list only contains unsigned interger vectors.
@@ -82,14 +82,14 @@ DolloDist <- function(edgeMat, tipPath, f, t) {
 #' @rdname dollo
 #' @keywords internal
 MergeList <- function(x) {
-    .Call('_PhyloProfile_MergeList', PACKAGE = 'PhyloProfile', x)
+    .Call('_PhyloProfileKit_MergeList', PACKAGE = 'PhyloProfileKit', x)
 }
 
 #' @inheritParams SimCor
 #' @rdname simdist
 #' @keywords internal
 SimMIBin <- function(f, t) {
-    .Call('_PhyloProfile_SimMIBin', PACKAGE = 'PhyloProfile', f, t)
+    .Call('_PhyloProfileKit_SimMIBin', PACKAGE = 'PhyloProfileKit', f, t)
 }
 
 #' Utilities for MI
@@ -104,11 +104,11 @@ SimMIBin <- function(f, t) {
 #'
 #' @param p1, p2, p3: Counts of variables in cells.
 #' @param n Total variables.
-#' @author Yulong Niu \email{niuylscu@@gmail.com}
+#' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 #' @rdname utilities-MI
 #' @keywords internal
 eachMI <- function(p1, p2, p3, n) {
-    .Call('_PhyloProfile_eachMI', PACKAGE = 'PhyloProfile', p1, p2, p3, n)
+    .Call('_PhyloProfileKit_eachMI', PACKAGE = 'PhyloProfileKit', p1, p2, p3, n)
 }
 
 #' @inheritParams SimCor
@@ -116,7 +116,7 @@ eachMI <- function(p1, p2, p3, n) {
 #' @rdname simdist
 #' @keywords internal
 SimMIConti <- function(f, t, bin) {
-    .Call('_PhyloProfile_SimMIConti', PACKAGE = 'PhyloProfile', f, t, bin)
+    .Call('_PhyloProfileKit_SimMIConti', PACKAGE = 'PhyloProfileKit', f, t, bin)
 }
 
 #' @param v Histogram of counts.
@@ -124,7 +124,7 @@ SimMIConti <- function(f, t, bin) {
 #' @rdname utilities-MI
 #' @keywords internal
 Info <- function(v, n) {
-    .Call('_PhyloProfile_Info', PACKAGE = 'PhyloProfile', v, n)
+    .Call('_PhyloProfileKit_Info', PACKAGE = 'PhyloProfileKit', v, n)
 }
 
 #' @inheritParams SimMIConti
@@ -132,7 +132,7 @@ Info <- function(v, n) {
 #' @rdname utilities-MI
 #' @keywords internal
 HistTwo <- function(x, y, bin) {
-    .Call('_PhyloProfile_HistTwo', PACKAGE = 'PhyloProfile', x, y, bin)
+    .Call('_PhyloProfileKit_HistTwo', PACKAGE = 'PhyloProfileKit', x, y, bin)
 }
 
 #' @inheritParams HistTwo
@@ -140,7 +140,7 @@ HistTwo <- function(x, y, bin) {
 #' @rdname utilities-MI
 #' @keywords internal
 FindInter <- function(x, interval) {
-    .Call('_PhyloProfile_FindInter', PACKAGE = 'PhyloProfile', x, interval)
+    .Call('_PhyloProfileKit_FindInter', PACKAGE = 'PhyloProfileKit', x, interval)
 }
 
 #' @inheritParams FindInter
@@ -148,21 +148,21 @@ FindInter <- function(x, interval) {
 #' @rdname utilities-MI
 #' @keywords internal
 FindInterSingle <- function(value, interval) {
-    .Call('_PhyloProfile_FindInterSingle', PACKAGE = 'PhyloProfile', value, interval)
+    .Call('_PhyloProfileKit_FindInterSingle', PACKAGE = 'PhyloProfileKit', value, interval)
 }
 
 #' @inheritParams HistTwo
 #' @rdname utilities-MI
 #' @keywords internal
 gInter <- function(x, bin) {
-    .Call('_PhyloProfile_gInter', PACKAGE = 'PhyloProfile', x, bin)
+    .Call('_PhyloProfileKit_gInter', PACKAGE = 'PhyloProfileKit', x, bin)
 }
 
 #' @inheritParams HistTwo
 #' @rdname utilities-MI
 #' @keywords internal
 CountRepeat <- function(x) {
-    .Call('_PhyloProfile_CountRepeat', PACKAGE = 'PhyloProfile', x)
+    .Call('_PhyloProfileKit_CountRepeat', PACKAGE = 'PhyloProfileKit', x)
 }
 
 #' NPP normalization
@@ -182,12 +182,12 @@ CountRepeat <- function(x) {
 #'
 #' NPPNorm(): NPP normalized bit score matrix.
 #'
-#' @author Yulong Niu \email{niuylscu@@gmail.com}
+#' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 #' @inheritParams SVDNorm
 #' @references \href{http://www.nature.com/nature/journal/v493/n7434/extref/nature11779-s1.pdf}{NPP description}
 #' @keywords internal
 NPPNorm <- function(rawBitM, bitCutoff, bitReset, minConserve) {
-    .Call('_PhyloProfile_NPPNorm', PACKAGE = 'PhyloProfile', rawBitM, bitCutoff, bitReset, minConserve)
+    .Call('_PhyloProfileKit_NPPNorm', PACKAGE = 'PhyloProfileKit', rawBitM, bitCutoff, bitReset, minConserve)
 }
 
 #' SVD normalization
@@ -210,14 +210,14 @@ NPPNorm <- function(rawBitM, bitCutoff, bitReset, minConserve) {
 #'
 #' SVDPhy(): A L^2 normalized unitary matrix.
 #'
-#' @author Yulong Niu \email{niuylscu@@gmail.com}
+#' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 #' @inheritParams SVDPhy
 #' @references \href{https://bitbucket.org/andrea/svd-phy}{SVD-Phy package}
 #' @references \href{http://bioinformatics.oxfordjournals.org/content/suppl/2015/11/25/btv696.DC1/SVD-Phy-supplementary-material.docx}{SVD description}
 #' @rdname normSVD
 #' @keywords internal
 SVDNorm <- function(rawBitM, bitCutoff, bitReset, minConserve, trimming) {
-    .Call('_PhyloProfile_SVDNorm', PACKAGE = 'PhyloProfile', rawBitM, bitCutoff, bitReset, minConserve, trimming)
+    .Call('_PhyloProfileKit_SVDNorm', PACKAGE = 'PhyloProfileKit', rawBitM, bitCutoff, bitReset, minConserve, trimming)
 }
 
 #' @param bitM Bit score matrix, for example the BLASTP or STRING bit scores. It is a named numeric matrix, columns are species and rows are genes.
@@ -227,7 +227,7 @@ SVDNorm <- function(rawBitM, bitCutoff, bitReset, minConserve, trimming) {
 #' @rdname normSVD
 #' @keywords internal
 SVDPhy <- function(bitM, bitReset, minConserve, trimming) {
-    .Call('_PhyloProfile_SVDPhy', PACKAGE = 'PhyloProfile', bitM, bitReset, minConserve, trimming)
+    .Call('_PhyloProfileKit_SVDPhy', PACKAGE = 'PhyloProfileKit', bitM, bitReset, minConserve, trimming)
 }
 
 #' Similarity or distance of paired phylogenetic profile
@@ -248,31 +248,31 @@ SVDPhy <- function(bitM, bitReset, minConserve, trimming) {
 #' @param f Numeric vector indicating a gene profile.
 #' @param t Numeric vector indicating a gene profile.
 #' @return A numeric value.
-#' @author Yulong Niu \email{niuylscu@@gmail.com}
+#' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 #' @rdname simdist
 #' @keywords internal
 SimCor <- function(f, t) {
-    .Call('_PhyloProfile_SimCor', PACKAGE = 'PhyloProfile', f, t)
+    .Call('_PhyloProfileKit_SimCor', PACKAGE = 'PhyloProfileKit', f, t)
 }
 
 #' @inheritParams SimCor
 #' @rdname simdist
 #' @keywords internal
 SimJaccard <- function(f, t) {
-    .Call('_PhyloProfile_SimJaccard', PACKAGE = 'PhyloProfile', f, t)
+    .Call('_PhyloProfileKit_SimJaccard', PACKAGE = 'PhyloProfileKit', f, t)
 }
 
 #' @inheritParams SimCor
 #' @rdname simdist
 #' @keywords internal
 DistHamming <- function(f, t) {
-    .Call('_PhyloProfile_DistHamming', PACKAGE = 'PhyloProfile', f, t)
+    .Call('_PhyloProfileKit_DistHamming', PACKAGE = 'PhyloProfileKit', f, t)
 }
 
 #' @inheritParams SimCor
 #' @rdname simdist
 #' @keywords internal
 DistEuclidean <- function(f, t) {
-    .Call('_PhyloProfile_DistEuclidean', PACKAGE = 'PhyloProfile', f, t)
+    .Call('_PhyloProfileKit_DistEuclidean', PACKAGE = 'PhyloProfileKit', f, t)
 }
 

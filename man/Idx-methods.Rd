@@ -55,5 +55,5 @@ Idx(ppBinning, linkM)
 Idx(ppBinning, 1:3, 1:nrow(ppBinning))
 }
 \author{
-Yulong Niu \email{niuylscu@gmail.com}
+Yulong Niu \email{yulong.niu@hotmail.com}
 }

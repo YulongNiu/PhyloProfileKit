@@ -23,7 +23,7 @@ using namespace arma;
 //' @param f Numeric vector indicating a gene profile.
 //' @param t Numeric vector indicating a gene profile.
 //' @return A numeric value.
-//' @author Yulong Niu \email{niuylscu@@gmail.com}
+//' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 //' @rdname simdist
 //' @keywords internal
 // [[Rcpp::export]]

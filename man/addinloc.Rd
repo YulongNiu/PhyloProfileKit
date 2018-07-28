@@ -34,5 +34,5 @@ p \%@+\% (p + scale_colour_manual(values = c('red', 'blue', 'green')))
 grid.arrange(grobs = q, ncol = 1)
 }
 \author{
-Yulong Niu \email{niuylscu@gmail.com}
+Yulong Niu \email{yulong.niu@hotmail.com}
 }

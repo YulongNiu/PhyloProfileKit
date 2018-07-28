@@ -35,5 +35,5 @@ plot(pp_legend(p, legend.position = 'left'))
 \url{https://github.com/hadley/ggplot2/issues/809}
 }
 \author{
-Yulong Niu \email{niuylscu@gmail.com}
+Yulong Niu \email{yulong.niu@hotmail.com}
 }

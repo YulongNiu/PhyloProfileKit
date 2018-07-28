@@ -16,7 +16,7 @@
 ##' ATPCorPlot <- PlotPhyloCor(fatp1$atpPhylo, geneCol = fatp1$genecol)
 ##' dev.off()
 ##' }
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @importFrom ggplot2 ggplot geom_text geom_tile geom_segment geom_point scale_fill_manual labs scale_x_continuous scale_y_continuous scale_fill_gradientn scale_x_discrete scale_y_discrete scale_x_reverse scale_y_reverse aes_string coord_flip
 ##' @importFrom ggdendro dendro_data segment
 ##' @importFrom gridExtra grid.arrange
@@ -189,7 +189,7 @@ PlotPhyloCor <- function(phyloData,
 ##' @examples
 ##' data(fatp)
 ##' corMat <- GetPhyloCorMat(fatp$atpPhylo)
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @importFrom stats cor dist hclust
 ##' @rdname simplot
 ##' @export

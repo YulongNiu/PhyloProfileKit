@@ -14,7 +14,7 @@
 ##' pp_text(letters[1:10], colour = 'grey55', size = 3)
 ##' pp_text(rep(LETTERS[1:2], 3), colour = factor(rep(c('blue', 'red'), 3)))
 ##' pp_text(letters[1:5]) + coord_flip()
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @importFrom ggplot2 ggplot geom_text labs scale_x_continuous scale_y_continuous scale_y_reverse aes_string
 ##' @seealso \code{\link[ggplot2]{geom_text}}
 ##' @seealso \code{\link[ggplot2]{theme}}

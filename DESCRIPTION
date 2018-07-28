@@ -1,5 +1,5 @@
-Package: PhyloProfile
-Title: PhyloProfile: an R package for phylogenetic profiling analysis
+Package: PhyloProfileKit
+Title: PhyloProfileKit: a tookit for phylogenetic profiling analysis
 Description: It contains various analysis methods and visualization of
     phylogenetic profiles. Methods include co-occurrency (Jaccard similarity,
     Pearson correlation coefficient, mutual information, Hamming distance, and
@@ -9,11 +9,11 @@ Description: It contains various analysis methods and visualization of
     Circos plot, and D3 network. Retrieving phylogenetic profile from the STRING
     database. Downstream analysis includes expanding known gene-sets, significant
     gene-set analysis.
-Version: 0.5.5
-Authors@R: person("Yulong", "Niu", email = "niuylscu@gmail.com", role = c("aut", "cre"))
-Maintainer: Yulong Niu <niuylscu@gmail.com>
+Version: 0.5.6
+Authors@R: person("Yulong", "Niu", email = "yulong.niu@hotmail.com", role = c("aut", "cre"))
+Maintainer: Yulong Niu <yulong.niu@hotmail.com>
 Depends:
-    R (>= 3.2.1)
+    R (>= 3.5.0)
 Imports:
     ggplot2,
     reshape2,

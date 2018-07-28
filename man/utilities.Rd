@@ -2,15 +2,15 @@
 % Please edit documentation in R/utilities.R
 \name{isBinMat_internal}
 \alias{isBinMat_internal}
-\alias{validMatNames_internal}
-\alias{validTreeMat_internal}
+\alias{validMatNames_}
+\alias{validTreeMat_}
 \title{utilities}
 \usage{
 isBinMat_internal(x)
 
-validMatNames_internal(x, warnName)
+validMatNames_(x, warnName)
 
-validTreeMat_internal(m, t)
+validTreeMat_(m, t)
 }
 \arguments{
 \item{x}{A matrix.}
@@ -26,17 +26,21 @@ validTreeMat_internal(m, t)
 \value{
 \code{isBinMat_internal()}: Logic.
 
-\code{valiMatNames_internal()}: \code{TRUE} or a warning message.
+\code{valiMatNames_()}: \code{TRUE} or a warning message.
+
+\code{valiTreeMat_()}: \code{TRUE} or a warning message.
 }
 \description{
 Additional utilities
 }
 \details{
-\code{isBinMat_internal()}: Whether a matrix is binning.
+\code{isBinMat_internal()}: Whether a \code{numeric matrix} is binning.
 
-\code{valiMatNames_internal()}: Validate a numeric matrix with row names and column names.
+\code{valiMatNames_()}: Validate a \code{numeric matrix} with row names and column names.
+
+\code{valiTreeMat_()}: Validate a \code{numeric matrix} with trees.
 }
 \author{
-Yulong Niu \email{niuylscu@gmail.com}
+Yulong Niu \email{yulong.niu@hotmail.com}
 }
 \keyword{internal}

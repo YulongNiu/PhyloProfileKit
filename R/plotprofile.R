@@ -21,7 +21,7 @@ NULL
 ##'                  speGroup = fatp$domain,
 ##'                  speGroupCol = fatp$domainCol)
 ##' 
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @rdname plotprofile-methods
 ##' @importFrom magrittr %>%
 ##' @importFrom ape as.phylo
@@ -72,7 +72,7 @@ setMethod(f = 'plotprofile',
 ##' @param speGroup A factor indicating species groups.
 ##' @param speGroupCol A named character vector indicating species group colour.
 ##' @return A \code{gmat} object.
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @importFrom ggplot2 scale_fill_manual coord_flip scale_fill_gradientn
 ##' @keywords internal
 ##' 

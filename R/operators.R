@@ -19,7 +19,7 @@ NULL
 ##'
 ##' ## plot
 ##' grid.arrange(grobs = q, ncol = 1)
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @rdname addinloc
 ##' @export
 ##' 
@@ -55,7 +55,7 @@ atadd <- function(e1, e2) {
 ##'
 ##' p <- qplot(1,1)
 ##' new('gmat') %@<% p
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @rdname loc
 ##' @export
 ##'
@@ -117,7 +117,7 @@ atbottom <- function(x, y) {
 ##' @title Transfer to list.
 ##' @param x A \code{ggplot}/\code{gtable} object.
 ##' @return A list.
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @importFrom ggplot2 ggplotGrob
 ##' @keywords internal
 ##' 
@@ -144,7 +144,7 @@ gg2list <- function(x) {
 ##' require('magrittr')
 ##'
 ##' qplot(1,1) %>% ascore
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @export
 ##' 
 ascore <- function(x) {

@@ -52,7 +52,7 @@ setMethod(f = 'show',
 ##'
 ##' ## top 3 proteins with whole profiles
 ##' Idx(ppBinning, 1:3, 1:nrow(ppBinning))
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @rdname Idx-methods
 ##' @importFrom magrittr %>% %<>%
 ##' @exportMethod Idx
@@ -131,7 +131,7 @@ setMethod(f = 'Idx',
 ##' ## with bidirectional linkages
 ##' PPIdx(ppBinning, 1:3, 1:3, self = TRUE, bidirect = TRUE)
 ##'
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @importFrom magrittr %>% %<>%
 ##' @importFrom methods new
 ##' @importFrom bigmemory as.big.matrix
@@ -189,7 +189,7 @@ PPIdx <- function(p, x, ...) {
 ##' ## type is changed to "binning"
 ##' ppContinuous
 ##'
-##' @author Yulong Niu \email{niuylscu@@gmail.com}
+##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @rdname IdxData-methods
 ##' @exportMethod IdxData
 ##'

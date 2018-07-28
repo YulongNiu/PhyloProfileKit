@@ -19,6 +19,6 @@ A numeric matrix
 Construct the layout matrix of a \code{gmat} object.
 }
 \author{
-Yulong Niu \email{niuylscu@gmail.com}
+Yulong Niu \email{yulong.niu@hotmail.com}
 }
 \keyword{internal}

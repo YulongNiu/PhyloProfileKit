@@ -38,7 +38,7 @@ double SimMIBin(arma::vec f,
 //'
 //' @param p1, p2, p3: Counts of variables in cells.
 //' @param n Total variables.
-//' @author Yulong Niu \email{niuylscu@@gmail.com}
+//' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 //' @rdname utilities-MI
 //' @keywords internal
 // [[Rcpp::export]]
