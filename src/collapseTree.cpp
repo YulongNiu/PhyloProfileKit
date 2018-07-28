@@ -1,6 +1,7 @@
 #include <RcppArmadillo.h>
-// [[Rcpp::depends(RcppArmadillo)]]
 #include "collapseTree.h"
+
+// [[Rcpp::depends(RcppArmadillo)]]
 
 using namespace Rcpp;
 using namespace arma;
