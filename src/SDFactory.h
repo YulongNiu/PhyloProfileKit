@@ -15,13 +15,13 @@ private:
   // p: The phylogenetic profile
   // idx: The index matrix
   // idxBig: The index big matrix
-  arma::mat p;
-  arma::umat idx;
-  SEXP idxBig;
+  const arma::mat p;
+  const arma::umat idx;
+  const arma::Mat<int> idxbig;
 public:
   explicit SDFactory(const arma::mat& p,
-                     SEXP idxBig)
-    : p(p), idxBig(idxBig) {};
+                     const arma::Mat<int>& idxbig)
+    : p(p), idxbig(idxbig) {};
 
   explicit SDFactory(const arma::mat& p,
                      const arma::umat& idx)

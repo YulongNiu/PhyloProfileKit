@@ -1,15 +1,7 @@
 Package: PhyloProfileKit
 Title: PhyloProfileKit: a tookit for phylogenetic profiling analysis
-Description: It contains various analysis methods and visualization of
-    phylogenetic profiles. Methods include co-occurrency (Jaccard similarity,
-    Pearson correlation coefficient, mutual information, Hamming distance, and
-    Euclidean distance), model-based methods(maximum likelihood from "BayesTrait"
-    and Dollo parsimony distance), and normalization (NPP and SVD). Visualization
-    techniques consist of phylogenetic profile, correlation matrix, configures of
-    Circos plot, and D3 network. Retrieving phylogenetic profile from the STRING
-    database. Downstream analysis includes expanding known gene-sets, significant
-    gene-set analysis.
-Version: 0.5.6
+Description: It contains various analysis methods and visualization of phylogenetic profiles. Methods include co-occurrency (Jaccard similarity, Pearson correlation coefficient, mutual information, Hamming distance, and Euclidean distance), model-based methods(maximum likelihood from "BayesTrait" and Dollo parsimony distance), and normalization (NPP and SVD). Visualization techniques consist of phylogenetic profile, correlation matrix, configures of Circos plot, and D3 network. Retrieving phylogenetic profile from the STRING database. Downstream analysis includes expanding known gene-sets, significant gene-set analysis.
+Version: 0.6.0
 Authors@R: person("Yulong", "Niu", email = "yulong.niu@hotmail.com", role = c("aut", "cre"))
 Maintainer: Yulong Niu <yulong.niu@hotmail.com>
 Depends:
@@ -28,6 +20,7 @@ Imports:
     foreach,
     iterators,
     Rcpp,
+    RcppParallel,
     ape,
     methods,
     magrittr,
@@ -43,8 +36,11 @@ License: GPL
 LazyData: true
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr
-LinkingTo: Rcpp,
-    RcppArmadillo
+LinkingTo:
+    Rcpp,
+    RcppArmadillo,
+    bigmemory,
+    RcppParallel
 Collate: 
     'utilities.R'
     'AllClasses.R'

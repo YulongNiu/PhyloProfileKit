@@ -13,17 +13,18 @@ using namespace arma;
 
 // [[Rcpp::depends(RcppArmadillo, RcppParallel, bigmemory)]]
 
-struct BatchCoreMat : public Worker {
+template <typename T>
+struct BatchCore : public Worker {
 
   const mat& p;
-  const umat& idx;
+  const T& idx;
   std::shared_ptr<SDmeasure>& sdfunc;
   vec& res;
 
-  BatchCoreMat(const arma::mat& p,
-               const arma::umat& idx,
-               std::shared_ptr<SDmeasure>& sdfunc,
-               arma::vec& res)
+  BatchCore(const arma::mat& p,
+            const T& idx,
+            std::shared_ptr<SDmeasure>& sdfunc,
+            arma::vec& res)
     : p(p), idx(idx), sdfunc(sdfunc), res(res) {}
 
   void operator()(std::size_t begin, std::size_t end) {
@@ -32,38 +33,6 @@ struct BatchCoreMat : public Worker {
 
       uword fidx = idx(i, 0);
       uword tidx = idx(i, 1);
-
-      rowvec f = p.row(fidx-1);
-      rowvec t = p.row(tidx-1);
-
-      res(i) = sdfunc->calcSD(f, t);
-    }
-  }
-};
-
-
-struct BatchCoreBigmat : public Worker {
-
-  const mat& p;
-  SEXP idx;
-  std::shared_ptr<SDmeasure>& sdfunc;
-  vec& res;
-
-  BatchCoreBigmat(const arma::mat& p,
-                  SEXP idx,
-                  std::shared_ptr<SDmeasure>& sdfunc,
-                  arma::vec& res)
-    : p(p), idx(idx), sdfunc(sdfunc), res(res) {}
-
-  void operator()(std::size_t begin, std::size_t end) {
-
-    XPtr<BigMatrix> bigidx(idx);
-    Mat<int> bigidxarma = Mat<int>((int *)bigidx->matrix(), bigidx->nrow(), bigidx->ncol(), false);
-
-    for (std::size_t i = begin; i < end; ++i) {
-
-      uword fidx = bigidxarma(i, 0);
-      uword tidx = bigidxarma(i, 1);
 
       rowvec f = p.row(fidx-1);
       rowvec t = p.row(tidx-1);
@@ -88,7 +57,7 @@ arma::vec BatchMat(const arma::mat p,
 
   // create the worker
   std::shared_ptr<SDmeasure> sdfunc = SDFactory(p, idx).createSDFunc(attrs, arguments);
-  BatchCoreMat* batchWorker = new BatchCoreMat(p, idx, sdfunc, res);
+  BatchCore<arma::umat>* batchWorker = new BatchCore<arma::umat>(p, idx, sdfunc, res);
 
   // call it with parallelFor
   parallelFor(0, n, (*batchWorker));
@@ -108,13 +77,14 @@ arma::vec BatchBigmat(const arma::mat p,
 
   XPtr<BigMatrix> bigidx(idx);
   unsigned long n = bigidx->nrow();
+  Mat<int> bigidxarma = Mat<int>((int *)bigidx->matrix(), bigidx->nrow(), bigidx->ncol(), false);
 
   // allocate the result vector we will return
   vec res(n);
 
   // create the worker
-  std::shared_ptr<SDmeasure> sdfunc = SDFactory(p, idx).createSDFunc(attrs, arguments);
-  BatchCoreBigmat* batchWorker = new BatchCoreBigmat(p, idx, sdfunc, res);
+  std::shared_ptr<SDmeasure> sdfunc = SDFactory(p, bigidxarma).createSDFunc(attrs, arguments);
+  BatchCore<arma::Mat<int>>* batchWorker = new BatchCore<arma::Mat<int>>(p, bigidxarma, sdfunc, res);
 
   // call it with parallelFor
   parallelFor(0, n, (*batchWorker));
