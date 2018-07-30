@@ -19,12 +19,12 @@ struct BatchCore : public Worker {
   const mat& p;
   const T& idx;
   std::shared_ptr<SDmeasure>& sdfunc;
-  vec& res;
+  NumericVector& res;
 
   BatchCore(const arma::mat& p,
             const T& idx,
             std::shared_ptr<SDmeasure>& sdfunc,
-            arma::vec& res)
+            Rcpp::NumericVector& res)
     : p(p), idx(idx), sdfunc(sdfunc), res(res) {}
 
   void operator()(std::size_t begin, std::size_t end) {
@@ -39,7 +39,7 @@ struct BatchCore : public Worker {
       rowvec trow = p.row(tidx-1);
       vec t(trow.begin(), trow.n_elem);
 
-      res(i) = sdfunc->calcSD(f, t);
+      res[i] = sdfunc->calcSD(f, t);
     }
   }
 };
@@ -47,15 +47,15 @@ struct BatchCore : public Worker {
 
 
 // [[Rcpp::export]]
-arma::vec BatchMat(const arma::mat p,
-                   const arma::umat idx,
-                   Rcpp::List attrs,
-                   Rcpp::List arguments) {
+Rcpp::NumericVector BatchMat(const arma::mat p,
+                             const arma::umat idx,
+                             Rcpp::List attrs,
+                             Rcpp::List arguments) {
 
   unsigned long n = idx.n_rows;
 
   // allocate the result vector we will return
-  vec res(n);
+  NumericVector res(n);
 
   // create the worker
   std::shared_ptr<SDmeasure> sdfunc = SDFactory(p, idx).createSDFunc(attrs, arguments);
@@ -72,17 +72,17 @@ arma::vec BatchMat(const arma::mat p,
 
 
 // [[Rcpp::export]]
-arma::vec BatchBigmat(const arma::mat p,
-                      SEXP idx,
-                      Rcpp::List attrs,
-                      Rcpp::List arguments) {
+Rcpp::NumericVector BatchBigmat(const arma::mat p,
+                                SEXP idx,
+                                Rcpp::List attrs,
+                                Rcpp::List arguments) {
 
   XPtr<BigMatrix> bigidx(idx);
   unsigned long n = bigidx->nrow();
   Mat<int> bigidxarma = Mat<int>((int *)bigidx->matrix(), bigidx->nrow(), bigidx->ncol(), false);
 
   // allocate the result vector we will return
-  vec res(n);
+  NumericVector res(n);
 
   // create the worker
   std::shared_ptr<SDmeasure> sdfunc = SDFactory(p, bigidxarma).createSDFunc(attrs, arguments);

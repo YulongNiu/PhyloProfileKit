@@ -7,7 +7,7 @@
 using namespace Rcpp;
 
 // BatchMat
-arma::vec BatchMat(const arma::mat p, const arma::umat idx, Rcpp::List attrs, Rcpp::List arguments);
+Rcpp::NumericVector BatchMat(const arma::mat p, const arma::umat idx, Rcpp::List attrs, Rcpp::List arguments);
 RcppExport SEXP _PhyloProfileKit_BatchMat(SEXP pSEXP, SEXP idxSEXP, SEXP attrsSEXP, SEXP argumentsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -21,7 +21,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // BatchBigmat
-arma::vec BatchBigmat(const arma::mat p, SEXP idx, Rcpp::List attrs, Rcpp::List arguments);
+Rcpp::NumericVector BatchBigmat(const arma::mat p, SEXP idx, Rcpp::List attrs, Rcpp::List arguments);
 RcppExport SEXP _PhyloProfileKit_BatchBigmat(SEXP pSEXP, SEXP idxSEXP, SEXP attrsSEXP, SEXP argumentsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;

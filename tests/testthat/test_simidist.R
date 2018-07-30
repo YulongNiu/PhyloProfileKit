@@ -2,6 +2,20 @@ context('simdist')
 
 library('stats')
 library('bioDist')
+library('magrittr')
+
+BatchMatR <- function(p, pidx, FUN) {
+
+  ppiNum <- nrow(pidx)
+  res <- double(ppiNum)
+
+  for (i in seq_len(ppiNum)) {
+    ft <- p[c(pidx[i, 1], pidx[i, 2]), ]
+    res[i] <- FUN(t(ft))
+  }
+
+  return(res)
+}
 
 SimCorR <- function(pairProfile) {
   return(cor(pairProfile[, 1], pairProfile[, 2]))
@@ -9,6 +23,7 @@ SimCorR <- function(pairProfile) {
 
 SimJaccardR <- function(pairProfile) {
   f <- pairProfile[, 1]
+
   t <- pairProfile[, 2]
 
   A <- sum((f + 2*t) == 3)
@@ -18,10 +33,13 @@ SimJaccardR <- function(pairProfile) {
 }
 
 
-DistHammingR <- function(pairProfile) {
+DistManhattanR <- function(pairProfile) {
   return(sum(abs(pairProfile[, 1] - pairProfile[, 2])))
 }
 
+DistHammingR <- function(pairProfile) {
+  return(sum(pairProfile[, 1] != pairProfile[, 2]))
+}
 
 SimMIBinR <- function(pairProfile) {
   combVec <- pairProfile[, 1] + 2 * pairProfile[, 2]
@@ -50,7 +68,7 @@ SimMIBinR <- function(pairProfile) {
 }
 
 DistEuclideanR <- function(pairProfile) {
-  return(sqrt(sum((pairProfile[, 1] - pairProfile[, 2])^2)))
+    return(sqrt(sum((pairProfile[, 1] - pairProfile[, 2])^2)))
 }
 
 SimMIContiR <- function(pairProfile) {
@@ -58,19 +76,25 @@ SimMIContiR <- function(pairProfile) {
 }
 
 #######################test R version and Arma version############
-testNum <- 10000
+testNum <- 2
+prow  <- 1e5
+pcol  <- 1e3
+idxnum <- 1e3
 
-sd1 <- numeric(testNum)
-sd2 <- numeric(testNum)
-sd3 <- numeric(testNum)
+sd1 <- vector('list', testNum)
+sd2 <- vector('list', testNum)
+sd3 <- vector('list', testNum)
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~~cor~~~~~~~~~~~~~~~~~~~
 for(i in 1:testNum) {
-  speNum <- 20
-  pptmp <- matrix(rnorm(2 * speNum), ncol = 2)
 
-  sd1[i] <- SimCorR(pptmp)
-  sd2[i] <- SimCor(pptmp[, 1], pptmp[, 2])
+  p <- sample(0:1, prow * pcol, replace = TRUE) %>%
+    matrix(nrow = prow)
+  pidx <- sample(1:prow, idxnum * 2, replace = TRUE) %>%
+    matrix(nrow = idxnum)
+
+  sd1[[i]] <- BatchMatR(p, pidx, SimCorR)
+  sd2[[i]] <- BatchMat(p, pidx, list(method = 'SimCor'), list())
 }
 
 test_that('Pearson correlation coefficient are equal in two versions.', {
@@ -109,12 +133,16 @@ test_that('Binning MI similarity are equal in two versions.', {
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~~Jaccard~~~~~~~~~~~~~~~~~~~
 for(i in 1:testNum) {
-  speNum <- 20
-  pptmp <- matrix(sample(0:1, 2 * speNum, replace = TRUE), ncol = 2)
 
-  sd1[i] <- SimJaccardR(pptmp)
-  sd2[i] <- SimJaccard(pptmp[, 1], pptmp[, 2])
+  p <- sample(0:1, prow * pcol, replace = TRUE) %>%
+    matrix(nrow = prow)
+  pidx <- sample(1:prow, idxnum * 2, replace = TRUE) %>%
+    matrix(nrow = idxnum)
+
+  sd1[[i]] <- BatchMatR(p, pidx, SimJaccardR)
+  sd2[[i]] <- BatchMat(p, pidx, list(method = 'SimJaccard'), list())
 }
+
 
 test_that('Jaccard similarity are equal in two versions.', {
   expect_equal(all.equal(sd1, sd2), TRUE)
@@ -123,11 +151,14 @@ test_that('Jaccard similarity are equal in two versions.', {
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~~Hamming~~~~~~~~~~~~~~~~~~~
 for(i in 1:testNum) {
-  speNum <- 20
-  pptmp <- matrix(rnorm(2 * speNum), ncol = 2)
 
-  sd1[i] <- DistHammingR(pptmp)
-  sd2[i] <- DistHamming(pptmp[, 1], pptmp[, 2])
+  p <- sample(0:1, prow * pcol, replace = TRUE) %>%
+    matrix(nrow = prow)
+  pidx <- sample(1:prow, idxnum * 2, replace = TRUE) %>%
+    matrix(nrow = idxnum)
+
+  sd1[[i]] <- BatchMatR(p, pidx, DistHammingR)
+  sd2[[i]] <- BatchMat(p, pidx, list(method = 'DistHamming'), list())
 }
 
 test_that('Hamming distances are equal in two versions.', {
@@ -135,19 +166,37 @@ test_that('Hamming distances are equal in two versions.', {
 })
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-##~~~~~~~~~~~~~~~~~~~~~~~~~Euclidean MI~~~~~~~~~~~~~~~~~~~
+##~~~~~~~~~~~~~~~~~~~~~~~~~Manhattan~~~~~~~~~~~~~~~~~
 for(i in 1:testNum) {
-  speNum <- 20
-  pptmp <- matrix(rnorm(2 * speNum), ncol = 2)
 
-  sd1[i] <- DistEuclideanR(pptmp)
-  sd2[i] <- DistEuclidean(pptmp[, 1], pptmp[, 2])
-  sd3[i] <- as.numeric(dist(t(pptmp), method = 'euclidean'))
+  p <- sample(0:1, prow * pcol, replace = TRUE) %>%
+    matrix(nrow = prow)
+  pidx <- sample(1:prow, idxnum * 2, replace = TRUE) %>%
+    matrix(nrow = idxnum)
+
+  sd1[[i]] <- BatchMatR(p, pidx, DistManhattanR)
+  sd2[[i]] <- BatchMat(p, pidx, list(method = 'DistManhattan'), list())
+}
+
+test_that('Manhattan distances are equal in two versions.', {
+  expect_equal(all.equal(sd1, sd2), TRUE)
+})
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+##~~~~~~~~~~~~~~~~~~~~~~~~~Euclidean~~~~~~~~~~~~~~~~~~~
+for(i in 1:testNum) {
+
+  p <- sample(0:1, prow * pcol, replace = TRUE) %>%
+    matrix(nrow = prow)
+  pidx <- sample(1:prow, idxnum * 2, replace = TRUE) %>%
+    matrix(nrow = idxnum)
+
+  sd1[[i]] <- BatchMatR(p, pidx, DistEuclideanR)
+  sd2[[i]] <- BatchMat(p, pidx, list(method = 'DistEuclidean'), list())
 }
 
 test_that('Euclidean distances are equal in two versions.', {
   expect_equal(all.equal(sd1, sd2), TRUE)
-  expect_equal(all.equal(sd1, sd3), TRUE)
 })
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ########################################################################

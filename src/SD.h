@@ -4,6 +4,27 @@
 #include "SDmeasure.h"
 
 
+//' Similarity or distance of paired phylogenetic profile
+//'
+//' \code{SimCor()}: Person's correlation coefficient.
+//'
+//' \code{SimJaccard()}: Jaccard similarity.
+//'
+//' \code{SimMIBin()}: Mutual information for binning data.
+//'
+//' \code{SimMIConti()}: Mutual information for continuous data.
+//'
+//' \code{DistHamming()}: Hamming distance.
+//'
+//' \code{DistEuclidean()}: Euclidean distance.
+//'
+//' @title Similarity and distance
+//' @param f Numeric vector indicating a gene profile.
+//' @param t Numeric vector indicating a gene profile.
+//' @return A numeric value.
+//' @author Yulong Niu \email{yulong.niu@@hotmail.com}
+//' @rdname simdist
+//' @keywords internal
 //==============================================
 // Person's correlation coefficient (similarity)
 //==============================================
@@ -17,6 +38,9 @@ public:
 };
 
 
+//' @inheritParams SimCor
+//' @rdname simdist
+//' @keywords internal
 //=======================
 // Jaccard similarity
 //=======================
@@ -30,6 +54,9 @@ public:
   }
 };
 
+//' @inheritParams SimCor
+//' @rdname simdist
+//' @keywords internal
 //=======================
 // Hamming distance
 //=======================
@@ -42,6 +69,9 @@ public:
 };
 
 
+//' @inheritParams SimCor
+//' @rdname simdist
+//' @keywords internal
 //=======================
 // Manhattan distance
 //=======================
@@ -54,6 +84,9 @@ public:
 };
 
 
+//' @inheritParams SimCor
+//' @rdname simdist
+//' @keywords internal
 //=======================
 // Euclidean distance
 //=======================
@@ -66,6 +99,10 @@ public:
 };
 
 
+//' @param p The p-norm parameter.
+//' @inheritParams SimCor
+//' @rdname simdist
+//' @keywords internal
 //=======================
 // Minkowski distance
 //=======================
@@ -83,7 +120,9 @@ public:
   }
 };
 
-
+//' @inheritParams SimCor
+//' @rdname simdist
+//' @keywords internal
 //============================
 // Custom similarity/distance
 //============================
