@@ -5,8 +5,8 @@
 \alias{GetPhyloCorMat}
 \title{Plot correlation matrix}
 \usage{
-PlotPhyloCor(phyloData, gradientCol = colorRampPalette(rev(brewer.pal(n = 7,
-  name = "RdYlBu")))(100), geneNameSize = 3, geneNameCol = "grey55",
+PlotPhyloCor(phyloData, gradientCol = colorRampPalette(rev(brewer.pal(n =
+  7, name = "RdYlBu")))(100), geneNameSize = 3, geneNameCol = "grey55",
   geneBetweenBlockCol = NA, geneCol, showCorVal = TRUE,
   widthsShinkage = c(0.9, 0.7, 0.3, 7), heightsShinkage = c(7, 0.7))
 

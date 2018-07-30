@@ -1,6 +1,6 @@
 #include <RcppArmadillo.h>
 // [[Rcpp::depends(RcppArmadillo)]]
-#include "normNPP.h"
+// #include "normNPP.h"
 
 using namespace Rcpp;
 using namespace arma;

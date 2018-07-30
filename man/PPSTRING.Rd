@@ -4,8 +4,8 @@
 \alias{PPSTRING}
 \title{Constructor from the STRING database}
 \usage{
-PPSTRING(speID, idx = 1:10, symbets = FALSE, STRINGnorm = FALSE, n = 1,
-  verbose = FALSE)
+PPSTRING(speID, idx = 1:10, symbets = FALSE, STRINGnorm = FALSE,
+  n = 1, verbose = FALSE)
 }
 \arguments{
 \item{speID}{Number. NCBI taxonomy identifier must be present in the STRING database. Use \code{get_STRING_species()} from the STRINGdb package to determine supported organisms.}

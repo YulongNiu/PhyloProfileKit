@@ -5,8 +5,9 @@
 \alias{BayesTraitsTest}
 \title{Use BayesTraits to test the functional linkages.}
 \usage{
-BayesTraitsMode(BayesTraitsPath, treeFilePath, binFilePath, method = "MCMC",
-  priorAll = "exp 10", Stones = "100 1000", mode = "Indep", uniID = "1")
+BayesTraitsMode(BayesTraitsPath, treeFilePath, binFilePath,
+  method = "MCMC", priorAll = "exp 10", Stones = "100 1000",
+  mode = "Indep", uniID = "1")
 
 BayesTraitsTest(...)
 }

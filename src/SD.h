@@ -3,6 +3,25 @@
 
 #include "SDmeasure.h"
 
+
+//==============================================
+// Person's correlation coefficient (similarity)
+//==============================================
+class SimCor : public SDmeasure {
+public:
+  double calcSD(const arma::rowvec& f,
+                const arma::rowvec& t) {
+
+    mat corMat = cor(f, t);
+
+    return corMat(0, 0);
+  }
+};
+
+
+//=======================
+// Jaccard similarity
+//=======================
 class SimJaccard : public SDmeasure {
 public:
   double calcSD(const arma::rowvec& f,
@@ -15,7 +34,9 @@ public:
   }
 };
 
-
+//=======================
+// Hamming distance
+//=======================
 class DistHamming : public SDmeasure {
 public:
   double calcSD(const arma::rowvec& f,
@@ -26,6 +47,9 @@ public:
 };
 
 
+//=======================
+// Manhattan distance
+//=======================
 class DistManhattan : public SDmeasure {
 public:
   double calcSD(const arma::rowvec& f,
@@ -36,6 +60,9 @@ public:
 };
 
 
+//=======================
+// Euclidean distance
+//=======================
 class DistEuclidean : public SDmeasure {
 public:
   double calcSD(const arma::rowvec& f,
@@ -46,6 +73,9 @@ public:
 };
 
 
+//=======================
+// Minkowski distance
+//=======================
 class DistMinkowski : public SDmeasure {
 private:
   unsigned int p;
@@ -60,5 +90,22 @@ public:
   }
 };
 
+
+//============================
+// Custom similarity/distance
+//============================
+class SDCustom : public SDmeasure {
+private:
+  funcPtr func;
+public:
+  explicit SDCustom (funcPtr function) : func(function) {
+    this->func = function;
+  };
+  ~SDCustom () {}
+  double calcSD(const arma::rowvec &f,
+                const arma::rowvec &t) {
+    return func(f, t);
+  }
+};
 
 #endif

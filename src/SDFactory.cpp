@@ -8,7 +8,10 @@ std::shared_ptr<SDmeasure> SDFactory::createSDFunc(Rcpp::List &attrs,
   std::string sdName = attrs["method"];
   std::shared_ptr<SDmeasure> sdfunc = NULL;
 
-  if (isEqualStr(sdName, "SimJaccard")) {
+  if (isEqualStr(sdName, "SimCor")) {
+    sdfunc = std::make_shared<SimCor>();
+  }
+  else if (isEqualStr(sdName, "SimJaccard")) {
     sdfunc = std::make_shared<SimJaccard>();
   }
   else if (isEqualStr(sdName, "DistHamming")) {
@@ -26,6 +29,11 @@ std::shared_ptr<SDmeasure> SDFactory::createSDFunc(Rcpp::List &attrs,
       p = Rcpp::as<int>(arguments["p"]);
     } else {}
     sdfunc = std::make_shared<DistMinkowski>(p);
+  }
+  if (isEqualStr(sdName, "custom")) {
+    SEXP func_ = arguments["func"];
+    funcPtr func = *Rcpp::XPtr<funcPtr>(func_);
+    sdfunc = std::make_shared<SDCustom>(func);
   } else {}
 
   return sdfunc;
