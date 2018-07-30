@@ -5,26 +5,6 @@
 using namespace Rcpp;
 using namespace arma;
 
-//' @inheritParams SimCor
-//' @rdname simdist
-//' @keywords internal
-// [[Rcpp::export]]
-double SimMIBin(arma::vec f,
-                arma::vec t) {
-
-  vec combVec = f + 2*t;
-
-  double N = f.n_elem;
-  double A = sum(combVec == 3);
-  double B = sum(combVec == 1);
-  double C = sum(combVec == 2);
-  double D = N - A - B - C;
-
-  double I = eachMI(A, B, C, N) + eachMI(B, A, D, N) + eachMI(C, A, D, N) + eachMI(D, C, B, N);
-
-  return I;
-
-}
 
 //' Utilities for MI
 //'
@@ -53,24 +33,6 @@ double eachMI(double p1,
   }
 }
 
-//' @inheritParams SimCor
-//' @param bin Integer.
-//' @rdname simdist
-//' @keywords internal
-// [[Rcpp::export]]
-double SimMIConti(arma::vec f,
-                  arma::vec t,
-                  arma::uword bin) {
-
-  double MI;
-  double n = f.n_elem;
-
-  MI = Info(hist(f, bin), n) + Info(hist(t, bin), n) - Info(HistTwo(f, t, bin), n);
-
-  return MI;
-
-}
-
 
 //' @param v Histogram of counts.
 //' @inheritParams eachMI
@@ -89,8 +51,8 @@ double Info(arma::uvec v,
   return -sum(p % log(p));
 }
 
-//' @inheritParams SimMIConti
-//' @param x, y Numeric vector.
+//' @param bin A positive \code{integer} indicating the bin.
+//' @param x, y \code{numeric vector}.
 //' @rdname utilities-MI
 //' @keywords internal
 // [[Rcpp::export]]
@@ -157,8 +119,8 @@ arma::uword FindInterSingle(double value,
 //' @rdname utilities-MI
 //' @keywords internal
 // [[Rcpp::export]]
-arma::vec gInter (arma::vec x,
-                  arma::uword bin) {
+arma::vec gInter(arma::vec x,
+                 arma::uword bin) {
 
   double minVal = x.min();
   double maxVal = x.max();

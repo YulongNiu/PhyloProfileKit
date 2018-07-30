@@ -93,13 +93,6 @@ MergeList <- function(x) {
     .Call(`_PhyloProfileKit_MergeList`, x)
 }
 
-#' @inheritParams SimCor
-#' @rdname simdist
-#' @keywords internal
-SimMIBin <- function(f, t) {
-    .Call(`_PhyloProfileKit_SimMIBin`, f, t)
-}
-
 #' Utilities for MI
 #'
 #' \code{eachMI()}: Info for a cell.
@@ -119,14 +112,6 @@ eachMI <- function(p1, p2, p3, n) {
     .Call(`_PhyloProfileKit_eachMI`, p1, p2, p3, n)
 }
 
-#' @inheritParams SimCor
-#' @param bin Integer.
-#' @rdname simdist
-#' @keywords internal
-SimMIConti <- function(f, t, bin) {
-    .Call(`_PhyloProfileKit_SimMIConti`, f, t, bin)
-}
-
 #' @param v Histogram of counts.
 #' @inheritParams eachMI
 #' @rdname utilities-MI
@@ -135,8 +120,8 @@ Info <- function(v, n) {
     .Call(`_PhyloProfileKit_Info`, v, n)
 }
 
-#' @inheritParams SimMIConti
-#' @param x, y Numeric vector.
+#' @param bin A positive \code{integer} indicating the bin.
+#' @param x, y \code{numeric vector}.
 #' @rdname utilities-MI
 #' @keywords internal
 HistTwo <- function(x, y, bin) {

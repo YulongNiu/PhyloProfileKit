@@ -2,6 +2,7 @@
 #define SD_H_
 
 #include "SDmeasure.h"
+#include "MI.h"
 
 
 //' Similarity or distance of paired phylogenetic profile
@@ -99,7 +100,7 @@ public:
 };
 
 
-//' @param p The p-norm parameter.
+//' @param p \code{numeric} value indicating p-norm parameter.
 //' @inheritParams SimCor
 //' @rdname simdist
 //' @keywords internal
@@ -117,6 +118,57 @@ public:
   double calcSD(const arma::vec& f,
                 const arma::vec& t) {
     return pow(arma::accu(arma::pow(arma::abs(f - t), this->p)), 1.0 / this->p);
+  }
+};
+
+
+//' @inheritParams SimCor
+//' @rdname simdist
+//' @keywords internal
+//======================================
+//  Bin mutual information (similarity)
+//======================================
+class SimMIBin : public SDmeasure {
+public:
+  double calcSD(const arma::vec& f,
+                const arma::vec& t) {
+
+    vec combVec = f + 2*t;
+
+    double N = f.n_elem;
+    double A = sum(combVec == 3);
+    double B = sum(combVec == 1);
+    double C = sum(combVec == 2);
+    double D = N - A - B - C;
+
+    double I = eachMI(A, B, C, N) + eachMI(B, A, D, N) + eachMI(C, A, D, N) + eachMI(D, C, B, N);
+
+    return I;
+  }
+};
+
+//' @param bin A positive \code{Integer} indicating the bin.
+//' @inheritParams SimCor
+//' @rdname simdist
+//' @keywords internal
+//=============================================
+//  Continuous mutual information (similarity)
+//=============================================
+class SimMIConti : public SDmeasure {
+private:
+  uword bin;
+public:
+  explicit SimMIConti (arma::uword bin) {
+    this->bin = bin;
+  }
+  ~SimMIConti() {}
+  double calcSD(const arma::vec& f,
+                const arma::vec& t) {
+
+    double n = f.n_elem;
+    double MI = Info(hist(f, this->bin), n) + Info(hist(t, this->bin), n) - Info(HistTwo(f, t, this->bin), n);
+
+    return MI;
   }
 };
 

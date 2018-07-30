@@ -32,13 +32,20 @@ SimJaccardR <- function(pairProfile) {
   return(jac)
 }
 
-
 DistManhattanR <- function(pairProfile) {
   return(sum(abs(pairProfile[, 1] - pairProfile[, 2])))
 }
 
 DistHammingR <- function(pairProfile) {
   return(sum(pairProfile[, 1] != pairProfile[, 2]))
+}
+
+DistEuclideanR <- function(pairProfile) {
+    return(sqrt(sum((pairProfile[, 1] - pairProfile[, 2])^2)))
+}
+
+SimMIContiR <- function(pairProfile) {
+  return(as.numeric(mutualInfo(t(pairProfile))))
 }
 
 SimMIBinR <- function(pairProfile) {
@@ -67,13 +74,6 @@ SimMIBinR <- function(pairProfile) {
   return(I)
 }
 
-DistEuclideanR <- function(pairProfile) {
-    return(sqrt(sum((pairProfile[, 1] - pairProfile[, 2])^2)))
-}
-
-SimMIContiR <- function(pairProfile) {
-  return(as.numeric(mutualInfo(t(pairProfile))))
-}
 
 #######################test R version and Arma version############
 testNum <- 2
@@ -83,7 +83,6 @@ idxnum <- 1e3
 
 sd1 <- vector('list', testNum)
 sd2 <- vector('list', testNum)
-sd3 <- vector('list', testNum)
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~~cor~~~~~~~~~~~~~~~~~~~
 for(i in 1:testNum) {
@@ -98,35 +97,6 @@ for(i in 1:testNum) {
 }
 
 test_that('Pearson correlation coefficient are equal in two versions.', {
-  expect_equal(all.equal(sd1, sd2), TRUE)
-})
-##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-##~~~~~~~~~~~~~~~~~~~~~~~~~continuous MI~~~~~~~~~~~~~~~~~~~
-for(i in 1:testNum) {
-  speNum <- 20
-  pptmp <- matrix(rnorm(2 * speNum), ncol = 2)
-
-  sd1[i] <- SimMIContiR(pptmp)
-  sd2[i] <- SimMIConti(pptmp[, 1], pptmp[, 2], bin = 10)
-
-}
-
-test_that('Continuous MI similarity are equal in two versions.', {
-  expect_equal(all.equal(sd1, sd2), TRUE)
-})
-##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-##~~~~~~~~~~~~~~~~~~~~~~~~~binning MI~~~~~~~~~~~~~~~~~~~
-for(i in 1:testNum) {
-  speNum <- 20
-  pptmp <- matrix(sample(0:1, 2 * speNum, replace = TRUE), ncol = 2)
-
-  sd1[i] <- SimMIBinR(pptmp)
-  sd2[i] <- SimMIBin(pptmp[, 1], pptmp[, 2])
-}
-
-test_that('Binning MI similarity are equal in two versions.', {
   expect_equal(all.equal(sd1, sd2), TRUE)
 })
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -196,6 +166,41 @@ for(i in 1:testNum) {
 }
 
 test_that('Euclidean distances are equal in two versions.', {
+  expect_equal(all.equal(sd1, sd2), TRUE)
+})
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+##~~~~~~~~~~~~~~~~~~~~~~~~~binning MI~~~~~~~~~~~~~~~~~~~
+for(i in 1:testNum) {
+
+  p <- sample(0:1, prow * pcol, replace = TRUE) %>%
+    matrix(nrow = prow)
+  pidx <- sample(1:prow, idxnum * 2, replace = TRUE) %>%
+    matrix(nrow = idxnum)
+
+  sd1[[i]] <- BatchMatR(p, pidx, SimMIBinR)
+  sd2[[i]] <- BatchMat(p, pidx, list(method = 'SimMIBin'), list())
+}
+
+
+test_that('Binning MI similarity are equal in two versions.', {
+  expect_equal(all.equal(sd1, sd2), TRUE)
+})
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+##~~~~~~~~~~~~~~~~~~~~~~~~~continuous MI~~~~~~~~~~~~~~~~~~~
+for(i in 1:testNum) {
+
+  p <- sample(0:1, prow * pcol, replace = TRUE) %>%
+    matrix(nrow = prow)
+  pidx <- sample(1:prow, idxnum * 2, replace = TRUE) %>%
+    matrix(nrow = idxnum)
+
+  sd1[[i]] <- BatchMatR(p, pidx, SimMIContiR)
+  sd2[[i]] <- BatchMat(p, pidx, list(method = 'SimMIConti'), list(bin = 10))
+}
+
+test_that('Continuous MI similarity are equal in two versions.', {
   expect_equal(all.equal(sd1, sd2), TRUE)
 })
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

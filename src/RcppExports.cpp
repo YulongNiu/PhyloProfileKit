@@ -108,18 +108,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// SimMIBin
-double SimMIBin(arma::vec f, arma::vec t);
-RcppExport SEXP _PhyloProfileKit_SimMIBin(SEXP fSEXP, SEXP tSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::vec >::type f(fSEXP);
-    Rcpp::traits::input_parameter< arma::vec >::type t(tSEXP);
-    rcpp_result_gen = Rcpp::wrap(SimMIBin(f, t));
-    return rcpp_result_gen;
-END_RCPP
-}
 // eachMI
 double eachMI(double p1, double p2, double p3, double n);
 RcppExport SEXP _PhyloProfileKit_eachMI(SEXP p1SEXP, SEXP p2SEXP, SEXP p3SEXP, SEXP nSEXP) {
@@ -131,19 +119,6 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type p3(p3SEXP);
     Rcpp::traits::input_parameter< double >::type n(nSEXP);
     rcpp_result_gen = Rcpp::wrap(eachMI(p1, p2, p3, n));
-    return rcpp_result_gen;
-END_RCPP
-}
-// SimMIConti
-double SimMIConti(arma::vec f, arma::vec t, arma::uword bin);
-RcppExport SEXP _PhyloProfileKit_SimMIConti(SEXP fSEXP, SEXP tSEXP, SEXP binSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::vec >::type f(fSEXP);
-    Rcpp::traits::input_parameter< arma::vec >::type t(tSEXP);
-    Rcpp::traits::input_parameter< arma::uword >::type bin(binSEXP);
-    rcpp_result_gen = Rcpp::wrap(SimMIConti(f, t, bin));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -320,9 +295,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_PhyloProfileKit_InferEdge", (DL_FUNC) &_PhyloProfileKit_InferEdge, 3},
     {"_PhyloProfileKit_DolloDist", (DL_FUNC) &_PhyloProfileKit_DolloDist, 4},
     {"_PhyloProfileKit_MergeList", (DL_FUNC) &_PhyloProfileKit_MergeList, 1},
-    {"_PhyloProfileKit_SimMIBin", (DL_FUNC) &_PhyloProfileKit_SimMIBin, 2},
     {"_PhyloProfileKit_eachMI", (DL_FUNC) &_PhyloProfileKit_eachMI, 4},
-    {"_PhyloProfileKit_SimMIConti", (DL_FUNC) &_PhyloProfileKit_SimMIConti, 3},
     {"_PhyloProfileKit_Info", (DL_FUNC) &_PhyloProfileKit_Info, 2},
     {"_PhyloProfileKit_HistTwo", (DL_FUNC) &_PhyloProfileKit_HistTwo, 3},
     {"_PhyloProfileKit_FindInter", (DL_FUNC) &_PhyloProfileKit_FindInter, 2},

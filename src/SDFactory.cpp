@@ -30,7 +30,17 @@ std::shared_ptr<SDmeasure> SDFactory::createSDFunc(Rcpp::List &attrs,
     } else {}
     sdfunc = std::make_shared<DistMinkowski>(p);
   }
-  if (isEqualStr(sdName, "custom")) {
+  else if (isEqualStr(sdName, "SimMIBin")) {
+    sdfunc = std::make_shared<SimMIBin>();
+  }
+  else if (isEqualStr(sdName, "SimMIConti")) {
+    uword bin = 10;
+    if (arguments.containsElementNamed("bin")) {
+      bin = Rcpp::as<uword>(arguments["bin"]);
+    } else {}
+    sdfunc = std::make_shared<SimMIConti>(bin);
+  }
+  else if (isEqualStr(sdName, "custom")) {
     SEXP func_ = arguments["func"];
     funcPtr func = *Rcpp::XPtr<funcPtr>(func_);
     sdfunc = std::make_shared<SDCustom>(func);

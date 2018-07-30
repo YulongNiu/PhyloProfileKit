@@ -31,9 +31,9 @@ CountRepeat(x)
 
 \item{v}{Histogram of counts.}
 
-\item{x, }{y Numeric vector.}
+\item{x, }{y \code{numeric vector}.}
 
-\item{bin}{Integer.}
+\item{bin}{A positive \code{integer} indicating the bin.}
 
 \item{value}{Number.}
 

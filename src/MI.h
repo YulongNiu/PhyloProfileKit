@@ -4,17 +4,10 @@
 #include <RcppArmadillo.h>
 #include <Rcpp.h>
 
-double SimMIBin(arma::vec f,
-                arma::vec t);
-
 double eachMI(double p1,
               double p2,
               double p3,
               double n);
-
-double SimMIConti(arma::vec f,
-                  arma::vec t,
-                  arma::uword bin);
 
 double Info(arma::uvec v,
             double n);
