@@ -3,7 +3,7 @@
 
 #include <RcppArmadillo.h>
 
-typedef double (*funcPtr)(const arma::rowvec &f, const arma::rowvec &t);
+typedef double (*funcPtr)(const arma::vec &f, const arma::vec &t);
 
 using namespace std;
 using namespace arma;
@@ -11,7 +11,7 @@ using namespace arma;
 class SDmeasure {
 public:
   virtual ~SDmeasure() {};
-  virtual double calcSD(const arma::rowvec &f, const arma::rowvec &t) = 0;
+  virtual double calcSD(const arma::vec &f, const arma::vec &t) = 0;
 };
 
 #endif

@@ -9,11 +9,9 @@
 //==============================================
 class SimCor : public SDmeasure {
 public:
-  double calcSD(const arma::rowvec& f,
-                const arma::rowvec& t) {
-
+  double calcSD(const arma::vec& f,
+                const arma::vec& t) {
     mat corMat = cor(f, t);
-
     return corMat(0, 0);
   }
 };
@@ -24,12 +22,10 @@ public:
 //=======================
 class SimJaccard : public SDmeasure {
 public:
-  double calcSD(const arma::rowvec& f,
-                const arma::rowvec& t) {
-
+  double calcSD(const arma::vec& f,
+                const arma::vec& t) {
     vec combVec = f + 2*t;
     double A = sum(combVec == 3);
-
     return  A / (sum(f) + sum(t) - A);
   }
 };
@@ -39,9 +35,8 @@ public:
 //=======================
 class DistHamming : public SDmeasure {
 public:
-  double calcSD(const arma::rowvec& f,
-                const arma::rowvec& t) {
-
+  double calcSD(const arma::vec& f,
+                const arma::vec& t) {
     return sum(f != t);
   }
 };
@@ -52,9 +47,8 @@ public:
 //=======================
 class DistManhattan : public SDmeasure {
 public:
-  double calcSD(const arma::rowvec& f,
-                const arma::rowvec& t) {
-
+  double calcSD(const arma::vec& f,
+                const arma::vec& t) {
     return sum(abs(f - t));
   }
 };
@@ -65,9 +59,8 @@ public:
 //=======================
 class DistEuclidean : public SDmeasure {
 public:
-  double calcSD(const arma::rowvec& f,
-                const arma::rowvec& t) {
-
+  double calcSD(const arma::vec& f,
+                const arma::vec& t) {
     return sqrt(sum(square(f - t)));
   }
 };
@@ -84,8 +77,8 @@ public:
     this->p = p;
   }
   ~DistMinkowski() {}
-  double calcSD(const arma::rowvec& f,
-                const arma::rowvec& t) {
+  double calcSD(const arma::vec& f,
+                const arma::vec& t) {
     return pow(arma::accu(arma::pow(arma::abs(f - t), this->p)), 1.0 / this->p);
   }
 };
@@ -102,8 +95,8 @@ public:
     this->func = function;
   };
   ~SDCustom () {}
-  double calcSD(const arma::rowvec &f,
-                const arma::rowvec &t) {
+  double calcSD(const arma::vec &f,
+                const arma::vec &t) {
     return func(f, t);
   }
 };

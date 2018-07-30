@@ -34,8 +34,10 @@ struct BatchCore : public Worker {
       uword fidx = idx(i, 0);
       uword tidx = idx(i, 1);
 
-      rowvec f = p.row(fidx-1);
-      rowvec t = p.row(tidx-1);
+      rowvec frow = p.row(fidx-1);
+      vec f(frow.begin(), frow.n_elem);
+      rowvec trow = p.row(tidx-1);
+      vec t(trow.begin(), trow.n_elem);
 
       res(i) = sdfunc->calcSD(f, t);
     }
