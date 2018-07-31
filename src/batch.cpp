@@ -77,16 +77,16 @@ Rcpp::NumericVector BatchBigmat(const arma::mat p,
                                 Rcpp::List attrs,
                                 Rcpp::List arguments) {
 
-  XPtr<BigMatrix> bigidx(idx);
-  unsigned long n = bigidx->nrow();
-  Mat<int> bigidxarma = Mat<int>((int *)bigidx->matrix(), bigidx->nrow(), bigidx->ncol(), false);
+  XPtr<BigMatrix> bigidx_(idx);
+  unsigned long n = bigidx_->nrow();
+  Mat<int> bigidx = Mat<int>((int *)bigidx_->matrix(), bigidx_->nrow(), bigidx_->ncol(), false);
 
   // allocate the result vector we will return
   NumericVector res(n);
 
   // create the worker
-  std::shared_ptr<SDmeasure> sdfunc = SDFactory(p, bigidxarma).createSDFunc(attrs, arguments);
-  BatchCore<arma::Mat<int>>* batchWorker = new BatchCore<arma::Mat<int>>(p, bigidxarma, sdfunc, res);
+  std::shared_ptr<SDmeasure> sdfunc = SDFactory(p, bigidx).createSDFunc(attrs, arguments);
+  BatchCore<arma::Mat<int>>* batchWorker = new BatchCore<arma::Mat<int>>(p, bigidx, sdfunc, res);
 
   // call it with parallelFor
   parallelFor(0, n, (*batchWorker));

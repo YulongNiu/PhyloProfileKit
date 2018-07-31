@@ -24,7 +24,7 @@ std::shared_ptr<SDmeasure> SDFactory::createSDFunc(Rcpp::List &attrs,
     sdfunc = std::make_shared<DistEuclidean>();
   }
   else if (isEqualStr(sdName, "DistMinkowski")) {
-    int p = 2;
+    int p = 3;
     if (arguments.containsElementNamed("p")) {
       p = Rcpp::as<int>(arguments["p"]);
     } else {}

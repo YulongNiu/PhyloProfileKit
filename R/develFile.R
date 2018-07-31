@@ -41,3 +41,27 @@
 ##'   rownames(orderedPhyloData) <- 1:nrow(orderedPhyloData)
 ##'   orderedPhyloData <- melt(orderedPhyloData)
 ##'   orderedPhyloData <- data.frame(geneNames = orderedPhyloData[, 1], speNames = orderedPhyloData[, 2], apData = factor(orderedPhyloData[, 3]))
+
+
+## library('Rcpp')
+## library('magrittr')
+## library('RcppParallel')
+## library('bigmemory')
+## library('ape')
+## sourceCpp('src/batch.cpp')
+## source('R/AllClasses.R')
+## source('R/AllGenerics.R')
+## source('R/Batch.R')
+## source('R/PP.R')
+## source('R/PPIdx.R')
+## source('R/utilities.R')
+## source('R/PPResult.R')
+
+## tree <- read.nexus('inst/extdata/bioinfoTree.nex')
+## sceP <- read.csv('inst/extdata/bioinfoProfile.csv', row.names = 1) %>% as.matrix %>% PP
+## scePI <- PPIdx(sceP, 1:6, 1:6)
+
+## BatchMat(PPData(scePI), IdxData(scePI), list(method = 'SimCor'), list())
+## Batch(scePI, method = 'SimCor', n = 2)
+
+

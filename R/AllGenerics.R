@@ -74,25 +74,32 @@ setGeneric(name = 'Norm',
            def = function(x, method, ...){standardGeneric('Norm')})
 
 
-##' @param x Object with at least profile and linkage indices.
+##' @param x A \code{PPIdx}/\code{PPTreeIdx} object.
 ##' @param n The number of CPUs or processors.
-##' @param FUN Functions to process paired linkages. The \code{FUN} has two parameters, the first parameter is a list \code{list(f = f, t = t, uniID = i)} in which \code{f} and \code{t} is two numeric vector indicating two single profile and \code{uniID} is the current index for parallel programming, and the second parameter is \code{...} used for additional arguments.
-##' @param ... Additional parameters passed to \code{FUN}.
+##' @param method Functions to process paired linkages.
+##' \itemize{
+##'   \item \code{SimCor}: Person's correlation coefficient.
+##'   \item \code{SimJaccard}: Jaccard similarity.
+##'   \item \code{SimMIBin}: Mutual information for the binary phylogenetic profile.
+##'   \item \code{SimMIConti}: Mutual information for the continuous phylogenetic profile.
+##'   \item \code{DistHamming}: Hamming distance.
+##'   \item \code{DistManhattan}: Manhattan distance.
+##'   \item \code{DistEuclidean}: Euclidean distance.
+##'   \item \code{DistMinkowski}: Minkowski distance.
+##'   \item \code{custom}: Custom similarity/distance functions.
+##' }
+##' The method \code{DistHamming} and \code{DistManhattan} generated the same distance value for binary phylogenetic profile. The \code{DistManhattan} is recommended for the continuous phylgenetic profile.
+##' @param ... Additional parameters passed to \code{method}.
+##' \itemize{
+##'   \item \code{bin}: The bin size for the \code{SimMiConti} method, and the default value is 10.
+##'    \item \code{p}: The \code{p} parameter for the \code{DistMinkowski} method, and the default value is 3.
+##'    \item \code{func}: The pointer to the custom function.
+##' }
 ##' @rdname Batch-methods
 ##' @export
-##' 
+##'
 setGeneric(name = 'Batch',
-           def = function(x, FUN, ..., n = 1){standardGeneric('Batch')})
-
-
-##' @param p A \code{numeric matrix} or a \code{big.matrix} object.
-##' @param idx A \code{numeric matrix} object.
-##' @inheritParams Batch
-##' @rdname BatchCore-methods
-##' @keywords internal
-##' 
-setGeneric(name = 'BatchCore',
-           def = function(p, idx, FUN, ..., n){standardGeneric('BatchCore')})
+           def = function(x, method, ..., n = 1){standardGeneric('Batch')})
 
 
 ##' @param x A \code{PPIdx}/\code{PPTreeIdx} object.

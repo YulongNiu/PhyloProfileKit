@@ -126,7 +126,7 @@ public:
 //' @rdname simdist
 //' @keywords internal
 //======================================
-//  Bin mutual information (similarity)
+//  Binary mutual information (similarity)
 //======================================
 class SimMIBin : public SDmeasure {
 public:
@@ -191,5 +191,23 @@ public:
     return func(f, t);
   }
 };
+
+
+// class SDCustom : public SDmeasure {
+// private:
+//   funcPtr func;
+//   Rcpp::List funcargs;
+// public:
+//   explicit SDCustom (funcPtr function, Rcpp::List funcargs) :
+//     func(function), funcargs(funcargs) {
+//     this->func = function;
+//     this->funcargs = funcargs;
+//   };
+//   ~SDCustom () {}
+//   double calcSD(const arma::vec &f,
+//                 const arma::vec &t) {
+//     return func(f, t, funcargs);
+//   }
+// };
 
 #endif

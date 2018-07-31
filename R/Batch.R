@@ -7,117 +7,72 @@ NULL
 ##'
 ##' @title Parallel framework
 ##' @inheritParams Batch
-##' @return A numeric vector.
+##' @return A \code{numeric vector}.
 ##' @examples
 ##' require('magrittr')
+##' require('ape')
 ##'
-##' ## Person correlation coefficient
-##' ppBinIdx <- sample(0:1, 10 * 20, replace = TRUE) %>% matrix(ncol = 20) %>% PP %>% PPIdx(1:3, 1:3)
-##' testfun <- function(eachArg, ...) {sum(eachArg$f * eachArg$t)}
-##' Batch(ppBinIdx, testfun)
-##' Batch(ppBinIdx, testfun, n = 2)
+##' tree <- system.file('extdata', 'bioinfoTree.nex', package = "PhyloProfileKit") %>% read.nexus
+##' ppPath <- system.file('extdata', 'bioinfoProfile.csv', package = "PhyloProfileKit")
+##'
+##' sceP <- ppPath %>% read.csv(row.names = 1) %>% as.matrix %>% PP
+##' scePI <- PPIdx(sceP, 1:6, 1:6)
+##' scePTI <- sceP %>% PPTree(tree) %>% PPTreeIdx(1:6, 1:6)
+##'
+##' ## Mutual information
+##' Batch(scePI, method = 'SimCor', n = 2)
 ##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
+##' @importFrom magrittr %>%
+##' @importFrom RcppParallel setThreadOptions
+##' @importFrom bigmemory is.big.matrix
 ##' @rdname Batch-methods
-##' @seealso Batch process of similarity/distance \code{\link{SimDist}}.
 ##' @exportMethod Batch
 ##'
 setMethod(f = 'Batch',
           signature = c(x = 'PPIdx'),
-          definition = function(x, FUN, ..., n) {
+          definition = function(x, method, ..., n) {
 
+            ## check method
+            ms <- c('SimCor', 'SimJaccard', 'SimMIBin', 'SimMIConti',
+                   'DistHamming', 'DistManhattan', 'DistEuclidean',
+                   'DistMinkowski', 'custom')
+            midx <- pmatch(method, ms)
+
+            if (is.na(midx)) {
+              stop('Invalid similarity/distance method')
+            } else {
+              m <- ms[midx]
+            }
+
+            ## check arguments
+            args <- list(...)
+            if (method == 'custom') {
+              funcPtr = arguments[["func"]]
+              if (is.null(funcPtr)) {
+                stop('Parameter "func" is missing.')
+              } else {}
+            } else {}
+
+            ## set parallel threads
+            setThreadOptions(numThreads = n)
+
+            ## parallel idx
             p <- PPData(x)
             idx <- IdxData(x)
 
-            if (n == 1) {
-              ppiNum <- nrow(idx)
-              batchVec <- numeric(ppiNum)
-              for (i in 1:ppiNum) {
-
-                if (i %% 1000 == 0) {
-                  print(paste0('It is running ', i))
-                } else {}
-
-                f <- p[idx[i, 1], ]
-                t <- p[idx[i, 2], ]
-                batchVec[i] <- FUN(eachArg = list(f = f, t = t, uniID = i), ...)
-              }
+            if (is.big.matrix(idx)) {
+              bv <- BatchBigmat(p, idx, list(method = m), args)
             } else {
-              batchVec <- BatchCore(p = p,
-                                    idx = idx,
-                                    FUN = FUN,
-                                    ...,
-                                    n = n)
+              bv <- BatchMat(p, idx, list(method = m), args)
             }
-            return(batchVec)
+
+            bvRes <- new('PPResult',
+                         bv,
+                         idx = x@idx,
+                         pnames = rownames(x@.Data),
+                         method = m)
+
+            return(bvRes)
           })
 
 
-##' Parallel core for \code{numeric matrix} and \code{big.matrix}.
-##'
-##' Parallel core for the index data.
-##'
-##' @title Parallel core
-##' @inheritParams BatchCore
-##' @return A \code{numeric matrix} object.
-##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
-##' @importFrom doParallel registerDoParallel stopImplicitCluster
-##' @importFrom foreach foreach %dopar%
-##' @importFrom iterators iter
-##' @rdname BatchCore-methods
-##' @keywords internal
-##'
-setMethod(f = 'BatchCore',
-          signature = c(idx = 'matrix'),
-          definition = function(p, idx, FUN, ..., n = 1) {
-
-            ## register multiple core
-            registerDoParallel(cores = n)
-
-            itx <- iter(idx, by = 'row')
-
-            batchVec <- foreach(i = itx, .combine = c) %dopar% {
-              f <- p[i[1], ]
-              t <- p[i[2], ]
-              eachVal <- FUN(eachArg = list(f = f, t = t, uniID = i), ...)
-              return(eachVal)
-            }
-
-            ## stop multiple cores
-            stopImplicitCluster()
-
-            return(batchVec)
-          })
-
-
-##' @inheritParams BatchCore
-##' @importFrom doParallel registerDoParallel stopImplicitCluster
-##' @importFrom foreach foreach %dopar%
-##' @importFrom iterators icount
-##' @importFrom magrittr %>%
-##' @importFrom bigmemory as.big.matrix
-##' @rdname BatchCore-methods
-##' @keywords internal
-setMethod(f = 'BatchCore',
-          signature = c(idx = 'big.matrix'),
-          definition = function(p, idx, FUN, ..., n = 1) {
-
-            ## register multiple core
-            registerDoParallel(cores = n)
-
-            ## transfer p to big.matrix
-            p <- as.big.matrix(p)
-
-            itx <- idx %>% nrow %>% icount
-            batchVec <- foreach(i = itx, .combine = c) %dopar% {
-              f <- p[idx[i, 1], ]
-              t <- p[idx[i, 2], ]
-              eachVal <- FUN(eachArg = list(f = f, t = t, uniID = i), ...)
-              return(eachVal)
-            }
-
-            ## stop multiple cores
-            stopImplicitCluster()
-
-            return(batchVec)
-
-          })
