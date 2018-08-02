@@ -4,17 +4,17 @@
 #include <RcppArmadillo.h>
 #include <Rcpp.h>
 
-double SimCor(arma::vec f,
-              arma::vec t);
+double SimCor_(arma::vec f,
+               arma::vec t);
 
-double SimJaccard(arma::vec f,
-                  arma::vec t);
-
-double DistHamming(arma::vec f,
+double SimJaccard_(arma::vec f,
                    arma::vec t);
 
-double DistEuclidean(arma::vec f,
-                     arma::vec t);
+double DistHamming_(arma::vec f,
+                    arma::vec t);
+
+double DistEuclidean_(arma::vec f,
+                      arma::vec t);
 
 #endif
 

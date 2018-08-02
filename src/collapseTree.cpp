@@ -20,22 +20,22 @@ using namespace arma;
 //' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 //' @keywords internal
 // [[Rcpp::export]]
-arma::umat CollapseTree(arma::umat edgeMat,
-                        arma::uword tipNum,
-                        arma::uvec f,
-                        arma::uvec t) {
+arma::mat CollapseTree(arma::mat edgeMat,
+                       arma::uword tipNum,
+                       arma::vec f,
+                       arma::vec t) {
 
   // select node mat and tip mat
-  uvec tipnode = edgeMat.col(1);
-  umat tipMat = edgeMat.rows(find(tipnode <= tipNum));
-  umat nodeMat = edgeMat.rows(find(tipnode > tipNum));
+  vec tipnode = edgeMat.col(1);
+  mat tipMat = edgeMat.rows(find(tipnode <= tipNum));
+  mat nodeMat = edgeMat.rows(find(tipnode > tipNum));
 
   // joint ft with tipMat
-  umat ft = join_rows(f, t);
+  mat ft = join_rows(f, t);
   tipMat = join_rows(tipMat, ft);
 
   // initiate cm(collapseMat)
-  umat cm(0, 4);
+  mat cm(0, 4);
 
   if (all(f == f(0)) &&
       all(t == t(0))) {
@@ -44,7 +44,7 @@ arma::umat CollapseTree(arma::umat edgeMat,
   } else {}
 
   while (true) {
-    uvec uniqNodes = unique(tipMat.col(0));
+    vec uniqNodes = unique(tipMat.col(0));
 
     if (uniqNodes.n_elem == tipMat.n_rows) {
       cm = join_cols(cm, tipMat);
@@ -56,11 +56,11 @@ arma::umat CollapseTree(arma::umat edgeMat,
 
       if (sum(nodeIdx) > 1) {
         // one node has multiple tips
-        umat tipMulM = tipMat.rows(find(nodeIdx));
+        mat tipMulM = tipMat.rows(find(nodeIdx));
 
         if (isTwoRowsEqual(tipMulM.cols(2, 3))) {
           // 1. construct the new vec
-          urowvec newV(4);
+          rowvec newV(4);
           uvec rpIdx = find(nodeMat.col(1) == uniqNodes(i));
           newV.subvec(0, 1) = nodeMat.row(rpIdx(0)).subvec(0, 1);
           newV.subvec(2, 3) = tipMulM.row(0).subvec(2, 3);
@@ -94,7 +94,7 @@ arma::umat CollapseTree(arma::umat edgeMat,
 //' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 //' @keywords internal
 // [[Rcpp::export]]
-bool isTwoRowsEqual(arma::umat m) {
+bool isTwoRowsEqual(arma::mat m) {
   return sum(m.row(0) == m.row(1)) == m.n_cols;
 }
 

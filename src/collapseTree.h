@@ -4,11 +4,11 @@
 #include <RcppArmadillo.h>
 #include <Rcpp.h>
 
-arma::umat CollapseTree(arma::umat edgeMat,
-                        arma::uword tipNum,
-                        arma::uvec f,
-                        arma::uvec t);
+arma::mat CollapseTree(arma::mat edgeMat,
+                       arma::uword tipNum,
+                       arma::vec f,
+                       arma::vec t);
 
-bool isTwoRowsEqual(arma::umat m);
+bool isTwoRowsEqual(arma::mat m);
 
 #endif

@@ -11,6 +11,11 @@ std::shared_ptr<SDmeasure> SDFactory::createSDFunc(Rcpp::List &attrs,
   if (isEqualStr(sdName, "SimCor")) {
     sdfunc = std::make_shared<SimCor>();
   }
+  else if (isEqualStr(sdName, "SimCorCollapse")) {
+    mat edgeMat = arguments["edgeMat"];
+    uword tipNum = arguments["tipNum"];
+    sdfunc = std::make_shared<SimCorCollapse>(edgeMat, tipNum);
+  }
   else if (isEqualStr(sdName, "SimJaccard")) {
     sdfunc = std::make_shared<SimJaccard>();
   }

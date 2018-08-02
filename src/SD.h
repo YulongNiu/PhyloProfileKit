@@ -3,6 +3,8 @@
 
 #include "SDmeasure.h"
 #include "MI.h"
+#include "collapseTree.h"
+#include "simDist.h"
 
 
 //' Similarity or distance of paired phylogenetic profile
@@ -29,12 +31,37 @@
 //==============================================
 // Person's correlation coefficient (similarity)
 //==============================================
+
 class SimCor : public SDmeasure {
 public:
   double calcSD(const arma::vec& f,
                 const arma::vec& t) {
-    mat corMat = cor(f, t);
-    return corMat(0, 0);
+    return SimCor_(f, t);
+  }
+};
+
+//' @inheritParams SimCor
+//' @rdname simdist
+//' @keywords internal
+//=========================================================
+// Collapsed Person's correlation coefficient (similarity)
+//=========================================================
+class SimCorCollapse : public SDmeasure {
+private:
+  mat edgeMat;
+  uword tipNum;
+public:
+  explicit SimCorCollapse (arma::mat edgeMat, arma::uword tipNum) {
+    this->edgeMat = edgeMat;
+    this->tipNum = tipNum;
+  }
+  ~SimCorCollapse() {}
+  double calcSD(const arma::vec& f,
+                const arma::vec& t) {
+    mat ftMat = CollapseTree(this->edgeMat, this->tipNum, f, t);
+    vec fnew = ftMat.col(2);
+    vec tnew = ftMat.col(3);
+    return SimCor_(fnew, tnew);
   }
 };
 
@@ -49,9 +76,7 @@ class SimJaccard : public SDmeasure {
 public:
   double calcSD(const arma::vec& f,
                 const arma::vec& t) {
-    vec combVec = f + 2*t;
-    double A = sum(combVec == 3);
-    return  A / (sum(f) + sum(t) - A);
+    return  SimJaccard_(f, t);
   }
 };
 
@@ -191,23 +216,5 @@ public:
     return func(f, t);
   }
 };
-
-
-// class SDCustom : public SDmeasure {
-// private:
-//   funcPtr func;
-//   Rcpp::List funcargs;
-// public:
-//   explicit SDCustom (funcPtr function, Rcpp::List funcargs) :
-//     func(function), funcargs(funcargs) {
-//     this->func = function;
-//     this->funcargs = funcargs;
-//   };
-//   ~SDCustom () {}
-//   double calcSD(const arma::vec &f,
-//                 const arma::vec &t) {
-//     return func(f, t, funcargs);
-//   }
-// };
 
 #endif

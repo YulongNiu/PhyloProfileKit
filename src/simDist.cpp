@@ -27,29 +27,21 @@ using namespace arma;
 //' @rdname simdist
 //' @keywords internal
 // [[Rcpp::export]]
-double SimCor(arma::vec f,
+double SimCor_(arma::vec f,
               arma::vec t) {
-
   mat corMat = cor(f, t);
-  double corVal = corMat(0, 0);
-
-  return corVal;
+  return corMat(0, 0);
 }
 
 //' @inheritParams SimCor
 //' @rdname simdist
 //' @keywords internal
 // [[Rcpp::export]]
-double SimJaccard(arma::vec f,
-                  arma::vec t) {
-
+double SimJaccard_(arma::vec f,
+                   arma::vec t) {
   vec combVec = f + 2*t;
-
   double A = sum(combVec == 3);
-
-  double jac = A / (sum(f) + sum(t) - A);
-
-  return jac;
+  return  A / (sum(f) + sum(t) - A);
 }
 
 //' @inheritParams SimCor
