@@ -74,11 +74,19 @@ std::shared_ptr<SDmeasure> SDFactory::createSDFunc(Rcpp::List &attrs,
     } else {}
     sdfunc = std::make_shared<SimMIConti>(bin);
   }
-  else if (isEqualStr(sdName, "custom")) {
-    SEXP func_ = arguments["func"];
+  else if (isEqualStr(sdName, "SDCustom")) {
+    SEXP func_=arguments["func"];
     funcPtr func = *Rcpp::XPtr<funcPtr>(func_);
     sdfunc = std::make_shared<SDCustom>(func);
-  } else {}
+  }
+  else if (isEqualStr(sdName, "SDCustomCollapse")) {
+    SEXP func_=arguments["func"];
+    funcPtr func = *Rcpp::XPtr<funcPtr>(func_);
+    mat edgeMat = arguments["edgeMat"];
+    uword tipNum = arguments["tipNum"];
+    sdfunc = std::make_shared<SDCustomCollapse>(func, edgeMat, tipNum);
+  }
+  else {}
 
   return sdfunc;
 }

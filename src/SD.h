@@ -298,14 +298,45 @@ class SDCustom : public SDmeasure {
 private:
   funcPtr func;
 public:
-  explicit SDCustom (funcPtr function) : func(function) {
-    this->func = function;
-  };
+  explicit SDCustom (funcPtr func) {
+    this->func = func;
+  }
   ~SDCustom () {}
   double calcSD(const arma::vec &f,
                 const arma::vec &t) {
     return func(f, t);
   }
 };
+
+
+//' @inheritParams SimCor
+//' @rdname simdist
+//' @keywords internal
+//======================================
+// Collapsed custom similarity/distance
+//======================================
+class SDCustomCollapse : public SDmeasure {
+private:
+  funcPtr func;
+  mat edgeMat;
+  uword tipNum;
+public:
+  explicit SDCustomCollapse(funcPtr func,
+                            arma::mat edgeMat,
+                            arma::uword tipNum) {
+    this->func = func;
+    this->edgeMat = edgeMat;
+    this->tipNum = tipNum;
+  }
+  ~SDCustomCollapse() {}
+  double calcSD(const arma::vec& f,
+                const arma::vec& t) {
+    mat ftMat = CollapseTree(this->edgeMat, this->tipNum, f, t);
+    vec fnew = ftMat.col(2);
+    vec tnew = ftMat.col(3);
+    return func(fnew, tnew);
+  }
+};
+
 
 #endif

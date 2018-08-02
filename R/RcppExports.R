@@ -244,28 +244,42 @@ SVDPhy <- function(bitM, bitReset, minConserve, trimming) {
 #' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 #' @rdname simdist
 #' @keywords internal
-SimCor <- function(f, t) {
-    .Call(`_PhyloProfileKit_SimCor`, f, t)
+SimCor_ <- function(f, t) {
+    .Call(`_PhyloProfileKit_SimCor_`, f, t)
 }
 
 #' @inheritParams SimCor
 #' @rdname simdist
 #' @keywords internal
-SimJaccard <- function(f, t) {
-    .Call(`_PhyloProfileKit_SimJaccard`, f, t)
+SimJaccard_ <- function(f, t) {
+    .Call(`_PhyloProfileKit_SimJaccard_`, f, t)
 }
 
 #' @inheritParams SimCor
 #' @rdname simdist
 #' @keywords internal
-DistHamming <- function(f, t) {
-    .Call(`_PhyloProfileKit_DistHamming`, f, t)
+DistHamming_ <- function(f, t) {
+    .Call(`_PhyloProfileKit_DistHamming_`, f, t)
 }
 
 #' @inheritParams SimCor
 #' @rdname simdist
 #' @keywords internal
-DistEuclidean <- function(f, t) {
-    .Call(`_PhyloProfileKit_DistEuclidean`, f, t)
+DistManhattan_ <- function(f, t) {
+    .Call(`_PhyloProfileKit_DistManhattan_`, f, t)
+}
+
+#' @inheritParams SimCor
+#' @rdname simdist
+#' @keywords internal
+DistEuclidean_ <- function(f, t) {
+    .Call(`_PhyloProfileKit_DistEuclidean_`, f, t)
+}
+
+#' @inheritParams SimCor
+#' @rdname simdist
+#' @keywords internal
+DistMinkowski_ <- function(f, t, p) {
+    .Call(`_PhyloProfileKit_DistMinkowski_`, f, t, p)
 }
 

@@ -11,6 +11,7 @@ NULL
 ##' @examples
 ##' require('magrittr')
 ##' require('ape')
+##' require('RcppXPtrUtils')
 ##'
 ##' tree <- system.file('extdata', 'bioinfoTree.nex', package = "PhyloProfileKit") %>% read.nexus
 ##' ppPath <- system.file('extdata', 'bioinfoProfile.csv', package = "PhyloProfileKit")
@@ -40,7 +41,9 @@ NULL
 ##' ## Minkowski distance
 ##' Batch(scePI, method = 'DistMinkowski', p = 4, n = 2)
 ##'
-##' ## custom distance
+##' ## custom distance from the "parallelDist" package.
+##' euclideanFuncPtr <- cppXPtr("double customDist(const arma::mat &A, const arma::mat &B) { return sqrt(arma::accu(arma::square(A - B))); }", depends = c("RcppArmadillo"))
+##' Batch(scePI, method = 'SDCustom', func = euclideanFuncPtr, n = 2)
 ##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @importFrom magrittr %>%
 ##' @importFrom RcppParallel setThreadOptions
@@ -58,7 +61,7 @@ setMethod(f = 'Batch',
             ## check method
             ms <- c('SimCor', 'SimJaccard', 'SimMI',
                     'DistHamming', 'DistManhattan', 'DistEuclidean',
-                    'DistMinkowski', 'custom')
+                    'DistMinkowski', 'SDCustom')
             midx <- pmatch(method, ms)
 
             if (is.na(midx)) {
@@ -70,8 +73,8 @@ setMethod(f = 'Batch',
             ## check arguments
             args <- list(...)
 
-            if (method == 'custom') {
-              funcPtr = arguments[["func"]]
+            if (method == 'SDCustom') {
+              funcPtr = args[["func"]]
               if (is.null(funcPtr)) {
                 stop('Parameter "func" is missing.')
               } else {}

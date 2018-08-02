@@ -24,10 +24,6 @@ MergeList(x)
 
 \item{pr}{A numeric vector indicates the "presence-absence" pattern."pr" should be in the same order with the tips of tree}
 
-\item{f}{Numeric vector indicating a gene profile.}
-
-\item{t}{Numeric vector indicating a gene profile.}
-
 \item{x}{A list only contains unsigned interger vectors.}
 }
 \value{

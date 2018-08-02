@@ -10,10 +10,6 @@ CollapseTree(edgeMat, tipNum, f, t)
 \item{edgeMat}{A edge mat could be generated from the "ape" package.The first row should be (root --> nodes).}
 
 \item{tipNum}{A int value. Tip (species) number.}
-
-\item{f}{Numeric vector indicating a gene profile.}
-
-\item{t}{Numeric vector indicating a gene profile.}
 }
 \value{
 A numeric matrix with four columns: first two are collapsed edges and last two represent collapsed two profiles.
