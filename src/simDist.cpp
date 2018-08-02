@@ -28,7 +28,7 @@ using namespace arma;
 //' @keywords internal
 // [[Rcpp::export]]
 double SimCor_(arma::vec f,
-              arma::vec t) {
+               arma::vec t) {
   mat corMat = cor(f, t);
   return corMat(0, 0);
 }
@@ -44,34 +44,46 @@ double SimJaccard_(arma::vec f,
   return  A / (sum(f) + sum(t) - A);
 }
 
+
 //' @inheritParams SimCor
 //' @rdname simdist
 //' @keywords internal
 // [[Rcpp::export]]
-double DistHamming(arma::vec f,
-                   arma::vec t) {
-
-  // Hamming distance
-  // uword ham = sum(f != t);
-
-  // Manhattan distance
-  double ham = sum(abs(f - t));
-
-  return ham;
-
+double DistHamming_(arma::vec f,
+                    arma::vec t) {
+  return sum(f != t);
 }
 
+
 //' @inheritParams SimCor
 //' @rdname simdist
 //' @keywords internal
 // [[Rcpp::export]]
-double DistEuclidean(arma::vec f,
+double DistManhattan_(arma::vec f,
+                      arma::vec t) {
+  return sum(f != t);
+}
+
+
+
+//' @inheritParams SimCor
+//' @rdname simdist
+//' @keywords internal
+// [[Rcpp::export]]
+double DistEuclidean_(arma::vec f,
                      arma::vec t) {
-
-  vec neq = f - t;
-
-  double eu = sqrt(sum(square(neq)));
-
-  return eu;
+  return sqrt(sum(square(f - t)));
 }
+
+
+//' @inheritParams SimCor
+//' @rdname simdist
+//' @keywords internal
+// [[Rcpp::export]]
+double DistMinkowski_(arma::vec f,
+                      arma::vec t,
+                      arma::uword p) {
+  return pow(accu(pow(abs(f - t), p)), 1.0 / p);
+}
+
 

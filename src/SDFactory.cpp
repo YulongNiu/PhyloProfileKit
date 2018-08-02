@@ -19,21 +19,50 @@ std::shared_ptr<SDmeasure> SDFactory::createSDFunc(Rcpp::List &attrs,
   else if (isEqualStr(sdName, "SimJaccard")) {
     sdfunc = std::make_shared<SimJaccard>();
   }
+  else if (isEqualStr(sdName, "SimJaccardCollapse")) {
+    mat edgeMat = arguments["edgeMat"];
+    uword tipNum = arguments["tipNum"];
+    sdfunc = std::make_shared<SimJaccardCollapse>(edgeMat, tipNum);
+  }
   else if (isEqualStr(sdName, "DistHamming")) {
     sdfunc = std::make_shared<DistHamming>();
+  }
+  else if (isEqualStr(sdName, "DistHammingCollapse")) {
+    mat edgeMat = arguments["edgeMat"];
+    uword tipNum = arguments["tipNum"];
+    sdfunc = std::make_shared<DistHammingCollapse>(edgeMat, tipNum);
   }
   else if (isEqualStr(sdName, "DistManhattan")) {
     sdfunc = std::make_shared<DistManhattan>();
   }
+  else if (isEqualStr(sdName, "DistManhattanCollapse")) {
+    mat edgeMat = arguments["edgeMat"];
+    uword tipNum = arguments["tipNum"];
+    sdfunc = std::make_shared<DistManhattanCollapse>(edgeMat, tipNum);
+  }
   else if (isEqualStr(sdName, "DistEuclidean")) {
     sdfunc = std::make_shared<DistEuclidean>();
   }
+  else if (isEqualStr(sdName, "DistEuclideanCollapse")) {
+    mat edgeMat = arguments["edgeMat"];
+    uword tipNum = arguments["tipNum"];
+    sdfunc = std::make_shared<DistEuclideanCollapse>(edgeMat, tipNum);
+  }
   else if (isEqualStr(sdName, "DistMinkowski")) {
-    int p = 3;
+    uword p = 3;
     if (arguments.containsElementNamed("p")) {
-      p = Rcpp::as<int>(arguments["p"]);
+      p = Rcpp::as<uword>(arguments["p"]);
     } else {}
     sdfunc = std::make_shared<DistMinkowski>(p);
+  }
+  else if (isEqualStr(sdName, "DistMinkowskiCollapse")) {
+    uword p = 3;
+    mat edgeMat = arguments["edgeMat"];
+    uword tipNum = arguments["tipNum"];
+    if (arguments.containsElementNamed("p")) {
+      p = Rcpp::as<uword>(arguments["p"]);
+    } else {}
+    sdfunc = std::make_shared<DistMinkowskiCollapse>(p, edgeMat, tipNum);
   }
   else if (isEqualStr(sdName, "SimMIBin")) {
     sdfunc = std::make_shared<SimMIBin>();

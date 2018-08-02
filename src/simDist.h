@@ -13,8 +13,15 @@ double SimJaccard_(arma::vec f,
 double DistHamming_(arma::vec f,
                     arma::vec t);
 
+double DistManhattan_(arma::vec f,
+                      arma::vec t);
+
 double DistEuclidean_(arma::vec f,
                       arma::vec t);
+
+double DistMinkowski_(arma::vec f,
+                      arma::vec t,
+                      arma::uword p);
 
 #endif
 

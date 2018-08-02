@@ -85,9 +85,9 @@ setMethod(f = 'Batch',
 
             ## parallel idx
             if (is.big.matrix(idx)) {
-              bv <- BatchBigmat(p, idx, list(method = m), args)
+              bv <- BatchBigmat(p, idx@address, list(method = m), args)
             } else {
-              bv <- BatchMat(p, idx@address, list(method = m), args)
+              bv <- BatchMat(p, idx, list(method = m), args)
             }
 
             bvRes <- new('PPResult',
