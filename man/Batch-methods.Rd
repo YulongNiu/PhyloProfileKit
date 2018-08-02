@@ -6,21 +6,37 @@
 \alias{Batch,PPIdx-method}
 \title{Parallel framework}
 \usage{
-Batch(x, FUN, ..., n = 1)
+Batch(x, method, ..., n = 1)
 
-\S4method{Batch}{PPIdx}(x, FUN, ..., n = 1)
+\S4method{Batch}{PPIdx}(x, method, ..., n = 1)
 }
 \arguments{
-\item{x}{Object with at least profile and linkage indices.}
+\item{x}{A \code{PPIdx}/\code{PPTreeIdx} object.}
 
-\item{FUN}{Functions to process paired linkages. The \code{FUN} has two parameters, the first parameter is a list \code{list(f = f, t = t, uniID = i)} in which \code{f} and \code{t} is two numeric vector indicating two single profile and \code{uniID} is the current index for parallel programming, and the second parameter is \code{...} used for additional arguments.}
+\item{method}{Functions to process paired linkages.
+\itemize{
+  \item \code{SimCor}: Person's correlation coefficient.
+  \item \code{SimJaccard}: Jaccard similarity.
+  \item \code{SimMI}: Mutual information.
+  \item \code{DistHamming}: Hamming distance.
+  \item \code{DistManhattan}: Manhattan distance.
+  \item \code{DistEuclidean}: Euclidean distance.
+  \item \code{DistMinkowski}: Minkowski distance.
+  \item \code{custom}: Custom similarity/distance functions.
+}
+The method \code{DistHamming} and \code{DistManhattan} generated the same distance value for binary phylogenetic profile. The \code{DistManhattan} is recommended for the continuous phylgenetic profile.}
 
-\item{...}{Additional parameters passed to \code{FUN}.}
+\item{...}{Additional parameters passed to \code{method}.
+\itemize{
+  \item \code{bin}: The bin size for the \code{SimMiConti} method, and the default value is 10.
+   \item \code{p}: A \code{integer} indicating the \code{p} parameter for the \code{DistMinkowski} method, and the default value is 3.
+   \item \code{func}: The pointer to the custom function.
+}}
 
 \item{n}{The number of CPUs or processors.}
 }
 \value{
-A numeric vector.
+A \code{numeric vector}.
 }
 \description{
 Parallel framework for \code{PPIdx} and \code{PPTreeIdx}.
@@ -30,15 +46,37 @@ Parallel framework for \code{PPIdx} and \code{PPTreeIdx}.
 }
 \examples{
 require('magrittr')
+require('ape')
 
-## Person correlation coefficient
-ppBinIdx <- sample(0:1, 10 * 20, replace = TRUE) \%>\% matrix(ncol = 20) \%>\% PP \%>\% PPIdx(1:3, 1:3)
-testfun <- function(eachArg, ...) {sum(eachArg$f * eachArg$t)}
-Batch(ppBinIdx, testfun)
-Batch(ppBinIdx, testfun, n = 2)
-}
-\seealso{
-Batch process of similarity/distance \code{\link{SimDist}}.
+tree <- system.file('extdata', 'bioinfoTree.nex', package = "PhyloProfileKit") \%>\% read.nexus
+ppPath <- system.file('extdata', 'bioinfoProfile.csv', package = "PhyloProfileKit")
+
+sceP <- ppPath \%>\% read.csv(row.names = 1) \%>\% as.matrix \%>\% PP
+scePI <- PPIdx(sceP, 1:6, 1:6)
+scePTI <- sceP \%>\% PPTree(tree) \%>\% PPTreeIdx(1:6, 1:6)
+
+## Person's correlation coefficient
+Batch(scePI, method = 'SimCor', n = 2)
+
+## Jaccard similarity
+Batch(scePI, method = 'SimJaccard', n = 2)
+
+## Mutual information
+Batch(scePI, method = 'SimMI', n = 2)
+
+## Hamming distance
+Batch(scePI, method = 'DistHamming', n = 2)
+
+## Manhattan distance
+Batch(scePI, method = 'DistManhattan', n = 2)
+
+## Euclidean distance
+Batch(scePI, method = 'DistEuclidean', n = 2)
+
+## Minkowski distance
+Batch(scePI, method = 'DistMinkowski', p = 4, n = 2)
+
+## custom distance
 }
 \author{
 Yulong Niu \email{yulong.niu@hotmail.com}

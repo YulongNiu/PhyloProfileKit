@@ -257,7 +257,7 @@ All the methods work well for a binning profile, whereas `SimCor` and `DistEulid
 ``` {r}
 ## mutual information with two cores
 ## increase n to accelerate profiling 
-sceLMI <- SimDist(sceL, method = 'SimMI', n = 2)
+sceLMI <- Batch(sceL, method = 'SimMI', n = 2)
 head(sceLMI)
 ```
 

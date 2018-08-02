@@ -19,8 +19,28 @@ NULL
 ##' scePI <- PPIdx(sceP, 1:6, 1:6)
 ##' scePTI <- sceP %>% PPTree(tree) %>% PPTreeIdx(1:6, 1:6)
 ##'
-##' ## Mutual information
+##' ## Person's correlation coefficient
 ##' Batch(scePI, method = 'SimCor', n = 2)
+##'
+##' ## Jaccard similarity
+##' Batch(scePI, method = 'SimJaccard', n = 2)
+##'
+##' ## Mutual information
+##' Batch(scePI, method = 'SimMI', n = 2)
+##'
+##' ## Hamming distance
+##' Batch(scePI, method = 'DistHamming', n = 2)
+##'
+##' ## Manhattan distance
+##' Batch(scePI, method = 'DistManhattan', n = 2)
+##'
+##' ## Euclidean distance
+##' Batch(scePI, method = 'DistEuclidean', n = 2)
+##'
+##' ## Minkowski distance
+##' Batch(scePI, method = 'DistMinkowski', p = 4, n = 2)
+##'
+##' ## custom distance
 ##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @importFrom magrittr %>%
 ##' @importFrom RcppParallel setThreadOptions
@@ -32,10 +52,13 @@ setMethod(f = 'Batch',
           signature = c(x = 'PPIdx'),
           definition = function(x, method, ..., n) {
 
+            p <- PPData(x)
+            idx <- IdxData(x)
+
             ## check method
-            ms <- c('SimCor', 'SimJaccard', 'SimMIBin', 'SimMIConti',
-                   'DistHamming', 'DistManhattan', 'DistEuclidean',
-                   'DistMinkowski', 'custom')
+            ms <- c('SimCor', 'SimJaccard', 'SimMI',
+                    'DistHamming', 'DistManhattan', 'DistEuclidean',
+                    'DistMinkowski', 'custom')
             midx <- pmatch(method, ms)
 
             if (is.na(midx)) {
@@ -46,24 +69,25 @@ setMethod(f = 'Batch',
 
             ## check arguments
             args <- list(...)
+
             if (method == 'custom') {
               funcPtr = arguments[["func"]]
               if (is.null(funcPtr)) {
                 stop('Parameter "func" is missing.')
               } else {}
+            }
+            else if (method == 'SimMI') {
+              m <- ifelse(isBinMat_(PP), 'SimMIBin', 'SimMIConti')
             } else {}
 
             ## set parallel threads
             setThreadOptions(numThreads = n)
 
             ## parallel idx
-            p <- PPData(x)
-            idx <- IdxData(x)
-
             if (is.big.matrix(idx)) {
               bv <- BatchBigmat(p, idx, list(method = m), args)
             } else {
-              bv <- BatchMat(p, idx, list(method = m), args)
+              bv <- BatchMat(p, idx@address, list(method = m), args)
             }
 
             bvRes <- new('PPResult',

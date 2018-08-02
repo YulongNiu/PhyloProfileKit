@@ -111,7 +111,7 @@ setMethod(f = 'ChooseSimDistFun',
           signature = c(x = 'PP'),
           definition = function(x, method, ...) {
 
-            if (isBinMat_internal(x@.Data)) {
+            if (isBinMat_(x@.Data)) {
               MI <- SimMIBin
             } else {
               MI <- SimMIConti

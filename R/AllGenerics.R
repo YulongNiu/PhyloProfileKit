@@ -80,8 +80,7 @@ setGeneric(name = 'Norm',
 ##' \itemize{
 ##'   \item \code{SimCor}: Person's correlation coefficient.
 ##'   \item \code{SimJaccard}: Jaccard similarity.
-##'   \item \code{SimMIBin}: Mutual information for the binary phylogenetic profile.
-##'   \item \code{SimMIConti}: Mutual information for the continuous phylogenetic profile.
+##'   \item \code{SimMI}: Mutual information.
 ##'   \item \code{DistHamming}: Hamming distance.
 ##'   \item \code{DistManhattan}: Manhattan distance.
 ##'   \item \code{DistEuclidean}: Euclidean distance.
@@ -92,7 +91,7 @@ setGeneric(name = 'Norm',
 ##' @param ... Additional parameters passed to \code{method}.
 ##' \itemize{
 ##'   \item \code{bin}: The bin size for the \code{SimMiConti} method, and the default value is 10.
-##'    \item \code{p}: The \code{p} parameter for the \code{DistMinkowski} method, and the default value is 3.
+##'    \item \code{p}: A \code{integer} indicating the \code{p} parameter for the \code{DistMinkowski} method, and the default value is 3.
 ##'    \item \code{func}: The pointer to the custom function.
 ##' }
 ##' @rdname Batch-methods

@@ -98,7 +98,7 @@ ProfileCore <- function(p,
 
   ## center
   cObj <- pp_profile(p)
-  if (isBinMat_internal(p)) {
+  if (isBinMat_(p)) {
     cObj <- cObj + scale_fill_manual(values = binColor)
   } else {
     cObj <- cObj + scale_fill_gradientn(colours = contiColor, breaks = seq(min(p), max(p), length.out = 5))

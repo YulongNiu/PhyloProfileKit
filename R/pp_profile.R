@@ -27,7 +27,7 @@ pp_profile <- function(x, legend.position = 'none', ...) {
 
   nr <- nrow(x)
   nc <- ncol(x)
-  if (isBinMat_internal(x)) {
+  if (isBinMat_(x)) {
     x <- factor(c(x))
   } else {
     x <- c(x)

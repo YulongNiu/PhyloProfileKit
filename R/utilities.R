@@ -1,6 +1,6 @@
 ##' Additional utilities
 ##'
-##' \code{isBinMat_internal()}: Whether a \code{numeric matrix} is binning.
+##' \code{isBinMat_()}: Whether a \code{numeric matrix} is binning.
 ##'
 ##' \code{valiMatNames_()}: Validate a \code{numeric matrix} with row names and column names.
 ##'
@@ -10,18 +10,18 @@
 ##' @param x A matrix.
 ##' @return
 ##'
-##' \code{isBinMat_internal()}: Logic.
+##' \code{isBinMat_()}: Logic.
 ##'
 ##' \code{valiMatNames_()}: \code{TRUE} or a warning message.
 ##'
 ##' \code{valiTreeMat_()}: \code{TRUE} or a warning message.
-##' 
+##'
 ##' @author Yulong Niu \email{yulong.niu@@hotmail.com}
 ##' @rdname utilities
 ##' @importFrom magrittr %>%
 ##' @keywords internal
 ##'
-isBinMat_internal <- function(x) {
+isBinMat_ <- function(x) {
   uniqVec <- x %>% c %>% unique %>% sort
   lenV <- length(uniqVec)
 
