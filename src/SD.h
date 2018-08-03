@@ -18,7 +18,7 @@ public:
   }
 };
 
-//' @inheritParams SimCor
+//' @inheritParams SimCor_
 //' @rdname simdist
 //' @keywords internal
 //=========================================================
@@ -53,7 +53,7 @@ public:
 };
 
 
-//' @inheritParams SimCor
+//' @inheritParams SimCor_
 //' @rdname simdist
 //' @keywords internal
 //==============================
@@ -91,7 +91,7 @@ public:
 };
 
 
-//' @inheritParams SimCor
+//' @inheritParams SimCor_
 //' @rdname simdist
 //' @keywords internal
 //==============================
@@ -130,7 +130,7 @@ public:
 };
 
 
-//' @inheritParams SimCor
+//' @inheritParams SimCor_
 //' @rdname simdist
 //' @keywords internal
 //==============================
@@ -167,7 +167,7 @@ public:
 };
 
 
-//' @inheritParams SimCor
+//' @inheritParams SimCor_
 //' @rdname simdist
 //' @keywords internal
 //==============================
@@ -210,7 +210,7 @@ public:
   }
 };
 
-//' @inheritParams SimCor
+//' @inheritParams SimCor_
 //' @rdname simdist
 //' @keywords internal
 //==============================
@@ -238,35 +238,45 @@ public:
 };
 
 
-//' @inheritParams SimCor
-//' @rdname simdist
-//' @keywords internal
-//======================================
+
+//=========================================
 //  Binary mutual information (similarity)
-//======================================
+//=========================================
 class SimMIBin : public SDmeasure {
 public:
   double calcSD(const arma::vec& f,
                 const arma::vec& t) {
-
-    vec combVec = f + 2*t;
-
-    double N = f.n_elem;
-    double A = sum(combVec == 3);
-    double B = sum(combVec == 1);
-    double C = sum(combVec == 2);
-    double D = N - A - B - C;
-
-    double I = eachMI(A, B, C, N) + eachMI(B, A, D, N) + eachMI(C, A, D, N) + eachMI(D, C, B, N);
-
-    return I;
+    return SimMIBin_(f, t);
   }
 };
 
-//' @param bin A positive \code{Integer} indicating the bin.
-//' @inheritParams SimCor
+
+//' @inheritParams SimCor_
 //' @rdname simdist
 //' @keywords internal
+//==================================================
+// Collapsed Binary mutual information (similarity)
+//==================================================
+class SimMIBinCollapse : public SDmeasure {
+private:
+  mat edgeMat;
+  uword tipNum;
+public:
+  explicit SimMIBinCollapse(arma::mat edgeMat, arma::uword tipNum) {
+    this->edgeMat = edgeMat;
+    this->tipNum = tipNum;
+  }
+  ~SimMIBinCollapse() {}
+  double calcSD(const arma::vec& f,
+                const arma::vec& t) {
+    mat ftMat = CollapseTree(this->edgeMat, this->tipNum, f, t);
+    vec fnew = ftMat.col(2);
+    vec tnew = ftMat.col(3);
+    return SimMIBin_(fnew, tnew);
+  }
+};
+
+
 //=============================================
 //  Continuous mutual information (similarity)
 //=============================================
@@ -280,17 +290,37 @@ public:
   ~SimMIConti() {}
   double calcSD(const arma::vec& f,
                 const arma::vec& t) {
-
-    double n = f.n_elem;
-    double MI = Info(hist(f, this->bin), n) + Info(hist(t, this->bin), n) - Info(HistTwo(f, t, this->bin), n);
-
-    return MI;
+    return SimMIConti_(f, t, this->bin);
   }
 };
 
-//' @inheritParams SimCor
+//' @inheritParams SimCor_
 //' @rdname simdist
 //' @keywords internal
+//=====================================================
+// Collapsed Continuous mutual information (similarity)
+//=====================================================
+class SimMIContiCollapse : public SDmeasure {
+private:
+  uword bin;
+  mat edgeMat;
+  uword tipNum;
+public:
+  explicit SimMIContiCollapse(uword bin, arma::mat edgeMat, arma::uword tipNum) {
+    this->bin = bin;
+    this->edgeMat = edgeMat;
+    this->tipNum = tipNum;
+  }
+  ~SimMIContiCollapse() {}
+  double calcSD(const arma::vec& f,
+                const arma::vec& t) {
+    mat ftMat = CollapseTree(this->edgeMat, this->tipNum, f, t);
+    vec fnew = ftMat.col(2);
+    vec tnew = ftMat.col(3);
+    return SimMIConti_(fnew, tnew, this->bin);
+  }
+};
+
 //============================
 // Custom similarity/distance
 //============================
@@ -309,7 +339,7 @@ public:
 };
 
 
-//' @inheritParams SimCor
+//' @inheritParams SimCor_
 //' @rdname simdist
 //' @keywords internal
 //======================================

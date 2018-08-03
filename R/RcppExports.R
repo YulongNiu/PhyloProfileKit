@@ -93,6 +93,21 @@ MergeList <- function(x) {
     .Call(`_PhyloProfileKit_MergeList`, x)
 }
 
+#' @inheritParams SimCor_
+#' @rdname simdist
+#' @keywords internal
+SimMIBin_ <- function(f, t) {
+    .Call(`_PhyloProfileKit_SimMIBin_`, f, t)
+}
+
+#' @param bin A positive \code{Integer} indicating the bin.
+#' @inheritParams SimCor_
+#' @rdname simdist
+#' @keywords internal
+SimMIConti_ <- function(f, t, bin) {
+    .Call(`_PhyloProfileKit_SimMIConti_`, f, t, bin)
+}
+
 #' Utilities for MI
 #'
 #' \code{eachMI()}: Info for a cell.
@@ -225,17 +240,17 @@ SVDPhy <- function(bitM, bitReset, minConserve, trimming) {
 
 #' Similarity or distance of paired phylogenetic profile
 #'
-#' \code{SimCor()}: Person's correlation coefficient.
+#' \code{SimCor_()}: Person's correlation coefficient.
 #'
-#' \code{SimJaccard()}: Jaccard similarity.
+#' \code{SimJaccard_()}: Jaccard similarity.
 #'
-#' \code{SimMIBin()}: Mutual information for binning data.
+#' \code{SimMIBin_()}: Mutual information for binning data.
 #'
-#' \code{SimMIConti()}: Mutual information for continuous data.
+#' \code{SimMIConti_()}: Mutual information for continuous data.
 #'
-#' \code{DistHamming()}: Hamming distance.
+#' \code{DistHamming_()}: Hamming distance.
 #'
-#' \code{DistEuclidean()}: Euclidean distance.
+#' \code{DistEuclidean_()}: Euclidean distance.
 #'
 #' @title Similarity and distance
 #' @param f Numeric vector indicating a gene profile.
@@ -248,35 +263,35 @@ SimCor_ <- function(f, t) {
     .Call(`_PhyloProfileKit_SimCor_`, f, t)
 }
 
-#' @inheritParams SimCor
+#' @inheritParams SimCor_
 #' @rdname simdist
 #' @keywords internal
 SimJaccard_ <- function(f, t) {
     .Call(`_PhyloProfileKit_SimJaccard_`, f, t)
 }
 
-#' @inheritParams SimCor
+#' @inheritParams SimCor_
 #' @rdname simdist
 #' @keywords internal
 DistHamming_ <- function(f, t) {
     .Call(`_PhyloProfileKit_DistHamming_`, f, t)
 }
 
-#' @inheritParams SimCor
+#' @inheritParams SimCor_
 #' @rdname simdist
 #' @keywords internal
 DistManhattan_ <- function(f, t) {
     .Call(`_PhyloProfileKit_DistManhattan_`, f, t)
 }
 
-#' @inheritParams SimCor
+#' @inheritParams SimCor_
 #' @rdname simdist
 #' @keywords internal
 DistEuclidean_ <- function(f, t) {
     .Call(`_PhyloProfileKit_DistEuclidean_`, f, t)
 }
 
-#' @inheritParams SimCor
+#' @inheritParams SimCor_
 #' @rdname simdist
 #' @keywords internal
 DistMinkowski_ <- function(f, t, p) {

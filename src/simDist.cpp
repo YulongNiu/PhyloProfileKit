@@ -7,17 +7,17 @@ using namespace arma;
 
 //' Similarity or distance of paired phylogenetic profile
 //'
-//' \code{SimCor()}: Person's correlation coefficient.
+//' \code{SimCor_()}: Person's correlation coefficient.
 //'
-//' \code{SimJaccard()}: Jaccard similarity.
+//' \code{SimJaccard_()}: Jaccard similarity.
 //'
-//' \code{SimMIBin()}: Mutual information for binning data.
+//' \code{SimMIBin_()}: Mutual information for binning data.
 //'
-//' \code{SimMIConti()}: Mutual information for continuous data.
+//' \code{SimMIConti_()}: Mutual information for continuous data.
 //'
-//' \code{DistHamming()}: Hamming distance.
+//' \code{DistHamming_()}: Hamming distance.
 //'
-//' \code{DistEuclidean()}: Euclidean distance.
+//' \code{DistEuclidean_()}: Euclidean distance.
 //'
 //' @title Similarity and distance
 //' @param f Numeric vector indicating a gene profile.
@@ -33,7 +33,7 @@ double SimCor_(arma::vec f,
   return corMat(0, 0);
 }
 
-//' @inheritParams SimCor
+//' @inheritParams SimCor_
 //' @rdname simdist
 //' @keywords internal
 // [[Rcpp::export]]
@@ -45,7 +45,7 @@ double SimJaccard_(arma::vec f,
 }
 
 
-//' @inheritParams SimCor
+//' @inheritParams SimCor_
 //' @rdname simdist
 //' @keywords internal
 // [[Rcpp::export]]
@@ -55,7 +55,7 @@ double DistHamming_(arma::vec f,
 }
 
 
-//' @inheritParams SimCor
+//' @inheritParams SimCor_
 //' @rdname simdist
 //' @keywords internal
 // [[Rcpp::export]]
@@ -66,7 +66,7 @@ double DistManhattan_(arma::vec f,
 
 
 
-//' @inheritParams SimCor
+//' @inheritParams SimCor_
 //' @rdname simdist
 //' @keywords internal
 // [[Rcpp::export]]
@@ -76,7 +76,7 @@ double DistEuclidean_(arma::vec f,
 }
 
 
-//' @inheritParams SimCor
+//' @inheritParams SimCor_
 //' @rdname simdist
 //' @keywords internal
 // [[Rcpp::export]]

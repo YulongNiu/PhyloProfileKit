@@ -73,13 +73,13 @@ setMethod(f = 'Batch',
             ## check arguments
             args <- list(...)
 
-            if (method == 'SDCustom') {
+            if (m == 'SDCustom') {
               funcPtr = args[["func"]]
               if (is.null(funcPtr)) {
                 stop('Parameter "func" is missing.')
               } else {}
             }
-            else if (method == 'SimMI') {
+            else if (m == 'SimMI') {
               m <- ifelse(isBinMat_(PP), 'SimMIBin', 'SimMIConti')
             } else {}
 
@@ -103,3 +103,47 @@ setMethod(f = 'Batch',
           })
 
 
+
+
+
+
+setMethod(f = 'Batch',
+          signature = c(x = 'PPTreeIdx'),
+          definition = function(x, method, ..., n) {
+
+            p <- PPData(x)
+            idx <- IdxData(x)
+            tree <- x@tree
+            em <- tree$edge
+            tn <- Ntip(tree)
+
+            ## check method
+            ms <- c('SimCor', 'SimJaccard', 'SimMI',
+                    'DistHamming', 'DistManhattan', 'DistEuclidean',
+                    'DistMinkowski', 'SDCustom')
+            mcs <- c('SimCorCollapse', 'SimJaccardCollapse',
+                     'SimMICollapse', 'DistHammingCollapse',
+                     'DistManhattanCollapse', 'DistEuclideanCollapse',
+                     'DistMinkowskiCollapse', 'SDCustomCollapse',
+                     'DistDollo')
+            midx <- pmatch(method, mcs)
+
+            if (is.na(midx)) {
+              stop('Invalid similarity/distance method')
+            } else {
+              m <- ms[midx]
+            }
+
+            if (m == 'SDCustomCollapse') {
+              funcPtr = args[["func"]]
+              if (is.null(funcPtr)) {
+                stop('Parameter "func" is missing.')
+              } else {}
+            }
+            else if (m == 'SimMI') {
+              m <- ifelse(isBinMat_(PP), 'SimMIBin', 'SimMIConti')
+            } else {}
+
+
+
+          })

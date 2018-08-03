@@ -6,6 +6,41 @@ using namespace Rcpp;
 using namespace arma;
 
 
+//' @inheritParams SimCor_
+//' @rdname simdist
+//' @keywords internal
+// [[Rcpp::export]]
+double SimMIBin_(const arma::vec f,
+                 const arma::vec t) {
+
+  vec combVec = f + 2*t;
+
+  double N = f.n_elem;
+  double A = sum(combVec == 3);
+  double B = sum(combVec == 1);
+  double C = sum(combVec == 2);
+  double D = N - A - B - C;
+
+  double I = eachMI(A, B, C, N) + eachMI(B, A, D, N) + eachMI(C, A, D, N) + eachMI(D, C, B, N);
+
+  return I;
+}
+
+
+//' @param bin A positive \code{Integer} indicating the bin.
+//' @inheritParams SimCor_
+//' @rdname simdist
+//' @keywords internal
+// [[Rcpp::export]]
+double SimMIConti_(const arma::vec& f,
+                   const arma::vec& t,
+                   arma::uword bin) {
+  double n = f.n_elem;
+  double MI = Info(hist(f, bin), n) + Info(hist(t, bin), n) - Info(HistTwo(f, t, bin), n);
+
+  return MI;
+}
+
 //' Utilities for MI
 //'
 //' \code{eachMI()}: Info for a cell.

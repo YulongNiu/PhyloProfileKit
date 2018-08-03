@@ -69,7 +69,7 @@ setGeneric(name = 'IdxData<-',
 ##' }
 ##' @rdname Norm-methods
 ##' @export
-##' 
+##'
 setGeneric(name = 'Norm',
            def = function(x, method, ...){standardGeneric('Norm')})
 

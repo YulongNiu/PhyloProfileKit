@@ -67,12 +67,26 @@ std::shared_ptr<SDmeasure> SDFactory::createSDFunc(Rcpp::List &attrs,
   else if (isEqualStr(sdName, "SimMIBin")) {
     sdfunc = std::make_shared<SimMIBin>();
   }
+  else if (isEqualStr(sdName, "SimMIBinCollapse")) {
+    mat edgeMat = arguments["edgeMat"];
+    uword tipNum = arguments["tipNum"];
+    sdfunc = std::make_shared<SimMIBinCollapse>(edgeMat, tipNum);
+  }
   else if (isEqualStr(sdName, "SimMIConti")) {
     uword bin = 10;
     if (arguments.containsElementNamed("bin")) {
       bin = Rcpp::as<uword>(arguments["bin"]);
     } else {}
     sdfunc = std::make_shared<SimMIConti>(bin);
+  }
+  else if (isEqualStr(sdName, "SimMIContiCollapse")) {
+    uword bin = 10;
+    mat edgeMat = arguments["edgeMat"];
+    uword tipNum = arguments["tipNum"];
+    if (arguments.containsElementNamed("bin")) {
+      bin = Rcpp::as<uword>(arguments["bin"]);
+    } else {}
+    sdfunc = std::make_shared<SimMIContiCollapse>(bin, edgeMat, tipNum);
   }
   else if (isEqualStr(sdName, "SDCustom")) {
     SEXP func_=arguments["func"];

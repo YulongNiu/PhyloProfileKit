@@ -4,6 +4,13 @@
 #include <RcppArmadillo.h>
 #include <Rcpp.h>
 
+double SimMIBin_(const arma::vec f,
+                 const arma::vec t);
+
+double SimMIConti_(const arma::vec& f,
+                   const arma::vec& t,
+                   arma::uword bin);
+
 double eachMI(double p1,
               double p2,
               double p3,
