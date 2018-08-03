@@ -18,11 +18,11 @@ SimDist(x, method, ..., n = 1)
 
 \item{method}{A character string.
 \itemize{
-  \item \code{"SimCor"}: Person's correlation coefficient.
-  \item \code{"SimJaccard"}: Jaccard similarity.
-  \item \code{"SimMI"}: Mutual information.
-  \item \code{"DistHamming"}: Hamming distance.
-  \item \code{"DistEuclidean"}: Euclidean distance.
+  \item \code{"SimCor"}: Person's correlation coefficient for both \code{PPIdx} and \code{PPTreeIdx} object.
+  \item \code{"SimJaccard"}: Jaccard similarity for both \code{PPIdx} and \code{PPTreeIdx} object.
+  \item \code{"SimMI"}: Mutual information for both \code{PPIdx} and \code{PPTreeIdx} object.
+  \item \code{"DistHamming"}: Hamming distance for both \code{PPIdx} and \code{PPTreeIdx} object.
+  \item \code{"DistEuclidean"}: Euclidean distance for both \code{PPIdx} and \code{PPTreeIdx} object.
 }
 
 \code{"SimCor"} and \code{"DistHamming"} are not recommended for binning profiles.}

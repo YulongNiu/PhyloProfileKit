@@ -3,11 +3,11 @@ NULL
 
 ##' Parallel framework for \code{PPIdx} and \code{PPTreeIdx}.
 ##'
-##' \code{Batch()}: Parallel framework to analysis paired profiles in batch mode.
+##' Parallel framework to analysis paired profiles in batch mode. \code{"SimCor"} and \code{"DistHamming"} are not recommended for binning profiles.
 ##'
 ##' @title Parallel framework
 ##' @inheritParams Batch
-##' @return A \code{numeric vector}.
+##' @return A \code{PPResult} object.
 ##' @examples
 ##' require('magrittr')
 ##' require('ape')
@@ -80,7 +80,7 @@ setMethod(f = 'Batch',
               } else {}
             }
             else if (m == 'SimMI') {
-              m <- ifelse(isBinMat_(PP), 'SimMIBin', 'SimMIConti')
+              m <- ifelse(isBinMat_(p), 'SimMIBin', 'SimMIConti')
             } else {}
 
             ## set parallel threads
@@ -105,8 +105,10 @@ setMethod(f = 'Batch',
 
 
 
-
-
+##' @inheritParams Batch
+##' @rdname Batch-methods
+##' @exportMethod Batch
+##'
 setMethod(f = 'Batch',
           signature = c(x = 'PPTreeIdx'),
           definition = function(x, method, ..., n) {
@@ -118,15 +120,12 @@ setMethod(f = 'Batch',
             tn <- Ntip(tree)
 
             ## check method
-            ms <- c('SimCor', 'SimJaccard', 'SimMI',
-                    'DistHamming', 'DistManhattan', 'DistEuclidean',
-                    'DistMinkowski', 'SDCustom')
-            mcs <- c('SimCorCollapse', 'SimJaccardCollapse',
+            ms <- c('SimCorCollapse', 'SimJaccardCollapse',
                      'SimMICollapse', 'DistHammingCollapse',
                      'DistManhattanCollapse', 'DistEuclideanCollapse',
                      'DistMinkowskiCollapse', 'SDCustomCollapse',
                      'DistDollo')
-            midx <- pmatch(method, mcs)
+            midx <- pmatch(method, ms)
 
             if (is.na(midx)) {
               stop('Invalid similarity/distance method')
@@ -134,16 +133,36 @@ setMethod(f = 'Batch',
               m <- ms[midx]
             }
 
+            ## check arguments
+            args <- list(...)
+            args$edgeMat = em;
+            args$tipNum = tn;
+
             if (m == 'SDCustomCollapse') {
               funcPtr = args[["func"]]
               if (is.null(funcPtr)) {
                 stop('Parameter "func" is missing.')
               } else {}
             }
-            else if (m == 'SimMI') {
-              m <- ifelse(isBinMat_(PP), 'SimMIBin', 'SimMIConti')
+            else if (m == 'SimMICollapse') {
+              m <- ifelse(isBinMat_(p), 'SimMIBin', 'SimMIConti')
             } else {}
 
+            ## set parallel threads
+            setThreadOptions(numThreads = n)
 
+            ## parallel idx
+            if (is.big.matrix(idx)) {
+              bv <- BatchBigmat(p, idx@address, list(method = m), args)
+            } else {
+              bv <- BatchMat(p, idx, list(method = m), args)
+            }
 
+            bvRes <- new('PPResult',
+                         bv,
+                         idx = x@idx,
+                         pnames = rownames(x@.Data),
+                         method = m)
+
+            return(bvRes)
           })

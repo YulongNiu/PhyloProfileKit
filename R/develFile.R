@@ -54,6 +54,8 @@
 ## source('R/AllGenerics.R')
 ## source('R/Batch.R')
 ## source('R/PP.R')
+## source('R/PPTree.R')
+## source('R/PPTreeIdx.R')
 ## source('R/PPIdx.R')
 ## source('R/utilities.R')
 ## source('R/PPResult.R')
@@ -61,6 +63,7 @@
 ## tree <- read.nexus('inst/extdata/bioinfoTree.nex')
 ## sceP <- read.csv('inst/extdata/bioinfoProfile.csv', row.names = 1) %>% as.matrix %>% PP
 ## scePI <- PPIdx(sceP, 1:6, 1:6)
+## scePTI <- sceP %>% PPTree(tree) %>% PPTreeIdx(1:6, 1:6)
 
 ## BatchMat(PPData(scePI), IdxData(scePI), list(method = 'SimCor'), list())
 ## BatchMat(PPData(scePI), IdxData(scePI), list(method = 'SimCorCollapse'), list(edgeMat=tree$edge, tipNum = Ntip(tree)))
@@ -68,8 +71,8 @@
 
 ## Batch(scePI, method = 'SimCor', n = 2)
 ## euclideanFuncPtr <- cppXPtr("double customDist(const arma::mat &A, const arma::mat &B) { return sqrt(arma::accu(arma::square(A - B))); }", depends = c("RcppArmadillo"))
-## all.equal(Batch(scePI, method = 'SDCustom', func = euclideanFuncPtr, n = 2)@.Data, Batch(scePI, method = 'DistEuclidean', n = 2)@.Data)
+## all.equal(Batch(scePI, method = 'SDCustom', func = euclideanFuncPtr)@.Data, Batch(scePI, method = 'DistEuclidean')@.Data)
 
-## all.equal(Batch(scePI, method = 'SDCustom', func = euclideanFuncPtr, edgeMat=tree$edge, tipNum = Ntip(tree), n = 2)@.Data, Batch(scePI, method = 'DistEuclidean', edgeMat=tree$edge, tipNum = Ntip(tree), n = 2)@.Data)
+## all.equal(Batch(scePTI, method = 'SDCustom', func = euclideanFuncPtr)@.Data, Batch(scePTI, method = 'DistEuclidean'))
 
 

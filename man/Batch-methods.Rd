@@ -4,11 +4,14 @@
 \name{Batch}
 \alias{Batch}
 \alias{Batch,PPIdx-method}
+\alias{Batch,PPTreeIdx-method}
 \title{Parallel framework}
 \usage{
 Batch(x, method, ..., n = 1)
 
 \S4method{Batch}{PPIdx}(x, method, ..., n = 1)
+
+\S4method{Batch}{PPTreeIdx}(x, method, ..., n = 1)
 }
 \arguments{
 \item{x}{A \code{PPIdx}/\code{PPTreeIdx} object.}
@@ -36,13 +39,13 @@ The method \code{DistHamming} and \code{DistManhattan} generated the same distan
 \item{n}{The number of CPUs or processors.}
 }
 \value{
-A \code{numeric vector}.
+A \code{PPResult} object.
 }
 \description{
 Parallel framework for \code{PPIdx} and \code{PPTreeIdx}.
 }
 \details{
-\code{Batch()}: Parallel framework to analysis paired profiles in batch mode.
+Parallel framework to analysis paired profiles in batch mode. \code{"SimCor"} and \code{"DistHamming"} are not recommended for binning profiles.
 }
 \examples{
 require('magrittr')
